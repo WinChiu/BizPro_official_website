@@ -16,23 +16,6 @@ This official website is designed for BizPro. Be sure to read the document caref
 - `npm run client`: start react-app (frontend)
 - `npm run dev`: run server & client
 
-### File Structure
-
-├── client                   // 前端資料夾
-│   └── src
-│       └── asset
-│           ├── img          // 圖片資源
-│           └── font         // 字體資源
-│       ├── components       // 前端元件
-│       └── css              // 樣式
-│   └── App.js
-├── config                   // 配置
-│   ├── db.js                // 資料庫設置
-│   └── production.json      // 生產環境
-├── routes
-│   └── api
-├──server.js                 // 後端伺服器
-
 ## Contact Info
 
 ### Jim
