@@ -1,0 +1,32 @@
+{
+  "name": "bizpro_official_website",
+  "description": "This official website is designed for BizPro. Be sure to read the document carefully in order to maintain the website successfully. If you are the administrator after 22nd and facing any problems about the website, feel free to contact 21st Jim or 22nd Win via Facebook or E-mail.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server",
+    "server": "nodemon server",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yichunlo/BizPro_official_website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yichunlo/BizPro_official_website/issues"
+  },
+  "homepage": "https://github.com/yichunlo/BizPro_official_website#readme",
+  "dependencies": {
+    "config": "^3.3.8",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5"
+  },
+  "devDependencies": {
+    "concurrently": "^7.4.0",
+    "nodemon": "^2.0.20"
+  }
+}
