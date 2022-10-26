@@ -24,7 +24,7 @@ function Activity() {
         />
         <article className="activity__content">
           <div className="activity__content--word pr">
-            <h4 className="content__title">職涯分享</h4>
+            <h2 className="content__title">職涯分享</h2>
             <p className="content__paragraph">
               透過社團 Alumni
               分享個人職涯發展心路歷程，與學員進行深度對談交流，發現更多職涯可能性。
@@ -39,7 +39,7 @@ function Activity() {
             <img src={sampleImg} alt="sampleImg" />
           </div>
           <div className="activity__content--word pl">
-            <h4 className="content__title">成年禮</h4>
+            <h2 className="content__title">成年禮</h2>
             <p className="content__paragraph">
               在兩天的旅行中 Junior 們將重新審視個人學習，Alumni與 Senior
               也將針對每一位 Junior 個人做出全方位的討論交流，讓 Junior
@@ -50,7 +50,7 @@ function Activity() {
         </article>
         <article className="activity__content">
           <div className="activity__content--word pr">
-            <h4 className="content__title">社團聚會</h4>
+            <h2 className="content__title">社團聚會</h2>
             <p className="content__paragraph">
               透過不定期的聚會，Junior 會與 Senior 及 Alumni 聚餐，讓 Junior
               有機會進一步與同儕及各界前輩近一步交流或詢問職涯問題，同時也有助於
