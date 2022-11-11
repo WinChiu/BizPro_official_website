@@ -1,24 +1,36 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
-import icon_pointDown from '../asset/img/icon/icon_pointDown.svg';
-import logo from '../asset/img/logo_red.svg';
-import title_symbol_left_lg from '../asset/img/title_symbol_left_lg.svg';
-import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
-import title_symbol_left_md from '../asset/img/title_symbol_left_md.svg';
-import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
+import Button from 'react-bootstrap/Button';
+import Marquee from 'react-fast-marquee';
+import Circle4_symbol_white300 from '../asset/img/4Circle_symbol_white300.svg';
+import briefIntro_course from '../asset/img/briefIntro_course.webp';
+import briefIntro_people from '../asset/img/briefIntro_people.webp';
 import circle_symbol_gradient from '../asset/img/circle_symbol_gradient.svg';
-import circle_symbol_beige from '../asset/img/circle_symbol_beige.svg';
+import connection_symbol from '../asset/img/connection_symbol_white300.svg';
+import connection_symbol_red from '../asset/img/connection_symbol_recommandRed.svg';
+import double_circle from '../asset/img/doubleCircle_symbol_white300.svg';
 import icon_courage from '../asset/img/icon/icon_courage.svg';
 import icon_creativity from '../asset/img/icon/icon_creativity.svg';
-import icon_trust from '../asset/img/icon/icon_trust.svg';
-import icon_integrity from '../asset/img/icon/icon_integrity.svg';
-import icon_share from '../asset/img/icon/icon_share.svg';
 import icon_entrepreneurship from '../asset/img/icon/icon_entrepreneurship.svg';
-import double_circle from '../asset/img/doubleCircle_symbol_white300.svg';
+import icon_integrity from '../asset/img/icon/icon_integrity.svg';
+import icon_pointDown from '../asset/img/icon/icon_pointDown.svg';
+import icon_share from '../asset/img/icon/icon_share.svg';
+import icon_trust from '../asset/img/icon/icon_trust.svg';
+import logo from '../asset/img/logo_red.svg';
 import people_symbol from '../asset/img/people_symbol.svg';
+import title_symbol_left_lg from '../asset/img/title_symbol_left_lg.svg';
+import title_symbol_left_md from '../asset/img/title_symbol_left_md.svg';
+import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
+import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
+import vision_bg from '../asset/img/vision_bg.webp';
+import MarqueeLogo from '../components/MarqueeLogo';
 function About() {
   return (
     <section className="about">
       <article className="about__header">
+        <img src={connection_symbol} alt="" className="connection__left" />
+        <img src={connection_symbol} alt="" className="connection__right" />
+        <img src={Circle4_symbol_white300} alt="" className="circle4" />
         <img src={logo} alt="logo" className="about__header--logo" />
         <h1 className="about__header--title">BizPro 台大商學研究社</h1>
         <h3 className="about__header--subTitle">
@@ -34,6 +46,8 @@ function About() {
         </div>
       </article>
       <article className="about__intro">
+        <img src={connection_symbol_red} alt="" className="connection__left" />
+        <img src={connection_symbol_red} alt="" className="connection__right" />
         <div className="about__intro--title sectionTitle sectionTitle--lg">
           <img
             src={title_symbol_left_lg}
@@ -47,7 +61,6 @@ function About() {
             className="title--symbolRight"
           />
         </div>
-
         <div className="about__intro--title sectionTitle sectionTitle--md">
           <img
             src={title_symbol_left_md}
@@ -61,7 +74,6 @@ function About() {
             className="title--symbolRight"
           />
         </div>
-
         <div className="about__intro--content">
           <div className="content__word">
             <p className="content__word--paragraph">
@@ -103,11 +115,7 @@ function About() {
           alt="double_circle"
           className="double_circle"
         />
-        <img
-          src={circle_symbol_beige}
-          alt="circle_symbol_beige"
-          className="bgCircle"
-        />
+        <img src={vision_bg} alt="circle_symbol_beige" className="bgCircle" />
         <div className="about__vision--content">
           <div className="content--title sectionTitle sectionTitle--lg">
             <img
@@ -122,6 +130,7 @@ function About() {
               className="title--symbolRight"
             />
           </div>
+
           <p className="content--word">
             BizPro
             的願景為培養充滿能量，且富有創造性的業界領袖人才。我們期許成員在
@@ -235,6 +244,21 @@ function About() {
             className="title--symbolRight"
           />
         </div>
+
+        <div className="about__achieve--title sectionTitle sectionTitle--md">
+          <img
+            src={title_symbol_left_md}
+            alt="title__symbol_left"
+            className="title--symbolLeft"
+          />
+          <h2 className="title--word whiteWord">社群影響力</h2>
+          <img
+            src={title_symbol_right_md}
+            alt="title__symbol_right"
+            className="title--symbolRight"
+          />
+        </div>
+
         <p className="about__achieve--content">
           BizPro
           齊聚正向、積極、創新的夥伴，我們期許夥伴在經歷社團培訓後能為世界上各個領域帶來正向影響。
@@ -245,12 +269,59 @@ function About() {
             <h4 className="numberList__item--content">小時商業專業能力訓練</h4>
           </div>
           <div className="numberList__item">
-            <h1 className="numberList__item--title">500+</h1>
-            <h4 className="numberList__item--content">小時商業專業能力訓練</h4>
+            <h1 className="numberList__item--title">100+</h1>
+            <h4 className="numberList__item--content">位社團 Alumni 成員</h4>
           </div>
-          <div className="numberList__item" style={{ marginRight: '0px' }}>
-            <h1 className="numberList__item--title">500+</h1>
-            <h4 className="numberList__item--content">小時商業專業能力訓練</h4>
+          <div className="numberList__item" style={{ margin: '0px' }}>
+            <h1 className="numberList__item--title">150+</h1>
+            <h4 className="numberList__item--content">個企業人脈連結</h4>
+          </div>
+        </div>
+      </article>
+      <Marquee className="marquee" gradientWidth={0}>
+        <MarqueeLogo />
+      </Marquee>
+      <article className="about__briefIntro">
+        <img
+          src={double_circle}
+          alt="double_circle"
+          className="double_circle"
+        />
+        <img src={connection_symbol} alt="" className="connection_symbol" />
+        <div className="briefIntro__course">
+          <div className="briefIntro__course--word">
+            <h2 className="word--title">BizPro 的商業專業能力訓練</h2>
+            <p className="word--content">
+              BizPro
+              透過系列課程、個案分析，以及專案實作提供社員完整的商業專業能力訓練。透過來自業界的
+              Alumni
+              教學系列課程，讓社員從基礎培養解決商業問題的能力，並透過個案分析與專業實作，更貼近實務，全方位提升社員的專業能力。
+            </p>
+            <Button variant="primary" href="/journey">
+              了解專業訓練內容
+            </Button>
+          </div>
+          <div
+            className="briefIntro__people--img"
+            style={{ backgroundImage: `url(${briefIntro_course})` }}
+          />
+        </div>
+        <div className="briefIntro__people">
+          <div
+            className="briefIntro__people--img"
+            style={{ backgroundImage: `url(${briefIntro_people})` }}
+          />
+          <div className="briefIntro__people--word">
+            <h2 className="word--title">BizPro 社員人脈連結</h2>
+            <p className="word--content">
+              BizPro 創立至今已累積超過 100
+              位社員，社員來自國立台灣大學各個校系，多元分布於各個產業與公司，並與
+              BizPro 保持密切的連結。BizPro
+              緊密的社群，能夠提供社員交流與共同學習、成長的養分。
+            </p>
+            <Button variant="primary" href="/members">
+              了解歷屆社員
+            </Button>
           </div>
         </div>
       </article>
