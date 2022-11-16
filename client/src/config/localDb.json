@@ -7,6 +7,20 @@
     "activity": {
       "title": "社群活動",
       "content": "BizPro 透過多元的課外社群活動，培養緊密的社群連結，並促進成員們互相交流與成長。"
+    },
+    "journey": {
+      "junior": {
+        "title": "Junior 新進社員",
+        "content": "經過兩階段的面試之後進入 BizPro，開始接受為期 6 個月客製化課程、專案訓練，順利完成所有的專業商業訓練後，將晉升為 Senior。"
+      },
+      "senior": {
+        "title": "Senior 社團幹部",
+        "content": "完成 Junior 訓練後所有成員將成為 Senior，負責社團教學、活動、公關等面向營運，並藉由進階課程、專案，持續精進專業能力。任期結束後將成為 BizPro 的 Alumni。"
+      },
+      "alumni": {
+        "title": "Alumni 歷屆成員",
+        "content": "活躍於各產業領域的 Alumni 將透過擔任社員 Mentor、專案評審、社課講師的方式，持續回饋 BizPro。也會透過不定期餐會與 BizPro 廣大的社群保持緊密的連結。"
+      }
     }
   }
 }

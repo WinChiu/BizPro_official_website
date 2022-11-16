@@ -6,6 +6,7 @@ import NavBarMin from './components/NavBarMin';
 import Activity from './pages/Activity';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './pages/About';
+import Journey from './pages/Journey';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<About />} />
         <Route path="/activity" element={<Activity />} />
+        <Route path="/journey" element={<Journey />} />
       </Routes>
       <Footer />
     </BrowserRouter>

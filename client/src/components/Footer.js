@@ -9,7 +9,11 @@ function Footer() {
     <div className="footer">
       <p className="footer__hashtag">#BeAGameChanger</p>
       <div className="linkList">
-        <a className="linkList__item" href="https://www.google.com/">
+        <a
+          className="linkList__item"
+          href="https://www.facebook.com/bizproXchange"
+          target="_blank"
+        >
           <img
             src={icon_facebook}
             alt="BizPro facebook"
@@ -17,7 +21,11 @@ function Footer() {
           />
           <p className="linkList__word">BizPro 台大商學研究社</p>
         </a>
-        <a className="linkList__item" href="/">
+        <a
+          className="linkList__item"
+          target="_blank"
+          href="https://www.linkedin.com/company/bizpro-taipei/mycompany/"
+        >
           <img
             src={icon_linkedin}
             alt="BizPro linkedin"
@@ -25,7 +33,11 @@ function Footer() {
           />
           <p className="linkList__word">BizPro Taipei</p>
         </a>
-        <a className="linkList__item" href="/">
+        <a
+          className="linkList__item"
+          href="mailto:bizpro.taipei@gmail.com"
+          target="_blank"
+        >
           <img
             src={icon_email}
             alt="BizPro email"
