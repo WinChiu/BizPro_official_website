@@ -75,6 +75,7 @@ body {
   padding-top: 60px;
   background-color: $white_200;
   padding: 0;
+  overflow-y: scroll;
 }
 * {
   //border: 1px black solid;
@@ -1358,5 +1359,179 @@ p {
     &__achieve {
       padding: 80px 24px 80px 24px;
     }
+  }
+}
+
+.article {
+  @include flex(column, flex-start, center);
+  padding: 120px 300px 120px 300px;
+  background-color: $white_200;
+
+  &__detail {
+    padding: 40px 48px 32px 48px;
+    position: fixed;
+    z-index: 21;
+    width: 50%;
+    height: 80%;
+    min-width: 500px;
+    background-color: $white_200;
+    border-radius: 24px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+    filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
+
+    display: none;
+    // flex
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+    .doubleCircleSymbol {
+      position: absolute;
+      left: -50%;
+      bottom: -90%;
+      z-index: -1;
+      transform: scale(-0.5, 0.5);
+    }
+    &--titleGroup {
+      @include flex(column, center, flex-start);
+      margin-bottom: 40px;
+      .titleGroup__img {
+        @include flex(row, center, center);
+        margin-bottom: 8px;
+        img {
+          width: 32px;
+          margin-right: 16px;
+        }
+        &--subTitle {
+          @include body1();
+          font-weight: bold;
+        }
+      }
+      .titleGroup__word {
+        &--title {
+          @include h3();
+          font-weight: bold;
+        }
+      }
+    }
+    &--content {
+      @include body1();
+      overflow-y: scroll;
+      white-space: pre-wrap;
+      height: 100%;
+    }
+  }
+  &__popupLayer {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    z-index: 20;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+  }
+  &__item {
+    cursor: pointer;
+    @include flex(row, center, center);
+    margin-bottom: 80px;
+    width: 100%;
+    border-radius: 8px;
+    z-index: 0;
+    &--img {
+      width: fit-content;
+      img {
+        width: 170px;
+      }
+    }
+    &--content {
+      margin-left: 20px;
+      width: 100%;
+      .name {
+        @include body1();
+        font-weight: bold;
+        margin-bottom: 4px;
+      }
+      .title {
+        @include h3();
+        font-weight: bold;
+        margin-bottom: 8px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+      }
+      .content {
+        @include body1();
+        margin-bottom: 12px;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        white-space: pre-wrap;
+      }
+      .tags {
+        width: 100%;
+        @include flex(row, flex-end, center);
+        .tag {
+          @include body2();
+          padding: 4px 16px 2px 16px;
+          border-radius: 16px;
+          background-color: $red_primary;
+          color: white;
+          margin-left: 12px;
+        }
+      }
+    }
+  }
+  &__item:hover {
+    transition-duration: 0.5s;
+    background-color: rgb(231, 231, 231);
+  }
+  @media screen and (max-width: 1366px) {
+    padding: 120px 120px 120px 120px;
+  }
+  @media screen and (max-width: 900px) {
+    padding: 120px 64px 120px 64px;
+  }
+  @media screen and (max-width: 768px) {
+    padding: 120px 32px 120px 32px;
+    &__item {
+      &--img {
+        img {
+          width: 100px;
+        }
+      }
+      &--content {
+        .name {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+          overflow: hidden;
+          @include body2();
+          font-weight: normal;
+        }
+        .title {
+          -webkit-line-clamp: 2;
+          @include body1();
+          margin-bottom: 8px;
+        }
+        .content {
+          display: none;
+          -webkit-line-clamp: 1;
+          @include body2();
+        }
+        .tags {
+          .tag {
+            @include caption();
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 414px) {
+    padding: 120px 24px 120px 24px;
   }
 }
