@@ -25,6 +25,10 @@
     "article": {
       "title": "成員心得",
       "content": "收錄 BizPro Alumni 們在經過 BizPro 的訓練後，對於自身職涯發展與自我學習上的心得"
+    },
+    "member": {
+      "title": "歷屆成員",
+      "content": "「人」是 BizPro 社團最重要的資產，我們十分珍惜每一位加入 BizPro 的成員，並以嚴謹的組織架構及階段性任務，讓每位成員在不同時期皆能獲得學習與成長，成為各領域的佼佼者。"
     }
   },
   "articleTemp": [
@@ -67,6 +71,91 @@
       "title": "BizPro 提供的商業技能，對於偏向工程的職涯也扮演至關重要的角色",
       "content": "對於當時還是學生的我，BizPro 不僅提供我商業分析上的能力，也塑造了非常難得的同儕環境，對於職涯發展以及視野開拓都有非常大的助益。\n\n#商業化的思維對於未來的工作能力有非常直接的幫助\n即使目前工作偏向涉略工程上的知識，我仍然認為 BizPro 所學的商業技能至關重要。例如，必須以商業化的角度思考此項資料專案能否解決我們目前的商業問題？預估的改善幅度為何？而當專案開發完成後，該如何根據量化結果解釋其商業意義？根據測試結果，可以怎麼改進？透過 BizPro 的每週課程安排，不僅能學習到這些商業判斷的本質與工具，更能夠以「效率」為主要思維進行架構化的分析。簡而言之，BizPro 的課程對於未來的工作能力有非常直接的幫助。\n\n#BizPro所塑造的同儕環境可以幫助彼此快速成長\n不過，我個人覺得最重要的還是 BizPro 所塑造的環境，能夠快速地幫助彼此成長。經過了在社團一年與同屆夥伴的奮戰，我理解到想把專案管理好，並不單靠一個人就能獨立完成，而是需要大家共同投注心力。因此，我們都非常在意整體社員的成長。在 BizPro 中，每個人都可以很直接地提供反饋、為的就是希望對方能夠成為更優秀的自己。同時，也時常有聚會分享各自的所見所聞。我認為像這樣願意貢獻的環境是非常難能可貴、且值得維繫的。\n\n如果你渴望提升自己的能力，並且不吝分享、希望與同伴相互成長，我們正在尋找志同道合的夥伴一齊加入。期許你經過 BizPro 的訓練後，能夠成為具有專業素養的自己、也願意一起守護並茁壯 BizPro 特別的環境。",
       "tags": ["科技業"]
+    }
+  ],
+  "memberTemp": [
+    {
+      "name": "Megan",
+      "number": "創社元老",
+      "jobTitle": "BCG Consultant",
+      "exp": [
+        "WEF Taipei Global Shaper",
+        "Morgan Stanley IBD Intern",
+        "UBS Investment Bank Summer Analyst",
+        "Exchange in University of Helskin, Finland",
+        "臺灣大學財務金融學系"
+      ],
+      "tags": ["顧問業", "金融業"],
+      "avatar": ""
+    },
+    {
+      "name": "Hector",
+      "number": "創社元老",
+      "jobTitle": "臺灣大學國際企業所",
+      "exp": [
+        "Allianz Group Intern",
+        "Bexcel Consultants Intern",
+        "Bain & Co. Intern",
+        "Exchange in University of Queensland in Australia",
+        "中國人民大學數學系"
+      ],
+      "tags": ["銀行業"],
+      "avatar": ""
+    },
+    {
+      "name": "Peggy",
+      "number": "創社元老",
+      "jobTitle": "Yahoo Sr. Specialist",
+      "exp": [
+        "Yahoo Sr. Strategy Planner",
+        "Nielsen Retailer Services Assistant",
+        "浙江大學管理學院交換",
+        "臺灣大學國際企業學系"
+      ],
+      "tags": ["設計產業", "軟體開發"],
+      "avatar": ""
+    },
+    {
+      "name": "Nelson",
+      "number": "創社元老",
+      "jobTitle": "MediaTek Engineer",
+      "exp": [
+        "Carnegie Mellon University, Master of Computational Data Science",
+        "第17屆臺大盃全國橋藝競賽總召",
+        "臺灣大學資訊管理研究所碩士",
+        "臺灣大學資訊管理學系"
+      ],
+      "tags": ["科技業"],
+      "avatar": ""
+    },
+    {
+      "name": "Hank",
+      "number": "創社元老",
+      "jobTitle": "Google HQ Software Engineer",
+      "exp": [
+        "三篇IEEE國際論文   第一作者",
+        "臺灣大學電子所碩士",
+        "臺灣大學電機工程學系",
+        "臺灣大學財務金融學系"
+      ],
+      "tags": ["公益", "教育產業"],
+      "avatar": ""
+    },
+    {
+      "name": "Claire",
+      "number": "2nd",
+      "jobTitle": "P&G Assistant Brand Manager",
+      "exp": ["Mckinsey & Co. R&I Intern", "臺灣大學財務金融學系"],
+      "tags": ["設計產業", "軟體開發"],
+      "avatar": ""
+    },
+    {
+      "name": "Michelle",
+      "number": "2nd",
+      "jobTitle": "Citi Corporate & Investment Bank",
+      "exp": ["UBS Investment Bank", "臺灣大學財務金融學系"],
+      "tags": ["公益", "教育產業"],
+      "avatar": ""
     }
   ]
 }

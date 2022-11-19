@@ -8,7 +8,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import About from './pages/About';
 import Journey from './pages/Journey';
 import Article from './pages/Article';
-
+import Member from './pages/Member';
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +18,7 @@ function App() {
         <Route path="/activity" element={<Activity />} />
         <Route path="/journey" element={<Journey />} />
         <Route path="/member_talk" element={<Article />} />
+        <Route path="/members" element={<Member />} />
       </Routes>
       <Footer />
     </BrowserRouter>

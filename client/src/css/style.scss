@@ -78,7 +78,7 @@ body {
   overflow-y: scroll;
 }
 * {
-  //border: 1px black solid;
+  border: 1px black solid;
   font-family: 'Noto Sans TC';
 }
 p {
@@ -1533,5 +1533,55 @@ p {
   }
   @media screen and (max-width: 414px) {
     padding: 120px 24px 120px 24px;
+  }
+}
+
+.member {
+  @include flex(column, center, center);
+  padding: 120px 96px 120px 96px;
+  &__items {
+    @include flex(row, flex-start, flex-start);
+    max-width: 1110px;
+    flex-wrap: wrap;
+    &--item {
+      margin: 0px 16px 44px 16px;
+      max-width: 180px;
+      .item__img {
+        margin-bottom: 16px;
+        &--img {
+          width: 180px;
+        }
+      }
+      .item__content {
+        @include flex(column, center, center);
+        &--title {
+          @include body1();
+          font-weight: bold;
+          margin-bottom: 8px;
+        }
+        &--subTitle {
+          @include body1();
+          text-align: center;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 768px) {
+    padding: 120px 48px 120px 48px;
+  }
+  @media screen and (max-width: 500px) {
+    padding: 120px 16px 120px 16px;
+    &__items {
+      &--item {
+        margin: 0px 12px 44px 12px;
+
+        max-width: 160px;
+        .item__img {
+          &--img {
+            width: 160px;
+          }
+        }
+      }
+    }
   }
 }
