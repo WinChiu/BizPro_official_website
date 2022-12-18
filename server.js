@@ -3,8 +3,7 @@ const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-//app.use(express.static(path.join(__dirname, 'client', 'build')));
-app.use(express.static('client/build'));
+app.use(express.static(path.join('client/build')));
 
 if (process.env.NODE_DEV === 'production') {
   app.get('*', (req, res) => {
@@ -14,7 +13,7 @@ if (process.env.NODE_DEV === 'production') {
   });
 }
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 

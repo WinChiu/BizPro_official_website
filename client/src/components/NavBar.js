@@ -12,7 +12,7 @@ function NavBar() {
       <img src={logo_red} alt="bizPro Logo" className="navBar__logo" />
       <div className="navBar__list">
         <div className="navBar__item navBar__word">
-          <a href="/about"> 關於 BizPro</a>
+          <a href="/"> 關於 BizPro</a>
         </div>
         <div className="navBar__item navBar__word">
           <a href="/journey">學習旅程</a>
@@ -54,7 +54,7 @@ function NavBar() {
       </div>
       <div className="navBar__dropdown">
         <div className="dropdown__item">
-          <a href="/about">關於 BizPro</a>
+          <a href="/">關於 BizPro</a>
         </div>
         <div className="dropdown__item">
           <a href="/journey">學習旅程</a>
