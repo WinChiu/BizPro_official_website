@@ -1502,7 +1502,7 @@ p {
     padding: 128px 128px 128px 128px;
   }
   .about__vision {
-    padding: 240px 128px 128px 128px;
+    padding: 64px 128px 128px 128px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1513,7 +1513,7 @@ p {
   }
   .about__vision--content {
     width: 100vw;
-    padding: 32px 128px 32px 128px;
+    padding: 64px 128px 64px 128px;
     background-color: #e8e4da;
   }
   .about__vision--content .content--title {
@@ -1561,10 +1561,10 @@ p {
     display: flex;
   }
   .about__vision {
-    padding: 240px 48px 128px 48px;
+    padding: 64px 48px 128px 48px;
   }
   .about__vision--content {
-    padding: 32px 52px 32px 52px;
+    padding: 64px 52px 64px 52px;
   }
   .about__briefIntro .briefIntro__course--word, .about__briefIntro .briefIntro__people--word {
     padding: 48px 48px 48px 48px;
@@ -1621,10 +1621,10 @@ p {
     padding-right: 0;
   }
   .about__vision {
-    padding: 240px 24px 128px 24px;
+    padding: 64px 24px 128px 24px;
   }
   .about__vision--content {
-    padding: 32px 28px 32px 28px;
+    padding: 64px 28px 64px 28px;
   }
   .about__achieve {
     padding: 80px 64px 80px 64px;
@@ -1692,6 +1692,9 @@ p {
 @media screen and (max-width: 414px) {
   .about__achieve {
     padding: 80px 24px 80px 24px;
+  }
+  .about__intro {
+    padding: 128px 24px 128px 24px;
   }
   .about__header {
     display: flex;
