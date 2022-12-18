@@ -78,7 +78,7 @@ body {
   overflow-y: scroll;
 }
 * {
-  border: 1px black solid;
+  //border: 1px black solid;
   font-family: 'Noto Sans TC';
 }
 p {
@@ -369,11 +369,28 @@ p {
   z-index: 0;
   .courseStructure {
     width: 100%;
-    padding: 128px 128px 64px 128px;
+    padding: 128px 128px 128px 128px;
+    position: relative;
     @include flex(column, center, center);
-
+    overflow: hidden;
+    .dubbleCircle {
+      position: absolute;
+      z-index: 0;
+      right: -10%;
+      bottom: -30%;
+      opacity: 0.8;
+    }
+    .circle4 {
+      position: absolute;
+      z-index: 0;
+      left: -5%;
+      top: -3%;
+      transform: scale(1.3);
+      opacity: 0.8;
+    }
     &__intro {
-      margin-bottom: 48px;
+      margin-bottom: 120px;
+      z-index: 0;
       @include flex(row, center, center);
       &--content {
         margin-right: 64px;
@@ -412,9 +429,44 @@ p {
       }
     }
     &__infos {
-      height: 120px;
       width: 100%;
-      background-color: red;
+      @include flex(column, center, center);
+      z-index: 0;
+      &--container {
+        width: 100%;
+        margin-bottom: 48px;
+        .container__title {
+          @include h3();
+          font-weight: bold;
+          margin-bottom: 16px;
+        }
+        .container__content {
+          @include flex(row, flex-start, center);
+          &--words {
+            @include body1();
+            margin-right: 48px;
+          }
+          &--iconSet {
+            @include flex(row, space-between, center);
+            min-width: 608px;
+
+            .iconSet__items {
+              @include flex(column, center, center);
+              width: 140px;
+              &--icon {
+                width: 48px;
+                margin-bottom: 8px;
+              }
+              &--title {
+                @include h4();
+              }
+            }
+          }
+        }
+      }
+      .icon_down {
+        margin-bottom: 48px;
+      }
     }
   }
   .caseStudy {
@@ -490,16 +542,18 @@ p {
     .connectionSymbol-1 {
       position: absolute;
       z-index: -1;
-      left: 0;
+      left: -5%;
       top: 10%;
       transform: scale(1.6);
+      opacity: 0.8;
     }
     .connectionSymbol-2 {
       position: absolute;
       z-index: -1;
-      right: 10%;
-      bottom: 0;
-      transform: scale(-1.4, -1.4);
+      right: 5%;
+      bottom: -10%;
+      transform: scale(-1.8, -1.8);
+      opacity: 0.8;
     }
     .sectionTitle {
       margin-bottom: 64px;
@@ -633,6 +687,18 @@ p {
           margin-bottom: 48px;
         }
       }
+      &__infos {
+        &--container {
+          .container__content {
+            @include flex(column, flex-start, center);
+            &--words {
+              @include body1();
+              margin: 0px;
+              margin-bottom: 32px;
+            }
+          }
+        }
+      }
     }
   }
   @media screen and (max-width: 768px) {
@@ -640,6 +706,21 @@ p {
       padding: 128px 32px 64px 32px;
       .sectionTitle {
         margin-bottom: 64px;
+      }
+      &__infos {
+        &--container {
+          .container__content {
+            &--iconSet {
+              display: grid;
+              grid-template-columns: 140px 140px;
+              grid-template-rows: 140px 140px;
+              grid-gap: 16px 24px;
+              align-content: center;
+              justify-content: center;
+              min-width: 0px;
+            }
+          }
+        }
       }
     }
     .caseStudy {
@@ -855,8 +936,8 @@ p {
 .tab {
   @include flex(row, center, center);
   width: 100%;
-  // position: sticky;
-  // top: 60px;
+  position: sticky;
+  top: 59px;
   z-index: 10;
 
   &__item {
@@ -1381,7 +1462,6 @@ p {
     transform: translate(-50%, -50%);
     box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
-
     display: none;
     // flex
     flex-direction: column;
@@ -1434,11 +1514,11 @@ p {
     display: none;
   }
   &__item {
-    cursor: pointer;
     @include flex(row, center, center);
+    border-radius: 8px;
+    cursor: pointer;
     margin-bottom: 80px;
     width: 100%;
-    border-radius: 8px;
     z-index: 0;
     &--img {
       width: fit-content;
@@ -1539,12 +1619,84 @@ p {
 .member {
   @include flex(column, center, center);
   padding: 120px 96px 120px 96px;
+  &__popUp {
+    @include flex(row, center, center);
+    background-color: white;
+    border-radius: 24px;
+    box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+    display: none;
+    filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
+    height: fit-content;
+    left: 50%;
+    max-width: 700px;
+    overflow: hidden;
+    position: fixed;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: fit-content;
+    z-index: 21;
+    &--content {
+      min-width: 390px;
+      padding: 16px 32px;
+      h3 {
+        @include h3();
+        font-weight: bold;
+        //margin-bottom: 6px;
+      }
+      p,
+      li {
+        @include body1();
+      }
+      .content__tags {
+        @include flex(row, flex-start, center);
+        margin: 12px 0px;
+        &--caption {
+          @include caption();
+        }
+        &--tag {
+          @include caption();
+          padding: 4px 8px 2px 8px;
+          border-radius: 16px;
+          background-color: $red_primary;
+          color: white;
+          margin-right: 8px;
+          width: fit-content;
+        }
+      }
+    }
+    &--img {
+      @include flex(column, center, center);
+      width: 300px;
+      height: 300px;
+
+      img {
+        height: 100%;
+      }
+    }
+  }
+  &__popupLayer {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+  }
+  &__searchSection {
+    width: 100%;
+  }
   &__items {
-    @include flex(row, flex-start, flex-start);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 180px);
+    grid-template-rows: repeat(auto-fill, auto);
+    grid-gap: 44px 24px;
     max-width: 1110px;
-    flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: space-between;
+    width: 100%;
     &--item {
-      margin: 0px 16px 44px 16px;
+      cursor: pointer;
       max-width: 180px;
       .item__img {
         margin-bottom: 16px;

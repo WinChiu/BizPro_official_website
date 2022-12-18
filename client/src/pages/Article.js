@@ -95,9 +95,6 @@ function Article() {
             content={`${data.content}`}
             tags={data.tags}
             id={i}
-            onClick={(e) => {
-              console.log('Parent');
-            }}
           />
         ))}
       </section>

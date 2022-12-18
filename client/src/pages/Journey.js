@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import briefIntro_people from '../asset/img/briefIntro_people.webp';
+import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
 import dot_symbol from '../asset/img/dot_symbol_white100.svg';
 import dot_symbol_grey from '../asset/img/dot_symbol_white300.svg';
 import dubbleCircle from '../asset/img/doubleCircle_symbol_white300.svg';
 import hbsCase from '../asset/img/hbsCase.webp';
+import icon_basicHypo from '../asset/img/icon/icon_basicHypo.svg';
 import junior_courseStructure from '../asset/img/junior_courseStructure.webp';
 import lifeCase from '../asset/img/lifeCase.webp';
 import seniorCourseImg from '../asset/img/seniorCourseImg.webp';
@@ -15,8 +17,18 @@ import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
 import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
 import Header from '../components/Header';
 import localDb from '../config/localDb.json';
-import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
-
+import icon_interview from '../asset/img/icon/icon_interview.svg';
+import icon_qualitative from '../asset/img/icon/icon_qualitative.svg';
+import icon_questionnaire from '../asset/img/icon/icon_questionnaire.svg';
+import icon_advancedHypo from '../asset/img/icon/icon_advancedHypo.svg';
+import icon_mece from '../asset/img/icon/icon_mece.svg';
+import icon_pyramid from '../asset/img/icon/icon_pyramid.svg';
+import icon_quantitative from '../asset/img/icon/icon_quantitative.svg';
+import icon_powerpoint from '../asset/img/icon/icon_powerpoint.svg';
+import icon_speach from '../asset/img/icon/icon_speach.svg';
+import icon_communication from '../asset/img/icon/icon_communication.svg';
+import icon_down from '../asset/img/icon/icon_down.svg';
+import circle4 from '../asset/img/4Circle_symbol_white300.svg';
 function Journey() {
   const headerWordingJunior = localDb.headerWording.journey.junior;
   const headerWordingSenior = localDb.headerWording.journey.senior;
@@ -24,9 +36,17 @@ function Journey() {
 
   const [tab, setTab] = useState('junior');
 
+  const Junior_IconItem = ({ icon, title }) => (
+    <div className="iconSet__items">
+      <img src={icon} alt="icon_basicHypo" className="iconSet__items--icon" />
+      <h4 className="iconSet__items--title">{title}</h4>
+    </div>
+  );
   const Junior = () => (
     <section className="junior">
       <article className="courseStructure">
+        <img src={circle4} alt="circle4" className="circle4" />
+        <img src={dubbleCircle} alt="dubbleCircle" className="dubbleCircle" />
         <div className="courseStructure__intro">
           <div className="courseStructure__intro--content">
             <div className="content--title sectionTitle sectionTitle--md">
@@ -74,9 +94,68 @@ function Journey() {
           </div>
         </div>
         <div className="courseStructure__infos">
-          <div className="courseStructure__infos--item"></div>
-          <div className="courseStructure__infos--item"></div>
-          <div className="courseStructure__infos--item"></div>
+          <div className="courseStructure__infos--container">
+            <h3 className="container__title">Info-In 階段</h3>
+            <div className="container__content">
+              <p className="container__content--words">
+                在資料搜集階段，假說思考強調先建立假設，再針對如何驗證假設找資料。透過20%的資料，能夠省去
+                80%
+                原本大海撈針要花費的時間。而針對專案問題建立議題樹，更能協助釐清目前問題的著力點，以更高效率的方式拆解問題。
+              </p>
+              <div className="container__content--iconSet">
+                <Junior_IconItem icon={icon_basicHypo} title="初階假說思考" />
+                <Junior_IconItem icon={icon_interview} title="群體/個人訪談" />
+                <Junior_IconItem icon={icon_qualitative} title="質化訪綱設計" />
+                <Junior_IconItem
+                  icon={icon_questionnaire}
+                  title="量化問卷設計"
+                />
+              </div>
+            </div>
+          </div>
+          <img src={icon_down} alt="icon_down" className="icon_down" />
+          <div className="courseStructure__infos--container">
+            <h3 className="container__title">Info-Process 階段</h3>
+            <div className="container__content">
+              <p className="container__content--words">
+                在資料分析階段，一個清晰的提案強調故事線邏輯，透過層層論證後的問題拆解，產出對應專案問題嚴謹的解方。我們安排社員學習建構故事邏輯，將所得資料進行分析與研究後，產出最具說服力的提案。
+              </p>
+              <div className="container__content--iconSet">
+                <Junior_IconItem
+                  icon={icon_advancedHypo}
+                  title="進階假說思考"
+                />
+                <Junior_IconItem icon={icon_mece} title="MECE 原則" />
+                <Junior_IconItem icon={icon_pyramid} title="金字塔原理" />
+                <Junior_IconItem
+                  icon={icon_quantitative}
+                  title="量化分析模型"
+                />
+              </div>
+            </div>
+          </div>
+          <img src={icon_down} alt="icon_down" className="icon_down" />
+          <div className="courseStructure__infos--container">
+            <h3 className="container__title">Info-Out 階段</h3>
+            <div className="container__content">
+              <p className="container__content--words">
+                在資料呈現階段，商業簡報強調在視覺上快速讓讀者理解提案，透過簡報設計，將故事線邏輯可視化。此外，在簡報設計、口頭報告皆強調以結論先行的方式，最高效率讓聽者抓到提案重點。
+              </p>
+              <div className="container__content--iconSet">
+                <Junior_IconItem
+                  icon={icon_advancedHypo}
+                  title="進階假說思考"
+                />
+                <Junior_IconItem icon={icon_powerpoint} title="提案簡報設計" />
+                <Junior_IconItem
+                  icon={icon_speach}
+                  title="提案報告技巧
+"
+                />
+                <Junior_IconItem icon={icon_communication} title="溝通與表達" />
+              </div>
+            </div>
+          </div>
         </div>
       </article>
       <article className="caseStudy">
