@@ -78,7 +78,7 @@ body {
   overflow-y: scroll;
 }
 * {
-  //border: 1px black solid;
+  border: 1px black solid;
   font-family: 'Noto Sans TC';
 }
 p {
@@ -116,11 +116,9 @@ p {
   &__logo {
     height: 28px;
   }
-
   &__list {
     @include flex(row, space-between, center);
   }
-
   &__item {
     color: $black_text;
     font-size: 18px;
@@ -129,43 +127,47 @@ p {
     transition-duration: 0.3s;
     cursor: pointer;
   }
-
   &__hamburger {
     //display: none;
     height: 24px;
   }
   &__dropdown {
+    @include shadow_100();
+    @include flex(column, center, flex-start);
     background-color: $white_100;
     position: absolute;
     right: 0px;
     top: 60px;
-
-    @include shadow_100();
-    @include flex(column, center, flex-start);
     display: none;
-
+    width: 160px;
     .dropdown__item {
       color: $black_text;
       font-size: 18px;
       line-height: 150%;
-      padding: 12px 32px 12px 32px;
-      width: 94px;
+      padding: 16px 32px 16px 20px;
+      width: 100%;
       text-align: right;
       cursor: pointer;
     }
   }
-  @media screen and (max-width: 810px) {
-    &__hamburger {
-      display: block;
-    }
-    &__word {
-      display: none;
-    }
+  @media screen and (max-width: 768px) {
+    padding: 0 32px 0 32px;
   }
-
   a {
     color: inherit;
     text-decoration: inherit;
+  }
+}
+
+.navBarS {
+  display: none;
+  @media screen and (max-width: 820px) {
+    display: flex;
+  }
+}
+.navBarL {
+  @media screen and (max-width: 820px) {
+    display: none;
   }
 }
 
@@ -1016,24 +1018,24 @@ p {
     overflow: hidden;
     .circle4 {
       position: absolute;
-      left: -10%;
-      top: -40%;
+      left: -200px;
+      top: -200px;
       opacity: 15%;
     }
     .connection {
       &__left {
         position: absolute;
         transform: scaleY(-1) scale(0.7) rotate(15deg);
-        left: -12%;
-        bottom: -40%;
+        left: -180px;
+        bottom: -223px;
         opacity: 0.8;
       }
       &__right {
         position: absolute;
         transform: scaleY(-1) scale(1.5);
         opacity: 0.15;
-        right: -25%;
-        bottom: -15%;
+        right: -380px;
+        bottom: -80px;
       }
     }
     &--logo {
@@ -1041,6 +1043,7 @@ p {
     }
     &--title {
       @include h1();
+
       font-weight: bold;
       color: $white_100;
       margin: 8px 0 8px 0;
@@ -1073,14 +1076,14 @@ p {
       &__left {
         position: absolute;
         transform: scaleY(-1) scale(0.7) rotate(15deg);
-        left: -12%;
-        top: -272px;
+        left: -180px;
+        top: -268.5px;
         z-index: -2;
       }
       &__right {
         position: absolute;
         transform: scaleY(-1) scale(1.5);
-        right: -25%;
+        right: -380px;
         top: -412px;
         z-index: -2;
       }
@@ -1133,23 +1136,24 @@ p {
   }
   &__vision {
     @include flex(row, center, center);
-    padding: 240px 200px 128px 200px;
+    padding: 200px 200px 128px 200px;
     position: relative;
     overflow-x: hidden;
     overflow-y: hidden;
     .double_circle {
       position: absolute;
       z-index: -1;
-      bottom: -55%;
-      right: -25%;
+      bottom: -540px;
+      right: -300px;
       transform: scale(0.8);
     }
     .bgCircle {
       position: absolute;
       left: -30%;
-      top: -5%;
+      top: -10%;
       z-index: -1;
       width: 80%;
+      opacity: 0.8;
     }
     &--content {
       position: relative;
@@ -1292,7 +1296,7 @@ p {
       right: -150px;
       bottom: -250px;
       width: 500px;
-      opacity: 0.5;
+      opacity: 0.8;
     }
     .connection_symbol {
       position: absolute;
@@ -1321,7 +1325,13 @@ p {
     &__vision {
       padding: 240px 128px 128px 128px;
       @include flex(column, center, center);
+      .bgCircle {
+        display: none;
+      }
       &--content {
+        width: 100vw;
+        padding: 32px 128px 32px 128px;
+        background-color: $beige;
         .content--title {
           margin-bottom: 40px;
           padding-right: 0px;
@@ -1340,10 +1350,40 @@ p {
         }
       }
     }
+
+    //symbol
+    &__header {
+      .connection {
+        &__left {
+          transform: scaleY(-1) scale(0.6) rotate(15deg);
+          left: -200px;
+          bottom: -223px;
+        }
+        &__right {
+          transform: scaleY(-1) scale(1.2);
+          right: -380px;
+          bottom: -80px;
+        }
+      }
+    }
+    &__intro {
+      .connection {
+        &__left {
+          transform: scaleY(-1) scale(0.6) rotate(15deg);
+          left: -200px;
+          top: -268.5px;
+        }
+        &__right {
+          transform: scaleY(-1) scale(1.2);
+          right: -380px;
+          top: -412px;
+        }
+      }
+    }
   }
   @media screen and (max-width: 900px) {
     &__intro {
-      padding: 128px 48px 128px 48px;
+      padding: 168px 48px 128px 48px;
     }
     &__achieve {
       padding: 80px 120px 80px 120px;
@@ -1358,8 +1398,10 @@ p {
     }
     &__vision {
       padding: 240px 48px 128px 48px;
+      &--content {
+        padding: 32px 52px 32px 52px;
+      }
     }
-
     &__briefIntro {
       .briefIntro {
         &__course,
@@ -1370,9 +1412,47 @@ p {
         }
       }
     }
+
+    //symbol
+    &__header {
+      .circle4 {
+        position: absolute;
+        left: -240px;
+        top: -200px;
+        opacity: 15%;
+        transform: scale(0.8);
+      }
+      .connection {
+        &__left {
+          transform: scaleY(-1) scale(0.6) rotate(15deg);
+          left: -200px;
+          bottom: -223px;
+        }
+        &__right {
+          transform: scaleY(-1) scale(1.2);
+          right: -420px;
+          bottom: -80px;
+        }
+      }
+    }
+    &__intro {
+      .connection {
+        &__left {
+          transform: scaleY(-1) scale(0.6) rotate(15deg);
+          left: -200px;
+          top: -268.5px;
+        }
+        &__right {
+          transform: scaleY(-1) scale(1.2);
+          right: -420px;
+          top: -412px;
+        }
+      }
+    }
   }
   @media screen and (max-width: 768px) {
     &__intro {
+      padding: 128px 48px 128px 48px;
       .sectionTitle {
         &--lg {
           display: none;
@@ -1398,6 +1478,9 @@ p {
     }
     &__vision {
       padding: 240px 24px 128px 24px;
+      &--content {
+        padding: 32px 28px 32px 28px;
+      }
     }
     &__achieve {
       padding: 80px 64px 80px 64px;
@@ -1421,6 +1504,36 @@ p {
         }
       }
     }
+
+    //symbol
+    &__header {
+      .connection {
+        &__left {
+          transform: scaleY(-1) scale(0.5) rotate(15deg);
+          left: -240px;
+          bottom: -223px;
+        }
+        &__right {
+          transform: scaleY(-1) scale(1.1);
+          right: -480px;
+          bottom: -80px;
+        }
+      }
+    }
+    &__intro {
+      .connection {
+        &__left {
+          transform: scaleY(-1) scale(0.5) rotate(15deg);
+          left: -240px;
+          top: -268.5px;
+        }
+        &__right {
+          transform: scaleY(-1) scale(1.1);
+          right: -480px;
+          top: -412px;
+        }
+      }
+    }
   }
   @media screen and (max-width: 600px) {
     &__achieve {
@@ -1435,10 +1548,60 @@ p {
         }
       }
     }
+    &__vision {
+      .double_circle {
+        bottom: -580px;
+        right: -360px;
+      }
+    }
   }
   @media screen and (max-width: 414px) {
     &__achieve {
       padding: 80px 24px 80px 24px;
+    }
+
+    //symbol
+    &__header {
+      @include flex(column, center, center);
+      height: 100vh;
+      &--title {
+        @include h2();
+        margin: 20px 0 20px 0;
+      }
+      &--subTitle {
+        @include h4();
+      }
+      .connection {
+        &__left {
+          transform: scaleY(-1) scale(0.8) rotate(15deg);
+          left: -380px;
+          bottom: -250px;
+        }
+        &__right {
+          transform: scaleY(-1) scale(1.1);
+          right: -520px;
+          bottom: -80px;
+        }
+      }
+    }
+    &__intro {
+      .connection {
+        &__left {
+          transform: scaleY(-1) scale(0.8) rotate(15deg);
+          left: -380px;
+          top: -241.5px;
+        }
+        &__right {
+          transform: scaleY(-1) scale(1.1);
+          right: -520px;
+          top: -412px;
+        }
+      }
+      &--content {
+        .content__video {
+          min-width: 380px;
+        }
+      }
     }
   }
 }
