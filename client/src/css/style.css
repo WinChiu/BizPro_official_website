@@ -1172,6 +1172,7 @@ p {
 }
 .about__header {
   height: 560px;
+  height: calc(100vh - 60px);
   width: 100%;
   background-image: url("../asset/img/about_headerImg.webp");
   background-repeat: no-repeat;
@@ -1180,9 +1181,10 @@ p {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   overflow: hidden;
+  padding-top: 120px;
 }
 .about__header .circle4 {
   position: absolute;
@@ -1749,7 +1751,7 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 60px);
   }
   .about__header--title {
     font-size: 34px;
