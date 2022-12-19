@@ -1469,7 +1469,7 @@ p {
               padding-right: 0;
             }
             &--quote {
-              margin-bottom: 80px;
+              margin-bottom: 160px;
               padding-right: 0;
             }
           }
@@ -1480,6 +1480,11 @@ p {
       padding: 64px 24px 128px 24px;
       &--content {
         padding: 64px 28px 64px 28px;
+      }
+      &--iconList {
+        .iconList__item {
+          margin-bottom: 32px;
+        }
       }
     }
     &__achieve {
@@ -1563,7 +1568,7 @@ p {
       padding: 80px 24px 80px 24px;
     }
     &__intro {
-      padding: 128px 24px 80px 24px;
+      padding: 160px 24px 80px 24px;
     }
     &__briefIntro {
       .briefIntro {
@@ -1573,6 +1578,11 @@ p {
             height: 280px;
           }
         }
+      }
+    }
+    &__vision {
+      &--content {
+        margin-bottom: 80px;
       }
     }
     //symbol

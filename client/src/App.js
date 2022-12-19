@@ -9,6 +9,13 @@ import Journey from './pages/Journey';
 import Article from './pages/Article';
 import Member from './pages/Member';
 function App() {
+  const setVh = () => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  };
+  window.addEventListener('load', setVh);
+  window.addEventListener('resize', setVh);
+
   return (
     <BrowserRouter>
       <NavBar />

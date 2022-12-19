@@ -1617,7 +1617,7 @@ p {
     padding-right: 0;
   }
   .about__intro--content .content__word--quote {
-    margin-bottom: 80px;
+    margin-bottom: 160px;
     padding-right: 0;
   }
   .about__vision {
@@ -1625,6 +1625,9 @@ p {
   }
   .about__vision--content {
     padding: 64px 28px 64px 28px;
+  }
+  .about__vision--iconList .iconList__item {
+    margin-bottom: 32px;
   }
   .about__achieve {
     padding: 80px 64px 80px 64px;
@@ -1697,10 +1700,13 @@ p {
     padding: 80px 24px 80px 24px;
   }
   .about__intro {
-    padding: 128px 24px 80px 24px;
+    padding: 160px 24px 80px 24px;
   }
   .about__briefIntro .briefIntro__course--img, .about__briefIntro .briefIntro__people--img {
     height: 280px;
+  }
+  .about__vision--content {
+    margin-bottom: 80px;
   }
   .about__header {
     display: flex;
