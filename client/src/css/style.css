@@ -1690,11 +1690,17 @@ p {
   }
 }
 @media screen and (max-width: 414px) {
+  .about .marquee {
+    padding: 32px 0px 32px 0px;
+  }
   .about__achieve {
     padding: 80px 24px 80px 24px;
   }
   .about__intro {
-    padding: 128px 24px 128px 24px;
+    padding: 128px 24px 80px 24px;
+  }
+  .about__briefIntro .briefIntro__course--img, .about__briefIntro .briefIntro__people--img {
+    height: 280px;
   }
   .about__header {
     display: flex;
