@@ -78,7 +78,7 @@ body {
   overflow-y: scroll;
 }
 * {
-  //border: 1px black solid;
+  border: 1px black solid;
   font-family: 'Noto Sans TC';
 }
 p {
@@ -140,6 +140,7 @@ p {
     top: 60px;
     display: none;
     width: 160px;
+    z-index: 100;
     .dropdown__item {
       color: $black_text;
       font-size: 18px;
@@ -260,6 +261,10 @@ p {
   }
   @media screen and (max-width: 900px) {
     padding: 0 32px 32px 32px;
+    &__stamp--rounds {
+      left: -240px;
+      top: -240px;
+    }
   }
   @media screen and (max-width: 768px) {
     &__logo {
@@ -274,6 +279,10 @@ p {
   }
   @media screen and (max-width: 414px) {
     padding: 0 24px 32px 24px;
+    &__stamp--rounds {
+      left: -300px;
+      top: -220px;
+    }
   }
 }
 
@@ -1943,13 +1952,22 @@ p {
     &__items {
       &--item {
         margin: 0px 12px 44px 12px;
-
         max-width: 160px;
         .item__img {
           &--img {
             width: 160px;
           }
         }
+      }
+    }
+  }
+  @media screen and (max-width: 414px) {
+    &__items {
+      grid-gap: 40px 8px;
+      max-width: 1000px;
+      grid-template-columns: repeat(auto-fill, 160px);
+      &--item {
+        margin: 0px 0px 44px 0px;
       }
     }
   }
