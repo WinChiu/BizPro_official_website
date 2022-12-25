@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/style.css';
 import logo_red from '../asset/img/logo_red.svg';
 import icon_hamburger from '../asset/img/icon/icon_hamburger.svg';
@@ -6,6 +6,34 @@ import $ from 'jquery';
 
 function NavBar() {
   const [dropDownOpen, setdropDownOpen] = useState(false);
+  console.log(document.URL);
+  useEffect(() => {
+    $('.navBar').addClass('navHamburgerWhite');
+
+    // document.URL TBD
+    if (
+      document.URL === 'http://localhost:3000/' ||
+      document.URL === 'https://bizpro-official-website.herokuapp.com/'
+    ) {
+      $('.navBar').addClass('navBarPOF');
+      $('.navBar').addClass('navBarTransparent');
+      $('.navBar').addClass('navHamburgerWhite');
+      $('.navBar__word').css('color', 'white');
+
+      $(document).on('scroll', function () {
+        if (window.pageYOffset > 20) {
+          $('.navBar').removeClass('navBarTransparent');
+          $('.navBar').removeClass('navHamburgerWhite');
+          $('.navBar__word').css('color', '#1e1e1e');
+        } else {
+          $('.navBar').addClass('navBarTransparent');
+          $('.navBar').addClass('navHamburgerWhite');
+          $('.navBar__word').css('color', 'white');
+        }
+      });
+    }
+    return;
+  }, []);
 
   const NavBarL = () => (
     <div className="navBar navBarL">

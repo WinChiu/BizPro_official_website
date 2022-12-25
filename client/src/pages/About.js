@@ -110,11 +110,11 @@ function About() {
         </div>
       </article>
       <article className="about__vision">
-        <img
+        {/* <img
           src={double_circle}
           alt="double_circle"
           className="double_circle"
-        />
+        /> */}
         <img src={vision_bg} alt="circle_symbol_beige" className="bgCircle" />
         <div className="about__vision--content">
           <div className="content--title sectionTitle sectionTitle--lg">
