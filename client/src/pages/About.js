@@ -32,7 +32,9 @@ function About() {
         <img src={connection_symbol} alt="" className="connection__right" />
         <img src={Circle4_symbol_white300} alt="" className="circle4" />
         <img src={logo} alt="logo" className="about__header--logo" />
-        <h1 className="about__header--title">BizPro 台大商學研究社</h1>
+        <h1 className="about__header--title" style={{ fontSize: '56px' }}>
+          BizPro 台大商學研究社
+        </h1>
         <h3 className="about__header--subTitle">
           紮實課程 X 社群連結 X 量身打造
         </h3>

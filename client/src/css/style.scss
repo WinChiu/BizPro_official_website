@@ -1148,6 +1148,7 @@ p {
         }
         &--icon:hover {
           animation: pointDownBounce 1s ease infinite;
+          cursor: pointer;
           @keyframes pointDownBounce {
             0%,
             20%,

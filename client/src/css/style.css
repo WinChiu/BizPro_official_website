@@ -1297,6 +1297,7 @@ p {
 .about__header--readMore .readMore--icon:hover {
   -webkit-animation: pointDownBounce 1s ease infinite;
           animation: pointDownBounce 1s ease infinite;
+  cursor: pointer;
 }
 @-webkit-keyframes pointDownBounce {
   0%, 20%, 50%, 80%, 100% {

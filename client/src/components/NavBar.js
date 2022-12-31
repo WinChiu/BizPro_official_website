@@ -9,7 +9,6 @@ function NavBar() {
   console.log(document.URL);
   useEffect(() => {
     $('.navBar').addClass('navHamburgerWhite');
-
     // document.URL TBD
     if (
       document.URL === 'http://localhost:3000/' ||
@@ -33,7 +32,7 @@ function NavBar() {
       });
     }
     return;
-  }, []);
+  }, [dropDownOpen]);
 
   const NavBarL = () => (
     <div className="navBar navBarL">
