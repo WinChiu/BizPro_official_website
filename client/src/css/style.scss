@@ -1146,7 +1146,7 @@ p {
           color: $white_100;
           margin-right: 4px;
         }
-        &--icon:hover {
+        &--icon {
           animation: pointDownBounce 1s ease infinite;
           cursor: pointer;
           @keyframes pointDownBounce {
@@ -1169,6 +1169,7 @@ p {
     }
   }
   &__intro {
+    z-index: 1;
     padding: 180px 200px 180px 200px;
     overflow: hidden;
     position: relative;
@@ -1235,18 +1236,11 @@ p {
     }
   }
   &__vision {
+    z-index: 2;
     @include flex(row, center, center);
     padding: 200px 200px 128px 200px;
     position: relative;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    .double_circle {
-      position: absolute;
-      z-index: -1;
-      bottom: -540px;
-      right: -300px;
-      transform: scale(0.8);
-    }
+    overflow: visible;
     .bgCircle {
       position: absolute;
       left: -30%;
@@ -1297,6 +1291,7 @@ p {
     }
   }
   &__achieve {
+    z-index: 3;
     background-color: $black_secondary;
     padding: 80px 200px 80px 200px;
     position: relative;
@@ -1735,10 +1730,91 @@ p {
 }
 
 .article {
-  @include flex(column, flex-start, center);
+  @include flex(column, flex-start, flex-start);
   padding: 120px 300px 120px 300px;
   background-color: $white_200;
-
+  &__searchSection {
+    width: 50%;
+    margin-bottom: 40px;
+    .btn-primary {
+      background-color: $black_secondary;
+      border: none;
+      @include body1();
+      font-weight: bol d;
+      color: white;
+      padding: 8px 16px 8px 16px;
+      white-space: nowrap;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary.active,
+    .open > .dropdown-toggle.btn-primary {
+      color: white;
+      background-color: $grey;
+    }
+    // &--search {
+    //   @include flex(row, flex-start, center);
+    //   label {
+    //     @include h4();
+    //     margin-right: 16px;
+    //     font-weight: normal;
+    //     white-space: nowrap;
+    //   }
+    //   .search {
+    //     &--directSearchInput {
+    //       padding: 8px 16px 6px 16px;
+    //       @include body1();
+    //       font-weight: normal;
+    //       border-radius: 4px;
+    //       border: 1px solid #cccccc;
+    //       margin-right: 16px;
+    //       min-width: 240px;
+    //       width: 100%;
+    //       &:focus {
+    //         outline: 2px solid $grey;
+    //       }
+    //     }
+    //   }
+    // }
+    form {
+      @include flex(row, flex-start, center);
+    }
+    &--filter {
+      margin-right: 16px;
+      label {
+        @include h4();
+        margin-right: 16px;
+        font-weight: normal;
+        white-space: nowrap;
+      }
+      @include flex(row, flex-start, center);
+      .filter__major,
+      .filter__field {
+        &--selector {
+          &__control {
+            min-width: 240px;
+            width: 267px;
+            //width: fit-content;
+            padding: 2px 6px 2px 6px;
+          }
+          &__multi-value {
+            background-color: $black_secondary;
+            color: white;
+            padding: 1px 4px 1px 6px;
+            &__label {
+              @include body2();
+              color: white;
+            }
+          }
+          &__option:hover {
+            background-color: $black_secondary;
+            color: white;
+          }
+        }
+      }
+    }
+  }
   &__detail {
     padding: 40px 48px 32px 48px;
     position: fixed;
@@ -1910,6 +1986,7 @@ p {
 .member {
   @include flex(column, center, center);
   padding: 120px 96px 120px 96px;
+  position: relative;
   &__popUp {
     @include flex(row, center, center);
     background-color: white;
@@ -1975,7 +2052,102 @@ p {
     z-index: 20;
   }
   &__searchSection {
+    @include flex(column, center, flex-start);
     width: 100%;
+    max-width: 1110px;
+    margin-bottom: 48px;
+    form {
+      width: 100%;
+    }
+    .btn-primary {
+      background-color: $black_secondary;
+      border: none;
+      @include body1();
+      font-weight: bol d;
+      color: white;
+      padding: 8px 16px 8px 16px;
+      white-space: nowrap;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active,
+    .btn-primary.active,
+    .open > .dropdown-toggle.btn-primary {
+      color: white;
+      background-color: $grey;
+    }
+    &--search {
+      @include flex(row, flex-start, center);
+      .search {
+        &--directSearchLabel {
+          @include h4();
+          margin-right: 16px;
+          font-weight: normal;
+          white-space: nowrap;
+        }
+        &--directSearchInput {
+          padding: 8px 16px 6px 16px;
+          @include body1();
+          font-weight: normal;
+          border-radius: 4px;
+          border: 1px solid #cccccc;
+          margin-right: 16px;
+          width: 100%;
+          &:focus {
+            outline: 2px solid $grey;
+          }
+        }
+      }
+    }
+    &--filter {
+      @include flex(row, flex-start, center);
+      width: 60%;
+      margin-bottom: 16px;
+      label {
+        @include h4();
+        margin-right: 16px;
+        font-weight: normal;
+        white-space: nowrap;
+      }
+      .filter {
+        &__major,
+        &__field {
+          margin-right: 16px;
+        }
+        &__major,
+        &__field,
+        &__grade {
+          flex: 1;
+          @include flex(row, flex-start, center);
+          label {
+            @include h4();
+            margin-right: 16px;
+            font-weight: normal;
+            white-space: nowrap;
+          }
+          &--selector {
+            &__control {
+              min-width: 240px;
+              width: fit-content;
+              padding: 2px 6px 2px 6px;
+            }
+            &__multi-value {
+              background-color: $black_secondary;
+              color: white;
+              padding: 1px 4px 1px 6px;
+              &__label {
+                @include body2();
+                color: white;
+              }
+            }
+            &__option:hover {
+              background-color: $black_secondary;
+              color: white;
+            }
+          }
+        }
+      }
+    }
   }
   &__items {
     display: grid;
@@ -1991,8 +2163,21 @@ p {
       max-width: 180px;
       .item__img {
         margin-bottom: 16px;
+        position: relative;
         &--img {
           width: 180px;
+        }
+        .mask {
+          @include flex(row, center, center);
+          opacity: 0;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.8);
+          @include body1();
+          font-weight: bold;
+          color: white;
+          transition-duration: 0.3s;
         }
       }
       .item__content {
@@ -2005,6 +2190,13 @@ p {
         &--subTitle {
           @include body1();
           text-align: center;
+        }
+      }
+      &:hover {
+        .item__img {
+          .mask {
+            opacity: 1;
+          }
         }
       }
     }
@@ -2036,4 +2228,24 @@ p {
       }
     }
   }
+}
+
+.css-b62m3t-container {
+  width: 100%;
+}
+
+select-pure {
+  flex: 1;
+  min-width: 232px;
+  --select-height: fit-content;
+  --select-width: 100%;
+  --border-color: #4c5263;
+  --padding: 8px 16px;
+  --font-size: 14px;
+  --color: #1e1e1e;
+  --selected-background-color: #38323c;
+  --selected-color: white;
+  --hover-background-color: #38323c;
+  --hover-color: white;
+  --dropdown-items: 5;
 }

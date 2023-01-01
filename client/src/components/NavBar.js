@@ -47,9 +47,9 @@ function NavBar() {
         <div className="navBar__item navBar__word">
           <a href="/members">歷屆成員</a>
         </div>
-        <div className="navBar__item navBar__word">
+        {/* <div className="navBar__item navBar__word">
           <a href="/activity">社群活動</a>
-        </div>
+        </div> */}
         <div className="navBar__item navBar__word">
           <a href="/member_talk">成員心得</a>
         </div>
@@ -89,9 +89,9 @@ function NavBar() {
         <div className="dropdown__item">
           <a href="/members">歷屆成員</a>
         </div>
-        <div className="dropdown__item">
+        {/* <div className="dropdown__item">
           <a href="/activity">社群活動</a>
-        </div>
+        </div> */}
         <div className="dropdown__item">
           <a href="/member_talk">成員心得</a>
         </div>

@@ -24,7 +24,8 @@
     "config": "^3.3.8",
     "express": "^4.18.2",
     "jquery": "^3.6.1",
-    "mongoose": "^6.6.5"
+    "mongoose": "^6.6.5",
+    "react-chosen": "^0.3.8"
   },
   "devDependencies": {
     "concurrently": "^7.4.0",

@@ -8,6 +8,7 @@ import About from './pages/About';
 import Journey from './pages/Journey';
 import Article from './pages/Article';
 import Member from './pages/Member';
+import $ from 'jquery';
 function App() {
   const setVh = () => {
     const vh = window.innerHeight * 0.01;
@@ -15,6 +16,7 @@ function App() {
   };
   window.addEventListener('load', setVh);
   window.addEventListener('resize', setVh);
+  window.$ = window.jQuery = require('jquery');
 
   return (
     <BrowserRouter>

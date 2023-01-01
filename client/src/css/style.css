@@ -1294,7 +1294,7 @@ p {
   color: #ffffff;
   margin-right: 4px;
 }
-.about__header--readMore .readMore--icon:hover {
+.about__header--readMore .readMore--icon {
   -webkit-animation: pointDownBounce 1s ease infinite;
           animation: pointDownBounce 1s ease infinite;
   cursor: pointer;
@@ -1322,6 +1322,7 @@ p {
   }
 }
 .about__intro {
+  z-index: 1;
   padding: 180px 200px 180px 200px;
   overflow: hidden;
   position: relative;
@@ -1396,21 +1397,14 @@ p {
   transform: scale(0.7);
 }
 .about__vision {
+  z-index: 2;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 200px 200px 128px 200px;
   position: relative;
-  overflow-x: hidden;
-  overflow-y: hidden;
-}
-.about__vision .double_circle {
-  position: absolute;
-  z-index: -1;
-  bottom: -540px;
-  right: -300px;
-  transform: scale(0.8);
+  overflow: visible;
 }
 .about__vision .bgCircle {
   position: absolute;
@@ -1471,6 +1465,7 @@ p {
   color: #1e1e1e;
 }
 .about__achieve {
+  z-index: 3;
   background-color: #38323c;
   padding: 80px 200px 80px 200px;
   position: relative;
@@ -1888,9 +1883,78 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   padding: 120px 300px 120px 300px;
   background-color: #f6f6f6;
+}
+.article__searchSection {
+  width: 50%;
+  margin-bottom: 40px;
+}
+.article__searchSection .btn-primary {
+  background-color: #38323c;
+  border: none;
+  font-size: 16px;
+  line-height: 150%;
+  margin: 0;
+  color: #1e1e1e;
+  font-weight: bol d;
+  color: white;
+  padding: 8px 16px 8px 16px;
+  white-space: nowrap;
+}
+.article__searchSection .btn-primary:hover,
+.article__searchSection .btn-primary:focus,
+.article__searchSection .btn-primary:active,
+.article__searchSection .btn-primary.active,
+.article__searchSection .open > .dropdown-toggle.btn-primary {
+  color: white;
+  background-color: #4c5263;
+}
+.article__searchSection form {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.article__searchSection--filter {
+  margin-right: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.article__searchSection--filter label {
+  font-size: 20px;
+  line-height: 150%;
+  margin: 0;
+  font-weight: bold;
+  margin-right: 16px;
+  font-weight: normal;
+  white-space: nowrap;
+}
+.article__searchSection--filter .filter__major--selector__control,
+.article__searchSection--filter .filter__field--selector__control {
+  min-width: 240px;
+  width: 267px;
+  padding: 2px 6px 2px 6px;
+}
+.article__searchSection--filter .filter__major--selector__multi-value,
+.article__searchSection--filter .filter__field--selector__multi-value {
+  background-color: #38323c;
+  color: white;
+  padding: 1px 4px 1px 6px;
+}
+.article__searchSection--filter .filter__major--selector__multi-value__label,
+.article__searchSection--filter .filter__field--selector__multi-value__label {
+  font-size: 14px;
+  line-height: 150%;
+  color: white;
+}
+.article__searchSection--filter .filter__major--selector__option:hover,
+.article__searchSection--filter .filter__field--selector__option:hover {
+  background-color: #38323c;
+  color: white;
 }
 .article__detail {
   padding: 40px 48px 32px 48px;
@@ -2098,6 +2162,7 @@ p {
   justify-content: center;
   align-items: center;
   padding: 120px 96px 120px 96px;
+  position: relative;
 }
 .member__popUp {
   display: flex;
@@ -2182,7 +2247,123 @@ p {
   z-index: 20;
 }
 .member__searchSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   width: 100%;
+  max-width: 1110px;
+  margin-bottom: 48px;
+}
+.member__searchSection form {
+  width: 100%;
+}
+.member__searchSection .btn-primary {
+  background-color: #38323c;
+  border: none;
+  font-size: 16px;
+  line-height: 150%;
+  margin: 0;
+  color: #1e1e1e;
+  font-weight: bol d;
+  color: white;
+  padding: 8px 16px 8px 16px;
+  white-space: nowrap;
+}
+.member__searchSection .btn-primary:hover,
+.member__searchSection .btn-primary:focus,
+.member__searchSection .btn-primary:active,
+.member__searchSection .btn-primary.active,
+.member__searchSection .open > .dropdown-toggle.btn-primary {
+  color: white;
+  background-color: #4c5263;
+}
+.member__searchSection--search {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.member__searchSection--search .search--directSearchLabel {
+  font-size: 20px;
+  line-height: 150%;
+  margin: 0;
+  font-weight: bold;
+  margin-right: 16px;
+  font-weight: normal;
+  white-space: nowrap;
+}
+.member__searchSection--search .search--directSearchInput {
+  padding: 8px 16px 6px 16px;
+  font-size: 16px;
+  line-height: 150%;
+  margin: 0;
+  color: #1e1e1e;
+  font-weight: normal;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+  margin-right: 16px;
+  width: 100%;
+}
+.member__searchSection--search .search--directSearchInput:focus {
+  outline: 2px solid #4c5263;
+}
+.member__searchSection--filter {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60%;
+  margin-bottom: 16px;
+}
+.member__searchSection--filter label {
+  font-size: 20px;
+  line-height: 150%;
+  margin: 0;
+  font-weight: bold;
+  margin-right: 16px;
+  font-weight: normal;
+  white-space: nowrap;
+}
+.member__searchSection--filter .filter__major, .member__searchSection--filter .filter__field {
+  margin-right: 16px;
+}
+.member__searchSection--filter .filter__major, .member__searchSection--filter .filter__field, .member__searchSection--filter .filter__grade {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.member__searchSection--filter .filter__major label, .member__searchSection--filter .filter__field label, .member__searchSection--filter .filter__grade label {
+  font-size: 20px;
+  line-height: 150%;
+  margin: 0;
+  font-weight: bold;
+  margin-right: 16px;
+  font-weight: normal;
+  white-space: nowrap;
+}
+.member__searchSection--filter .filter__major--selector__control, .member__searchSection--filter .filter__field--selector__control, .member__searchSection--filter .filter__grade--selector__control {
+  min-width: 240px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 2px 6px 2px 6px;
+}
+.member__searchSection--filter .filter__major--selector__multi-value, .member__searchSection--filter .filter__field--selector__multi-value, .member__searchSection--filter .filter__grade--selector__multi-value {
+  background-color: #38323c;
+  color: white;
+  padding: 1px 4px 1px 6px;
+}
+.member__searchSection--filter .filter__major--selector__multi-value__label, .member__searchSection--filter .filter__field--selector__multi-value__label, .member__searchSection--filter .filter__grade--selector__multi-value__label {
+  font-size: 14px;
+  line-height: 150%;
+  color: white;
+}
+.member__searchSection--filter .filter__major--selector__option:hover, .member__searchSection--filter .filter__field--selector__option:hover, .member__searchSection--filter .filter__grade--selector__option:hover {
+  background-color: #38323c;
+  color: white;
 }
 .member__items {
   display: grid;
@@ -2200,9 +2381,28 @@ p {
 }
 .member__items--item .item__img {
   margin-bottom: 16px;
+  position: relative;
 }
 .member__items--item .item__img--img {
   width: 180px;
+}
+.member__items--item .item__img .mask {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 16px;
+  line-height: 150%;
+  margin: 0;
+  color: #1e1e1e;
+  font-weight: bold;
+  color: white;
+  transition-duration: 0.3s;
 }
 .member__items--item .item__content {
   display: flex;
@@ -2224,6 +2424,9 @@ p {
   margin: 0;
   color: #1e1e1e;
   text-align: center;
+}
+.member__items--item:hover .item__img .mask {
+  opacity: 1;
 }
 @media screen and (max-width: 768px) {
   .member {
@@ -2251,4 +2454,24 @@ p {
   .member__items--item {
     margin: 0px 0px 44px 0px;
   }
+}
+
+.css-b62m3t-container {
+  width: 100%;
+}
+
+select-pure {
+  flex: 1;
+  min-width: 232px;
+  --select-height: fit-content;
+  --select-width: 100%;
+  --border-color: #4c5263;
+  --padding: 8px 16px;
+  --font-size: 14px;
+  --color: #1e1e1e;
+  --selected-background-color: #38323c;
+  --selected-color: white;
+  --hover-background-color: #38323c;
+  --hover-color: white;
+  --dropdown-items: 5;
 }/*# sourceMappingURL=style.css.map */
