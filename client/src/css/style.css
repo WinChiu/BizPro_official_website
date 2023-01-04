@@ -2508,6 +2508,7 @@ p {
   .member__searchSection--filter .filterContainer .filter__major, .member__searchSection--filter .filterContainer .filter__field, .member__searchSection--filter .filterContainer .filter__grade {
     width: 100%;
     padding: 0;
+    padding-bottom: 16px;
   }
   .member__searchSection--search {
     display: flex;

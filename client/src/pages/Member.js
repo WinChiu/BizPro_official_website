@@ -6,6 +6,12 @@ import localDb from '../config/localDb.json';
 import Button from 'react-bootstrap/Button';
 import Select from 'react-select';
 
+/*
+TODO:
+- 換頁功能
+- 串上 API 後的篩選功能
+*/
+
 function Member() {
   const [popupContent, setPopupContent] = useState({
     name: '',
