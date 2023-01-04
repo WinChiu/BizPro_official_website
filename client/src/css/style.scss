@@ -1126,7 +1126,7 @@ p {
     }
     &--title {
       @include h1();
-
+      font-size: 56px;
       font-weight: bold;
       color: $white_100;
       margin: 8px 0 8px 0;
@@ -1253,7 +1253,7 @@ p {
       position: relative;
       height: fit-content;
       flex: 1;
-      margin-bottom: 48px;
+      margin-bottom: 108px;
       .content--title {
         margin-bottom: 40px;
         padding-right: 56px;
@@ -1304,11 +1304,12 @@ p {
       width: 100%;
     }
     &--content {
-      @include body1();
+      @include h4();
       color: $white_100;
       margin-bottom: 60px;
       max-width: 590px;
       text-align: center;
+      font-weight: normal;
     }
     &--numberList {
       @include flex(row, space-around, center);
@@ -1446,7 +1447,11 @@ p {
         }
       }
     }
-
+    &__header {
+      &--title {
+        @include h1();
+      }
+    }
     //symbol
     &__header {
       .connection {
@@ -1637,6 +1642,11 @@ p {
     }
   }
   @media screen and (max-width: 600px) {
+    &__header {
+      &--title {
+        font-size: 40px;
+      }
+    }
     &__achieve {
       padding: 80px 48px 80px 48px;
       &--numberList {
@@ -1689,7 +1699,7 @@ p {
 
       &--title {
         @include h2();
-        margin: 20px 0 20px 0;
+        margin: 32px 0 12px 0;
       }
       &--subTitle {
         @include h4();

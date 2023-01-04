@@ -1267,6 +1267,7 @@ p {
   font-size: 48px;
   line-height: 150%;
   margin: 0;
+  font-size: 56px;
   font-weight: bold;
   color: #ffffff;
   margin: 8px 0 8px 0;
@@ -1420,7 +1421,7 @@ p {
   height: -moz-fit-content;
   height: fit-content;
   flex: 1;
-  margin-bottom: 48px;
+  margin-bottom: 108px;
 }
 .about__vision--content .content--title {
   margin-bottom: 40px;
@@ -1482,14 +1483,15 @@ p {
   width: 100%;
 }
 .about__achieve--content {
-  font-size: 16px;
+  font-size: 20px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  font-weight: bold;
   color: #ffffff;
   margin-bottom: 60px;
   max-width: 590px;
   text-align: center;
+  font-weight: normal;
 }
 .about__achieve--numberList {
   display: flex;
@@ -1640,6 +1642,11 @@ p {
   .about__vision--iconList .iconList__item--icon {
     margin-left: 0px;
   }
+  .about__header--title {
+    font-size: 48px;
+    line-height: 150%;
+    margin: 0;
+  }
   .about__header .connection__left {
     transform: scaleY(-1) scale(0.6) rotate(15deg);
     left: -200px;
@@ -1788,6 +1795,9 @@ p {
   }
 }
 @media screen and (max-width: 600px) {
+  .about__header--title {
+    font-size: 40px;
+  }
   .about__achieve {
     padding: 80px 48px 80px 48px;
   }
@@ -1835,7 +1845,7 @@ p {
     line-height: 120%;
     margin: 0;
     font-weight: bold;
-    margin: 20px 0 20px 0;
+    margin: 32px 0 12px 0;
   }
 }
 @media screen and (max-width: 414px) and (max-width: 768px) {
