@@ -8,6 +8,7 @@ body {
 }
 
 * {
+  border: 1px black solid;
   font-family: "Noto Sans TC";
 }
 
@@ -2289,7 +2290,14 @@ p {
   font-weight: normal;
   white-space: nowrap;
 }
-.member__searchSection--search .search--directSearchInput {
+.member__searchSection--search .searchContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.member__searchSection--search .searchContainer .search--directSearchInput {
   padding: 8px 16px 6px 16px;
   font-size: 16px;
   line-height: 150%;
@@ -2301,7 +2309,7 @@ p {
   margin-right: 16px;
   width: 100%;
 }
-.member__searchSection--search .search--directSearchInput:focus {
+.member__searchSection--search .searchContainer .search--directSearchInput:focus {
   outline: 2px solid #4c5263;
 }
 .member__searchSection--filter {
@@ -2457,7 +2465,6 @@ p {
   }
   .member__searchSection--filter .filterContainer .filter__major, .member__searchSection--filter .filterContainer .filter__field, .member__searchSection--filter .filterContainer .filter__grade {
     width: 100%;
-    padding-right: 80px;
   }
   .member__searchSection--filter .filterContainer .filter__major--selector__control, .member__searchSection--filter .filterContainer .filter__field--selector__control, .member__searchSection--filter .filterContainer .filter__grade--selector__control {
     min-width: 240px;
@@ -2479,6 +2486,44 @@ p {
   }
   .member__items--item .item__img--img {
     width: 160px;
+  }
+  .member__searchSection--filter {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .member__searchSection--filter label {
+    margin-top: 8px;
+    margin-bottom: 12px;
+  }
+  .member__searchSection--filter .filterContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 0;
+  }
+  .member__searchSection--filter .filterContainer .filter__major, .member__searchSection--filter .filterContainer .filter__field, .member__searchSection--filter .filterContainer .filter__grade {
+    width: 100%;
+    padding: 0;
+  }
+  .member__searchSection--search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .member__searchSection--search .search--directSearchLabel {
+    margin-bottom: 12px;
+  }
+  .member__searchSection--search .searchContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
   }
 }
 @media screen and (max-width: 414px) {

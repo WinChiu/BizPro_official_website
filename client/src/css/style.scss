@@ -79,7 +79,7 @@ body {
 }
 
 * {
-  //border: 1px black solid;
+  border: 1px black solid;
   font-family: 'Noto Sans TC';
 }
 p {
@@ -2096,7 +2096,11 @@ p {
           font-weight: normal;
           white-space: nowrap;
         }
-        &--directSearchInput {
+      }
+      .searchContainer {
+        @include flex(row, center, center);
+        width: 100%;
+        .search--directSearchInput {
           padding: 8px 16px 6px 16px;
           @include body1();
           font-weight: normal;
@@ -2245,7 +2249,7 @@ p {
             &__field,
             &__grade {
               width: 100%;
-              padding-right: 80px;
+              //padding-right: 80px;
               &--selector {
                 &__control {
                   min-width: 240px;
@@ -2270,6 +2274,42 @@ p {
         .item__img {
           &--img {
             width: 160px;
+          }
+        }
+      }
+    }
+    &__searchSection {
+      &--filter {
+        @include flex(column, flex-start, flex-start);
+        width: 100%;
+        label {
+          margin-top: 8px;
+          margin-bottom: 12px;
+        }
+        .filterContainer {
+          @include flex(column, center, flex-start);
+          width: 100%;
+          padding: 0;
+          .filter {
+            &__major,
+            &__field,
+            &__grade {
+              width: 100%;
+              padding: 0;
+            }
+          }
+        }
+      }
+      &--search {
+        @include flex(column, center, flex-start);
+        .search {
+          &--directSearchLabel {
+            margin-bottom: 12px;
+          }
+        }
+        .searchContainer {
+          @include flex(row, center, center);
+          .search--directSearchInput {
           }
         }
       }

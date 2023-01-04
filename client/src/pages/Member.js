@@ -171,15 +171,17 @@ function Member() {
             </div>
             <div className="member__searchSection--search">
               <label className="search--directSearchLabel">直接搜尋：</label>
-              <input
-                type="text"
-                name="search"
-                placeholder="直接搜尋"
-                className="search--directSearchInput"
-              />
-              <Button variant="primary" type="submit">
-                搜尋
-              </Button>
+              <div className="searchContainer">
+                <input
+                  type="text"
+                  name="search"
+                  placeholder="直接搜尋"
+                  className="search--directSearchInput"
+                />
+                <Button variant="primary" type="submit">
+                  搜尋
+                </Button>
+              </div>
             </div>
           </form>
         </div>
