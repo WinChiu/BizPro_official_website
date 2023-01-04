@@ -79,7 +79,7 @@ body {
 }
 
 * {
-  border: 1px black solid;
+  //border: 1px black solid;
   font-family: 'Noto Sans TC';
 }
 p {
@@ -2250,10 +2250,10 @@ p {
             &__grade {
               width: 100%;
               //padding-right: 80px;
+              padding-bottom: 16px;
               &--selector {
                 &__control {
                   min-width: 240px;
-                  margin-bottom: 16px;
                 }
               }
             }

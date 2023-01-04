@@ -8,7 +8,6 @@ body {
 }
 
 * {
-  border: 1px black solid;
   font-family: "Noto Sans TC";
 }
 
@@ -2465,10 +2464,10 @@ p {
   }
   .member__searchSection--filter .filterContainer .filter__major, .member__searchSection--filter .filterContainer .filter__field, .member__searchSection--filter .filterContainer .filter__grade {
     width: 100%;
+    padding-bottom: 16px;
   }
   .member__searchSection--filter .filterContainer .filter__major--selector__control, .member__searchSection--filter .filterContainer .filter__field--selector__control, .member__searchSection--filter .filterContainer .filter__grade--selector__control {
     min-width: 240px;
-    margin-bottom: 16px;
   }
 }
 @media screen and (max-width: 768px) {
