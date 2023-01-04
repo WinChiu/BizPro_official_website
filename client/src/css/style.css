@@ -1842,26 +1842,14 @@ p {
   }
   .about__header--title {
     font-size: 34px;
-    line-height: 120%;
-    margin: 0;
-    font-weight: bold;
-    margin: 32px 0 12px 0;
+    margin: 32px 0 8px 0;
   }
-}
-@media screen and (max-width: 414px) and (max-width: 768px) {
-  .about__header--title {
-    font-size: 30px;
-  }
-}
-@media screen and (max-width: 414px) {
   .about__header--subTitle {
     font-size: 20px;
     line-height: 150%;
     margin: 0;
     font-weight: bold;
   }
-}
-@media screen and (max-width: 414px) {
   .about__header .connection__left {
     transform: scaleY(-1) scale(0.8) rotate(15deg);
     left: -380px;
@@ -1872,8 +1860,6 @@ p {
     right: -520px;
     bottom: -80px;
   }
-}
-@media screen and (max-width: 414px) {
   .about__intro .connection__left {
     transform: scaleY(-1) scale(0.8) rotate(15deg);
     left: -380px;

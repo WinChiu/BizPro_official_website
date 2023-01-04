@@ -1698,8 +1698,9 @@ p {
       padding-top: 60px;
 
       &--title {
-        @include h2();
-        margin: 32px 0 12px 0;
+        //@include h2();
+        font-size: 34px;
+        margin: 32px 0 8px 0;
       }
       &--subTitle {
         @include h4();
