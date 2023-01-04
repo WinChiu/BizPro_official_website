@@ -2112,7 +2112,7 @@ p {
     }
     &--filter {
       @include flex(row, flex-start, center);
-      width: 60%;
+      width: 80%;
       margin-bottom: 16px;
       label {
         @include h4();
@@ -2120,40 +2120,45 @@ p {
         font-weight: normal;
         white-space: nowrap;
       }
-      .filter {
-        &__major,
-        &__field {
-          margin-right: 16px;
-        }
-        &__major,
-        &__field,
-        &__grade {
-          flex: 1;
-          @include flex(row, flex-start, center);
-          label {
-            @include h4();
+      .filterContainer {
+        width: 100%;
+        padding-right: 80px;
+        @include flex(row, flex-start, center);
+        .filter {
+          &__major,
+          &__field {
             margin-right: 16px;
-            font-weight: normal;
-            white-space: nowrap;
           }
-          &--selector {
-            &__control {
-              min-width: 240px;
-              width: fit-content;
-              padding: 2px 6px 2px 6px;
+          &__major,
+          &__field,
+          &__grade {
+            flex: 1;
+            @include flex(row, flex-start, center);
+            label {
+              @include h4();
+              margin-right: 16px;
+              font-weight: normal;
+              white-space: nowrap;
             }
-            &__multi-value {
-              background-color: $black_secondary;
-              color: white;
-              padding: 1px 4px 1px 6px;
-              &__label {
-                @include body2();
+            &--selector {
+              &__control {
+                //min-width: 240px;
+                width: 100%;
+                padding: 2px 6px 2px 6px;
+              }
+              &__multi-value {
+                background-color: $black_secondary;
+                color: white;
+                padding: 1px 4px 1px 6px;
+                &__label {
+                  @include body2();
+                  color: white;
+                }
+              }
+              &__option:hover {
+                background-color: $black_secondary;
                 color: white;
               }
-            }
-            &__option:hover {
-              background-color: $black_secondary;
-              color: white;
             }
           }
         }
@@ -2212,11 +2217,52 @@ p {
       }
     }
   }
+  @media screen and (max-width: 1366px) {
+    &__searchSection {
+      &--filter {
+        width: 100%;
+      }
+    }
+  }
+  @media screen and (max-width: 994px) {
+    &__searchSection {
+      &--filter {
+        @include flex(row, flex-start, flex-start);
+        width: 100%;
+
+        label {
+          margin-top: 8px;
+        }
+        .filterContainer {
+          @include flex(column, center, flex-start);
+          width: 100%;
+          .filter {
+            &__major,
+            &__field {
+              margin-right: 0px;
+            }
+            &__major,
+            &__field,
+            &__grade {
+              width: 100%;
+              padding-right: 80px;
+              &--selector {
+                &__control {
+                  min-width: 240px;
+                  margin-bottom: 16px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
   @media screen and (max-width: 768px) {
     padding: 120px 48px 120px 48px;
   }
   @media screen and (max-width: 500px) {
-    padding: 120px 16px 120px 16px;
+    padding: 120px 32px 120px 32px;
     &__items {
       &--item {
         margin: 0px 12px 44px 12px;

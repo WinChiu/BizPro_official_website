@@ -123,48 +123,50 @@ function Member() {
           >
             <div className="member__searchSection--filter">
               <label className="filter__field--tag">條件篩選：</label>
-              <div className="filter__major">
-                {/* <label className="filter__field--tag">科系篩選：</label> */}
-                <Select
-                  classNamePrefix="filter__field--selector"
-                  placeholder="選擇科系"
-                  isMulti
-                  options={majorOptions}
-                  onChange={(choice) => {
-                    let tempArray = [];
-                    choice.map((option) => {
-                      tempArray.push(`${option.value}`);
-                    });
-                    setMajorFilter(tempArray);
-                  }}
-                />
-              </div>
-              <div className="filter__field">
-                {/* <label className="filter__field--tag">領域篩選：</label> */}
-                <Select
-                  classNamePrefix="filter__field--selector"
-                  placeholder="選擇領域"
-                  isMulti
-                  options={fieldOptions}
-                  onChange={(choice) => {
-                    let tempArray = [];
-                    choice.map((option) => {
-                      tempArray.push(`${option.value}`);
-                    });
-                    setFieldFilter(tempArray);
-                  }}
-                />
-              </div>
-              <div className="filter__grade">
-                {/* <label className="filter__grade--tag">屆數篩選：</label> */}
-                <Select
-                  classNamePrefix="filter__grade--selector"
-                  placeholder="選擇屆數"
-                  options={gradeOptions}
-                  onChange={(choice) => {
-                    setGradeFilter(choice.value);
-                  }}
-                />
+              <div className="filterContainer">
+                <div className="filter__major">
+                  {/* <label className="filter__field--tag">科系篩選：</label> */}
+                  <Select
+                    classNamePrefix="filter__field--selector"
+                    placeholder="選擇科系"
+                    isMulti
+                    options={majorOptions}
+                    onChange={(choice) => {
+                      let tempArray = [];
+                      choice.map((option) => {
+                        tempArray.push(`${option.value}`);
+                      });
+                      setMajorFilter(tempArray);
+                    }}
+                  />
+                </div>
+                <div className="filter__field">
+                  {/* <label className="filter__field--tag">領域篩選：</label> */}
+                  <Select
+                    classNamePrefix="filter__field--selector"
+                    placeholder="選擇領域"
+                    isMulti
+                    options={fieldOptions}
+                    onChange={(choice) => {
+                      let tempArray = [];
+                      choice.map((option) => {
+                        tempArray.push(`${option.value}`);
+                      });
+                      setFieldFilter(tempArray);
+                    }}
+                  />
+                </div>
+                <div className="filter__grade">
+                  {/* <label className="filter__grade--tag">屆數篩選：</label> */}
+                  <Select
+                    classNamePrefix="filter__grade--selector"
+                    placeholder="選擇屆數"
+                    options={gradeOptions}
+                    onChange={(choice) => {
+                      setGradeFilter(choice.value);
+                    }}
+                  />
+                </div>
               </div>
             </div>
             <div className="member__searchSection--search">

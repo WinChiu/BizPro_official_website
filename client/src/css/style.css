@@ -2309,7 +2309,7 @@ p {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  width: 60%;
+  width: 80%;
   margin-bottom: 16px;
 }
 .member__searchSection--filter label {
@@ -2321,17 +2321,25 @@ p {
   font-weight: normal;
   white-space: nowrap;
 }
-.member__searchSection--filter .filter__major, .member__searchSection--filter .filter__field {
+.member__searchSection--filter .filterContainer {
+  width: 100%;
+  padding-right: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.member__searchSection--filter .filterContainer .filter__major, .member__searchSection--filter .filterContainer .filter__field {
   margin-right: 16px;
 }
-.member__searchSection--filter .filter__major, .member__searchSection--filter .filter__field, .member__searchSection--filter .filter__grade {
+.member__searchSection--filter .filterContainer .filter__major, .member__searchSection--filter .filterContainer .filter__field, .member__searchSection--filter .filterContainer .filter__grade {
   flex: 1;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
 }
-.member__searchSection--filter .filter__major label, .member__searchSection--filter .filter__field label, .member__searchSection--filter .filter__grade label {
+.member__searchSection--filter .filterContainer .filter__major label, .member__searchSection--filter .filterContainer .filter__field label, .member__searchSection--filter .filterContainer .filter__grade label {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
@@ -2340,24 +2348,21 @@ p {
   font-weight: normal;
   white-space: nowrap;
 }
-.member__searchSection--filter .filter__major--selector__control, .member__searchSection--filter .filter__field--selector__control, .member__searchSection--filter .filter__grade--selector__control {
-  min-width: 240px;
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
+.member__searchSection--filter .filterContainer .filter__major--selector__control, .member__searchSection--filter .filterContainer .filter__field--selector__control, .member__searchSection--filter .filterContainer .filter__grade--selector__control {
+  width: 100%;
   padding: 2px 6px 2px 6px;
 }
-.member__searchSection--filter .filter__major--selector__multi-value, .member__searchSection--filter .filter__field--selector__multi-value, .member__searchSection--filter .filter__grade--selector__multi-value {
+.member__searchSection--filter .filterContainer .filter__major--selector__multi-value, .member__searchSection--filter .filterContainer .filter__field--selector__multi-value, .member__searchSection--filter .filterContainer .filter__grade--selector__multi-value {
   background-color: #38323c;
   color: white;
   padding: 1px 4px 1px 6px;
 }
-.member__searchSection--filter .filter__major--selector__multi-value__label, .member__searchSection--filter .filter__field--selector__multi-value__label, .member__searchSection--filter .filter__grade--selector__multi-value__label {
+.member__searchSection--filter .filterContainer .filter__major--selector__multi-value__label, .member__searchSection--filter .filterContainer .filter__field--selector__multi-value__label, .member__searchSection--filter .filterContainer .filter__grade--selector__multi-value__label {
   font-size: 14px;
   line-height: 150%;
   color: white;
 }
-.member__searchSection--filter .filter__major--selector__option:hover, .member__searchSection--filter .filter__field--selector__option:hover, .member__searchSection--filter .filter__grade--selector__option:hover {
+.member__searchSection--filter .filterContainer .filter__major--selector__option:hover, .member__searchSection--filter .filterContainer .filter__field--selector__option:hover, .member__searchSection--filter .filterContainer .filter__grade--selector__option:hover {
   background-color: #38323c;
   color: white;
 }
@@ -2424,6 +2429,41 @@ p {
 .member__items--item:hover .item__img .mask {
   opacity: 1;
 }
+@media screen and (max-width: 1366px) {
+  .member__searchSection--filter {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 994px) {
+  .member__searchSection--filter {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .member__searchSection--filter label {
+    margin-top: 8px;
+  }
+  .member__searchSection--filter .filterContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+  }
+  .member__searchSection--filter .filterContainer .filter__major, .member__searchSection--filter .filterContainer .filter__field {
+    margin-right: 0px;
+  }
+  .member__searchSection--filter .filterContainer .filter__major, .member__searchSection--filter .filterContainer .filter__field, .member__searchSection--filter .filterContainer .filter__grade {
+    width: 100%;
+    padding-right: 80px;
+  }
+  .member__searchSection--filter .filterContainer .filter__major--selector__control, .member__searchSection--filter .filterContainer .filter__field--selector__control, .member__searchSection--filter .filterContainer .filter__grade--selector__control {
+    min-width: 240px;
+    margin-bottom: 16px;
+  }
+}
 @media screen and (max-width: 768px) {
   .member {
     padding: 120px 48px 120px 48px;
@@ -2431,7 +2471,7 @@ p {
 }
 @media screen and (max-width: 500px) {
   .member {
-    padding: 120px 16px 120px 16px;
+    padding: 120px 32px 120px 32px;
   }
   .member__items--item {
     margin: 0px 12px 44px 12px;

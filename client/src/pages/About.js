@@ -24,10 +24,12 @@ import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
 import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
 import vision_bg from '../asset/img/vision_bg.webp';
 import MarqueeLogo from '../components/MarqueeLogo';
+
 function About() {
   return (
     <section className="about">
       <article className="about__header">
+        {/* TODO: 新增動畫效果，讓照片底圖延遲下滑 + 所有 symbol 隨著滑鼠移動做微小偏移  */}
         <img src={connection_symbol} alt="" className="connection__left" />
         <img src={connection_symbol} alt="" className="connection__right" />
         <img src={Circle4_symbol_white300} alt="" className="circle4" />
