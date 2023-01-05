@@ -245,16 +245,25 @@ p {
   height: 32px;
   margin-left: 40px;
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1200px) {
   .header {
-    padding: 0 32px 32px 32px;
+    padding: 0 64px 32px 64px;
   }
   .header__stamp--rounds {
     left: -240px;
     top: -240px;
   }
 }
+@media screen and (max-width: 900px) {
+  .header__stamp--rounds {
+    left: -240px;
+    top: -240px;
+  }
+}
 @media screen and (max-width: 768px) {
+  .header {
+    padding: 0 32px 32px 32px;
+  }
   .header__logo {
     display: none;
   }
@@ -417,7 +426,7 @@ p {
   opacity: 0.8;
 }
 .junior .courseStructure__intro {
-  margin-bottom: 120px;
+  margin-bottom: 140px;
   z-index: 0;
   display: flex;
   flex-direction: row;
@@ -477,14 +486,17 @@ p {
 .junior .courseStructure__infos {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   z-index: 0;
+  position: relative;
+}
+.junior .courseStructure__infos .containerMR {
+  margin-right: 40px;
 }
 .junior .courseStructure__infos--container {
-  width: 100%;
-  margin-bottom: 48px;
+  flex: 1;
 }
 .junior .courseStructure__infos--container .container__title {
   font-size: 24px;
@@ -495,43 +507,43 @@ p {
 }
 .junior .courseStructure__infos--container .container__content {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+  width: 100%;
+  height: 380px;
 }
 .junior .courseStructure__infos--container .container__content--words {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
   color: #1e1e1e;
-  margin-right: 48px;
 }
 .junior .courseStructure__infos--container .container__content--iconSet {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  min-width: 608px;
+  display: grid;
+  grid-template-columns: 120px 120px;
+  grid-template-rows: 90px 90px;
+  grid-gap: 28px 28px;
+  align-content: center;
+  justify-content: center;
 }
 .junior .courseStructure__infos--container .container__content--iconSet .iconSet__items {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 140px;
+  width: 120px;
 }
 .junior .courseStructure__infos--container .container__content--iconSet .iconSet__items--icon {
   width: 48px;
   margin-bottom: 8px;
 }
 .junior .courseStructure__infos--container .container__content--iconSet .iconSet__items--title {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 150%;
   margin: 0;
+  color: #1e1e1e;
   font-weight: bold;
-}
-.junior .courseStructure__infos .icon_down {
-  margin-bottom: 48px;
 }
 .junior .caseStudy {
   padding: 80px 128px 80px 128px;
@@ -578,7 +590,7 @@ p {
   color: #ffffff;
 }
 .junior .caseStudy__hbs {
-  margin-bottom: 32px;
+  margin-bottom: 48px;
 }
 .junior .caseStudy__hbs, .junior .caseStudy__lean {
   z-index: 10;
@@ -643,7 +655,7 @@ p {
   opacity: 0.8;
 }
 .junior .project .sectionTitle {
-  margin-bottom: 64px;
+  margin-bottom: 80px;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -736,10 +748,10 @@ p {
     transform: scale(1.1);
   }
   .junior .caseStudy {
-    padding: 128px 64px 64px 64px;
+    padding: 108px 64px 108px 64px;
   }
   .junior .project {
-    padding: 128px 64px 64px 64px;
+    padding: 128px 64px 128px 64px;
   }
   .junior .project__jp--title p, .junior .project__lc--title p {
     width: 100%;
@@ -755,6 +767,33 @@ p {
   }
   .junior .project__jp--content .content--img, .junior .project__lc--content .content--img {
     margin-bottom: 32px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .junior .courseStructure__infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .junior .courseStructure__infos .containerMR {
+    margin-right: 0px;
+    margin-bottom: 120px;
+  }
+  .junior .courseStructure__infos--container .container__content {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+  }
+  .junior .courseStructure__infos--container .container__content--words {
+    margin-bottom: 48px;
+  }
+  .junior .courseStructure__infos--container .container__content--iconSet {
+    width: 100%;
+    grid-template-columns: 120px 120px 120px 120px;
+    grid-template-rows: 90px;
+    align-content: center;
+    justify-content: space-between;
   }
 }
 @media screen and (max-width: 900px) {
@@ -797,20 +836,6 @@ p {
     margin-right: 0px;
     margin-bottom: 48px;
   }
-  .junior .courseStructure__infos--container .container__content {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-  }
-  .junior .courseStructure__infos--container .container__content--words {
-    font-size: 16px;
-    line-height: 150%;
-    margin: 0;
-    color: #1e1e1e;
-    margin: 0px;
-    margin-bottom: 32px;
-  }
 }
 @media screen and (max-width: 768px) {
   .junior .courseStructure {
@@ -822,15 +847,6 @@ p {
   }
   .junior .courseStructure .sectionTitle {
     margin-bottom: 64px;
-  }
-  .junior .courseStructure__infos--container .container__content--iconSet {
-    display: grid;
-    grid-template-columns: 140px 140px;
-    grid-template-rows: 140px 140px;
-    grid-gap: 16px 24px;
-    align-content: center;
-    justify-content: center;
-    min-width: 0px;
   }
   .junior .caseStudy {
     padding: 128px 32px 64px 32px;
@@ -855,6 +871,20 @@ p {
   }
   .junior .project .sectionTitle--md {
     display: flex;
+  }
+}
+@media screen and (max-width: 600px) {
+  .junior .courseStructure__infos {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .junior .courseStructure__infos--container .container__content--iconSet {
+    grid-template-columns: 120px 120px;
+    grid-template-rows: 90px 90px;
+    align-content: center;
+    justify-content: center;
   }
 }
 @media screen and (max-width: 414px) {
@@ -1103,10 +1133,7 @@ p {
   justify-content: center;
   align-items: center;
   width: 100%;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 59px;
-  z-index: 10;
+  position: relative;
 }
 .tab__item {
   display: flex;

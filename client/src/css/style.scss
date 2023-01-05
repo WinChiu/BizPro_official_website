@@ -278,14 +278,21 @@ p {
     height: 32px;
     margin-left: 40px;
   }
+  @media screen and (max-width: 1200px) {
+    padding: 0 64px 32px 64px;
+    &__stamp--rounds {
+      left: -240px;
+      top: -240px;
+    }
+  }
   @media screen and (max-width: 900px) {
-    padding: 0 32px 32px 32px;
     &__stamp--rounds {
       left: -240px;
       top: -240px;
     }
   }
   @media screen and (max-width: 768px) {
+    padding: 0 32px 32px 32px;
     &__logo {
       display: none;
     }
@@ -421,7 +428,7 @@ p {
       opacity: 0.8;
     }
     &__intro {
-      margin-bottom: 120px;
+      margin-bottom: 140px;
       z-index: 0;
       @include flex(row, center, center);
       &--content {
@@ -462,42 +469,47 @@ p {
     }
     &__infos {
       width: 100%;
-      @include flex(column, center, center);
+      @include flex(row, center, flex-start);
       z-index: 0;
+      position: relative;
+      .containerMR {
+        margin-right: 40px;
+      }
       &--container {
-        width: 100%;
-        margin-bottom: 48px;
+        flex: 1;
         .container__title {
           @include h3();
           font-weight: bold;
           margin-bottom: 16px;
         }
         .container__content {
-          @include flex(row, flex-start, center);
+          @include flex(column, space-between, center);
+          width: 100%;
+          height: 380px;
           &--words {
             @include body1();
-            margin-right: 48px;
           }
           &--iconSet {
-            @include flex(row, space-between, center);
-            min-width: 608px;
-
+            display: grid;
+            grid-template-columns: 120px 120px;
+            grid-template-rows: 90px 90px;
+            grid-gap: 28px 28px;
+            align-content: center;
+            justify-content: center;
             .iconSet__items {
               @include flex(column, center, center);
-              width: 140px;
+              width: 120px;
               &--icon {
                 width: 48px;
                 margin-bottom: 8px;
               }
               &--title {
-                @include h4();
+                @include body1();
+                font-weight: bold;
               }
             }
           }
         }
-      }
-      .icon_down {
-        margin-bottom: 48px;
       }
     }
   }
@@ -536,7 +548,7 @@ p {
       }
     }
     &__hbs {
-      margin-bottom: 32px;
+      margin-bottom: 48px;
     }
     &__hbs,
     &__lean {
@@ -588,7 +600,7 @@ p {
       opacity: 0.8;
     }
     .sectionTitle {
-      margin-bottom: 64px;
+      margin-bottom: 80px;
       @include flex(row, center, center);
       &--lg {
         display: flex;
@@ -666,10 +678,10 @@ p {
       }
     }
     .caseStudy {
-      padding: 128px 64px 64px 64px;
+      padding: 108px 64px 108px 64px;
     }
     .project {
-      padding: 128px 64px 64px 64px;
+      padding: 128px 64px 128px 64px;
       &__jp,
       &__lc {
         &--title {
@@ -684,6 +696,32 @@ p {
           }
           .content--img {
             margin-bottom: 32px;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 1000px) {
+    .courseStructure {
+      &__infos {
+        @include flex(column, center, flex-start);
+        .containerMR {
+          margin-right: 0px;
+          margin-bottom: 120px;
+        }
+        &--container {
+          .container__content {
+            height: fit-content;
+            &--words {
+              margin-bottom: 48px;
+            }
+            &--iconSet {
+              width: 100%;
+              grid-template-columns: 120px 120px 120px 120px;
+              grid-template-rows: 90px;
+              align-content: center;
+              justify-content: space-between;
+            }
           }
         }
       }
@@ -724,18 +762,6 @@ p {
           margin-bottom: 48px;
         }
       }
-      &__infos {
-        &--container {
-          .container__content {
-            @include flex(column, flex-start, center);
-            &--words {
-              @include body1();
-              margin: 0px;
-              margin-bottom: 32px;
-            }
-          }
-        }
-      }
     }
   }
   @media screen and (max-width: 768px) {
@@ -747,21 +773,6 @@ p {
       }
       .sectionTitle {
         margin-bottom: 64px;
-      }
-      &__infos {
-        &--container {
-          .container__content {
-            &--iconSet {
-              display: grid;
-              grid-template-columns: 140px 140px;
-              grid-template-rows: 140px 140px;
-              grid-gap: 16px 24px;
-              align-content: center;
-              justify-content: center;
-              min-width: 0px;
-            }
-          }
-        }
       }
     }
     .caseStudy {
@@ -786,6 +797,23 @@ p {
         }
         &--md {
           display: flex;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .courseStructure {
+      &__infos {
+        @include flex(column, center, flex-start);
+        &--container {
+          .container__content {
+            &--iconSet {
+              grid-template-columns: 120px 120px;
+              grid-template-rows: 90px 90px;
+              align-content: center;
+              justify-content: center;
+            }
+          }
         }
       }
     }
@@ -995,9 +1023,9 @@ p {
 .tab {
   @include flex(row, center, center);
   width: 100%;
-  position: sticky;
-  top: 59px;
-  z-index: 10;
+  position: relative;
+  //top: 59px;
+  //z-index: 10;
 
   &__item {
     @include flex(row, center, center);

@@ -10,6 +10,7 @@ import Select from 'react-select';
 TODO:
 - 換頁功能
 - 串上 API 後的篩選功能
+- 手機版本的查看詳情按鈕
 */
 
 function Member() {

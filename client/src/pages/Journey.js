@@ -42,6 +42,7 @@ function Journey() {
       <h4 className="iconSet__items--title">{title}</h4>
     </div>
   );
+  /*TODO: 課程架構 icon 調整*/
   const Junior = () => (
     <section className="junior">
       <article className="courseStructure">
@@ -55,7 +56,7 @@ function Journey() {
                 alt="title__symbol_left"
                 className="title--symbolLeft"
               />
-              <h2 className="title--word">課程架構</h2>
+              <h2 className="title--word">個案分析</h2>
               <img
                 src={title_symbol_right_md}
                 alt="title__symbol_right"
@@ -94,7 +95,7 @@ function Journey() {
           </div>
         </div>
         <div className="courseStructure__infos">
-          <div className="courseStructure__infos--container">
+          <div className="courseStructure__infos--container containerMR">
             <h3 className="container__title">Info-In 階段</h3>
             <div className="container__content">
               <p className="container__content--words">
@@ -113,8 +114,7 @@ function Journey() {
               </div>
             </div>
           </div>
-          <img src={icon_down} alt="icon_down" className="icon_down" />
-          <div className="courseStructure__infos--container">
+          <div className="courseStructure__infos--container containerMR">
             <h3 className="container__title">Info-Process 階段</h3>
             <div className="container__content">
               <p className="container__content--words">
@@ -134,7 +134,6 @@ function Journey() {
               </div>
             </div>
           </div>
-          <img src={icon_down} alt="icon_down" className="icon_down" />
           <div className="courseStructure__infos--container">
             <h3 className="container__title">Info-Out 階段</h3>
             <div className="container__content">
@@ -345,6 +344,7 @@ function Journey() {
       </article>
     </section>
   );
+  /*TODO: senior course 的領域 toggle list*/
   const Senior = () => {
     return (
       <section className="senior">
