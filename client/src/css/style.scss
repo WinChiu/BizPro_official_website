@@ -685,6 +685,7 @@ p {
       &__jp,
       &__lc {
         &--title {
+          margin-bottom: 24px;
           p {
             width: 100%;
           }
@@ -751,7 +752,7 @@ p {
       }
       &__hbs {
         @include flex(column-reverse, center, center);
-        margin-bottom: 56px;
+        margin-bottom: 80px;
       }
     }
     .courseStructure {
@@ -779,7 +780,6 @@ p {
       padding: 128px 32px 64px 32px;
       .sectionTitle {
         margin-bottom: 64px;
-
         &--lg {
           display: none;
         }
@@ -864,12 +864,49 @@ p {
     @include flex(row, center, center);
     &--content {
       flex: 1;
+      .contentContainer {
+        @include flex(column, center, center);
+        p {
+          @include body1();
+          margin-bottom: 16px;
+        }
+        .content--toggleList {
+          width: 100%;
+          .toggleItem {
+            @include flex(column, flex-start, flex-start);
+            overflow: hidden;
+            background-color: $red_secondary;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            transition-duration: 0.5s;
+            height: 38px;
+            &:hover {
+              height: fit-content;
+            }
+            &--title {
+              @include flex(row, flex-start, center);
+              margin-bottom: 4px;
+
+              img {
+                margin-right: 8px;
+              }
+              p {
+                @include body1();
+                color: white;
+                font-weight: bold;
+              }
+            }
+            &--content {
+              @include body1();
+              padding-left: 8px;
+              color: white;
+            }
+          }
+        }
+      }
       h2 {
         @include h2();
         margin-bottom: 24px;
-      }
-      p {
-        @include body1();
       }
     }
     &--img {
@@ -894,15 +931,24 @@ p {
     padding: 120px 64px 120px 64px;
   }
   @media screen and (max-width: 900px) {
-    // .dot_symbol,
-    // .dubbleCircle {
-    //   transform: scale(0.8);
-    // }
     &__course {
       @include flex(column, center, center);
       &--content {
         margin-left: 0px;
+        .contentContainer {
+          @include flex(row, center, flex-start);
+          p {
+            flex: 1;
+            margin-right: 24px;
+          }
+          .content--toggleList {
+            flex: 1;
+          }
+        }
       }
+    }
+    &__course {
+      margin-bottom: 128px;
     }
     &__project {
       @include flex(column-reverse, center, center);
@@ -918,7 +964,7 @@ p {
     }
   }
   @media screen and (max-width: 768px) {
-    padding: 120px 24px 120px 24px;
+    padding: 0px 24px 120px 24px;
     .dot_symbol {
       right: -360px;
       top: -300px;
@@ -927,6 +973,21 @@ p {
     .dubbleCircle {
       bottom: -600px;
       left: -360px;
+    }
+    &__course {
+      &--content {
+        .contentContainer {
+          @include flex(column, center, flex-start);
+        }
+      }
+    }
+    &__course,
+    &__project {
+      &--img {
+        img {
+          width: 100vw;
+        }
+      }
     }
   }
 }
@@ -1024,9 +1085,6 @@ p {
   @include flex(row, center, center);
   width: 100%;
   position: relative;
-  //top: 59px;
-  //z-index: 10;
-
   &__item {
     @include flex(row, center, center);
     p {
@@ -1056,7 +1114,9 @@ p {
   }
   @media screen and (max-width: 600px) {
     position: sticky;
+
     top: 56px;
+    z-index: 100;
     &__item {
       padding: 8px 0px 8px 0px;
       .lg {

@@ -29,6 +29,8 @@ import icon_speach from '../asset/img/icon/icon_speach.svg';
 import icon_communication from '../asset/img/icon/icon_communication.svg';
 import icon_down from '../asset/img/icon/icon_down.svg';
 import circle4 from '../asset/img/4Circle_symbol_white300.svg';
+import toggle_symbol from '../asset/img/toggle_symbol.svg';
+
 function Journey() {
   const headerWordingJunior = localDb.headerWording.journey.junior;
   const headerWordingSenior = localDb.headerWording.journey.senior;
@@ -42,7 +44,6 @@ function Journey() {
       <h4 className="iconSet__items--title">{title}</h4>
     </div>
   );
-  /*TODO: 課程架構 icon 調整*/
   const Junior = () => (
     <section className="junior">
       <article className="courseStructure">
@@ -345,50 +346,84 @@ function Journey() {
     </section>
   );
   /*TODO: senior course 的領域 toggle list*/
-  const Senior = () => {
-    return (
-      <section className="senior">
-        <img
-          src={dot_symbol_grey}
-          alt="dot_symbol_grey"
-          className="dot_symbol"
-        />
-        <img src={dubbleCircle} alt="dubbleCircle" className="dubbleCircle" />
-        <article className="senior__course">
-          <div className="senior__course--img">
-            <img src={seniorCourseImg} alt="seniorCourseImg" />
-          </div>
-          <div className="senior__course--content">
-            <h2 className="content--title">Senior Course</h2>
+  const Senior = () => (
+    <section className="senior">
+      <img src={dot_symbol_grey} alt="dot_symbol_grey" className="dot_symbol" />
+      <img src={dubbleCircle} alt="dubbleCircle" className="dubbleCircle" />
+      <article className="senior__course">
+        <div className="senior__course--img">
+          <img src={seniorCourseImg} alt="seniorCourseImg" />
+        </div>
+        <div className="senior__course--content">
+          <h2 className="content--title">Senior Course</h2>
+          <div className="contentContainer">
             <p className="content--paragraph">
               經歷 Junior 時期的系統化培訓後，具備基礎商業能力的 Senior
               可以更自由地依照自身需求或興趣規劃相應增能課程。從職場實用技巧、產業所需技能到多元職涯分享，Senior
               可彈性運用 BizPro 資源客製化個人學習旅程。
             </p>
+            <div className="content--toggleList">
+              <div className="toggleItem">
+                <div className="toggleItem--title">
+                  <img src={toggle_symbol} alt="toggle_symbol" />
+                  <p>職涯分享</p>
+                </div>
+                <div className="toggleItem--content">
+                  <li>Career Sharing: BCG</li>
+                  <li>Career Sharing: Google</li>
+                  <li>Career Sharing: Tencent</li>
+                </div>
+              </div>
+              <div className="toggleItem">
+                <div className="toggleItem--title">
+                  <img src={toggle_symbol} alt="toggle_symbol" />
+                  <p>產業技能</p>
+                </div>
+                <div className="toggleItem--content">
+                  <li>Case Interview</li>
+                  <li>Valuation and Due Dilligence</li>
+                  <li>Financial Statements Analysis</li>
+                  <li>Digital Marketing</li>
+                  <li>UX Research in Business Context</li>
+                </div>
+              </div>
+              <div className="toggleItem">
+                <div className="toggleItem--title">
+                  <img src={toggle_symbol} alt="toggle_symbol" />
+                  <p>職場技巧</p>
+                </div>
+                <div className="toggleItem--content">
+                  <li>Project Management</li>
+                  <li>Upward Management</li>
+                  <li>Professionalism</li>
+                </div>
+              </div>
+            </div>
           </div>
-        </article>
-        <article className="senior__project">
-          <div className="senior__project--content">
-            <h2 className="content--title">Senior Project</h2>
-            <p className="content--paragraph" style={{ marginBottom: '16px' }}>
-              在 Senior 時期，Senior 們將與外部企業或組織合作，進行為期 3-4
-              個月的團體專案，並配有 1-2 位 BizPro Alumni 作為專案 Mentor。
-            </p>
-            <p className="content--paragraph">
-              不同於 Junior 時期的 Life Case，在 Senior Project 裡 Senior
-              們將接受更高強度的訓練，研究更複雜的專案命題並產出更完整詳盡的解決方案。不論是硬性的資料搜集與分析、質化
-              /
-              量化研究、簡報製作與表達能力，抑或軟性的專案管理、團隊合作、業主向上管理能力，Senior
-              都將在專案執行過程中不斷砥礪並精進，為合作企業或組織創造價值。
-            </p>
-          </div>
-          <div className="senior__project--img">
-            <img src={seniorProjectImg} alt="seniorProjectImg" />
-          </div>
-        </article>
-      </section>
-    );
-  };
+        </div>
+      </article>
+      <article className="senior__project">
+        <div className="senior__project--content">
+          <h2 className="content--title">Senior Project</h2>
+          <p className="content--paragraph" style={{ marginBottom: '16px' }}>
+            在 Senior 時期，Senior 們將與外部企業或組織合作，進行為期 3-4
+            個月的團體專案，並配有 1-2 位 BizPro Alumni 作為專案 Mentor。
+          </p>
+          <p className="content--paragraph">
+            不同於 Junior 時期的 Life Case，在 Senior Project 裡 Senior
+            們將接受更高強度的訓練，研究更複雜的專案命題並產出更完整詳盡的解決方案。不論是硬性的資料搜集與分析、質化
+            /
+            量化研究、簡報製作與表達能力，抑或軟性的專案管理、團隊合作、業主向上管理能力，Senior
+            都將在專案執行過程中不斷砥礪並精進，為合作企業或組織創造價值。
+          </p>
+        </div>
+        <div className="senior__project--img">
+          <img src={seniorProjectImg} alt="seniorProjectImg" />
+        </div>
+      </article>
+    </section>
+  );
+
   const Alumni = () => (
     <section className="alumni">
       <img src={dubbleCircle} alt="dubbleCircle" className="dubbleCircle" />
