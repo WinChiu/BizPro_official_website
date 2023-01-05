@@ -965,7 +965,7 @@ p {
   background-color: #b9544c;
   margin-bottom: 8px;
   padding: 8px 12px;
-  transition-duration: 0.3s;
+  transition-duration: 0.1s;
   height: 38px;
 }
 .senior__course--content .contentContainer .content--toggleList .toggleItem--title, .senior__project--content .contentContainer .content--toggleList .toggleItem--title {
