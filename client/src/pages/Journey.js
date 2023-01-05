@@ -27,7 +27,6 @@ import icon_quantitative from '../asset/img/icon/icon_quantitative.svg';
 import icon_powerpoint from '../asset/img/icon/icon_powerpoint.svg';
 import icon_speach from '../asset/img/icon/icon_speach.svg';
 import icon_communication from '../asset/img/icon/icon_communication.svg';
-import icon_down from '../asset/img/icon/icon_down.svg';
 import circle4 from '../asset/img/4Circle_symbol_white300.svg';
 import toggle_symbol from '../asset/img/toggle_symbol.svg';
 import $ from 'jquery';
