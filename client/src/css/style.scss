@@ -2085,7 +2085,7 @@ p {
 
 .member {
   @include flex(column, center, center);
-  padding: 120px 96px 120px 96px;
+  padding: 120px 128px 120px 128px;
   position: relative;
   &__popUp {
     @include flex(row, center, center);
@@ -2154,7 +2154,7 @@ p {
   &__searchSection {
     @include flex(column, center, flex-start);
     width: 100%;
-    max-width: 1110px;
+    //max-width: 1110px;
     margin-bottom: 48px;
     form {
       width: 100%;
@@ -2263,13 +2263,14 @@ p {
     grid-template-columns: repeat(auto-fill, 180px);
     grid-template-rows: repeat(auto-fill, auto);
     grid-gap: 44px 24px;
-    max-width: 1110px;
+    //max-width: 1110px;
     align-content: space-around;
     justify-content: space-between;
     width: 100%;
     &--item {
       cursor: pointer;
       max-width: 180px;
+      @include flex(column, center, center);
       .item__img {
         margin-bottom: 16px;
         position: relative;
@@ -2299,7 +2300,26 @@ p {
         &--subTitle {
           @include body1();
           text-align: center;
+          margin-bottom: 8px;
         }
+      }
+      .btn-primary {
+        background-color: $black_secondary;
+        border: none;
+        @include body1();
+        font-weight: bold;
+        color: white;
+        padding: 8px 16px 8px 16px;
+        width: 100%;
+        display: none;
+      }
+      .btn-primary:hover,
+      .btn-primary:focus,
+      .btn-primary:active,
+      .btn-primary.active,
+      .open > .dropdown-toggle.btn-primary {
+        color: white;
+        background-color: $grey;
       }
       &:hover {
         .item__img {
@@ -2316,6 +2336,9 @@ p {
         width: 100%;
       }
     }
+  }
+  @media screen and (max-width: 1200px) {
+    padding: 120px 64px 120px 64px;
   }
   @media screen and (max-width: 994px) {
     &__searchSection {
@@ -2352,10 +2375,20 @@ p {
     }
   }
   @media screen and (max-width: 768px) {
-    padding: 120px 48px 120px 48px;
+    padding: 80px 32px 120px 32px;
+    &__popUp {
+      @include flex(column, center, center);
+      &--img {
+        width: 390px;
+        height: 390px;
+        img {
+          width: 100%;
+        }
+      }
+    }
   }
   @media screen and (max-width: 500px) {
-    padding: 120px 24px 120px 24px;
+    padding: 80px 24px 120px 24px;
     &__items {
       &--item {
         margin: 0px 12px 44px 12px;
@@ -2412,6 +2445,9 @@ p {
       grid-template-columns: repeat(auto-fill, 160px);
       &--item {
         margin: 0px 0px 44px 0px;
+        .btn-primary {
+          display: block;
+        }
       }
     }
   }

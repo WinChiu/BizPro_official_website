@@ -66,12 +66,11 @@ function Member() {
         setTimeout(() => {
           $('.member__popUp').css('display', 'flex');
           $('.member__popupLayer').css('display', 'block');
-          //$('body').css('overflow-y', 'hidden');
         }, 100);
       }}
     >
       <div className="item__img">
-        <div className="mask">查看詳細資料</div>
+        <div className="mask">查看成員經歷</div>
         <img src={avatar} alt="avatar" className="item__img--img" />
       </div>
       <div className="item__content">
@@ -80,6 +79,18 @@ function Member() {
         </p>
         <p className="item__content--subTitle">{props.jobTitle}</p>
       </div>
+      <Button
+        variant="primary"
+        onClick={() => {
+          setPopupContent(membersEX[props.id]);
+          setTimeout(() => {
+            $('.member__popUp').css('display', 'flex');
+            $('.member__popupLayer').css('display', 'block');
+          }, 100);
+        }}
+      >
+        查看成員經歷
+      </Button>
     </div>
   );
   const PopUp = ({ props }) => (

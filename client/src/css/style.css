@@ -2265,7 +2265,7 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 120px 96px 120px 96px;
+  padding: 120px 128px 120px 128px;
   position: relative;
 }
 .member__popUp {
@@ -2356,7 +2356,6 @@ p {
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  max-width: 1110px;
   margin-bottom: 48px;
 }
 .member__searchSection form {
@@ -2486,7 +2485,6 @@ p {
   grid-template-columns: repeat(auto-fill, 180px);
   grid-template-rows: repeat(auto-fill, auto);
   grid-gap: 44px 24px;
-  max-width: 1110px;
   align-content: space-around;
   justify-content: space-between;
   width: 100%;
@@ -2494,6 +2492,10 @@ p {
 .member__items--item {
   cursor: pointer;
   max-width: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .member__items--item .item__img {
   margin-bottom: 16px;
@@ -2540,6 +2542,28 @@ p {
   margin: 0;
   color: #1e1e1e;
   text-align: center;
+  margin-bottom: 8px;
+}
+.member__items--item .btn-primary {
+  background-color: #38323c;
+  border: none;
+  font-size: 16px;
+  line-height: 150%;
+  margin: 0;
+  color: #1e1e1e;
+  font-weight: bold;
+  color: white;
+  padding: 8px 16px 8px 16px;
+  width: 100%;
+  display: none;
+}
+.member__items--item .btn-primary:hover,
+.member__items--item .btn-primary:focus,
+.member__items--item .btn-primary:active,
+.member__items--item .btn-primary.active,
+.member__items--item .open > .dropdown-toggle.btn-primary {
+  color: white;
+  background-color: #4c5263;
 }
 .member__items--item:hover .item__img .mask {
   opacity: 1;
@@ -2547,6 +2571,11 @@ p {
 @media screen and (max-width: 1366px) {
   .member__searchSection--filter {
     width: 100%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .member {
+    padding: 120px 64px 120px 64px;
   }
 }
 @media screen and (max-width: 994px) {
@@ -2580,12 +2609,25 @@ p {
 }
 @media screen and (max-width: 768px) {
   .member {
-    padding: 120px 48px 120px 48px;
+    padding: 80px 32px 120px 32px;
+  }
+  .member__popUp {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .member__popUp--img {
+    width: 390px;
+    height: 390px;
+  }
+  .member__popUp--img img {
+    width: 100%;
   }
 }
 @media screen and (max-width: 500px) {
   .member {
-    padding: 120px 24px 120px 24px;
+    padding: 80px 24px 120px 24px;
   }
   .member__items--item {
     margin: 0px 12px 44px 12px;
@@ -2642,6 +2684,9 @@ p {
   }
   .member__items--item {
     margin: 0px 0px 44px 0px;
+  }
+  .member__items--item .btn-primary {
+    display: block;
   }
 }
 
