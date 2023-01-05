@@ -935,7 +935,7 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 .senior__course--content, .senior__project--content {
   flex: 1;
@@ -965,13 +965,8 @@ p {
   background-color: #b9544c;
   margin-bottom: 8px;
   padding: 8px 12px;
-  transition-duration: 0.5s;
+  transition-duration: 0.3s;
   height: 38px;
-}
-.senior__course--content .contentContainer .content--toggleList .toggleItem:hover, .senior__project--content .contentContainer .content--toggleList .toggleItem:hover {
-  height: -webkit-fit-content;
-  height: -moz-fit-content;
-  height: fit-content;
 }
 .senior__course--content .contentContainer .content--toggleList .toggleItem--title, .senior__project--content .contentContainer .content--toggleList .toggleItem--title {
   display: flex;
@@ -979,6 +974,10 @@ p {
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 4px;
+  width: 100%;
+}
+.senior__course--content .contentContainer .content--toggleList .toggleItem--title:hover, .senior__project--content .contentContainer .content--toggleList .toggleItem--title:hover {
+  cursor: pointer;
 }
 .senior__course--content .contentContainer .content--toggleList .toggleItem--title img, .senior__project--content .contentContainer .content--toggleList .toggleItem--title img {
   margin-right: 8px;

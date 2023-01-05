@@ -861,7 +861,7 @@ p {
   }
   &__course,
   &__project {
-    @include flex(row, center, center);
+    @include flex(row, center, flex-start);
     &--content {
       flex: 1;
       .contentContainer {
@@ -878,15 +878,16 @@ p {
             background-color: $red_secondary;
             margin-bottom: 8px;
             padding: 8px 12px;
-            transition-duration: 0.5s;
+            transition-duration: 0.3s;
             height: 38px;
-            &:hover {
-              height: fit-content;
-            }
+
             &--title {
               @include flex(row, flex-start, center);
               margin-bottom: 4px;
-
+              width: 100%;
+              &:hover {
+                cursor: pointer;
+              }
               img {
                 margin-right: 8px;
               }

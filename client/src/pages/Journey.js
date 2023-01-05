@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import briefIntro_people from '../asset/img/briefIntro_people.webp';
 import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
@@ -30,7 +30,7 @@ import icon_communication from '../asset/img/icon/icon_communication.svg';
 import icon_down from '../asset/img/icon/icon_down.svg';
 import circle4 from '../asset/img/4Circle_symbol_white300.svg';
 import toggle_symbol from '../asset/img/toggle_symbol.svg';
-
+import $ from 'jquery';
 function Journey() {
   const headerWordingJunior = localDb.headerWording.journey.junior;
   const headerWordingSenior = localDb.headerWording.journey.senior;
@@ -57,7 +57,7 @@ function Journey() {
                 alt="title__symbol_left"
                 className="title--symbolLeft"
               />
-              <h2 className="title--word">個案分析</h2>
+              <h2 className="title--word">課程架構</h2>
               <img
                 src={title_symbol_right_md}
                 alt="title__symbol_right"
@@ -166,7 +166,7 @@ function Journey() {
             alt="title__symbol_left"
             className="title--symbolLeft"
           />
-          <h2 className="title--word">課程架構</h2>
+          <h2 className="title--word">個案分析</h2>
           <img
             src={title_symbol_right_lg}
             alt="title__symbol_right"
@@ -179,7 +179,7 @@ function Journey() {
             alt="title__symbol_left"
             className="title--symbolLeft"
           />
-          <h2 className="title--word">課程架構</h2>
+          <h2 className="title--word">個案分析</h2>
           <img
             src={title_symbol_right_md}
             alt="title__symbol_right"
@@ -345,7 +345,6 @@ function Journey() {
       </article>
     </section>
   );
-  /*TODO: senior course 的領域 toggle list*/
   const Senior = () => (
     <section className="senior">
       <img src={dot_symbol_grey} alt="dot_symbol_grey" className="dot_symbol" />
@@ -363,8 +362,20 @@ function Journey() {
               可彈性運用 BizPro 資源客製化個人學習旅程。
             </p>
             <div className="content--toggleList">
-              <div className="toggleItem">
-                <div className="toggleItem--title">
+              <div className="toggleItem toggleItem--1">
+                <div
+                  className="toggleItem--title"
+                  onClick={() => {
+                    const height = $('.toggleItem--1').css('height');
+                    if (height === '38px') {
+                      $('.toggleItem--3').css('height', '38px');
+                      $('.toggleItem--2').css('height', '38px');
+                      $('.toggleItem--1').css('height', '116px');
+                    } else {
+                      $('.toggleItem--1').css('height', '38px');
+                    }
+                  }}
+                >
                   <img src={toggle_symbol} alt="toggle_symbol" />
                   <p>職涯分享</p>
                 </div>
@@ -374,8 +385,20 @@ function Journey() {
                   <li>Career Sharing: Tencent</li>
                 </div>
               </div>
-              <div className="toggleItem">
-                <div className="toggleItem--title">
+              <div className="toggleItem toggleItem--2">
+                <div
+                  className="toggleItem--title"
+                  onClick={() => {
+                    const height = $('.toggleItem--2').css('height');
+                    if (height === '38px') {
+                      $('.toggleItem--1').css('height', '38px');
+                      $('.toggleItem--3').css('height', '38px');
+                      $('.toggleItem--2').css('height', '164px');
+                    } else {
+                      $('.toggleItem--2').css('height', '38px');
+                    }
+                  }}
+                >
                   <img src={toggle_symbol} alt="toggle_symbol" />
                   <p>產業技能</p>
                 </div>
@@ -387,8 +410,21 @@ function Journey() {
                   <li>UX Research in Business Context</li>
                 </div>
               </div>
-              <div className="toggleItem">
-                <div className="toggleItem--title">
+              <div className="toggleItem toggleItem--3">
+                <div
+                  className="toggleItem--title"
+                  onClick={() => {
+                    const height = $('.toggleItem--3').css('height');
+                    if (height === '38px') {
+                      $('.toggleItem--1').css('height', '38px');
+                      $('.toggleItem--2').css('height', '38px');
+
+                      $('.toggleItem--3').css('height', '116px');
+                    } else {
+                      $('.toggleItem--3').css('height', '38px');
+                    }
+                  }}
+                >
                   <img src={toggle_symbol} alt="toggle_symbol" />
                   <p>職場技巧</p>
                 </div>
