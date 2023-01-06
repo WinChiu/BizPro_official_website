@@ -5,12 +5,12 @@ import Header from '../components/Header';
 import localDb from '../config/localDb.json';
 import Button from 'react-bootstrap/Button';
 import Select from 'react-select';
+import Pagination from 'react-bootstrap/Pagination';
 
 /*
 TODO:
 - 換頁功能
 - 串上 API 後的篩選功能
-- 手機版本的查看詳情按鈕
 */
 
 function Member() {
@@ -108,13 +108,31 @@ function Member() {
             <div className="content__tags--tag">{tag}</div>
           ))}
         </div>
-        {props.exp.map((exp) => (
-          <li>{exp}</li>
-        ))}
+        <ul>
+          {props.exp.map((exp) => (
+            <li>{exp}</li>
+          ))}
+        </ul>
       </div>
     </section>
   );
+  const PaginationComponent = () => (
+    <Pagination>
+      <Pagination.First />
+      <Pagination.Prev />
+      <Pagination.Item>{1}</Pagination.Item>
+      <Pagination.Ellipsis />
 
+      <Pagination.Item>{11}</Pagination.Item>
+      <Pagination.Item active>{12}</Pagination.Item>
+      <Pagination.Item>{13}</Pagination.Item>
+
+      <Pagination.Ellipsis />
+      <Pagination.Item>{20}</Pagination.Item>
+      <Pagination.Next />
+      <Pagination.Last />
+    </Pagination>
+  );
   return (
     <React.Fragment>
       <Header title={headerWording.title} content={headerWording.content} />
@@ -125,7 +143,6 @@ function Member() {
           onClick={() => {
             $('.member__popUp').css('display', 'none');
             $('.member__popupLayer').css('display', 'none');
-            //$('body').css('overflow-y', 'scroll');
           }}
         />
         <div className="member__searchSection">
@@ -143,7 +160,6 @@ function Member() {
               <label className="filter__field--tag">條件篩選：</label>
               <div className="filterContainer">
                 <div className="filter__major">
-                  {/* <label className="filter__field--tag">科系篩選：</label> */}
                   <Select
                     classNamePrefix="filter__field--selector"
                     placeholder="選擇科系"
@@ -159,7 +175,6 @@ function Member() {
                   />
                 </div>
                 <div className="filter__field">
-                  {/* <label className="filter__field--tag">領域篩選：</label> */}
                   <Select
                     classNamePrefix="filter__field--selector"
                     placeholder="選擇領域"
@@ -175,7 +190,6 @@ function Member() {
                   />
                 </div>
                 <div className="filter__grade">
-                  {/* <label className="filter__grade--tag">屆數篩選：</label> */}
                   <Select
                     classNamePrefix="filter__grade--selector"
                     placeholder="選擇屆數"
@@ -218,6 +232,7 @@ function Member() {
             );
           })}
         </div>
+        <PaginationComponent />
       </section>
     </React.Fragment>
   );

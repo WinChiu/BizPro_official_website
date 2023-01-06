@@ -1164,6 +1164,7 @@ p {
     @include flex(column, center, center);
     overflow: hidden;
     padding-top: 120px;
+    //background-position: 20px 20px;
     .circle4 {
       position: absolute;
       left: -200px;
@@ -1197,6 +1198,7 @@ p {
         right: -380px;
         bottom: -80px;
         animation: fading 2s ease-in-out 1s infinite;
+        transform: translate(0px, 0px);
         @keyframes fading {
           0% {
             opacity: 15%;
@@ -1212,6 +1214,9 @@ p {
     }
     &--logo {
       height: 40px;
+      transform: translateY(20px);
+      opacity: 0;
+      transition-duration: 1s;
     }
     &--title {
       @include h1();
@@ -1219,11 +1224,17 @@ p {
       font-weight: bold;
       color: $white_100;
       margin: 8px 0 8px 0;
+      transform: translateY(20px);
+      opacity: 0;
+      transition-duration: 1s;
     }
     &--subTitle {
       @include h3();
       font-weight: bold;
       color: $white_100;
+      transform: translateY(20px);
+      opacity: 0;
+      transition-duration: 1s;
     }
     &--readMore {
       margin-bottom: 120px;
@@ -2115,6 +2126,9 @@ p {
       li {
         @include body1();
       }
+      li {
+        //list-style-position: outside;
+      }
       .content__tags {
         @include flex(row, flex-start, center);
         margin: 12px 0px;
@@ -2263,14 +2277,16 @@ p {
     grid-template-columns: repeat(auto-fill, 180px);
     grid-template-rows: repeat(auto-fill, auto);
     grid-gap: 44px 24px;
-    //max-width: 1110px;
     align-content: space-around;
     justify-content: space-between;
     width: 100%;
+    margin-bottom: 80px;
     &--item {
       cursor: pointer;
       max-width: 180px;
       @include flex(column, center, center);
+      align-self: start;
+
       .item__img {
         margin-bottom: 16px;
         position: relative;
@@ -2448,6 +2464,16 @@ p {
         .btn-primary {
           display: block;
         }
+      }
+    }
+    &__popUp {
+      &--img {
+        width: 300px;
+        height: 300px;
+      }
+      &--content {
+        min-width: 300px;
+        padding: 16px 16px 8px 16px;
       }
     }
   }

@@ -1,5 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Marquee from 'react-fast-marquee';
 import Circle4_symbol_white300 from '../asset/img/4Circle_symbol_white300.svg';
@@ -24,8 +24,94 @@ import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
 import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
 import vision_bg from '../asset/img/vision_bg.webp';
 import MarqueeLogo from '../components/MarqueeLogo';
-
+import $ from 'jquery';
 function About() {
+  useEffect(() => {
+    class Vec {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+      }
+      set(x, y) {
+        this.x = x;
+        this.y = y;
+      }
+      move(x, y) {
+        this.x += x;
+        this.y += y;
+      }
+      add(v) {
+        return new Vec(this.x + v.x, this.y + v.y);
+      }
+      sub(v) {
+        return new Vec(this.x - v.x, this.y - v.y);
+      }
+      mul(s) {
+        return new Vec(this.x * s, this.y * s);
+      }
+      get length() {
+        return Math.sqrt(this.x * this.x + this.y * this.y);
+      }
+      set length(nv) {
+        let temp = this.unit.mul(nv);
+        this.set(temp.x, temp.y);
+      }
+      clone() {
+        return new Vec(this.x, this.y);
+      }
+      toString() {
+        return `(${this.x}, ${this.y})`;
+      }
+      equal(v) {
+        return this.x == v.x && this.y == v.y;
+      }
+      get angle() {
+        return Math.atan2(this.y, this.x);
+      }
+      get unit() {
+        return this.mul(1 / this.length);
+      }
+    }
+    let mousePos = new Vec(0, 0);
+    let imgPos = new Vec(
+      $('.connection__right').position().top,
+      $('.connection__right').position().left
+    );
+    window.addEventListener('mousemove', (e) => {
+      mousePos.set(e.pageX, e.pageY);
+      let tilt = mousePos.sub(
+        new Vec(window.innerWidth / 2, window.innerHeight / 2)
+      );
+
+      $('.connection__right, .connection__left, .circle4').css(
+        'transform',
+        `translate(${tilt.x / 40}px,${tilt.y / 40}px)`
+      );
+    });
+
+    // window.addEventListener('onload', () => {
+    //   console.log('hi');
+    //   $('.about__header--title').css({
+    //     transform: 'translateY(0px)',
+    //     opacity: '1',
+    //   });
+    // });
+    return () => {
+      setTimeout(() => {
+        $('.about__header--title, .about__header--logo').css({
+          transform: 'translateY(0px)',
+          opacity: '1',
+        });
+        setTimeout(() => {
+          $('.about__header--subTitle').css({
+            transform: 'translateY(0px)',
+            opacity: '1',
+          });
+        }, 500);
+      }, 300);
+    };
+  }, []);
+
   return (
     <section className="about">
       <article className="about__header">

@@ -1356,6 +1356,7 @@ p {
   bottom: -80px;
   -webkit-animation: fading 2s ease-in-out 1s infinite;
           animation: fading 2s ease-in-out 1s infinite;
+  transform: translate(0px, 0px);
 }
 @keyframes fading {
   0% {
@@ -1370,6 +1371,9 @@ p {
 }
 .about__header--logo {
   height: 40px;
+  transform: translateY(20px);
+  opacity: 0;
+  transition-duration: 1s;
 }
 .about__header--title {
   font-size: 48px;
@@ -1379,6 +1383,9 @@ p {
   font-weight: bold;
   color: #ffffff;
   margin: 8px 0 8px 0;
+  transform: translateY(20px);
+  opacity: 0;
+  transition-duration: 1s;
 }
 .about__header--subTitle {
   font-size: 24px;
@@ -1386,6 +1393,9 @@ p {
   margin: 0;
   font-weight: bold;
   color: #ffffff;
+  transform: translateY(20px);
+  opacity: 0;
+  transition-duration: 1s;
 }
 .about__header--readMore {
   margin-bottom: 120px;
@@ -2488,6 +2498,7 @@ p {
   align-content: space-around;
   justify-content: space-between;
   width: 100%;
+  margin-bottom: 80px;
 }
 .member__items--item {
   cursor: pointer;
@@ -2496,6 +2507,7 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  align-self: start;
 }
 .member__items--item .item__img {
   margin-bottom: 16px;
@@ -2687,6 +2699,14 @@ p {
   }
   .member__items--item .btn-primary {
     display: block;
+  }
+  .member__popUp--img {
+    width: 300px;
+    height: 300px;
+  }
+  .member__popUp--content {
+    min-width: 300px;
+    padding: 16px 16px 8px 16px;
   }
 }
 
