@@ -19,7 +19,6 @@ const AlumniSchema = new mongoose.Schema({
 	},
 	tags: {
 		type: [String],
-		required: true
 	},
 	avater: {
 		type: String		
