@@ -1,7 +1,14 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+<<<<<<< HEAD
+const PORT = process.env.PORT || 5000;
+const connectDB = require('./config/db');
+
+connectDB();
+=======
 const PORT = process.env.PORT || 3000;
+>>>>>>> d3a16f0ef8f09e8b962c5ca3e6cff7385b624a6a
 
 app.use(express.static(path.join('client/build')));
 
