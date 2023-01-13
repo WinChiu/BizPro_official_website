@@ -1,29 +1,23 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-<<<<<<< HEAD
-const PORT = process.env.PORT || 5000;
+
 const connectDB = require('./config/db');
 
 connectDB();
-=======
-const PORT = process.env.PORT || 3000;
->>>>>>> d3a16f0ef8f09e8b962c5ca3e6cff7385b624a6a
 
-app.use(express.static(path.join('client/build')));
+app.use('/api/alumni', require('./routes/api/alumni'));
+app.use('/api/article', require('./routes/api/article'));
 
-if (process.env.NODE_DEV === 'production') {
+if (process.env.NODE_ENV === 'production') {
+  // Set static folder
+  app.use(express.static('client/build'));
+
   app.get('*', (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname.anchor, 'client', 'build', 'index.html')
-    );
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-});
+const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server started on ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
