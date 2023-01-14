@@ -1156,7 +1156,7 @@ p {
     height: 560px;
     height: calc(100vh);
     width: 100%;
-    background-image: url('../asset/img/about_headerImg.webp');
+    //background-image: url('../asset/img/about_headerImg.webp');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -1165,6 +1165,17 @@ p {
     overflow: hidden;
     padding-top: 120px;
     //background-position: 20px 20px;
+    .headerImg {
+      position: fixed;
+      height: calc(100vh + 60px);
+      width: 100vw;
+      background-image: url('../asset/img/about_headerImg.webp');
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      top: -60px;
+      z-index: -1;
+    }
     .circle4 {
       position: absolute;
       left: -200px;
@@ -1273,6 +1284,7 @@ p {
     padding: 180px 200px 180px 200px;
     overflow: hidden;
     position: relative;
+    background-color: $white_200;
     .connection {
       &__left {
         position: absolute;
@@ -1341,6 +1353,8 @@ p {
     padding: 200px 200px 128px 200px;
     position: relative;
     overflow: visible;
+    background-color: $white_200;
+
     .bgCircle {
       position: absolute;
       left: -30%;
@@ -1396,6 +1410,7 @@ p {
     padding: 80px 200px 80px 200px;
     position: relative;
     overflow: hidden;
+
     @include flex(column, center, center);
     .people_symbol {
       position: absolute;
@@ -1435,6 +1450,8 @@ p {
     }
   }
   .marquee {
+    background-color: $white_200;
+
     padding: 48px 0px 48px 0px;
 
     &__item {
@@ -1444,6 +1461,8 @@ p {
   &__briefIntro {
     position: relative;
     overflow: hidden;
+    background-color: $white_200;
+
     .briefIntro {
       &__course,
       &__people {
@@ -1626,7 +1645,7 @@ p {
       .connection {
         &__left {
           transform: scaleY(-1) scale(0.6) rotate(15deg);
-          left: -200px;
+          left: -260px;
           bottom: -223px;
         }
         &__right {
@@ -1640,7 +1659,7 @@ p {
       .connection {
         &__left {
           transform: scaleY(-1) scale(0.6) rotate(15deg);
-          left: -200px;
+          left: -260px;
           top: -268.5px;
         }
         &__right {
@@ -1716,7 +1735,7 @@ p {
       .connection {
         &__left {
           transform: scaleY(-1) scale(0.5) rotate(15deg);
-          left: -240px;
+          left: -360px;
           bottom: -223px;
         }
         &__right {
@@ -1730,7 +1749,7 @@ p {
       .connection {
         &__left {
           transform: scaleY(-1) scale(0.5) rotate(15deg);
-          left: -240px;
+          left: -360px;
           top: -268.5px;
         }
         &__right {
@@ -1808,12 +1827,12 @@ p {
       .connection {
         &__left {
           transform: scaleY(-1) scale(0.8) rotate(15deg);
-          left: -380px;
-          bottom: -250px;
+          left: -460px;
+          bottom: -180px;
         }
         &__right {
           transform: scaleY(-1) scale(1.1);
-          right: -520px;
+          right: -480px;
           bottom: -80px;
         }
       }
@@ -1822,12 +1841,12 @@ p {
       .connection {
         &__left {
           transform: scaleY(-1) scale(0.8) rotate(15deg);
-          left: -380px;
-          top: -241.5px;
+          left: -460px;
+          top: -310.5px;
         }
         &__right {
           transform: scaleY(-1) scale(1.1);
-          right: -520px;
+          right: -480px;
           top: -412px;
         }
       }

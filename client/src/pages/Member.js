@@ -25,22 +25,35 @@ function Member() {
   const [fieldFilter, setFieldFilter] = useState([]);
   const [gradeFilter, setGradeFilter] = useState('');
   const [directSearch, setDirectSearch] = useState('');
+  const [fieldOptions, setFieldOptions] = useState('');
+  const [memberData, setMemberData] = useState(localDb.memberTemp);
 
   const headerWording = localDb.headerWording.member;
-  const membersEX = localDb.memberTemp;
+  const rawMemberData = localDb.memberTemp;
 
+  //let fieldOptions = [];
+  rawMemberData.forEach((member) => {
+    member.tags.forEach((tag) => {
+      if (!fieldOptions.includes(tag)) {
+        fieldOptions.push(tag);
+      }
+    });
+  });
+  console.log(fieldOptions);
+  // const fieldOptions2 = rawMemberData.for;
+  // console.log(fieldOptions2);
   const majorOptions = [
     { value: '經濟學系', label: '經濟學系' },
     { value: '國際企業學系', label: '國際企業學系' },
     { value: '財務金融學系', label: '財務金融學系' },
     { value: '電子機械系', label: '電子機械系' },
   ];
-  const fieldOptions = [
-    { value: '金融業', label: '金融業' },
-    { value: '顧問業', label: '顧問業' },
-    { value: '科技業', label: '科技業' },
-    { value: '社會創新', label: '社會創新' },
-  ];
+  // const fieldOptions = [
+  //   { value: '金融業', label: '金融業' },
+  //   { value: '顧問業', label: '顧問業' },
+  //   { value: '科技業', label: '科技業' },
+  //   { value: '社會創新', label: '社會創新' },
+  // ];
   const gradeOptions = [
     { value: '0', label: '全部屆數' },
     { value: '1', label: '1' },
@@ -62,7 +75,7 @@ function Member() {
     <div
       className="member__items--item"
       onClick={() => {
-        setPopupContent(membersEX[props.id]);
+        setPopupContent(memberData[props.id]);
         setTimeout(() => {
           $('.member__popUp').css('display', 'flex');
           $('.member__popupLayer').css('display', 'block');
@@ -71,7 +84,7 @@ function Member() {
     >
       <div className="item__img">
         <div className="mask">查看成員經歷</div>
-        <img src={avatar} alt="avatar" className="item__img--img" />
+        <img src={props.avatar} alt="avatar" className="item__img--img" />
       </div>
       <div className="item__content">
         <p className="item__content--title">
@@ -82,7 +95,7 @@ function Member() {
       <Button
         variant="primary"
         onClick={() => {
-          setPopupContent(membersEX[props.id]);
+          setPopupContent(memberData[props.id]);
           setTimeout(() => {
             $('.member__popUp').css('display', 'flex');
             $('.member__popupLayer').css('display', 'block');
@@ -133,6 +146,17 @@ function Member() {
       <Pagination.Last />
     </Pagination>
   );
+
+  const startFilter = (field) => {
+    if (field[0]) {
+      let filteredMemberData = rawMemberData.filter((member) =>
+        field.some((e) => member.tags.includes(e))
+      );
+      setMemberData(filteredMemberData);
+    } else {
+      setMemberData(rawMemberData);
+    }
+  };
   return (
     <React.Fragment>
       <Header title={headerWording.title} content={headerWording.content} />
@@ -186,6 +210,7 @@ function Member() {
                         tempArray.push(`${option.value}`);
                       });
                       setFieldFilter(tempArray);
+                      startFilter(tempArray);
                     }}
                   />
                 </div>
@@ -218,7 +243,7 @@ function Member() {
           </form>
         </div>
         <div className="member__items">
-          {membersEX?.map((member, i) => {
+          {memberData?.map((member, i) => {
             return (
               <MemberItem
                 name={`${member.name}`}
@@ -226,7 +251,7 @@ function Member() {
                 jobTitle={`${member.jobTitle}`}
                 exp={`${member.exp}`}
                 tags={`${member.tags}`}
-                avatar=""
+                avatar={`${member.avatar}`}
                 id={i}
               />
             );

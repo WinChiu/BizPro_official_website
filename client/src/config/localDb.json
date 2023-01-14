@@ -86,7 +86,7 @@
         "臺灣大學財務金融學系"
       ],
       "tags": ["顧問業", "金融業"],
-      "avatar": ""
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
     },
     {
       "name": "Hector",
@@ -100,7 +100,7 @@
         "中國人民大學數學系"
       ],
       "tags": ["銀行業"],
-      "avatar": ""
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
     },
     {
       "name": "Peggy",
@@ -113,7 +113,7 @@
         "臺灣大學國際企業學系"
       ],
       "tags": ["設計產業", "軟體開發"],
-      "avatar": ""
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
     },
     {
       "name": "Nelson",
@@ -126,7 +126,7 @@
         "臺灣大學資訊管理學系"
       ],
       "tags": ["科技業"],
-      "avatar": ""
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
     },
     {
       "name": "Hank",
@@ -138,16 +138,16 @@
         "臺灣大學電機工程學系",
         "臺灣大學財務金融學系"
       ],
-      "tags": ["公益", "教育產業"],
-      "avatar": ""
+      "tags": ["公益", "科技業"],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
     },
     {
       "name": "Claire",
       "number": "2nd",
       "jobTitle": "P&G Assistant Brand Manager",
       "exp": ["Mckinsey & Co. R&I Intern", "臺灣大學財務金融學系"],
-      "tags": ["設計產業", "軟體開發"],
-      "avatar": ""
+      "tags": ["設計業", "軟體開發"],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
     },
     {
       "name": "Michelle",
@@ -155,7 +155,143 @@
       "jobTitle": "Citi Corporate & Investment Bank",
       "exp": ["UBS Investment Bank", "臺灣大學財務金融學系"],
       "tags": ["公益", "教育產業"],
-      "avatar": ""
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
+    },
+    {
+      "name": "Paula",
+      "number": "2nd",
+      "jobTitle": "Teach for Taiwan Director of Operations",
+      "exp": [
+        "UBS Intern",
+        "KPMG Intern",
+        "Columbia University MPA",
+        "臺灣大學會計學系"
+      ],
+      "tags": ["會計業", "公益"],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
+    },
+    {
+      "name": "Joyce",
+      "number": "2nd",
+      "jobTitle": "THLK Attorney-at-Law",
+      "exp": [
+        "Taiwan Taoyuan District Court Law Clerk",
+        "UBS Investment Bank Equity Deriatives PTA",
+        "臺灣大學科法所碩士",
+        "臺灣大學經濟學系"
+      ],
+      "tags": ["法律", "經濟"],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
+    },
+    {
+      "name": "Jenny",
+      "number": "2nd",
+      "jobTitle": "PwC Taipei office Tax consultant",
+      "exp": ["PwC Intern", "臺大醫鯊游泳社總務", "臺灣大學會計學系"],
+      "tags": ["", ""],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
+    },
+    {
+      "name": "Charlie",
+      "number": "2nd",
+      "jobTitle": "臺灣大學經濟學系",
+      "exp": [
+        "UBS Investment Bank Equity Reseach Intern",
+        "Goldman Sachs summer Intern",
+        "Grand Cathay Securities Summer Analyst",
+        "Fubon Securities Sales & Trading Winter Intern",
+        "Exchange in University of Hong Kong"
+      ],
+      "tags": ["", ""],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
+    },
+    {
+      "name": "Alistair",
+      "number": "2nd",
+      "jobTitle": "Asus Oversea Sales",
+      "exp": ["臺灣大學工商管理學系"],
+      "tags": ["", ""],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
+    },
+    {
+      "name": "Cindy",
+      "number": "3rd",
+      "jobTitle": "StorySense Computing Strategist",
+      "exp": [
+        "StorySense Computing Strategist",
+        "Pebbo Project Coordinator",
+        "SLP (Startup Leadership Program) Taipei Fellow",
+        "IBM Mentoring Program",
+        "臺灣大學電機工程學系"
+      ],
+      "tags": ["", ""],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
+    },
+    {
+      "name": "Karen",
+      "number": "3rd",
+      "jobTitle": "The Wharton School MBA candidate",
+      "exp": [
+        "McKinsey & Company Associate",
+        "Mckinsey&Co. Intern",
+        "HSBC Summer Intern",
+        "Tong Shen Enterprise Summer Intern",
+        "Exchange in Rotterdam School of Management Erasmus University",
+        "臺灣大學國際企業系"
+      ],
+      "tags": ["", ""],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
+    },
+    {
+      "name": "Haas",
+      "number": "3rd",
+      "jobTitle": "Macquarie Associate Analyst",
+      "exp": [
+        "Athena Capital Management Equity Research Intern",
+        "Cathay Life Insurance Investment Accounting Intern",
+        "臺大種子教育社公關長",
+        "臺灣大學機械工程學系"
+      ],
+      "tags": ["機械領域", ""],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
+    },
+    {
+      "name": "Eric",
+      "number": "3rd",
+      "jobTitle": "臺灣大學醫學系",
+      "exp": [
+        "Exchange in University of California, Berkeley",
+        "第41屆國際化學奧林匹亞競賽 金牌",
+        "第19屆國際生物奧林匹亞競賽 金牌"
+      ],
+      "tags": ["醫學", ""],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
+    },
+    {
+      "name": "Jean",
+      "number": "3rd",
+      "jobTitle": "Wayfair Data Scientist (Forecasting)",
+      "exp": [
+        "UC Berkeley Master in Operations Research",
+        "花旗銀行決策管理部門/消金MA",
+        "QIC Research Intern",
+        "臺大模擬聯合國社學術部",
+        "臺灣大學財務金融學系"
+      ],
+      "tags": ["醫學", ""],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
+    },
+    {
+      "name": "Peter",
+      "number": "3rd",
+      "jobTitle": "Corning Manufacturing Strategy Program Manager",
+      "exp": [
+        "DKSH Business Development Specialist",
+        "University of Illinois at Urbana-Champaign Technology Management Master",
+        "臺灣大學資訊管理學系"
+      ],
+      "tags": ["醫學", ""],
+      "avatar": "https://i.imgur.com/vuB0zi7.jpg"
     }
   ]
 }

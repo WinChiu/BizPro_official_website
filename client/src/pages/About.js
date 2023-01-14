@@ -24,6 +24,7 @@ import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
 import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
 import vision_bg from '../asset/img/vision_bg.webp';
 import MarqueeLogo from '../components/MarqueeLogo';
+import headerImg from '../asset/img/about_headerImg.webp';
 import $ from 'jquery';
 function About() {
   useEffect(() => {
@@ -73,10 +74,6 @@ function About() {
       }
     }
     let mousePos = new Vec(0, 0);
-    let imgPos = new Vec(
-      $('.connection__right').position().top,
-      $('.connection__right').position().left
-    );
     window.addEventListener('mousemove', (e) => {
       mousePos.set(e.pageX, e.pageY);
       let tilt = mousePos.sub(
@@ -85,17 +82,9 @@ function About() {
 
       $('.connection__right, .connection__left, .circle4').css(
         'transform',
-        `translate(${tilt.x / 40}px,${tilt.y / 40}px)`
+        `translate(${tilt.x / 35}px,${tilt.y / 35}px)`
       );
     });
-
-    // window.addEventListener('onload', () => {
-    //   console.log('hi');
-    //   $('.about__header--title').css({
-    //     transform: 'translateY(0px)',
-    //     opacity: '1',
-    //   });
-    // });
     return () => {
       setTimeout(() => {
         $('.about__header--title, .about__header--logo').css({
@@ -117,6 +106,7 @@ function About() {
       <article className="about__header">
         {/* TODO: 新增動畫效果，讓照片底圖延遲下滑 + 所有 symbol 隨著滑鼠移動做微小偏移  */}
         <img src={connection_symbol} alt="" className="connection__left" />
+        <div className="headerImg"></div>
         <img src={connection_symbol} alt="" className="connection__right" />
         <img src={Circle4_symbol_white300} alt="" className="circle4" />
         <img src={logo} alt="logo" className="about__header--logo" />

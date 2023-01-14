@@ -1299,7 +1299,6 @@ p {
   height: 560px;
   height: 100vh;
   width: 100%;
-  background-image: url("../asset/img/about_headerImg.webp");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -1310,6 +1309,17 @@ p {
   align-items: center;
   overflow: hidden;
   padding-top: 120px;
+}
+.about__header .headerImg {
+  position: fixed;
+  height: calc(100vh + 60px);
+  width: 100vw;
+  background-image: url("../asset/img/about_headerImg.webp");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  top: -60px;
+  z-index: -1;
 }
 .about__header .circle4 {
   position: absolute;
@@ -1445,6 +1455,7 @@ p {
   padding: 180px 200px 180px 200px;
   overflow: hidden;
   position: relative;
+  background-color: #f6f6f6;
 }
 .about__intro .connection__left {
   position: absolute;
@@ -1524,6 +1535,7 @@ p {
   padding: 200px 200px 128px 200px;
   position: relative;
   overflow: visible;
+  background-color: #f6f6f6;
 }
 .about__vision .bgCircle {
   position: absolute;
@@ -1640,6 +1652,7 @@ p {
   text-align: center;
 }
 .about .marquee {
+  background-color: #f6f6f6;
   padding: 48px 0px 48px 0px;
 }
 .about .marquee__item {
@@ -1648,6 +1661,7 @@ p {
 .about__briefIntro {
   position: relative;
   overflow: hidden;
+  background-color: #f6f6f6;
 }
 .about__briefIntro .briefIntro__course, .about__briefIntro .briefIntro__people {
   display: flex;
@@ -1817,7 +1831,7 @@ p {
   }
   .about__header .connection__left {
     transform: scaleY(-1) scale(0.6) rotate(15deg);
-    left: -200px;
+    left: -260px;
     bottom: -223px;
   }
   .about__header .connection__right {
@@ -1827,7 +1841,7 @@ p {
   }
   .about__intro .connection__left {
     transform: scaleY(-1) scale(0.6) rotate(15deg);
-    left: -200px;
+    left: -260px;
     top: -268.5px;
   }
   .about__intro .connection__right {
@@ -1893,7 +1907,7 @@ p {
   }
   .about__header .connection__left {
     transform: scaleY(-1) scale(0.5) rotate(15deg);
-    left: -240px;
+    left: -360px;
     bottom: -223px;
   }
   .about__header .connection__right {
@@ -1903,7 +1917,7 @@ p {
   }
   .about__intro .connection__left {
     transform: scaleY(-1) scale(0.5) rotate(15deg);
-    left: -240px;
+    left: -360px;
     top: -268.5px;
   }
   .about__intro .connection__right {
@@ -1968,24 +1982,24 @@ p {
     margin: 0;
     font-weight: bold;
   }
-  .about__header .connection__left {
+  blank .about__header .connection__left {
     transform: scaleY(-1) scale(0.8) rotate(15deg);
-    left: -380px;
-    bottom: -250px;
+    left: -460px;
+    bottom: -180px;
   }
   .about__header .connection__right {
     transform: scaleY(-1) scale(1.1);
-    right: -520px;
+    right: -480px;
     bottom: -80px;
   }
   .about__intro .connection__left {
     transform: scaleY(-1) scale(0.8) rotate(15deg);
-    left: -380px;
-    top: -241.5px;
+    left: -460px;
+    top: -310.5px;
   }
   .about__intro .connection__right {
     transform: scaleY(-1) scale(1.1);
-    right: -520px;
+    right: -480px;
     top: -412px;
   }
   .about__intro--content .content__video {
