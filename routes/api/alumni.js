@@ -1,10 +1,8 @@
 const express = require('express');
 const router = express.Router();
-//const config = require('config');
-
 const Alumni = require('../../models/Alumni');
 
-router.get('/members', async (res, req) => {
+router.get('/members', async (req, res) => {
   try {
     const alumni = await Alumni.find({});
     if (!alumni) {
@@ -16,3 +14,5 @@ router.get('/members', async (res, req) => {
     res.status(500).send('Server Error');
   }
 });
+
+module.exports = router;

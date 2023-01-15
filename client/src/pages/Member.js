@@ -25,21 +25,21 @@ function Member() {
   const [fieldFilter, setFieldFilter] = useState([]);
   const [gradeFilter, setGradeFilter] = useState('');
   const [directSearch, setDirectSearch] = useState('');
-  const [fieldOptions, setFieldOptions] = useState('');
+  //const [fieldOptions, setFieldOptions] = useState('');
   const [memberData, setMemberData] = useState(localDb.memberTemp);
 
   const headerWording = localDb.headerWording.member;
   const rawMemberData = localDb.memberTemp;
 
   //let fieldOptions = [];
-  rawMemberData.forEach((member) => {
-    member.tags.forEach((tag) => {
-      if (!fieldOptions.includes(tag)) {
-        fieldOptions.push(tag);
-      }
-    });
-  });
-  console.log(fieldOptions);
+  // rawMemberData.forEach((member) => {
+  //   member.tags.forEach((tag) => {
+  //     if (!fieldOptions.includes(tag)) {
+  //       fieldOptions.push(tag);
+  //     }
+  //   });
+  // });
+  //console.log(fieldOptions);
   // const fieldOptions2 = rawMemberData.for;
   // console.log(fieldOptions2);
   const majorOptions = [
@@ -48,12 +48,12 @@ function Member() {
     { value: '財務金融學系', label: '財務金融學系' },
     { value: '電子機械系', label: '電子機械系' },
   ];
-  // const fieldOptions = [
-  //   { value: '金融業', label: '金融業' },
-  //   { value: '顧問業', label: '顧問業' },
-  //   { value: '科技業', label: '科技業' },
-  //   { value: '社會創新', label: '社會創新' },
-  // ];
+  const fieldOptions = [
+    { value: '金融業', label: '金融業' },
+    { value: '顧問業', label: '顧問業' },
+    { value: '科技業', label: '科技業' },
+    { value: '社會創新', label: '社會創新' },
+  ];
   const gradeOptions = [
     { value: '0', label: '全部屆數' },
     { value: '1', label: '1' },
