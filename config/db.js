@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const config = require('config');
-const db = config.get('mongoURL');
+const db = config.get('mongoURI');
 
 const connectDB = async () => {
   try {
@@ -8,6 +8,7 @@ const connectDB = async () => {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
+    mongoose.connection.useDb('BP');
     console.log('MongoDB Connected...');
   } catch (err) {
     console.log(err.message);
