@@ -1,12 +1,13 @@
 import $ from 'jquery';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import avatar from '../asset/img/avatar_sample.webp';
 import Header from '../components/Header';
 import localDb from '../config/localDb.json';
 import Button from 'react-bootstrap/Button';
 import Select from 'react-select';
 import Pagination from 'react-bootstrap/Pagination';
-
+import axios from 'axios';
+import numberToRank from '../utility/numberToRank.js';
 /*
 TODO:
 - 換頁功能
@@ -25,23 +26,28 @@ function Member() {
   const [fieldFilter, setFieldFilter] = useState([]);
   const [gradeFilter, setGradeFilter] = useState('');
   const [directSearch, setDirectSearch] = useState('');
-  //const [fieldOptions, setFieldOptions] = useState('');
+  const [totalPage, setTotalPage] = useState(0);
+  const [nowPage, setNowPage] = useState(1);
   const [memberData, setMemberData] = useState(localDb.memberTemp);
-
   const headerWording = localDb.headerWording.member;
   const rawMemberData = localDb.memberTemp;
 
-  //let fieldOptions = [];
-  // rawMemberData.forEach((member) => {
-  //   member.tags.forEach((tag) => {
-  //     if (!fieldOptions.includes(tag)) {
-  //       fieldOptions.push(tag);
-  //     }
-  //   });
-  // });
-  //console.log(fieldOptions);
-  // const fieldOptions2 = rawMemberData.for;
-  // console.log(fieldOptions2);
+  useEffect(() => {
+    const fetchData = async () => {
+      await axios
+        .get('http://localhost:5000/api/alumni/members')
+        .then((res) => {
+          setMemberData(res.data);
+          setTotalPage(Math.ceil(res.data.length / 18));
+          console.log(Math.ceil(res.data.length / 18));
+          console.log(res);
+        })
+        .catch((error) => console.log(error));
+    };
+
+    fetchData();
+    return;
+  }, []);
   const majorOptions = [
     { value: '經濟學系', label: '經濟學系' },
     { value: '國際企業學系', label: '國際企業學系' },
@@ -70,7 +76,6 @@ function Member() {
     { value: '12', label: '12' },
     { value: '13', label: '13' },
   ];
-
   const MemberItem = (props) => (
     <div
       className="member__items--item"
@@ -88,7 +93,7 @@ function Member() {
       </div>
       <div className="item__content">
         <p className="item__content--title">
-          {props.number} {props.name}
+          {numberToRank(props.number)} {props.name}
         </p>
         <p className="item__content--subTitle">{props.jobTitle}</p>
       </div>
@@ -109,11 +114,11 @@ function Member() {
   const PopUp = ({ props }) => (
     <section className="member__popUp">
       <div className="member__popUp--img">
-        <img src={avatar} alt="" />
+        <img src={props.avater} alt="" />
       </div>
       <div className="member__popUp--content">
         <h3>
-          {props.number} {props.name}
+          {numberToRank(props.number)} {props.name}
         </h3>
         <p>{props.jobTitle}</p>
         <div className="content__tags">
@@ -129,11 +134,62 @@ function Member() {
       </div>
     </section>
   );
+  const switchPage = (direction, certainPage) => {
+    switch (direction) {
+      case 'next':
+        if (nowPage < totalPage) {
+          document.getElementById('memberSection').scrollIntoView();
+          setNowPage(nowPage + 1);
+        }
+        break;
+      case 'prev':
+        if (nowPage > 1) {
+          document.getElementById('memberSection').scrollIntoView();
+          setNowPage(nowPage - 1);
+        }
+        break;
+      case 'last':
+        document.getElementById('memberSection').scrollIntoView();
+        setNowPage(totalPage);
+        break;
+      case 'first':
+        document.getElementById('memberSection').scrollIntoView();
+        setNowPage(1);
+        break;
+      case 'certainPage':
+        document.getElementById('memberSection').scrollIntoView();
+        setNowPage(certainPage);
+        break;
+      default:
+        break;
+    }
+  };
   const PaginationComponent = () => (
     <Pagination>
-      <Pagination.First />
-      <Pagination.Prev />
-      <Pagination.Item>{1}</Pagination.Item>
+      <Pagination.First
+        onClick={() => {
+          switchPage('first');
+        }}
+      />
+      <Pagination.Prev
+        onClick={() => {
+          switchPage('prev');
+        }}
+      />
+      {Array.from(Array(totalPage), (e, i) => {
+        return (
+          <Pagination.Item
+            key={i}
+            onClick={() => {
+              switchPage('certainPage', i + 1);
+            }}
+            active={nowPage === i + 1 ? true : false}
+          >
+            {i + 1}
+          </Pagination.Item>
+        );
+      })}
+      {/* <Pagination.Item>{1}</Pagination.Item>
       <Pagination.Ellipsis />
 
       <Pagination.Item>{11}</Pagination.Item>
@@ -141,12 +197,19 @@ function Member() {
       <Pagination.Item>{13}</Pagination.Item>
 
       <Pagination.Ellipsis />
-      <Pagination.Item>{20}</Pagination.Item>
-      <Pagination.Next />
-      <Pagination.Last />
+      <Pagination.Item>{20}</Pagination.Item> */}
+      <Pagination.Next
+        onClick={() => {
+          switchPage('next');
+        }}
+      />
+      <Pagination.Last
+        onClick={() => {
+          switchPage('last');
+        }}
+      />
     </Pagination>
   );
-
   const startFilter = (field) => {
     if (field[0]) {
       let filteredMemberData = rawMemberData.filter((member) =>
@@ -160,7 +223,7 @@ function Member() {
   return (
     <React.Fragment>
       <Header title={headerWording.title} content={headerWording.content} />
-      <section className="member">
+      <section className="member" id="memberSection">
         <PopUp props={popupContent} />
         <div
           className="member__popupLayer"
@@ -186,7 +249,7 @@ function Member() {
                 <div className="filter__major">
                   <Select
                     classNamePrefix="filter__field--selector"
-                    placeholder="選擇科系"
+                    placeholder="選擇科系（限臺大科系）"
                     isMulti
                     options={majorOptions}
                     onChange={(choice) => {
@@ -244,17 +307,21 @@ function Member() {
         </div>
         <div className="member__items">
           {memberData?.map((member, i) => {
-            return (
-              <MemberItem
-                name={`${member.name}`}
-                number={`${member.number}`}
-                jobTitle={`${member.jobTitle}`}
-                exp={`${member.exp}`}
-                tags={`${member.tags}`}
-                avatar={`${member.avatar}`}
-                id={i}
-              />
-            );
+            if ((nowPage - 1) * 18 <= i && i < nowPage * 18) {
+              return (
+                <MemberItem
+                  name={`${member.name}`}
+                  number={`${member.number}`}
+                  jobTitle={`${member.jobTitle}`}
+                  exp={`${member.exp}`}
+                  tags={`${member.tags}`}
+                  avatar={`${member.avater}`}
+                  id={i}
+                />
+              );
+            } else {
+              return;
+            }
           })}
         </div>
         <PaginationComponent />

@@ -1,4 +1,4 @@
-$red_primary: #ae0023;
+$red_primary: rgb(174, 0, 35);
 $red_secondary: #b9544c;
 $black_text: #1e1e1e;
 $black_secondary: #38323c;
@@ -101,6 +101,10 @@ p {
 ::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: $red_primary;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 .navBar {
@@ -2135,11 +2139,13 @@ p {
     z-index: 21;
     &--content {
       min-width: 390px;
-      padding: 16px 32px;
+      max-height: 300px;
+      padding: 24px 32px;
+      background-color: white;
+      @include flex(column, center, flex-start);
       h3 {
         @include h3();
         font-weight: bold;
-        //margin-bottom: 6px;
       }
       p,
       li {
@@ -2148,9 +2154,16 @@ p {
       li {
         //list-style-position: outside;
       }
+      ul {
+        height: fit-content;
+        overflow-y: scroll;
+        margin-bottom: 0;
+        padding-left: 20px;
+        width: 100%;
+      }
       .content__tags {
         @include flex(row, flex-start, center);
-        margin: 12px 0px;
+        margin: 4px 0px 12px 0px;
         &--caption {
           @include caption();
         }
@@ -2188,7 +2201,7 @@ p {
     @include flex(column, center, flex-start);
     width: 100%;
     //max-width: 1110px;
-    margin-bottom: 48px;
+    margin-bottom: 64px;
     form {
       width: 100%;
     }
@@ -2365,6 +2378,23 @@ p {
       }
     }
   }
+  .pagination {
+    .page-item {
+      a {
+        color: $black_text;
+        &:hover {
+          background-color: rgba(174, 0, 35, 0);
+          //color: white;
+        }
+      }
+    }
+    .active {
+      .page-link {
+        background-color: $red_primary;
+        border-color: $red_primary;
+      }
+    }
+  }
   @media screen and (max-width: 1366px) {
     &__searchSection {
       &--filter {
@@ -2413,6 +2443,7 @@ p {
     padding: 80px 32px 120px 32px;
     &__popUp {
       @include flex(column, center, center);
+      display: none;
       &--img {
         width: 390px;
         height: 390px;
