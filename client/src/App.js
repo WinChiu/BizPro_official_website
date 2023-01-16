@@ -9,7 +9,10 @@ import Journey from './pages/Journey';
 import Article from './pages/Article';
 import Member from './pages/Member';
 import $ from 'jquery';
+import axios from 'axios';
 function App() {
+  axios.defaults.baseURL = 'https://bizpro-official-website.herokuapp.com/';
+
   const setVh = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
