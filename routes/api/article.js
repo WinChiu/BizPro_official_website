@@ -3,11 +3,11 @@ const router = express.Router();
 
 const Article = require('../../models/Article');
 
-router.get('/member_talk', async (res, req) => {
+router.get('/member_talk', async (req, res) => {
   try {
     const article = await Article.find({});
     if (!article) {
-      return res.status(400).json({ msg: 'Ariticle data is not available' });
+      return res.status(400).json({ msg: 'Article data is not available' });
     }
     return res.json(article);
   } catch (err) {
