@@ -25,6 +25,10 @@ const ArticleSchema = new mongoose.Schema(
       type: [String],
       required: true,
     },
+    avatar: {
+      type: String,
+      required: true,
+    },
   },
   { collection: 'article' }
 );

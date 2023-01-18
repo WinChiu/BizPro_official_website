@@ -21,7 +21,10 @@ const AlumniSchema = new mongoose.Schema(
     tags: {
       type: [String],
     },
-    avater: {
+    avatar: {
+      type: String,
+    },
+    major: {
       type: String,
     },
   },
