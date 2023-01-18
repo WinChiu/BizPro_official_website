@@ -9,10 +9,12 @@ soup = BeautifulSoup(res.text, "html.parser")
 
 '''
 
-cluster = MongoClient("mongodb+srv://BizPro:auxK7-HxJzGaB3r@cluster0.btdw0vd.mongodb.net/?retryWrites=true&w=majority")
+cluster = MongoClient("mongodb+srv://BizPro:auxK7-HxJzGaB3r@cluster0.btdw0vd.mongodb.net/BP?retryWrites=true&w=majority")
 
 db = cluster["BP"]
 collection_alumni = db["alumni"]
+#new_values = {"$rename", {"avater": "avatar"}}
+#collection_alumni.update_many({}, new_values)
 
 '''
 collection_alumni.insert_one({
@@ -23,7 +25,7 @@ collection_alumni.insert_one({
     "tags": [""],
     "avater": "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_960,w_480,f_auto,q_auto/89241/385535_892520.jpeg"
 })
-'''
+
 
 collection_article = db["article"]
 
@@ -93,5 +95,5 @@ for i in range(28):
     collection_article.insert_one(data_dict)
 
 
-
+'''
 
