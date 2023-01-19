@@ -10,8 +10,7 @@ import axios from 'axios';
 import numberToRank from '../utility/numberToRank.js';
 /*
 TODO:
-- 換頁功能
-- 串上 API 後的篩選功能
+- loading 符號
 */
 
 function Member() {
@@ -35,7 +34,7 @@ function Member() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get('api/alumni/members')
+        .get('http://localhost:5000/api/alumni/members')
         .then((res) => {
           setMemberData(res.data);
           setTotalPage(Math.ceil(res.data.length / 18));
@@ -329,5 +328,6 @@ function Member() {
     </React.Fragment>
   );
 }
+
 
 export default Member;

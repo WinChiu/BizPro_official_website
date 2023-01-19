@@ -1578,6 +1578,7 @@ html {
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 24px;
+  transition-duration: 0.5s;
 }
 .about__vision--iconList .iconList__item--icon {
   width: 72px;
@@ -1598,6 +1599,10 @@ html {
   line-height: 150%;
   margin: 0;
   color: #1e1e1e;
+}
+.about__vision .hideIcon {
+  transform: translateY(20px);
+  opacity: 0;
 }
 .about__achieve {
   z-index: 3;
@@ -1675,6 +1680,7 @@ html {
   align-items: stretch;
 }
 .about__briefIntro .briefIntro__course--word, .about__briefIntro .briefIntro__people--word {
+  transition-duration: 0.6s;
   width: 50%;
   box-sizing: border-box;
   padding: 96px 80px 96px 80px;
@@ -1725,6 +1731,15 @@ html {
   width: 50%;
   background-position: center center;
   background-size: cover;
+  transition-duration: 0.6s;
+}
+.about__briefIntro .hideToRight {
+  transform: translateX(200px);
+  opacity: 0;
+}
+.about__briefIntro .hideToLeft {
+  transform: translateX(-200px);
+  opacity: 0;
 }
 .about__briefIntro .double_circle {
   position: absolute;

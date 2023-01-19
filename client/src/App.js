@@ -10,48 +10,21 @@ import Article from './pages/Article';
 import Member from './pages/Member';
 import $ from 'jquery';
 import axios from 'axios';
-function App() {
-  axios.defaults.baseURL = 'https://bizpro-official-website.herokuapp.com/';
 
+/*
+TODO:
+- lazy loading
+*/
+
+function App() {
+  //axios.defaults.baseURL = 'https://bizpro-official-website.herokuapp.com/';
+  axios.defaults.baseURL = 'http://localhost:5000/';
   const setVh = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   };
   window.addEventListener('load', setVh);
   window.addEventListener('resize', setVh);
-
-  // function wheel(event) {
-  //   var delta = 0;
-  //   if (event.wheelDelta) {
-  //     delta = event.wheelDelta / 120;
-  //   } else if (event.detail) {
-  //     delta = -event.detail / 3;
-  //   }
-
-  //   handle(delta);
-  //   if (event.preventDefault) {
-  //     event.preventDefault();
-  //   }
-  //   event.returnValue = false;
-  // }
-  // function handle(delta) {
-  //   var time = 1000;
-  //   var distance = 300;
-
-  //   $('html, body')
-  //     .stop()
-  //     .animate(
-  //       {
-  //         scrollTop: $(window).scrollTop() - distance * delta,
-  //       },
-  //       time
-  //     );
-  // }
-
-  // if (window.addEventListener) {
-  //   window.addEventListener('DOMMouseScroll', wheel, false);
-  // }
-  // window.onmousewheel = document.onmousewheel = wheel;
 
   return (
     <BrowserRouter>

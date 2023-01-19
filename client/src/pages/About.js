@@ -26,6 +26,12 @@ import vision_bg from '../asset/img/vision_bg.webp';
 import MarqueeLogo from '../components/MarqueeLogo';
 import headerImg from '../asset/img/about_headerImg.webp';
 import $ from 'jquery';
+
+/*
+TODO:
+- 進入動畫
+*/
+
 function About() {
   useEffect(() => {
     class Vec {
@@ -101,6 +107,50 @@ function About() {
     };
   }, []);
 
+  window.addEventListener('scroll', () => {
+    if (
+      document.getElementById('briefIntro__course').getBoundingClientRect().y -
+        window.innerHeight <
+      -100
+    ) {
+      $('.briefIntro__course--img').removeClass('hideToRight');
+      $('.briefIntro__course--word').removeClass('hideToLeft');
+    }
+    if (
+      document.getElementById('briefIntro__people').getBoundingClientRect().y -
+        window.innerHeight <
+      -100
+    ) {
+      $('.briefIntro__people--img').removeClass('hideToLeft');
+      $('.briefIntro__people--word').removeClass('hideToRight');
+    }
+
+    if (
+      document.getElementById('about__vision--iconList').getBoundingClientRect()
+        .y -
+        window.innerHeight <
+      -240
+    ) {
+      let timeDelta = 100;
+      $('.iconList__item--1').removeClass('hideIcon');
+      setTimeout(() => {
+        $('.iconList__item--2').removeClass('hideIcon');
+      }, timeDelta);
+      setTimeout(() => {
+        $('.iconList__item--3').removeClass('hideIcon');
+      }, timeDelta * 2);
+      setTimeout(() => {
+        $('.iconList__item--4').removeClass('hideIcon');
+      }, timeDelta * 3);
+      setTimeout(() => {
+        $('.iconList__item--5').removeClass('hideIcon');
+      }, timeDelta * 4);
+      setTimeout(() => {
+        $('.iconList__item--6').removeClass('hideIcon');
+      }, timeDelta * 5);
+    }
+  });
+
   return (
     <section className="about">
       <article className="about__header">
@@ -114,7 +164,14 @@ function About() {
         <h3 className="about__header--subTitle">
           紮實課程 X 社群連結 X 量身打造
         </h3>
-        <div className="about__header--readMore">
+        <div
+          className="about__header--readMore"
+          onClick={() => {
+            document.getElementById('about__intro').scrollIntoView({
+              behavior: 'smooth',
+            });
+          }}
+        >
           <h4 className="readMore--word">繼續瀏覽</h4>
           <img
             src={icon_pointDown}
@@ -123,7 +180,7 @@ function About() {
           />
         </div>
       </article>
-      <article className="about__intro">
+      <article className="about__intro" id="about__intro">
         <img src={connection_symbol_red} alt="" className="connection__left" />
         <img src={connection_symbol_red} alt="" className="connection__right" />
         <div className="about__intro--title sectionTitle sectionTitle--lg">
@@ -214,8 +271,8 @@ function About() {
             期望能建立同儕、學界、業界三方的橋樑，讓優秀的學生與前輩透過頻繁的互動，創造新的價值，成為各行各業的領袖人才。
           </p>
         </div>
-        <div className="about__vision--iconList">
-          <div className="iconList__item">
+        <div className="about__vision--iconList" id="about__vision--iconList">
+          <div className="iconList__item iconList__item--1 hideIcon ">
             <img
               src={icon_courage}
               alt="icon_courage"
@@ -228,7 +285,7 @@ function About() {
               </p>
             </div>
           </div>
-          <div className="iconList__item">
+          <div className="iconList__item iconList__item--2 hideIcon">
             <img
               src={icon_creativity}
               alt="icon_creativity"
@@ -241,7 +298,7 @@ function About() {
               </p>
             </div>
           </div>
-          <div className="iconList__item">
+          <div className="iconList__item iconList__item--3 hideIcon">
             <img
               src={icon_trust}
               alt="icon_trust"
@@ -254,7 +311,7 @@ function About() {
               </p>
             </div>
           </div>
-          <div className="iconList__item">
+          <div className="iconList__item iconList__item--4 hideIcon">
             <img
               src={icon_integrity}
               alt="icon_integrity"
@@ -267,7 +324,7 @@ function About() {
               </p>
             </div>
           </div>
-          <div className="iconList__item">
+          <div className="iconList__item iconList__item--5 hideIcon">
             <img
               src={icon_share}
               alt="icon_share"
@@ -280,7 +337,10 @@ function About() {
               </p>
             </div>
           </div>
-          <div className="iconList__item" style={{ marginBottom: '0px' }}>
+          <div
+            className="iconList__item iconList__item--6 hideIcon"
+            style={{ marginBottom: '0px' }}
+          >
             <img
               src={icon_entrepreneurship}
               alt="icon_entrepreneurship"
@@ -361,8 +421,8 @@ function About() {
           className="double_circle"
         />
         <img src={connection_symbol} alt="" className="connection_symbol" />
-        <div className="briefIntro__course">
-          <div className="briefIntro__course--word">
+        <div className="briefIntro__course" id="briefIntro__course">
+          <div className="briefIntro__course--word hideToLeft">
             <h2 className="word--title">BizPro 的商業專業能力訓練</h2>
             <p className="word--content">
               BizPro
@@ -375,16 +435,16 @@ function About() {
             </Button>
           </div>
           <div
-            className="briefIntro__people--img"
+            className="briefIntro__course--img hideToRight"
             style={{ backgroundImage: `url(${briefIntro_course})` }}
           />
         </div>
-        <div className="briefIntro__people">
+        <div className="briefIntro__people" id="briefIntro__people">
           <div
-            className="briefIntro__people--img"
+            className="briefIntro__people--img hideToLeft"
             style={{ backgroundImage: `url(${briefIntro_people})` }}
           />
-          <div className="briefIntro__people--word">
+          <div className="briefIntro__people--word hideToRight">
             <h2 className="word--title">BizPro 社員人脈連結</h2>
             <p className="word--content">
               BizPro 創立至今已累積超過 100
