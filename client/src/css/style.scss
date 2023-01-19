@@ -420,7 +420,7 @@ html {
       position: absolute;
       z-index: 0;
       right: -10%;
-      bottom: -30%;
+      bottom: -45%;
       opacity: 0.8;
     }
     .circle4 {
@@ -473,11 +473,15 @@ html {
     }
     &__infos {
       width: 100%;
-      @include flex(row, center, flex-start);
+      @include flex(row, center, center);
       z-index: 0;
       position: relative;
       .containerMR {
-        margin-right: 40px;
+        margin-right: 32px;
+      }
+      .nextIcon {
+        transform: rotate(-90deg);
+        opacity: 0.3;
       }
       &--container {
         flex: 1;
@@ -497,7 +501,7 @@ html {
             display: grid;
             grid-template-columns: 120px 120px;
             grid-template-rows: 90px 90px;
-            grid-gap: 28px 28px;
+            grid-gap: 32px 32px;
             align-content: center;
             justify-content: center;
             .iconSet__items {
@@ -505,10 +509,11 @@ html {
               width: 120px;
               &--icon {
                 width: 48px;
-                margin-bottom: 8px;
+                margin-bottom: 12px;
               }
               &--title {
                 @include body1();
+                font-size: 18px;
                 font-weight: bold;
               }
             }
@@ -680,6 +685,32 @@ html {
         top: -120px;
         transform: scale(1.1);
       }
+      &__infos {
+        @include flex(column, center, center);
+        .containerMR {
+          margin-right: 0px;
+          margin-bottom: 32px;
+        }
+        .nextIcon {
+          transform: rotate(0deg);
+          opacity: 0.3;
+        }
+        &--container {
+          .container__content {
+            height: fit-content;
+            &--words {
+              margin-bottom: 48px;
+            }
+            &--iconSet {
+              width: 100%;
+              grid-template-columns: 120px 120px 120px 120px;
+              grid-template-rows: 90px;
+              align-content: center;
+              justify-content: space-between;
+            }
+          }
+        }
+      }
     }
     .caseStudy {
       padding: 108px 64px 108px 64px;
@@ -707,30 +738,30 @@ html {
     }
   }
   @media screen and (max-width: 1000px) {
-    .courseStructure {
-      &__infos {
-        @include flex(column, center, flex-start);
-        .containerMR {
-          margin-right: 0px;
-          margin-bottom: 120px;
-        }
-        &--container {
-          .container__content {
-            height: fit-content;
-            &--words {
-              margin-bottom: 48px;
-            }
-            &--iconSet {
-              width: 100%;
-              grid-template-columns: 120px 120px 120px 120px;
-              grid-template-rows: 90px;
-              align-content: center;
-              justify-content: space-between;
-            }
-          }
-        }
-      }
-    }
+    // .courseStructure {
+    //   &__infos {
+    //     @include flex(column, center, flex-start);
+    //     .containerMR {
+    //       margin-right: 0px;
+    //       margin-bottom: 120px;
+    //     }
+    //     &--container {
+    //       .container__content {
+    //         height: fit-content;
+    //         &--words {
+    //           margin-bottom: 48px;
+    //         }
+    //         &--iconSet {
+    //           width: 100%;
+    //           grid-template-columns: 120px 120px 120px 120px;
+    //           grid-template-rows: 90px;
+    //           align-content: center;
+    //           justify-content: space-between;
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
   }
   @media screen and (max-width: 900px) {
     .caseStudy {
@@ -808,7 +839,7 @@ html {
   @media screen and (max-width: 600px) {
     .courseStructure {
       &__infos {
-        @include flex(column, center, flex-start);
+        @include flex(column, flex-start, center);
         &--container {
           .container__content {
             &--iconSet {
@@ -855,6 +886,7 @@ html {
     z-index: -1;
     right: -240px;
     top: -240px;
+    opacity: 0.8;
   }
   .dubbleCircle {
     position: absolute;
@@ -862,6 +894,7 @@ html {
     bottom: -520px;
     left: -280px;
     transform: scaleX(-1);
+    opacity: 0.8;
   }
   &__course,
   &__project {
@@ -928,6 +961,7 @@ html {
     }
   }
   &__project {
+    @include flex(row, center, center);
     &--content {
       margin-right: 48px;
     }
@@ -1009,7 +1043,8 @@ html {
     position: absolute;
     z-index: -1;
     right: -400px;
-    bottom: -520px;
+    bottom: -600px;
+    opacity: 0.8;
   }
   &__img {
     flex: 1;
@@ -1884,17 +1919,17 @@ html {
 }
 
 .article {
-  @include flex(column, flex-start, flex-start);
-  padding: 120px 300px 120px 300px;
+  @include flex(column, flex-start, center);
+  padding: 120px 80px 120px 128px;
   background-color: $white_200;
   &__searchSection {
-    width: 50%;
+    width: 100%;
     margin-bottom: 40px;
     .btn-primary {
       background-color: $black_secondary;
       border: none;
       @include body1();
-      font-weight: bol d;
+      font-weight: bold;
       color: white;
       padding: 8px 16px 8px 16px;
       white-space: nowrap;
@@ -1907,49 +1942,30 @@ html {
       color: white;
       background-color: $grey;
     }
-    // &--search {
-    //   @include flex(row, flex-start, center);
-    //   label {
-    //     @include h4();
-    //     margin-right: 16px;
-    //     font-weight: normal;
-    //     white-space: nowrap;
-    //   }
-    //   .search {
-    //     &--directSearchInput {
-    //       padding: 8px 16px 6px 16px;
-    //       @include body1();
-    //       font-weight: normal;
-    //       border-radius: 4px;
-    //       border: 1px solid #cccccc;
-    //       margin-right: 16px;
-    //       min-width: 240px;
-    //       width: 100%;
-    //       &:focus {
-    //         outline: 2px solid $grey;
-    //       }
-    //     }
-    //   }
-    // }
     form {
       @include flex(row, flex-start, center);
     }
     &--filter {
-      margin-right: 16px;
+      width: 100%;
+      @include flex(row, flex-start, center);
       label {
         @include h4();
         margin-right: 16px;
         font-weight: normal;
         white-space: nowrap;
       }
-      @include flex(row, flex-start, center);
+      .css-b62m3t-container {
+        max-width: 267px;
+        width: 100%;
+        margin-right: 16px;
+      }
       .filter__major,
       .filter__field {
         &--selector {
           &__control {
-            min-width: 240px;
-            width: 267px;
-            //width: fit-content;
+            min-width: 140px;
+            max-width: 267px;
+            width: 100%;
             padding: 2px 6px 2px 6px;
           }
           &__multi-value {
@@ -2091,15 +2107,43 @@ html {
     transition-duration: 0.5s;
     background-color: rgb(231, 231, 231);
   }
+  .pagination {
+    margin-top: 40px;
+    .page-item {
+      a {
+        color: $black_text;
+        &:hover {
+          background-color: rgba(174, 0, 35, 0);
+          //color: white;
+        }
+      }
+    }
+    .active {
+      .page-link {
+        background-color: $red_primary;
+        border-color: $red_primary;
+      }
+    }
+  }
   @media screen and (max-width: 1366px) {
     padding: 120px 120px 120px 120px;
+  }
+  @media screen and (max-width: 1200px) {
+    padding: 120px 64px 120px 64px;
   }
   @media screen and (max-width: 900px) {
     padding: 120px 64px 120px 64px;
   }
   @media screen and (max-width: 768px) {
     padding: 120px 32px 120px 32px;
+    &__detail {
+      width: calc(100% - 32px);
+      height: 80%;
+      min-width: 0px;
+      padding: 40px 32px 32px 32px;
+    }
     &__item {
+      margin-bottom: 40px;
       &--img {
         img {
           width: 100px;
@@ -2131,9 +2175,42 @@ html {
         }
       }
     }
+    &__searchSection {
+      .btn-primary {
+        width: 100%;
+      }
+      &--filter {
+        @include flex(column, flex-start, flex-start);
+        width: 100%;
+        label {
+          @include h4();
+          margin-right: 0px;
+          margin-bottom: 16px;
+        }
+        .css-b62m3t-container {
+          max-width: none;
+          width: 100%;
+        }
+        .filter__major,
+        .filter__field {
+          &--selector {
+            &__control {
+              min-width: none;
+              max-width: none;
+              margin-bottom: 16px;
+              width: 100%;
+              padding: 2px 6px 2px 6px;
+            }
+          }
+        }
+      }
+    }
   }
   @media screen and (max-width: 414px) {
     padding: 120px 24px 120px 24px;
+    &__detail {
+      padding: 32px 16px 24px 16px;
+    }
   }
 }
 
@@ -2141,6 +2218,7 @@ html {
   @include flex(column, center, center);
   padding: 120px 128px 120px 128px;
   position: relative;
+  background-color: $white_200;
   &__popUp {
     @include flex(row, center, center);
     background-color: white;
@@ -2336,41 +2414,46 @@ html {
     &--item {
       cursor: pointer;
       max-width: 180px;
-      @include flex(column, center, center);
+      height: 100%;
+      @include flex(column, space-between, center);
       align-self: start;
-
-      .item__img {
-        margin-bottom: 16px;
-        position: relative;
+      .item__container {
+        @include flex(column, flex-start, center);
+        width: 100%;
         &--img {
-          width: 180px;
+          margin-bottom: 16px;
+          position: relative;
+          .item__img--img {
+            width: 180px;
+          }
+          .mask {
+            @include flex(row, center, center);
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            @include body1();
+            font-weight: bold;
+            color: white;
+            transition-duration: 0.3s;
+          }
         }
-        .mask {
-          @include flex(row, center, center);
-          opacity: 0;
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background-color: rgba(0, 0, 0, 0.8);
-          @include body1();
-          font-weight: bold;
-          color: white;
-          transition-duration: 0.3s;
+        &--content {
+          @include flex(column, center, center);
+          .item__content--title {
+            @include body1();
+            font-weight: bold;
+            margin-bottom: 8px;
+          }
+          .item__content--subTitle {
+            @include body1();
+            text-align: center;
+            margin-bottom: 8px;
+          }
         }
       }
-      .item__content {
-        @include flex(column, center, center);
-        &--title {
-          @include body1();
-          font-weight: bold;
-          margin-bottom: 8px;
-        }
-        &--subTitle {
-          @include body1();
-          text-align: center;
-          margin-bottom: 8px;
-        }
-      }
+
       .btn-primary {
         background-color: $black_secondary;
         border: none;
@@ -2474,14 +2557,17 @@ html {
     }
   }
   @media screen and (max-width: 500px) {
-    padding: 80px 24px 120px 24px;
+    padding: 80px 32px 120px 32px;
     &__items {
+      grid-gap: 40px 8px;
       &--item {
-        margin: 0px 12px 44px 12px;
-        max-width: 160px;
-        .item__img {
+        margin: 0px 0px 44px 0px;
+        //max-width: 160px;
+        .item__container {
           &--img {
-            width: 160px;
+            .item__img--img {
+              width: 160px;
+            }
           }
         }
       }
@@ -2524,13 +2610,13 @@ html {
       }
     }
   }
-  @media screen and (max-width: 414px) {
+  @media screen and (max-width: 460px) {
     &__items {
-      grid-gap: 40px 8px;
+      grid-gap: 64px 8px;
       max-width: 1000px;
       grid-template-columns: repeat(auto-fill, 160px);
       &--item {
-        margin: 0px 0px 44px 0px;
+        margin: 0px 0px 32px 0px;
         .btn-primary {
           display: block;
         }
@@ -2543,7 +2629,24 @@ html {
       }
       &--content {
         min-width: 300px;
-        padding: 16px 16px 8px 16px;
+        padding: 16px 16px 16px 16px;
+      }
+    }
+  }
+  @media screen and (max-width: 414px) {
+    padding: 80px 24px 120px 24px;
+  }
+  @media screen and (max-width: 390px) {
+    &__items {
+      grid-template-columns: repeat(auto-fill, 140px);
+      &--item {
+        .item__container {
+          &--img {
+            .item__img--img {
+              width: 140px;
+            }
+          }
+        }
       }
     }
   }

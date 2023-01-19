@@ -29,6 +29,7 @@ import icon_speach from '../asset/img/icon/icon_speach.svg';
 import icon_communication from '../asset/img/icon/icon_communication.svg';
 import circle4 from '../asset/img/4Circle_symbol_white300.svg';
 import toggle_symbol from '../asset/img/toggle_symbol.svg';
+import icon_down from '../asset/img/icon/icon_down.svg';
 import $ from 'jquery';
 function Journey() {
   const headerWordingJunior = localDb.headerWording.journey.junior;
@@ -37,7 +38,7 @@ function Journey() {
 
   const [tab, setTab] = useState('junior');
 
-  const Junior_IconItem = ({ icon, title }) => (
+  const JuniorIconItem = ({ icon, title }) => (
     <div className="iconSet__items">
       <img src={icon} alt="icon_basicHypo" className="iconSet__items--icon" />
       <h4 className="iconSet__items--title">{title}</h4>
@@ -104,16 +105,17 @@ function Journey() {
                 原本大海撈針要花費的時間。而針對專案問題建立議題樹，更能協助釐清目前問題的著力點，以更高效率的方式拆解問題。
               </p>
               <div className="container__content--iconSet">
-                <Junior_IconItem icon={icon_basicHypo} title="初階假說思考" />
-                <Junior_IconItem icon={icon_interview} title="群體/個人訪談" />
-                <Junior_IconItem icon={icon_qualitative} title="質化訪綱設計" />
-                <Junior_IconItem
+                <JuniorIconItem icon={icon_basicHypo} title="初階假說思考" />
+                <JuniorIconItem icon={icon_interview} title="群體/個人訪談" />
+                <JuniorIconItem icon={icon_qualitative} title="質化訪綱設計" />
+                <JuniorIconItem
                   icon={icon_questionnaire}
                   title="量化問卷設計"
                 />
               </div>
             </div>
           </div>
+          <img src={icon_down} alt="" className="nextIcon containerMR" />
           <div className="courseStructure__infos--container containerMR">
             <h3 className="container__title">Info-Process 階段</h3>
             <div className="container__content">
@@ -121,19 +123,14 @@ function Journey() {
                 在資料分析階段，一個清晰的提案強調故事線邏輯，透過層層論證後的問題拆解，產出對應專案問題嚴謹的解方。我們安排社員學習建構故事邏輯，將所得資料進行分析與研究後，產出最具說服力的提案。
               </p>
               <div className="container__content--iconSet">
-                <Junior_IconItem
-                  icon={icon_advancedHypo}
-                  title="進階假說思考"
-                />
-                <Junior_IconItem icon={icon_mece} title="MECE 原則" />
-                <Junior_IconItem icon={icon_pyramid} title="金字塔原理" />
-                <Junior_IconItem
-                  icon={icon_quantitative}
-                  title="量化分析模型"
-                />
+                <JuniorIconItem icon={icon_advancedHypo} title="進階假說思考" />
+                <JuniorIconItem icon={icon_mece} title="MECE 原則" />
+                <JuniorIconItem icon={icon_pyramid} title="金字塔原理" />
+                <JuniorIconItem icon={icon_quantitative} title="量化分析模型" />
               </div>
             </div>
           </div>
+          <img src={icon_down} alt="" className="nextIcon containerMR" />
           <div className="courseStructure__infos--container">
             <h3 className="container__title">Info-Out 階段</h3>
             <div className="container__content">
@@ -141,17 +138,14 @@ function Journey() {
                 在資料呈現階段，商業簡報強調在視覺上快速讓讀者理解提案，透過簡報設計，將故事線邏輯可視化。此外，在簡報設計、口頭報告皆強調以結論先行的方式，最高效率讓聽者抓到提案重點。
               </p>
               <div className="container__content--iconSet">
-                <Junior_IconItem
-                  icon={icon_advancedHypo}
-                  title="進階假說思考"
-                />
-                <Junior_IconItem icon={icon_powerpoint} title="提案簡報設計" />
-                <Junior_IconItem
+                <JuniorIconItem icon={icon_advancedHypo} title="進階假說思考" />
+                <JuniorIconItem icon={icon_powerpoint} title="提案簡報設計" />
+                <JuniorIconItem
                   icon={icon_speach}
                   title="提案報告技巧
 "
                 />
-                <Junior_IconItem icon={icon_communication} title="溝通與表達" />
+                <JuniorIconItem icon={icon_communication} title="溝通與表達" />
               </div>
             </div>
           </div>

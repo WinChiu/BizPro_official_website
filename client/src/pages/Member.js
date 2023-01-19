@@ -86,15 +86,17 @@ function Member() {
         }, 100);
       }}
     >
-      <div className="item__img">
-        <div className="mask">查看成員經歷</div>
-        <img src={props.avatar} alt="avatar" className="item__img--img" />
-      </div>
-      <div className="item__content">
-        <p className="item__content--title">
-          {numberToRank(props.number)} {props.name}
-        </p>
-        <p className="item__content--subTitle">{props.jobTitle}</p>
+      <div className="item__container">
+        <div className="item__container--img">
+          <div className="mask">查看成員經歷</div>
+          <img src={props.avatar} alt="avatar" className="item__img--img" />
+        </div>
+        <div className="item__container--content">
+          <p className="item__content--title">
+            {numberToRank(props.number)} {props.name}
+          </p>
+          <p className="item__content--subTitle">{props.jobTitle}</p>
+        </div>
       </div>
       <Button
         variant="primary"
@@ -328,6 +330,5 @@ function Member() {
     </React.Fragment>
   );
 }
-
 
 export default Member;
