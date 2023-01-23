@@ -10,6 +10,7 @@ import Article from './pages/Article';
 import Member from './pages/Member';
 import $ from 'jquery';
 import axios from 'axios';
+import Backstage from './pages/Backstage';
 
 /*
 TODO:
@@ -28,15 +29,16 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {/* <NavBar /> */}
       <Routes>
         <Route exact path="/" element={<About />} />
         <Route path="/activity" element={<Activity />} />
         <Route path="/journey" element={<Journey />} />
         <Route path="/member_talk" element={<Article />} />
         <Route path="/members" element={<Member />} />
+        <Route path="/backstage" element={<Backstage />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
