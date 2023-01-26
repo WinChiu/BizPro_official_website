@@ -2894,10 +2894,12 @@ html {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
 }
 .backstage .sidebar .backstage_logo {
   padding: 24px 48px 24px 48px;
@@ -2958,7 +2960,7 @@ html {
   align-items: center;
 }
 .backstage .settingPage .toastComponent {
-  position: absolute;
+  position: fixed;
   z-index: 10;
   top: 24px;
   transform: translateY(-24px);
@@ -3003,7 +3005,7 @@ html {
   background-color: #198754;
   min-width: 0px;
 }
-.backstage .settingPage .success p {
+.backstage .settingPage .success ommit p {
   margin-right: 0px;
 }
 .backstage .settingPage .warning {
