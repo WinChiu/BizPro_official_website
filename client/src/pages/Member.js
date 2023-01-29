@@ -14,6 +14,14 @@ TODO:
 */
 
 function Member() {
+  const [memberData, setMemberData] = useState(null);
+  const [gradeOptions, setGradeOptions] = useState([]);
+  const [fieldOptions, setFieldOptions] = useState([]);
+  const [majorOptions, setMajorOptions] = useState([]);
+  const [majorFilter, setMajorFilter] = useState([]);
+  const [fieldFilter, setFieldFilter] = useState([]);
+  const [gradeFilter, setGradeFilter] = useState('');
+  const [directSearch, setDirectSearch] = useState('');
   const [popupContent, setPopupContent] = useState({
     name: '',
     number: '',
@@ -21,60 +29,59 @@ function Member() {
     tags: [],
     exp: [],
   });
-  const [majorFilter, setMajorFilter] = useState([]);
-  const [fieldFilter, setFieldFilter] = useState([]);
-  const [gradeFilter, setGradeFilter] = useState('');
-  const [directSearch, setDirectSearch] = useState('');
   const [totalPage, setTotalPage] = useState(0);
   const [nowPage, setNowPage] = useState(1);
-  const [memberData, setMemberData] = useState(localDb.memberTemp);
+
   const headerWording = localDb.headerWording.member;
   const rawMemberData = localDb.memberTemp;
 
   useEffect(() => {
+    let grade = [];
+    let field = [];
+    let major = [];
+    let gradeOptionsTemp = [{ value: '0', label: '全部屆數' }];
+    let fieldOptionsTemp = [];
+    let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
         .get('http://localhost:5000/api/alumni/members')
         .then((res) => {
           setMemberData(res.data);
           setTotalPage(Math.ceil(res.data.length / 18));
-          console.log(Math.ceil(res.data.length / 18));
-          console.log(res);
+          // Set options
+          res.data.map((member) => {
+            if (!grade.includes(member.number)) {
+              grade.push(member.number);
+            }
+            member.tags.map((tag) => {
+              if (!field.includes(tag)) {
+                field.push(tag);
+              }
+            });
+            if (!major.includes(member.major)) {
+              major.push(member.major);
+            }
+          });
+          grade.map((item) => {
+            gradeOptionsTemp.push({ value: item, label: item });
+          });
+          field.map((item) => {
+            fieldOptionsTemp.push({ value: item, label: item });
+          });
+          major.map((item) => {
+            majorOptionsTemp.push({ value: item, label: item });
+          });
+          setFieldOptions(fieldOptionsTemp);
+          setGradeOptions(gradeOptionsTemp);
+          setMajorOptions(majorOptionsTemp);
         })
         .catch((error) => console.log(error));
     };
-
     fetchData();
     return;
   }, []);
-  const majorOptions = [
-    { value: '經濟學系', label: '經濟學系' },
-    { value: '國際企業學系', label: '國際企業學系' },
-    { value: '財務金融學系', label: '財務金融學系' },
-    { value: '電子機械系', label: '電子機械系' },
-  ];
-  const fieldOptions = [
-    { value: '金融業', label: '金融業' },
-    { value: '顧問業', label: '顧問業' },
-    { value: '科技業', label: '科技業' },
-    { value: '社會創新', label: '社會創新' },
-  ];
-  const gradeOptions = [
-    { value: '0', label: '全部屆數' },
-    { value: '1', label: '1' },
-    { value: '2', label: '2' },
-    { value: '3', label: '3' },
-    { value: '4', label: '4' },
-    { value: '5', label: '5' },
-    { value: '6', label: '6' },
-    { value: '7', label: '7' },
-    { value: '8', label: '8' },
-    { value: '9', label: '9' },
-    { value: '10', label: '10' },
-    { value: '11', label: '11' },
-    { value: '12', label: '12' },
-    { value: '13', label: '13' },
-  ];
+
+
   const MemberItem = (props) => (
     <div
       className="member__items--item"

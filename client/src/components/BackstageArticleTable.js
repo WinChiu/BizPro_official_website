@@ -18,6 +18,9 @@ function BackstageArticleTable() {
   const [targetArticle, setTargetArticle] = useState({
     name: '',
     number: '',
+    jobTitle: '',
+    title: '',
+    content: '',
     avatar: '',
   });
 
@@ -27,6 +30,7 @@ function BackstageArticleTable() {
       await axios
         .get('http://localhost:5000/api/article/member_talk')
         .then((res) => {
+          console.log(res.data);
           setArticleData(res.data);
 
           setTotalPage(Math.ceil(res.data.length / 10));
@@ -128,7 +132,84 @@ function BackstageArticleTable() {
       </div>
     );
   };
-  const ArticleRow = ({ name, number, title, major, exp, tags, avatar }) => (
+  const DataEditModal = () => {
+    return (
+      <div className="modal show dataModal">
+        <Modal.Dialog>
+          <Modal.Header>
+            <Modal.Title>
+              <strong>編輯或新增心得</strong>
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="container container__row1">
+              <label>姓名</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="nameInput"
+                className="nameInput"
+                defaultValue={`${targetArticle.name ? targetArticle.name : ''}`}
+              />
+              <label>屆數</label>
+              <input
+                type="number"
+                name="name"
+                placeholder="屆數"
+                className="numberInput"
+                defaultValue={`${
+                  targetArticle.number ? targetArticle.number : ''
+                }`}
+              />
+            </div>
+            <div className="container container__row2">
+              <label>頭銜</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="頭銜"
+                className="titleInput"
+                defaultValue={`${
+                  targetArticle.jobTitle ? targetArticle.jobTitle : ''
+                }`}
+              />
+            </div>
+            <div className="container container__row3">
+              <label>標題</label>
+              <input
+                type="text"
+                name="name"
+                placeholder="心得文標題"
+                className="articleTitleInput"
+                defaultValue={`${
+                  targetArticle.title ? targetArticle.title : ''
+                }`}
+              />
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button
+              variant="primary"
+              onClick={() => {
+                $('.modal').css('display', 'none');
+              }}
+            >
+              取消
+            </Button>
+            <Button
+              variant="success"
+              onClick={() => {
+                updateAvatar();
+              }}
+            >
+              更新
+            </Button>
+          </Modal.Footer>
+        </Modal.Dialog>
+      </div>
+    );
+  };
+  const ArticleRow = ({ name, number, jobTitle, title, avatar, content }) => (
     <tr data-name={name} data-number={number} data-avatar={avatar}>
       <td
         contentEditable="false"
@@ -147,6 +228,13 @@ function BackstageArticleTable() {
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
+        className="jobTitleContent data"
+      >
+        {jobTitle ? jobTitle : <span className="noData">查無資料</span>}
+      </td>
+      <td
+        contentEditable="false"
+        suppressContentEditableWarning="true"
         className="titleContent data"
       >
         {title ? title : <span className="noData">查無資料</span>}
@@ -154,41 +242,9 @@ function BackstageArticleTable() {
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
-        className="majorContent data"
+        className="contentContent data"
       >
-        {major ? major : <span className="noData">查無資料</span>}
-      </td>
-      <td
-        contentEditable="false"
-        suppressContentEditableWarning="true"
-        className="expContent data"
-      >
-        {exp ? (
-          exp.map((data, i) => {
-            if (i !== exp.length - 1) {
-              return data + '；';
-            }
-            return data;
-          })
-        ) : (
-          <span className="noData">查無資料</span>
-        )}
-      </td>
-      <td
-        contentEditable="false"
-        suppressContentEditableWarning="true"
-        className="tagsContent data"
-      >
-        {tags === [''] ? (
-          tags.map((data, i) => {
-            if (i !== tags.length - 1) {
-              return data + '；';
-            }
-            return data;
-          })
-        ) : (
-          <span className="noData">查無資料</span>
-        )}
+        {content ? content : <span className="noData">查無資料</span>}
       </td>
       <td>
         {avatar ? (
@@ -229,7 +285,10 @@ function BackstageArticleTable() {
           variant="primary"
           className="btn-edit"
           onClick={(e) => {
-            startEdit(e);
+            getTargetAlumni(e);
+            setTimeout(() => {
+              $('.dataModal').css('display', 'block');
+            }, 0);
           }}
         >
           編輯
@@ -314,11 +373,29 @@ function BackstageArticleTable() {
   // Utilities
 
   const getTargetAlumni = (e) => {
-    let targetAlumniData = e.target.parentNode.parentNode.dataset;
+    let jobTitle,
+      title,
+      content = '';
+    let targetArticleData = e.target.parentNode.parentNode.dataset;
+    console.log(e.target.parentNode.parentNode.childNodes);
+    e.target.parentNode.parentNode.childNodes.forEach((child) => {
+      if (child.classList[0] === 'jobTitleContent') {
+        jobTitle = child.innerText;
+      }
+      if (child.classList[0] === 'titleContent') {
+        title = child.innerText;
+      }
+      if (child.classList[0] === 'contentContent') {
+        content = child.innerText;
+      }
+    });
     setTargetArticle({
-      name: targetAlumniData.name,
-      number: targetAlumniData.number,
-      avatar: targetAlumniData.avatar,
+      name: targetArticleData.name,
+      number: targetArticleData.number,
+      jobTitle: jobTitle,
+      title: title,
+      content: content,
+      avatar: targetArticleData.avatar,
     });
   };
   const startEdit = (e) => {
@@ -505,6 +582,7 @@ function BackstageArticleTable() {
       <WarningToast />
       <WarningModal />
       <PictureUploadModal />
+      <DataEditModal />
       <div className="titleSection">
         <h2 className="title">歷屆心得文資料庫</h2>
         <Button variant="primary">新增心得文</Button>
@@ -515,9 +593,8 @@ function BackstageArticleTable() {
             <th>姓名</th>
             <th>屆數</th>
             <th>頭銜</th>
-            <th>學歷</th>
-            <th>經歷（使用；隔開）</th>
-            <th>產業標籤（使用；隔開）</th>
+            <th>心得標題</th>
+            <th>心得內容</th>
             <th>照片</th>
             <th>操作</th>
           </tr>
@@ -530,11 +607,10 @@ function BackstageArticleTable() {
                   key={i}
                   name={article.name}
                   number={article.number}
-                  title={article.jobTitle}
-                  major={article.major}
-                  exp={article.exp}
-                  tags={article.tags}
-                  avatar={article.avater}
+                  jobTitle={article.jobTitle}
+                  title={article.title}
+                  content={article.content}
+                  avatar={article.avatar}
                 />
               );
             } else {

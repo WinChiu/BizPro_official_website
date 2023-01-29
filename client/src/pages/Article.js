@@ -10,6 +10,12 @@ import axios from 'axios';
 import Pagination from 'react-bootstrap/Pagination';
 
 function Article() {
+  const [articleData, setArticleData] = useState(null);
+  const [fieldOptions, setFieldOptions] = useState([]);
+  const [majorOptions, setMajorOptions] = useState([]);
+  const [totalPage, setTotalPage] = useState(0);
+  const [nowPage, setNowPage] = useState(1);
+  const headerWording = localDb.headerWording.article;
   const [popupContent, setPopupContent] = useState({
     name: '',
     number: '',
@@ -17,33 +23,36 @@ function Article() {
     title: '',
     content: '',
   });
-  const [totalPage, setTotalPage] = useState(0);
-  const [nowPage, setNowPage] = useState(1);
-  const [articleData, setArticleData] = useState(null);
-  const headerWording = localDb.headerWording.article;
-  //const articleEx = localDb.articleTemp;
-
-  const majorOptions = [
-    { value: '經濟學系', label: '經濟學系' },
-    { value: '國際企業學系', label: '國際企業學系' },
-    { value: '財務金融學系', label: '財務金融學系' },
-    { value: '電子機械系', label: '電子機械系' },
-  ];
-  const fieldOptions = [
-    { value: '金融業', label: '金融業' },
-    { value: '顧問業', label: '顧問業' },
-    { value: '科技業', label: '科技業' },
-    { value: '社會創新', label: '社會創新' },
-  ];
 
   useEffect(() => {
+    let field = [];
+    let major = [];
+    let fieldOptionsTemp = [];
+    let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
         .get('http://localhost:5000/api/article/member_talk')
         .then((res) => {
           setArticleData(res.data);
           setTotalPage(Math.ceil(res.data.length / 6));
-          console.log(res.data);
+          res.data.map((article) => {
+            article.tags.map((tag) => {
+              if (!field.includes(tag)) {
+                field.push(tag);
+              }
+            });
+            if (!major.includes(article.major)) {
+              major.push(article.major);
+            }
+          });
+          field.map((item) => {
+            fieldOptionsTemp.push({ value: item, label: item });
+          });
+          major.map((item) => {
+            majorOptionsTemp.push({ value: item, label: item });
+          });
+          setFieldOptions(fieldOptionsTemp);
+          setMajorOptions(majorOptionsTemp);
         })
         .catch((error) => console.log(error));
     };

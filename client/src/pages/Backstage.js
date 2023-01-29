@@ -39,7 +39,7 @@ function Backstage() {
             tabName={'article'}
           />
         </div>
-        <p className="sign">Built by Win & Jim</p>
+        <p className="sign">Built by 22nd Win & 21st Jim</p>
       </section>
       <section className="settingPage" id="settingPageSection">
         {nowTab === 'alumni' ? (

@@ -29,7 +29,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <NavBar /> */}
+      <NavBar />
       <Routes>
         <Route exact path="/" element={<About />} />
         <Route path="/activity" element={<Activity />} />
@@ -38,7 +38,7 @@ function App() {
         <Route path="/members" element={<Member />} />
         <Route path="/backstage" element={<Backstage />} />
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </BrowserRouter>
   );
 }
