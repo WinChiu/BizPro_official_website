@@ -5,7 +5,7 @@ const Alumni = require('../../models/Alumni');
 router.get('/update', async (req, res) => {
   try {
     const query = { number: '1' };
-    const update = { $rename: { avater: 'avatar' } };
+    const update = { $rename: { avatar: 'avatar' } };
     const FieldStatus = Alumni.updateMany(query, update);
     if (FieldStatus) {
       //res.status(200).send({msg: "success!!\n"});

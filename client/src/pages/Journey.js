@@ -452,7 +452,6 @@ function Journey() {
       </article>
     </section>
   );
-
   const Alumni = () => (
     <section className="alumni">
       <img src={dubbleCircle} alt="dubbleCircle" className="dubbleCircle" />
@@ -490,6 +489,41 @@ function Journey() {
       </div>
     </section>
   );
+  const MemberTypeTab = () => (
+    <section className="tab">
+      <div
+        className="tab__item tab__item--junior tab__item--active"
+        onClick={() => {
+          changeToJunior();
+          setTab('junior');
+        }}
+      >
+        <p className="lg">Junior 新進社員</p>
+        <p className="sm">Junior</p>
+      </div>
+      <div
+        className="tab__item tab__item--senior tab__item--default"
+        onClick={() => {
+          changeToSenior();
+          setTab('senior');
+        }}
+      >
+        <p className="lg">Senior 社團幹部</p>
+        <p className="sm">Senior</p>
+      </div>
+      <div
+        className="tab__item tab__item--alumni tab__item--default"
+        onClick={() => {
+          changeToAlumni();
+          setTab('alumni');
+        }}
+      >
+        <p className="lg">Alumni 歷屆成員</p>
+        <p className="sm">Alumni</p>
+      </div>
+    </section>
+  );
+
   const clearClass = () => {
     document
       .getElementsByClassName('tab__item--junior')[0]
@@ -499,6 +533,15 @@ function Journey() {
       .classList.remove('tab__item--default', 'tab__item--active');
     document
       .getElementsByClassName('tab__item--alumni')[0]
+      .classList.remove('tab__item--default', 'tab__item--active');
+    document
+      .getElementsByClassName('tab__item--junior')[1]
+      .classList.remove('tab__item--default', 'tab__item--active');
+    document
+      .getElementsByClassName('tab__item--senior')[1]
+      .classList.remove('tab__item--default', 'tab__item--active');
+    document
+      .getElementsByClassName('tab__item--alumni')[1]
       .classList.remove('tab__item--default', 'tab__item--active');
   };
   const changeToJunior = () => {
@@ -512,11 +555,18 @@ function Journey() {
       .classList.add('tab__item--default');
     document
       .getElementsByClassName('tab__item--alumni')[0]
-      .classList.add('tab__item--default');
+      .classList.add('tab__item--default'); document
+        .getElementsByClassName('tab__item--junior')[1]
+        .classList.add('tab__item--active');
+      document
+        .getElementsByClassName('tab__item--senior')[1]
+        .classList.add('tab__item--default');
+      document
+        .getElementsByClassName('tab__item--alumni')[1]
+        .classList.add('tab__item--default');
   };
   const changeToSenior = () => {
     clearClass();
-    console.log(document.getElementsByClassName('tab__item--junior')[0]);
     document
       .getElementsByClassName('tab__item--junior')[0]
       .classList.add('tab__item--default');
@@ -525,6 +575,15 @@ function Journey() {
       .classList.add('tab__item--active');
     document
       .getElementsByClassName('tab__item--alumni')[0]
+      .classList.add('tab__item--default');
+    document
+      .getElementsByClassName('tab__item--junior')[1]
+      .classList.add('tab__item--default');
+    document
+      .getElementsByClassName('tab__item--senior')[1]
+      .classList.add('tab__item--active');
+    document
+      .getElementsByClassName('tab__item--alumni')[1]
       .classList.add('tab__item--default');
   };
   const changeToAlumni = () => {
@@ -537,6 +596,15 @@ function Journey() {
       .classList.add('tab__item--default');
     document
       .getElementsByClassName('tab__item--alumni')[0]
+      .classList.add('tab__item--active');
+    document
+      .getElementsByClassName('tab__item--junior')[1]
+      .classList.add('tab__item--default');
+    document
+      .getElementsByClassName('tab__item--senior')[1]
+      .classList.add('tab__item--default');
+    document
+      .getElementsByClassName('tab__item--alumni')[1]
       .classList.add('tab__item--active');
   };
 
@@ -596,7 +664,39 @@ function Journey() {
         <Senior />
       ) : (
         <Alumni />
-      )}
+      )}{' '}
+      <section className="tab">
+        <div
+          className="tab__item tab__item--junior tab__item--active"
+          onClick={() => {
+            changeToJunior();
+            setTab('junior');
+          }}
+        >
+          <p className="lg">Junior 新進社員</p>
+          <p className="sm">Junior</p>
+        </div>
+        <div
+          className="tab__item tab__item--senior tab__item--default"
+          onClick={() => {
+            changeToSenior();
+            setTab('senior');
+          }}
+        >
+          <p className="lg">Senior 社團幹部</p>
+          <p className="sm">Senior</p>
+        </div>
+        <div
+          className="tab__item tab__item--alumni tab__item--default"
+          onClick={() => {
+            changeToAlumni();
+            setTab('alumni');
+          }}
+        >
+          <p className="lg">Alumni 歷屆成員</p>
+          <p className="sm">Alumni</p>
+        </div>
+      </section>
     </React.Fragment>
   );
 }

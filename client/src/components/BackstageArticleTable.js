@@ -30,9 +30,8 @@ function BackstageArticleTable() {
       await axios
         .get('http://localhost:5000/api/article/member_talk')
         .then((res) => {
-          console.log(res.data);
+          console.log(res.data[0].content.replace(/\n/g, `\\r\\n`));
           setArticleData(res.data);
-
           setTotalPage(Math.ceil(res.data.length / 10));
         })
         .catch((error) => console.log(error));
@@ -185,6 +184,19 @@ function BackstageArticleTable() {
                   targetArticle.title ? targetArticle.title : ''
                 }`}
               />
+            </div>
+            <div className="container container__row4">
+              <textarea
+                className="contentInput"
+                name="content"
+                id=""
+                cols="30"
+                rows="10"
+                defaultValue={`jkl\r\nkl`}
+                // defaultValue={`  ${
+                //   targetArticle.content ? targetArticle.content : ''
+                // }`}
+              ></textarea>
             </div>
           </Modal.Body>
           <Modal.Footer>
@@ -375,7 +387,7 @@ function BackstageArticleTable() {
   const getTargetAlumni = (e) => {
     let jobTitle,
       title,
-      content = '';
+      content = null;
     let targetArticleData = e.target.parentNode.parentNode.dataset;
     console.log(e.target.parentNode.parentNode.childNodes);
     e.target.parentNode.parentNode.childNodes.forEach((child) => {
@@ -609,7 +621,7 @@ function BackstageArticleTable() {
                   number={article.number}
                   jobTitle={article.jobTitle}
                   title={article.title}
-                  content={article.content}
+                  content={article.content.replace(/\n/g, `\\r\\n`)}
                   avatar={article.avatar}
                 />
               );

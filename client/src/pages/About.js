@@ -80,17 +80,35 @@ function About() {
       }
     }
     let mousePos = new Vec(0, 0);
-    window.addEventListener('mousemove', (e) => {
+    const phoneScreen = window.matchMedia('(max-width: 414px)');
+    const headerAnimate = (e) => {
       mousePos.set(e.pageX, e.pageY);
       let tilt = mousePos.sub(
         new Vec(window.innerWidth / 2, window.innerHeight / 2)
       );
-
       $('.connection__right, .connection__left, .circle4').css(
         'transform',
         `translate(${tilt.x / 35}px,${tilt.y / 35}px)`
       );
+    };
+    const phoneScreenCancelAnimate = (x) => {
+      if (x.matches) {
+        console.log('notMatch');
+        window.removeEventListener('mousemove', (e) => {
+          headerAnimate(e);
+        });
+      } else {
+        console.log('match');
+        window.addEventListener('mousemove', (e) => {
+          headerAnimate(e);
+        });
+      }
+    };
+
+    phoneScreen.addEventListener('change', () => {
+      phoneScreenCancelAnimate(phoneScreen);
     });
+    phoneScreenCancelAnimate(phoneScreen);
     return () => {
       setTimeout(() => {
         $('.about__header--title, .about__header--logo').css({
@@ -102,7 +120,13 @@ function About() {
             transform: 'translateY(0px)',
             opacity: '1',
           });
-        }, 500);
+          setTimeout(() => {
+            $('.about__header--readMore').css({
+              transform: 'translateY(0px)',
+              opacity: '1',
+            });
+          }, 500);
+        }, 400);
       }, 300);
     };
   }, []);
@@ -132,6 +156,8 @@ function About() {
       -240
     ) {
       let timeDelta = 100;
+      $('.about__vision--content').removeClass('hideVision');
+
       $('.iconList__item--1').removeClass('hideIcon');
       setTimeout(() => {
         $('.iconList__item--2').removeClass('hideIcon');
@@ -149,12 +175,80 @@ function About() {
         $('.iconList__item--6').removeClass('hideIcon');
       }, timeDelta * 5);
     }
+    if (
+      document
+        .getElementById('about__achieve--numberList')
+        .getBoundingClientRect().y -
+        window.innerHeight <
+      -180
+    ) {
+      $('.achieveRank1').each(function () {
+        $(this)
+          .prop('Counter', 0)
+          .animate(
+            {
+              Counter: 500,
+            },
+            {
+              duration: 1500,
+              easing: 'swing',
+              step: function (now) {
+                $(this).text(Math.ceil(now));
+              },
+            }
+          );
+      });
+      $('.achieveRank2').each(function () {
+        $(this)
+          .prop('Counter', 0)
+          .animate(
+            {
+              Counter: 100,
+            },
+            {
+              duration: 1000,
+              easing: 'swing',
+              step: function (now) {
+                $(this).text(Math.ceil(now));
+              },
+            }
+          );
+      });
+      $('.achieveRank3').each(function () {
+        $(this)
+          .prop('Counter', 0)
+          .animate(
+            {
+              Counter: 150,
+            },
+            {
+              duration: 1200,
+              easing: 'swing',
+              step: function (now) {
+                $(this).text(Math.ceil(now));
+              },
+            }
+          );
+      });
+      $('.people_symbol').fadeIn(800);
+    }
+    if (
+      document
+        .getElementById('about__achieve--numberList')
+        .getBoundingClientRect().y -
+        window.innerHeight <
+      -200
+    ) {
+      $('.marquee__item').map((i, logo) => {
+        logo.style.transform = 'translate(0px,0px)';
+        logo.style.opacity = '1';
+      });
+    }
   });
 
   return (
     <section className="about">
       <article className="about__header">
-        {/* TODO: 新增動畫效果，讓照片底圖延遲下滑 + 所有 symbol 隨著滑鼠移動做微小偏移  */}
         <img src={connection_symbol} alt="" className="connection__left" />
         <div className="headerImg"></div>
         <img src={connection_symbol} alt="" className="connection__right" />
@@ -172,7 +266,7 @@ function About() {
             });
           }}
         >
-          <h4 className="readMore--word">繼續瀏覽</h4>
+          <h4 className="readMore--word">下滑瀏覽</h4>
           <img
             src={icon_pointDown}
             alt="icon_pointDown"
@@ -246,7 +340,10 @@ function About() {
       </article>
       <article className="about__vision">
         <img src={vision_bg} alt="circle_symbol_beige" className="bgCircle" />
-        <div className="about__vision--content">
+        <div
+          id="about__vision--content"
+          className="about__vision--content hideVision"
+        >
           <div className="content--title sectionTitle sectionTitle--lg">
             <img
               src={title_symbol_left_md}
@@ -260,7 +357,6 @@ function About() {
               className="title--symbolRight"
             />
           </div>
-
           <p className="content--word">
             BizPro
             的願景為培養充滿能量，且富有創造性的業界領袖人才。我們期許成員在
@@ -396,17 +492,26 @@ function About() {
           BizPro
           齊聚正向、積極、創新的夥伴，我們期許夥伴在經歷社團培訓後能為世界上各個領域帶來正向影響。
         </p>
-        <div className="about__achieve--numberList">
+        <div
+          id="about__achieve--numberList"
+          className="about__achieve--numberList"
+        >
           <div className="numberList__item">
-            <h1 className="numberList__item--title">500+</h1>
+            <h1 className="numberList__item--title">
+              <span className="achieveRank1">0</span> +
+            </h1>
             <h4 className="numberList__item--content">小時商業專業能力訓練</h4>
           </div>
           <div className="numberList__item">
-            <h1 className="numberList__item--title">100+</h1>
+            <h1 className="numberList__item--title">
+              <span className="achieveRank2">0</span> +
+            </h1>
             <h4 className="numberList__item--content">位社團 Alumni 成員</h4>
           </div>
           <div className="numberList__item" style={{ margin: '0px' }}>
-            <h1 className="numberList__item--title">150+</h1>
+            <h1 className="numberList__item--title">
+              <span className="achieveRank3">0</span> +
+            </h1>
             <h4 className="numberList__item--content">個企業人脈連結</h4>
           </div>
         </div>

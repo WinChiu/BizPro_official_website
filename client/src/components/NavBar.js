@@ -5,15 +5,12 @@ import icon_hamburger from '../asset/img/icon/icon_hamburger.svg';
 import $ from 'jquery';
 
 function NavBar() {
-  const [dropDownOpen, setdropDownOpen] = useState(false);
+  // const [dropDownOpen, setdropDownOpen] = useState(false);
   console.log(document.URL);
   useEffect(() => {
-    $('.navBar').addClass('navHamburgerWhite');
-    // document.URL TBD
-    if (
-      document.URL === 'http://localhost:3000/' ||
-      document.URL === 'https://bizpro-official-website.herokuapp.com/'
-    ) {
+    if (document.location.href[document.location.href.length - 1] === '/') {
+      $('.navBar').addClass('navHamburgerWhite');
+
       $('.navBar').addClass('navBarPOF');
       $('.navBar').addClass('navBarTransparent');
       $('.navBar').addClass('navHamburgerWhite');
@@ -31,12 +28,16 @@ function NavBar() {
         }
       });
     }
+
     return;
-  }, [dropDownOpen]);
+  }, []);
 
   const NavBarL = () => (
     <div className="navBar navBarL">
-      <img src={logo_red} alt="bizPro Logo" className="navBar__logo" />
+      <a href="/">
+        <img src={logo_red} alt="bizPro Logo" className="navBar__logo" />
+      </a>
+
       <div className="navBar__list">
         <div className="navBar__item navBar__word">
           <a href="/"> 關於 BizPro</a>
@@ -63,18 +64,12 @@ function NavBar() {
         <img
           className="navBar__item navBar__hamburger"
           src={icon_hamburger}
-          alt=""
+          alt="123"
           onClick={() => {
-            if (dropDownOpen === false) {
-              setdropDownOpen(true);
-              setTimeout(() => {
-                $('.navBar__dropdown').css('display', 'flex');
-              }, 0);
+            if ($('.navBar__dropdown').css('display') === 'none') {
+              $('.navBar__dropdown').css('display', 'flex');
             } else {
-              setdropDownOpen(false);
-              setTimeout(() => {
-                $('.navBar__dropdown').css('display', 'none');
-              }, 0);
+              $('.navBar__dropdown').css('display', 'none');
             }
           }}
         />

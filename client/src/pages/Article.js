@@ -8,6 +8,7 @@ import Select from 'react-select';
 import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Pagination from 'react-bootstrap/Pagination';
+import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
 
 function Article() {
   const [articleData, setArticleData] = useState(null);
@@ -22,8 +23,10 @@ function Article() {
     jobTitle: '',
     title: '',
     content: '',
+    avatar: '',
   });
-
+  // TODO: textarea line break (Sounds that i should use "\r\n" to replace "\n" instead of using "<br>"
+  // but it still doesn't work!!!)
   useEffect(() => {
     let field = [];
     let major = [];
@@ -31,8 +34,9 @@ function Article() {
     let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
-        .get('http://localhost:5000/api/article/member_talk')
+        .get('http://172.20.10.3:5000/api/article/member_talk')
         .then((res) => {
+          console.log(res.data);
           setArticleData(res.data);
           setTotalPage(Math.ceil(res.data.length / 6));
           res.data.map((article) => {
@@ -102,7 +106,7 @@ function Article() {
         }}
       >
         <div className="article__item--img">
-          <img src={avatar} alt="avatar" />
+          <img src={props.avatar} alt="avatar" />
         </div>
         <div className="article__item--content">
           <p className="name">{`${props.number} ${props.name}${'：'}${
@@ -128,7 +132,7 @@ function Article() {
       />
       <div className="article__detail--titleGroup">
         <div className="titleGroup__img">
-          <img src={avatar} alt="avatar" />
+          <img src={props.avatar} alt="avatar" />
           <p className="titleGroup__img--subTitle">
             {`${props.number} ${props.name}${'：'}`}
             {/* <br /> */}
@@ -194,6 +198,16 @@ function Article() {
     <React.Fragment>
       <Header title={headerWording.title} content={headerWording.content} />
       <section className="article" id="articleSection">
+        <img
+          src={connectionSymbol}
+          alt="connectionSymbol"
+          className="connectionSymbolTop connectionSymbol"
+        />
+        <img
+          src={connectionSymbol}
+          alt="connectionSymbol"
+          className="connectionSymbolBottom connectionSymbol"
+        />
         <PopUp props={popupContent} />
         <div className="article__searchSection">
           <form
@@ -255,6 +269,7 @@ function Article() {
                 title={`${data.title}`}
                 content={`${data.content}`}
                 tags={data.tags}
+                avatar={data.avatar}
                 id={i}
               />
             );

@@ -552,7 +552,7 @@ function Backstage() {
                     major={member.major}
                     exp={member.exp}
                     tags={member.tags}
-                    avatar={member.avater}
+                    avatar={member.avatar}
                   />
                 );
               } else {

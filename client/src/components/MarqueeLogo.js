@@ -13,7 +13,19 @@ function MarqueeLogo() {
   return (
     <>
       {logoList.map((logo, i) => {
-        return <img src={logo} alt="" className="marquee__item" />;
+        return (
+          <img
+            src={logo}
+            alt=""
+            className="marquee__item"
+            style={{
+              transform: `translate(${100 - Math.random() * 800}px,${
+                100 - Math.random() * 800
+              }px)`,
+              opacity: 0,
+            }}
+          />
+        );
       })}
     </>
   );

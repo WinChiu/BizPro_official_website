@@ -8,6 +8,8 @@ import Select from 'react-select';
 import Pagination from 'react-bootstrap/Pagination';
 import axios from 'axios';
 import numberToRank from '../utility/numberToRank.js';
+import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
+
 /*
 TODO:
 - loading 符號
@@ -81,7 +83,6 @@ function Member() {
     return;
   }, []);
 
-
   const MemberItem = (props) => (
     <div
       className="member__items--item"
@@ -90,6 +91,11 @@ function Member() {
         setTimeout(() => {
           $('.member__popUp').css('display', 'flex');
           $('.member__popupLayer').css('display', 'block');
+          setTimeout(() => {
+            $('.member__popUp').css('opacity', '1');
+            $('.member__popupLayer').css('opacity', '1');
+            console.log('hi');
+          }, 100);
         }, 100);
       }}
     >
@@ -112,6 +118,8 @@ function Member() {
           setTimeout(() => {
             $('.member__popUp').css('display', 'flex');
             $('.member__popupLayer').css('display', 'block');
+            $('.member__popUp').css('opacity', '0');
+            $('.member__popupLayer').css('opacity', '0');
           }, 100);
         }}
       >
@@ -122,7 +130,7 @@ function Member() {
   const PopUp = ({ props }) => (
     <section className="member__popUp">
       <div className="member__popUp--img">
-        <img src={props.avater} alt="" />
+        <img src={props.avatar} alt="" />
       </div>
       <div className="member__popUp--content">
         <h3>
@@ -232,6 +240,16 @@ function Member() {
     <React.Fragment>
       <Header title={headerWording.title} content={headerWording.content} />
       <section className="member" id="memberSection">
+        <img
+          src={connectionSymbol}
+          alt="connectionSymbol"
+          className="connectionSymbolTop connectionSymbol"
+        />
+        <img
+          src={connectionSymbol}
+          alt="connectionSymbol"
+          className="connectionSymbolBottom connectionSymbol"
+        />
         <PopUp props={popupContent} />
         <div
           className="member__popupLayer"
@@ -323,7 +341,7 @@ function Member() {
                   jobTitle={`${member.jobTitle}`}
                   exp={`${member.exp}`}
                   tags={`${member.tags}`}
-                  avatar={`${member.avater}`}
+                  avatar={`${member.avatar}`}
                   id={i}
                 />
               );
