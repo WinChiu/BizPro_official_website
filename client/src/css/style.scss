@@ -74,18 +74,19 @@ body {
   margin: 0;
   box-sizing: border-box;
   padding-top: 60px;
-  background-color: $white_200;
   padding: 0;
   overflow-y: scroll;
 }
-
 * {
   //border: 1px black solid;
   font-family: 'Noto Sans TC', 'roboto';
+  scrollbar-gutter: stable;
 }
 html {
   scroll-behavior: smooth !important;
+  height: fit-content;
 }
+
 p {
   margin: 0;
 }
@@ -95,6 +96,7 @@ p {
 ::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: $white_200;
+  display: none;
 }
 
 ::-webkit-scrollbar {
@@ -124,7 +126,6 @@ html {
   z-index: 10;
   @include shadow_100();
   transition-duration: 0.5s;
-
   &__logo {
     height: 28px;
   }
@@ -208,16 +209,11 @@ html {
     display: none;
   }
 }
-.navBarSForPhoneAnimate {
-}
 
 .footer {
   @include flex(column, center, center);
-
   background-color: $black_secondary;
   color: $beige;
-  // position: absolute;
-  // bottom: 0;
   width: 100%;
   padding: 32px 24px 20px 24px;
   box-sizing: border-box;
@@ -280,6 +276,8 @@ html {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+
+  position: relative;
   @include flex(row, space-between, flex-end);
   &__content {
     .content__title {
@@ -687,6 +685,27 @@ html {
       }
     }
   }
+  // .bottomNavGroup {
+  //   width: 100%;
+  //   margin-top: 40px;
+  //   @include flex(row, center, center);
+  //   .nextButton,
+  //   .prevButton {
+  //     h4 {
+  //       @include h4();
+  //       color: $grey;
+  //     }
+  //     &:hover {
+  //       h4 {
+  //         color: $red_primary;
+  //       }
+  //       cursor: pointer;
+  //     }
+  //   }
+  //   .prevButton {
+  //     margin-right: 44px;
+  //   }
+  // }
   @media screen and (max-width: 1200px) {
     .courseStructure {
       padding: 128px 64px 64px 64px;
@@ -1080,6 +1099,14 @@ html {
     @include flex(column, center, flex-end);
     padding: 64px 64px 64px 64px;
     flex: 1;
+    .btn-check:checked + .btn,
+    .btn.active,
+    .btn.show,
+    .btn:first-child:active,
+    :not(.btn-check) + .btn:active {
+      background-color: $grey;
+      border-color: $grey;
+    }
     .btn-primary {
       background-color: $black_secondary;
       border: none;
@@ -1456,7 +1483,7 @@ html {
   &__vision {
     z-index: 2;
     @include flex(row, center, center);
-    padding: 200px 200px 128px 200px;
+    padding: 160px 200px 128px 200px;
     position: relative;
     overflow: visible;
     background-color: $white_200;
@@ -1464,7 +1491,7 @@ html {
     .bgCircle {
       position: absolute;
       left: -30%;
-      top: -10%;
+      top: -16%;
       z-index: -1;
       width: 80%;
       opacity: 0.8;
@@ -1594,6 +1621,14 @@ html {
           width: 50%;
           box-sizing: border-box;
           padding: 96px 80px 96px 80px;
+          .btn-check:checked + .btn,
+          .btn.active,
+          .btn.show,
+          .btn:first-child:active,
+          :not(.btn-check) + .btn:active {
+            background-color: $grey;
+            border-color: $grey;
+          }
           .btn-primary {
             background-color: $black_secondary;
             border: none;
@@ -2006,27 +2041,36 @@ html {
   @include flex(column, flex-start, center);
   padding: 120px 80px 120px 128px;
   background-color: $white_200;
-  z-index: 0;
   overflow: hidden;
   position: relative;
   .connectionSymbol {
     position: absolute;
-    z-index: -1;
+    z-index: 0;
     opacity: 0.8;
   }
   .connectionSymbolTop {
     transform: scale(1.5);
     left: -60px;
     top: 0;
+    z-index: 0;
   }
   .connectionSymbolBottom {
     transform: scale(1.5) rotate(180deg);
     right: 0;
     bottom: 0;
+    z-index: 0;
   }
   &__searchSection {
     width: 100%;
     margin-bottom: 64px;
+    .btn-check:checked + .btn,
+    .btn.active,
+    .btn.show,
+    .btn:first-child:active,
+    :not(.btn-check) + .btn:active {
+      background-color: $grey;
+      border-color: $grey;
+    }
     .btn-primary {
       background-color: $black_secondary;
       border: none;
@@ -2149,6 +2193,7 @@ html {
     width: 100%;
     height: 100%;
     top: 0;
+    left: 0;
     z-index: 20;
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
@@ -2219,8 +2264,12 @@ html {
       a {
         color: $black_text;
         &:hover {
-          background-color: rgba(174, 0, 35, 0);
-          //color: white;
+          background-color: rgba(174, 0, 35, 0.1);
+          border-color: white;
+          color: $black_text;
+        }
+        &:active {
+          background-color: none;
         }
       }
     }
@@ -2228,9 +2277,11 @@ html {
       .page-link {
         background-color: $red_primary;
         border-color: $red_primary;
+        color: white;
       }
     }
   }
+
   @media screen and (max-width: 1366px) {
     padding: 120px 120px 120px 120px;
   }
@@ -2376,7 +2427,6 @@ html {
   padding: 120px 128px 120px 128px;
   position: relative;
   background-color: $white_200;
-  z-index: 0;
   overflow: hidden;
   .connectionSymbol {
     position: absolute;
@@ -2387,11 +2437,13 @@ html {
     transform: scale(1.5);
     left: -60px;
     top: 0;
+    z-index: 0;
   }
   .connectionSymbolBottom {
     transform: scale(1.5) rotate(180deg);
     right: 0;
     bottom: 0;
+    z-index: 0;
   }
   &__popUp {
     @include flex(row, center, center);
@@ -2400,10 +2452,8 @@ html {
     box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
     display: none;
     opacity: 0;
-    transition-duration: 0.5s;
-
+    //transition-duration: 0.5s;
     -webkit-filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
-
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
     height: -webkit-fit-content;
     height: -moz-fit-content;
@@ -2476,22 +2526,30 @@ html {
   &__popupLayer {
     display: none;
     opacity: 0;
-    transition-duration: 0.5s;
-
+    //transition-duration: 0.5s;
     background-color: rgba(0, 0, 0, 0.7);
     height: 100%;
+    width: 100%;
     position: fixed;
     top: 0;
-    width: 100%;
+    left: 0;
     z-index: 20;
   }
   &__searchSection {
+    z-index: 1;
     @include flex(column, center, flex-start);
     width: 100%;
-    //max-width: 1110px;
     margin-bottom: 64px;
     form {
       width: 100%;
+    }
+    .btn-check:checked + .btn,
+    .btn.active,
+    .btn.show,
+    .btn:first-child:active,
+    :not(.btn-check) + .btn:active {
+      background-color: $grey;
+      border-color: $grey;
     }
     .btn-primary {
       background-color: $black_secondary;
@@ -2539,7 +2597,7 @@ html {
     }
     &--filter {
       @include flex(row, flex-start, center);
-      width: 80%;
+      width: 100%;
       margin-bottom: 16px;
       label {
         @include h4();
@@ -2569,7 +2627,6 @@ html {
             }
             &--selector {
               &__control {
-                //min-width: 240px;
                 width: 100%;
                 padding: 2px 6px 2px 6px;
               }
@@ -2593,6 +2650,7 @@ html {
     }
   }
   &__items {
+    z-index: 1;
     display: grid;
     grid-template-columns: repeat(auto-fill, 180px);
     grid-template-rows: repeat(auto-fill, auto);
@@ -2643,7 +2701,14 @@ html {
           }
         }
       }
-
+      .btn-check:checked + .btn,
+      .btn.active,
+      .btn.show,
+      .btn:first-child:active,
+      :not(.btn-check) + .btn:active {
+        background-color: $grey;
+        border-color: $grey;
+      }
       .btn-primary {
         background-color: $black_secondary;
         border: none;
@@ -2653,6 +2718,9 @@ html {
         padding: 8px 16px 8px 16px;
         width: 100%;
         display: none;
+        &:active {
+          background-color: none;
+        }
       }
       .btn-primary:hover,
       .btn-primary:focus,
@@ -2674,8 +2742,12 @@ html {
       a {
         color: $black_text;
         &:hover {
-          background-color: rgba(174, 0, 35, 0);
-          //color: white;
+          background-color: rgba(174, 0, 35, 0.1);
+          border-color: white;
+          color: $black_text;
+        }
+        &:active {
+          background-color: none;
         }
       }
     }
@@ -2683,6 +2755,7 @@ html {
       .page-link {
         background-color: $red_primary;
         border-color: $red_primary;
+        color: white;
       }
     }
   }

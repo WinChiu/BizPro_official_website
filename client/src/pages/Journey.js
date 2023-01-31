@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import briefIntro_people from '../asset/img/briefIntro_people.webp';
 import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
@@ -255,7 +255,7 @@ function Journey() {
             className="title--symbolRight"
           />
         </div>
-        <div className="project__jp" style={{ marginBottom: '128px' }}>
+        <div className="project__jp" style={{ marginBottom: '80px' }}>
           <div className="project__jp--title">
             <h2 className="jp__title--title">Junior Project</h2>
             <p className="jp__title--content">
@@ -335,6 +335,14 @@ function Journey() {
             </div>
           </div>
         </div>
+        {/* <div className="bottomNavGroup">
+          <div className="prevButton">
+            <h4>{'<'} 查看 Junior</h4>
+          </div>
+          <div className="nextButton">
+            <h4>查看 Senior {'>'} </h4>
+          </div>
+        </div> */}
       </article>
     </section>
   );
@@ -489,40 +497,6 @@ function Journey() {
       </div>
     </section>
   );
-  const MemberTypeTab = () => (
-    <section className="tab">
-      <div
-        className="tab__item tab__item--junior tab__item--active"
-        onClick={() => {
-          changeToJunior();
-          setTab('junior');
-        }}
-      >
-        <p className="lg">Junior 新進社員</p>
-        <p className="sm">Junior</p>
-      </div>
-      <div
-        className="tab__item tab__item--senior tab__item--default"
-        onClick={() => {
-          changeToSenior();
-          setTab('senior');
-        }}
-      >
-        <p className="lg">Senior 社團幹部</p>
-        <p className="sm">Senior</p>
-      </div>
-      <div
-        className="tab__item tab__item--alumni tab__item--default"
-        onClick={() => {
-          changeToAlumni();
-          setTab('alumni');
-        }}
-      >
-        <p className="lg">Alumni 歷屆成員</p>
-        <p className="sm">Alumni</p>
-      </div>
-    </section>
-  );
 
   const clearClass = () => {
     document
@@ -555,15 +529,16 @@ function Journey() {
       .classList.add('tab__item--default');
     document
       .getElementsByClassName('tab__item--alumni')[0]
-      .classList.add('tab__item--default'); document
-        .getElementsByClassName('tab__item--junior')[1]
-        .classList.add('tab__item--active');
-      document
-        .getElementsByClassName('tab__item--senior')[1]
-        .classList.add('tab__item--default');
-      document
-        .getElementsByClassName('tab__item--alumni')[1]
-        .classList.add('tab__item--default');
+      .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--junior')[1]
+    //   .classList.add('tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--senior')[1]
+    //   .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--alumni')[1]
+    //   .classList.add('tab__item--default');
   };
   const changeToSenior = () => {
     clearClass();
@@ -576,15 +551,15 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--alumni')[0]
       .classList.add('tab__item--default');
-    document
-      .getElementsByClassName('tab__item--junior')[1]
-      .classList.add('tab__item--default');
-    document
-      .getElementsByClassName('tab__item--senior')[1]
-      .classList.add('tab__item--active');
-    document
-      .getElementsByClassName('tab__item--alumni')[1]
-      .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--junior')[1]
+    //   .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--senior')[1]
+    //   .classList.add('tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--alumni')[1]
+    //   .classList.add('tab__item--default');
   };
   const changeToAlumni = () => {
     clearClass();
@@ -597,15 +572,15 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--alumni')[0]
       .classList.add('tab__item--active');
-    document
-      .getElementsByClassName('tab__item--junior')[1]
-      .classList.add('tab__item--default');
-    document
-      .getElementsByClassName('tab__item--senior')[1]
-      .classList.add('tab__item--default');
-    document
-      .getElementsByClassName('tab__item--alumni')[1]
-      .classList.add('tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--junior')[1]
+    //   .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--senior')[1]
+    //   .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--alumni')[1]
+    //   .classList.add('tab__item--active');
   };
 
   return (
@@ -664,39 +639,7 @@ function Journey() {
         <Senior />
       ) : (
         <Alumni />
-      )}{' '}
-      <section className="tab">
-        <div
-          className="tab__item tab__item--junior tab__item--active"
-          onClick={() => {
-            changeToJunior();
-            setTab('junior');
-          }}
-        >
-          <p className="lg">Junior 新進社員</p>
-          <p className="sm">Junior</p>
-        </div>
-        <div
-          className="tab__item tab__item--senior tab__item--default"
-          onClick={() => {
-            changeToSenior();
-            setTab('senior');
-          }}
-        >
-          <p className="lg">Senior 社團幹部</p>
-          <p className="sm">Senior</p>
-        </div>
-        <div
-          className="tab__item tab__item--alumni tab__item--default"
-          onClick={() => {
-            changeToAlumni();
-            setTab('alumni');
-          }}
-        >
-          <p className="lg">Alumni 歷屆成員</p>
-          <p className="sm">Alumni</p>
-        </div>
-      </section>
+      )}
     </React.Fragment>
   );
 }

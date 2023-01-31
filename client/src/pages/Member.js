@@ -1,15 +1,15 @@
 import $ from 'jquery';
 import React, { useState, useEffect } from 'react';
-import avatar from '../asset/img/avatar_sample.webp';
 import Header from '../components/Header';
 import localDb from '../config/localDb.json';
 import Button from 'react-bootstrap/Button';
 import Select from 'react-select';
-import Pagination from 'react-bootstrap/Pagination';
 import axios from 'axios';
 import numberToRank from '../utility/numberToRank.js';
 import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
+import ReactPaginate from 'react-paginate';
 
+// import memberColumnCount from '../utility/memberColumnCount.js';
 /*
 TODO:
 - loading 符號
@@ -33,7 +33,8 @@ function Member() {
   });
   const [totalPage, setTotalPage] = useState(0);
   const [nowPage, setNowPage] = useState(1);
-
+  const [onePageMemberCount, setOnePageMemberCount] = useState(1);
+  const [memberColumnCount, setMemberColumnCount] = useState(1);
   const headerWording = localDb.headerWording.member;
   const rawMemberData = localDb.memberTemp;
 
@@ -48,8 +49,43 @@ function Member() {
       await axios
         .get('http://localhost:5000/api/alumni/members')
         .then((res) => {
-          setMemberData(res.data);
-          setTotalPage(Math.ceil(res.data.length / 18));
+          const gridColumnCount = window
+            .getComputedStyle(
+              document.getElementsByClassName('member__items')[0]
+            )
+            .getPropertyValue('grid-template-columns')
+            .split(' ').length;
+
+          // set onePageMemberCount
+          let onePageMemberCountTemp = 1;
+          if (gridColumnCount === 1) {
+            onePageMemberCountTemp = 10;
+            setOnePageMemberCount(10);
+          } else if (gridColumnCount === 2) {
+            onePageMemberCountTemp = 12;
+            setOnePageMemberCount(12);
+          } else if (gridColumnCount === 3) {
+            onePageMemberCountTemp = 18;
+            setOnePageMemberCount(18);
+          } else if (gridColumnCount === 4) {
+            onePageMemberCountTemp = 20;
+            setOnePageMemberCount(20);
+          } else if (gridColumnCount === 5) {
+            onePageMemberCountTemp = 20;
+            setOnePageMemberCount(20);
+          } else {
+            onePageMemberCountTemp = 20;
+            setOnePageMemberCount(20);
+          }
+
+          // if (gridColumnCount === 5) {
+          //   onePageMemberCountTemp = 15;
+          //   setOnePageMemberCount(15);
+          // } else {
+          //   onePageMemberCountTemp = 1;
+          //   setOnePageMemberCount(1);
+          // }
+
           // Set options
           res.data.map((member) => {
             if (!grade.includes(member.number)) {
@@ -71,8 +107,14 @@ function Member() {
             fieldOptionsTemp.push({ value: item, label: item });
           });
           major.map((item) => {
-            majorOptionsTemp.push({ value: item, label: item });
+            majorOptionsTemp.push({
+              value: item.replace('臺灣大學', ''),
+              label: item.replace('臺灣大學', ''),
+            });
           });
+
+          setMemberData(res.data);
+          setTotalPage(Math.ceil(res.data.length / onePageMemberCountTemp));
           setFieldOptions(fieldOptionsTemp);
           setGradeOptions(gradeOptionsTemp);
           setMajorOptions(majorOptionsTemp);
@@ -80,8 +122,50 @@ function Member() {
         .catch((error) => console.log(error));
     };
     fetchData();
+    window.addEventListener('resize', () => {
+      let column = window
+        .getComputedStyle(document.getElementsByClassName('member__items')[0])
+        .getPropertyValue('grid-template-columns')
+        .split(' ').length;
+      if (column !== memberColumnCount) {
+        setMemberColumnCount(column);
+      }
+    });
     return;
   }, []);
+
+  useEffect(() => {
+    const gridColumnCount = window
+      .getComputedStyle(document.getElementsByClassName('member__items')[0])
+      .getPropertyValue('grid-template-columns')
+      .split(' ').length;
+
+    // set onePageMemberCount
+    let onePageMemberCountTemp = 1;
+    if (gridColumnCount === 1) {
+      onePageMemberCountTemp = 10;
+      setOnePageMemberCount(10);
+    } else if (gridColumnCount === 2) {
+      onePageMemberCountTemp = 12;
+      setOnePageMemberCount(12);
+    } else if (gridColumnCount === 3) {
+      onePageMemberCountTemp = 18;
+      setOnePageMemberCount(18);
+    } else if (gridColumnCount === 4) {
+      onePageMemberCountTemp = 20;
+      setOnePageMemberCount(20);
+    } else if (gridColumnCount === 5) {
+      onePageMemberCountTemp = 20;
+      setOnePageMemberCount(20);
+    } else {
+      onePageMemberCountTemp = 20;
+      setOnePageMemberCount(20);
+    }
+    if (memberData)
+      setTotalPage(Math.ceil(memberData.length / onePageMemberCountTemp));
+
+    return;
+  }, [memberColumnCount]);
 
   const MemberItem = (props) => (
     <div
@@ -91,11 +175,10 @@ function Member() {
         setTimeout(() => {
           $('.member__popUp').css('display', 'flex');
           $('.member__popupLayer').css('display', 'block');
-          setTimeout(() => {
-            $('.member__popUp').css('opacity', '1');
-            $('.member__popupLayer').css('opacity', '1');
-            console.log('hi');
-          }, 100);
+          $('body').css('overflow-y', 'hidden');
+          $('#memberSection').css('z-index', '');
+          $('.member__popUp').css('opacity', '1');
+          $('.member__popupLayer').css('opacity', '1');
         }, 100);
       }}
     >
@@ -180,52 +263,6 @@ function Member() {
         break;
     }
   };
-  const PaginationComponent = () => (
-    <Pagination>
-      <Pagination.First
-        onClick={() => {
-          switchPage('first');
-        }}
-      />
-      <Pagination.Prev
-        onClick={() => {
-          switchPage('prev');
-        }}
-      />
-      {Array.from(Array(totalPage), (e, i) => {
-        return (
-          <Pagination.Item
-            key={i}
-            onClick={() => {
-              switchPage('certainPage', i + 1);
-            }}
-            active={nowPage === i + 1 ? true : false}
-          >
-            {i + 1}
-          </Pagination.Item>
-        );
-      })}
-      {/* <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Ellipsis />
-
-      <Pagination.Item>{11}</Pagination.Item>
-      <Pagination.Item active>{12}</Pagination.Item>
-      <Pagination.Item>{13}</Pagination.Item>
-
-      <Pagination.Ellipsis />
-      <Pagination.Item>{20}</Pagination.Item> */}
-      <Pagination.Next
-        onClick={() => {
-          switchPage('next');
-        }}
-      />
-      <Pagination.Last
-        onClick={() => {
-          switchPage('last');
-        }}
-      />
-    </Pagination>
-  );
   const startFilter = (field) => {
     if (field[0]) {
       let filteredMemberData = rawMemberData.filter((member) =>
@@ -256,6 +293,7 @@ function Member() {
           onClick={() => {
             $('.member__popUp').css('display', 'none');
             $('.member__popupLayer').css('display', 'none');
+            $('body').css('overflow-y', 'scroll');
           }}
         />
         <div className="member__searchSection">
@@ -275,7 +313,7 @@ function Member() {
                 <div className="filter__major">
                   <Select
                     classNamePrefix="filter__field--selector"
-                    placeholder="選擇科系（限臺大科系）"
+                    placeholder="選擇科系（限臺大）"
                     isMulti
                     options={majorOptions}
                     onChange={(choice) => {
@@ -333,7 +371,10 @@ function Member() {
         </div>
         <div className="member__items">
           {memberData?.map((member, i) => {
-            if ((nowPage - 1) * 18 <= i && i < nowPage * 18) {
+            if (
+              (nowPage - 1) * onePageMemberCount <= i &&
+              i < nowPage * onePageMemberCount
+            ) {
               return (
                 <MemberItem
                   name={`${member.name}`}
@@ -350,7 +391,28 @@ function Member() {
             }
           })}
         </div>
-        <PaginationComponent />
+        <ReactPaginate
+          nextLabel="›"
+          onPageChange={(e) => {
+            switchPage('certainPage', e.selected + 1);
+          }}
+          pageRangeDisplayed={5}
+          marginPagesDisplayed={1}
+          pageCount={totalPage}
+          previousLabel="‹"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={null}
+        />
       </section>
     </React.Fragment>
   );

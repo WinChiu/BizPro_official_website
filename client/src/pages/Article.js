@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import localDb from '../config/localDb.json';
 import Header from '../components/Header';
-import avatar from '../asset/img/avatar_sample.webp';
 import doubleCircleSymbol from '../asset/img/doubleCircle_symbol_white300.svg';
 import $ from 'jquery';
 import Select from 'react-select';
@@ -9,7 +8,7 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 import Pagination from 'react-bootstrap/Pagination';
 import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
-
+import ReactPaginate from 'react-paginate';
 function Article() {
   const [articleData, setArticleData] = useState(null);
   const [fieldOptions, setFieldOptions] = useState([]);
@@ -25,7 +24,7 @@ function Article() {
     content: '',
     avatar: '',
   });
-  // TODO: textarea line break (Sounds that i should use "\r\n" to replace "\n" instead of using "<br>"
+  // TODO: textarea line break (Someone on stack-overflow said that i should use "\r\n" to replace "\n" instead of using "<br>"
   // but it still doesn't work!!!)
   useEffect(() => {
     let field = [];
@@ -34,7 +33,7 @@ function Article() {
     let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
-        .get('http://172.20.10.3:5000/api/article/member_talk')
+        .get('http://localhost:5000/api/article/member_talk')
         .then((res) => {
           console.log(res.data);
           setArticleData(res.data);
@@ -148,52 +147,6 @@ function Article() {
       </p>
     </section>
   );
-  const PaginationComponent = () => (
-    <Pagination>
-      <Pagination.First
-        onClick={() => {
-          switchPage('first');
-        }}
-      />
-      <Pagination.Prev
-        onClick={() => {
-          switchPage('prev');
-        }}
-      />
-      {Array.from(Array(totalPage), (e, i) => {
-        return (
-          <Pagination.Item
-            key={i}
-            onClick={() => {
-              switchPage('certainPage', i + 1);
-            }}
-            active={nowPage === i + 1 ? true : false}
-          >
-            {i + 1}
-          </Pagination.Item>
-        );
-      })}
-      {/* <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Ellipsis />
-
-      <Pagination.Item>{11}</Pagination.Item>
-      <Pagination.Item active>{12}</Pagination.Item>
-      <Pagination.Item>{13}</Pagination.Item>
-
-      <Pagination.Ellipsis />
-      <Pagination.Item>{20}</Pagination.Item> */}
-      <Pagination.Next
-        onClick={() => {
-          switchPage('next');
-        }}
-      />
-      <Pagination.Last
-        onClick={() => {
-          switchPage('last');
-        }}
-      />
-    </Pagination>
-  );
   return (
     <React.Fragment>
       <Header title={headerWording.title} content={headerWording.content} />
@@ -277,7 +230,28 @@ function Article() {
             return;
           }
         })}
-        <PaginationComponent />
+        <ReactPaginate
+          nextLabel="›"
+          onPageChange={(e) => {
+            switchPage('certainPage', e.selected + 1);
+          }}
+          pageRangeDisplayed={5}
+          marginPagesDisplayed={1}
+          pageCount={totalPage}
+          previousLabel="‹"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={null}
+        />
       </section>
     </React.Fragment>
   );
