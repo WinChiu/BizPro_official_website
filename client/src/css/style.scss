@@ -7,8 +7,18 @@ $beige: #e8e4da;
 $white_100: #ffffff;
 $white_200: #f6f6f6;
 $white_300: #ededed;
-$randomNum: random(100);
-
+@font-face {
+  font-family: 'PingFangTC-Regular';
+  src: url('../asset/font/PingFang-TC-Regular.otf');
+}
+@font-face {
+  font-family: 'PingFangTC-Medium';
+  src: url('../asset/font/PingFang-TC-Medium.otf');
+}
+@font-face {
+  font-family: 'PingFangTC-Semibold';
+  src: url('../asset/font/PingFang-TC-Semibold.otf');
+}
 @mixin bizProGradient {
   background: linear-gradient(44.43deg, #bc1a27 1.74%, #e7ab7c 100%);
 }
@@ -25,42 +35,47 @@ $randomNum: random(100);
     0px 1px 3px rgba(0, 0, 0, 0.3);
 }
 @mixin h1 {
+  font-family: 'PingFangTC-Semibold';
   font-size: 48px;
   line-height: 150%;
   margin: 0;
 }
 @mixin h2 {
+  font-family: 'PingFangTC-Semibold';
   font-size: 34px;
   line-height: 120%;
   margin: 0;
-  font-weight: bold;
   @media screen and (max-width: 768px) {
     font-size: 30px;
   }
 }
 @mixin h3 {
+  font-family: 'PingFangTC-Semibold';
   font-size: 24px;
   line-height: 150%;
   margin: 0;
 }
 @mixin h4 {
+  font-family: 'PingFangTC-Semibold';
   font-size: 20px;
   line-height: 150%;
   margin: 0;
-  font-weight: bold;
 }
 
 @mixin body1 {
+  font-family: 'PingFangTC-Regular';
   font-size: 16px;
   line-height: 150%;
   margin: 0;
   color: $black_text;
 }
 @mixin body2 {
+  font-family: 'PingFangTC-Regular';
   font-size: 14px;
   line-height: 150%;
 }
 @mixin caption {
+  font-family: 'PingFangTC-Regular';
   font-size: 12px;
 }
 @mixin flex($d, $jc, $ai) {
@@ -79,7 +94,7 @@ body {
 }
 * {
   //border: 1px black solid;
-  font-family: 'Noto Sans TC', 'roboto';
+  font-family: 'PingFangTC-Regular', 'Noto Sans TC', 'roboto';
   scrollbar-gutter: stable;
 }
 html {
@@ -137,9 +152,10 @@ html {
     cursor: pointer;
     a {
       @include h4();
+      font-family: 'PingFangTC-Regular';
       font-size: 18px;
       margin-left: 40px;
-      font-weight: 500;
+      font-weight: normal;
     }
   }
   &__item :hover {
@@ -168,8 +184,9 @@ html {
       cursor: pointer;
       a {
         @include h4();
+        font-family: 'PingFangTC-Regular';
         font-size: 18px;
-        font-weight: 500;
+        font-weight: normal;
       }
     }
   }
@@ -282,7 +299,6 @@ html {
   &__content {
     .content__title {
       @include h2();
-      font-weight: bold;
       margin-bottom: 12px;
     }
     .content__word {
@@ -295,7 +311,7 @@ html {
     position: absolute;
     opacity: 0.3;
     left: -200px;
-    top: -240px;
+    top: -280px;
     width: 520px;
   }
   &__logo {
@@ -305,14 +321,14 @@ html {
   @media screen and (max-width: 1200px) {
     padding: 0 64px 32px 64px;
     &__stamp--rounds {
-      left: -240px;
-      top: -240px;
+      left: -260px;
+      top: -300px;
     }
   }
   @media screen and (max-width: 900px) {
     &__stamp--rounds {
-      left: -240px;
-      top: -240px;
+      left: -280px;
+      top: -300px;
     }
   }
   @media screen and (max-width: 768px) {
@@ -330,8 +346,10 @@ html {
   @media screen and (max-width: 414px) {
     padding: 0 24px 32px 24px;
     &__stamp--rounds {
-      left: -300px;
-      top: -220px;
+      left: -280px;
+      top: -240px;
+      opacity: 0.2;
+      transform: scale(0.8);
     }
   }
 }
@@ -452,7 +470,7 @@ html {
       opacity: 0.8;
     }
     &__intro {
-      margin-bottom: 140px;
+      margin-bottom: 120px;
       z-index: 0;
       @include flex(row, center, center);
       &--content {
@@ -461,6 +479,7 @@ html {
         @include flex(column, center, center);
         .sectionTitle {
           margin-bottom: 40px;
+          height: fit-content;
           @include flex(row, center, center);
           &--lg {
             display: flex;
@@ -509,6 +528,7 @@ html {
           @include h3();
           font-weight: bold;
           margin-bottom: 16px;
+          text-align: center;
         }
         .container__content {
           @include flex(column, space-between, center);
@@ -516,6 +536,7 @@ html {
           height: 380px;
           &--words {
             @include body1();
+            text-align: center;
           }
           &--iconSet {
             display: grid;
@@ -585,7 +606,8 @@ html {
       @include flex(row, center, center);
       &--img {
         flex: 1;
-        .hbsCaseImg {
+        .hbsCaseImg,
+        .leanCaseImg {
           width: 100%;
         }
       }
@@ -851,7 +873,7 @@ html {
         top: -120px;
       }
       .sectionTitle {
-        margin-bottom: 64px;
+        margin-bottom: 40px;
       }
     }
     .caseStudy {
@@ -863,6 +885,7 @@ html {
         }
         &--md {
           display: flex;
+          margin-bottom: 40px;
         }
       }
     }
@@ -898,14 +921,17 @@ html {
   }
   @media screen and (max-width: 414px) {
     .courseStructure {
-      padding: 128px 24px 64px 24px;
+      padding: 64px 24px 64px 24px;
+      &__intro {
+        margin-bottom: 80px;
+      }
       .circle4 {
         left: -280px;
         top: -160px;
       }
     }
     .caseStudy {
-      padding: 128px 24px 64px 24px;
+      padding: 64px 24px 64px 24px;
       .dotSymbolImg {
         right: -50%;
         bottom: 40%;
@@ -913,7 +939,7 @@ html {
       }
     }
     .project {
-      padding: 128px 24px 64px 24px;
+      padding: 64px 24px 64px 24px;
     }
   }
 }
@@ -1010,13 +1036,15 @@ html {
     }
   }
   @media screen and (max-width: 1200px) {
-    padding: 120px 64px 120px 64px;
+    padding: 128px 64px 120px 64px;
   }
   @media screen and (max-width: 900px) {
+    padding: 128px 64px 120px 64px;
     &__course {
-      @include flex(column, center, center);
+      @include flex(column-reverse, center, center);
       &--content {
         margin-left: 0px;
+        margin-bottom: 48px;
         .contentContainer {
           @include flex(row, center, flex-start);
           p {
@@ -1033,7 +1061,7 @@ html {
       margin-bottom: 128px;
     }
     &__project {
-      @include flex(column-reverse, center, center);
+      @include flex(column, center, center);
       &--content {
         margin-right: 0px;
       }
@@ -1046,7 +1074,7 @@ html {
     }
   }
   @media screen and (max-width: 768px) {
-    padding: 0px 24px 120px 24px;
+    padding: 64px 24px 120px 24px;
     .dot_symbol {
       right: -360px;
       top: -300px;
@@ -1057,6 +1085,7 @@ html {
       left: -360px;
     }
     &__course {
+      margin-bottom: 44px;
       &--content {
         .contentContainer {
           @include flex(column, center, flex-start);
@@ -1067,7 +1096,7 @@ html {
     &__project {
       &--img {
         img {
-          width: 100vw;
+          //width: 100vw;
         }
       }
     }
@@ -1345,7 +1374,6 @@ html {
     &--title {
       @include h1();
       font-size: 56px;
-      font-weight: bold;
       color: $white_100;
       margin: 8px 0 8px 0;
       transform: translateY(20px);
@@ -1442,12 +1470,12 @@ html {
           &--paragraph {
             @include body1();
             margin-bottom: 32px;
-            padding-right: 48px;
+            padding-right: 56px;
           }
           &--quote {
             @include h4();
             color: $red_primary;
-            padding-right: 48px;
+            padding-right: 56px;
           }
         }
         &__video {
@@ -1574,10 +1602,10 @@ html {
       text-align: center;
       font-weight: normal;
     }
+
     &--numberList {
       @include flex(row, space-around, center);
       width: 70%;
-
       .numberList {
         &__item {
           @include flex(column, flex-start, center);
@@ -1679,8 +1707,8 @@ html {
     .double_circle {
       position: absolute;
       z-index: -1;
-      right: -150px;
-      bottom: -250px;
+      right: -180px;
+      bottom: -300px;
       width: 500px;
       opacity: 0.8;
     }
@@ -1787,6 +1815,7 @@ html {
         }
         &--md {
           display: flex;
+          margin-bottom: 40px;
         }
       }
     }
@@ -1853,6 +1882,7 @@ html {
         }
         &--md {
           display: flex;
+          margin-bottom: 40px;
         }
       }
       &--content {
@@ -1871,9 +1901,10 @@ html {
       }
     }
     &__vision {
-      padding: 64px 24px 128px 24px;
+      padding: 64px 24px 64px 24px;
       &--content {
         padding: 64px 28px 64px 28px;
+        margin-bottom: 64px;
       }
       &--iconList {
         .iconList__item {
@@ -1891,7 +1922,7 @@ html {
           @include flex(column, center, center);
           &--word {
             width: 100%;
-            padding: 48px 24px 96px 24px;
+            padding: 56px 24px 56px 24px;
           }
           &--img {
             width: 100%;
@@ -1909,7 +1940,7 @@ html {
       .connection {
         &__left {
           transform: scaleY(-1) scale(0.5) rotate(15deg);
-          left: -360px;
+          left: -420px;
           bottom: -223px;
         }
         &__right {
@@ -1923,7 +1954,7 @@ html {
       .connection {
         &__left {
           transform: scaleY(-1) scale(0.5) rotate(15deg);
-          left: -360px;
+          left: -420px;
           top: -268.5px;
         }
         &__right {
@@ -1958,6 +1989,25 @@ html {
         right: -360px;
       }
     }
+
+    &__header {
+      .connection {
+        &__left {
+          transform: scaleY(-1) scale(0.5) rotate(15deg);
+          left: -480px;
+          bottom: -223px;
+        }
+      }
+    }
+    &__intro {
+      .connection {
+        &__left {
+          transform: scaleY(-1) scale(0.5) rotate(15deg);
+          left: -480px;
+          top: -268.5px;
+        }
+      }
+    }
   }
   @media screen and (max-width: 414px) {
     .marquee {
@@ -1981,6 +2031,10 @@ html {
             height: 280px;
           }
         }
+      }
+      .connection_symbol {
+        left: -60%;
+        top: -20%;
       }
     }
     &__vision {
@@ -2132,7 +2186,8 @@ html {
     }
   }
   &__detail {
-    padding: 40px 48px 32px 48px;
+    box-sizing: border-box;
+    padding: 32px 32px 32px 32px;
     position: fixed;
     z-index: 21;
     width: 50%;
@@ -2142,7 +2197,7 @@ html {
     border-radius: 24px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50.5%, -50%);
     box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
     -webkit-filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
@@ -2154,17 +2209,18 @@ html {
     overflow: hidden;
     .doubleCircleSymbol {
       position: absolute;
-      left: -50%;
-      bottom: -90%;
+      left: -360px;
+      bottom: -500px;
       z-index: -1;
       transform: scale(-0.5, 0.5);
+      display: none;
     }
     &--titleGroup {
       @include flex(column, center, flex-start);
       margin-bottom: 16px;
       .titleGroup__img {
         @include flex(row, center, center);
-        margin-bottom: 24px;
+        margin-bottom: 4px;
         img {
           width: 32px;
           margin-right: 16px;
@@ -2186,6 +2242,21 @@ html {
       overflow-y: scroll;
       white-space: pre-wrap;
       height: 100%;
+      padding-right: 4px;
+      box-sizing: border-box;
+      position: relative;
+      .gradientBox {
+        width: calc(100% - 40px);
+        height: 60px;
+        position: fixed;
+        bottom: 28px;
+        left: 0;
+        background: linear-gradient(
+          0deg,
+          $white_200 20%,
+          rgba(255, 255, 255, 0) 100%
+        );
+      }
     }
   }
   &__popupLayer {
@@ -2307,7 +2378,12 @@ html {
       width: calc(100% - 32px);
       height: 80%;
       min-width: 0px;
-      padding: 40px 32px 32px 32px;
+      padding: 24px 20px 20px 20px;
+
+      .gradientBox {
+        width: calc(100% - 32px);
+        bottom: 18px;
+      }
     }
     &__item {
       margin-bottom: 40px;
@@ -2387,16 +2463,22 @@ html {
   @media screen and (max-width: 414px) {
     padding: 64px 24px 120px 24px;
     &__detail {
-      padding: 24px 20px 20px 20px;
+      padding: 24px 4px 20px 16px;
       .doubleCircleSymbol {
         display: none;
       }
-
       &--titleGroup {
         .titleGroup__word {
           &--title {
             @include h4();
           }
+        }
+      }
+      &--content {
+        .gradientBox {
+          height: 40px;
+          width: calc(100% - 20px);
+          bottom: 18px;
         }
       }
     }
@@ -2447,12 +2529,11 @@ html {
   }
   &__popUp {
     @include flex(row, center, center);
-    background-color: white;
+    background-color: $white_200;
     border-radius: 24px;
     box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
     display: none;
     opacity: 0;
-    //transition-duration: 0.5s;
     -webkit-filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
     filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
     height: -webkit-fit-content;
@@ -2472,15 +2553,16 @@ html {
       min-width: 390px;
       max-height: 300px;
       padding: 24px 32px;
-      background-color: white;
       @include flex(column, center, flex-start);
       h3 {
         @include h3();
         font-weight: bold;
+        -webkit-font-smoothing: antialiased;
       }
       p,
       li {
         @include body1();
+        -webkit-font-smoothing: antialiased;
       }
       li {
         //list-style-position: outside;
@@ -2536,7 +2618,7 @@ html {
     z-index: 20;
   }
   &__searchSection {
-    z-index: 1;
+    z-index: 2;
     @include flex(column, center, flex-start);
     width: 100%;
     margin-bottom: 64px;
@@ -2748,6 +2830,9 @@ html {
         }
         &:active {
           background-color: none;
+        }
+        &:focus {
+          box-shadow: none;
         }
       }
     }

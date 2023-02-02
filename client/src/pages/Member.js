@@ -9,7 +9,6 @@ import numberToRank from '../utility/numberToRank.js';
 import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
 import ReactPaginate from 'react-paginate';
 
-// import memberColumnCount from '../utility/memberColumnCount.js';
 /*
 TODO:
 - loading 符號
@@ -17,6 +16,7 @@ TODO:
 
 function Member() {
   const [memberData, setMemberData] = useState(null);
+  const [filteredMemberData, setFilteredMemberData] = useState(null);
   const [gradeOptions, setGradeOptions] = useState([]);
   const [fieldOptions, setFieldOptions] = useState([]);
   const [majorOptions, setMajorOptions] = useState([]);
@@ -36,7 +36,6 @@ function Member() {
   const [onePageMemberCount, setOnePageMemberCount] = useState(1);
   const [memberColumnCount, setMemberColumnCount] = useState(1);
   const headerWording = localDb.headerWording.member;
-  const rawMemberData = localDb.memberTemp;
 
   useEffect(() => {
     let grade = [];
@@ -74,17 +73,9 @@ function Member() {
             onePageMemberCountTemp = 20;
             setOnePageMemberCount(20);
           } else {
-            onePageMemberCountTemp = 20;
-            setOnePageMemberCount(20);
+            onePageMemberCountTemp = gridColumnCount * 4;
+            setOnePageMemberCount(gridColumnCount * 4);
           }
-
-          // if (gridColumnCount === 5) {
-          //   onePageMemberCountTemp = 15;
-          //   setOnePageMemberCount(15);
-          // } else {
-          //   onePageMemberCountTemp = 1;
-          //   setOnePageMemberCount(1);
-          // }
 
           // Set options
           res.data.map((member) => {
@@ -97,7 +88,7 @@ function Member() {
               }
             });
             if (!major.includes(member.major)) {
-              major.push(member.major);
+              if (member.major !== 'Unknown') major.push(member.major);
             }
           });
           grade.map((item) => {
@@ -114,6 +105,7 @@ function Member() {
           });
 
           setMemberData(res.data);
+          setFilteredMemberData(res.data);
           setTotalPage(Math.ceil(res.data.length / onePageMemberCountTemp));
           setFieldOptions(fieldOptionsTemp);
           setGradeOptions(gradeOptionsTemp);
@@ -123,6 +115,14 @@ function Member() {
     };
     fetchData();
     window.addEventListener('resize', () => {
+      if (
+        $('.member__popUp').css('display') === 'none' &&
+        $('.member__popupLayer').css('display') === 'block'
+      ) {
+        $('.member__popUp').css('display', 'flex');
+        $('.member__popUp').css('opacity', '1');
+      }
+
       let column = window
         .getComputedStyle(document.getElementsByClassName('member__items')[0])
         .getPropertyValue('grid-template-columns')
@@ -158,11 +158,13 @@ function Member() {
       onePageMemberCountTemp = 20;
       setOnePageMemberCount(20);
     } else {
-      onePageMemberCountTemp = 20;
-      setOnePageMemberCount(20);
+      onePageMemberCountTemp = gridColumnCount * 4;
+      setOnePageMemberCount(gridColumnCount * 4);
     }
-    if (memberData)
-      setTotalPage(Math.ceil(memberData.length / onePageMemberCountTemp));
+    if (filteredMemberData)
+      setTotalPage(
+        Math.ceil(filteredMemberData.length / onePageMemberCountTemp)
+      );
 
     return;
   }, [memberColumnCount]);
@@ -171,14 +173,14 @@ function Member() {
     <div
       className="member__items--item"
       onClick={() => {
-        setPopupContent(memberData[props.id]);
+        setPopupContent(filteredMemberData[props.id]);
         setTimeout(() => {
           $('.member__popUp').css('display', 'flex');
           $('.member__popupLayer').css('display', 'block');
-          $('body').css('overflow-y', 'hidden');
-          $('#memberSection').css('z-index', '');
           $('.member__popUp').css('opacity', '1');
           $('.member__popupLayer').css('opacity', '1');
+          $('body').css('overflow-y', 'hidden');
+          $('#memberSection').css('z-index', '');
         }, 100);
       }}
     >
@@ -210,29 +212,32 @@ function Member() {
       </Button>
     </div>
   );
-  const PopUp = ({ props }) => (
-    <section className="member__popUp">
-      <div className="member__popUp--img">
-        <img src={props.avatar} alt="" />
-      </div>
-      <div className="member__popUp--content">
-        <h3>
-          {numberToRank(props.number)} {props.name}
-        </h3>
-        <p>{props.jobTitle}</p>
-        <div className="content__tags">
-          {props.tags.map((tag) => (
-            <div className="content__tags--tag">{tag}</div>
-          ))}
+  const PopUp = ({ props }) => {
+    return (
+      <section className="member__popUp">
+        <div className="member__popUp--img">
+          <img src={props.avatar} alt="" />
         </div>
-        <ul>
-          {props.exp.map((exp) => (
-            <li>{exp}</li>
-          ))}
-        </ul>
-      </div>
-    </section>
-  );
+        <div className="member__popUp--content">
+          <h3>
+            {numberToRank(props.number)} {props.name}
+          </h3>
+          <p>{props.jobTitle}</p>
+          <div className="content__tags">
+            {props.tags.map((tag) => (
+              <div className="content__tags--tag">{tag}</div>
+            ))}
+          </div>
+          <ul>
+            {props.exp.map((exp) => (
+              <li>{exp}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    );
+  };
+
   const switchPage = (direction, certainPage) => {
     switch (direction) {
       case 'next':
@@ -263,15 +268,39 @@ function Member() {
         break;
     }
   };
-  const startFilter = (field) => {
+  const startFilter = (major, field, grade) => {
+    let filteredMemberDataTemp = memberData;
+
+    // field filter
+
     if (field[0]) {
-      let filteredMemberData = rawMemberData.filter((member) =>
+      filteredMemberDataTemp = filteredMemberDataTemp.filter((member) =>
         field.some((e) => member.tags.includes(e))
       );
-      setMemberData(filteredMemberData);
-    } else {
-      setMemberData(rawMemberData);
     }
+
+    //grade filter
+    if (major[0]) {
+      filteredMemberDataTemp = filteredMemberDataTemp.filter((member) => {
+        return major.some((e) => member.major.includes(e));
+      });
+    }
+
+    if (grade && grade !== '0') {
+      filteredMemberDataTemp = filteredMemberDataTemp.filter(
+        (member) => member.number === grade
+      );
+    }
+    setNowPage(1);
+    setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
+    setFilteredMemberData(filteredMemberDataTemp);
+
+    // Set pagination to page 1
+    $('.page-link').map((id, el) => {
+      if (el.getAttribute('aria-label') === 'Page 1') {
+        el.click();
+      }
+    });
   };
   return (
     <React.Fragment>
@@ -322,6 +351,7 @@ function Member() {
                         tempArray.push(`${option.value}`);
                       });
                       setMajorFilter(tempArray);
+                      startFilter(tempArray, fieldFilter, gradeFilter);
                     }}
                   />
                 </div>
@@ -337,7 +367,7 @@ function Member() {
                         tempArray.push(`${option.value}`);
                       });
                       setFieldFilter(tempArray);
-                      startFilter(tempArray);
+                      startFilter(majorFilter, tempArray, gradeFilter);
                     }}
                   />
                 </div>
@@ -348,6 +378,7 @@ function Member() {
                     options={gradeOptions}
                     onChange={(choice) => {
                       setGradeFilter(choice.value);
+                      startFilter(majorFilter, fieldFilter, choice.value);
                     }}
                   />
                 </div>
@@ -370,7 +401,7 @@ function Member() {
           </form>
         </div>
         <div className="member__items">
-          {memberData?.map((member, i) => {
+          {filteredMemberData?.map((member, i) => {
             if (
               (nowPage - 1) * onePageMemberCount <= i &&
               i < nowPage * onePageMemberCount
@@ -383,6 +414,7 @@ function Member() {
                   exp={`${member.exp}`}
                   tags={`${member.tags}`}
                   avatar={`${member.avatar}`}
+                  key={i}
                   id={i}
                 />
               );

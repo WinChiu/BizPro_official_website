@@ -180,7 +180,7 @@ function About() {
         .getElementById('about__achieve--numberList')
         .getBoundingClientRect().y -
         window.innerHeight <
-      -180
+      -140
     ) {
       $('.achieveRank1').each(function () {
         $(this)
@@ -459,7 +459,7 @@ function About() {
         />
         <div
           className="about__achieve--title sectionTitle sectionTitle--lg"
-          style={{ marginBottom: '48px' }}
+          style={{ marginBottom: '40px' }}
         >
           <img
             src={title_symbol_left_lg}

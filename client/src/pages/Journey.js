@@ -6,6 +6,8 @@ import dot_symbol from '../asset/img/dot_symbol_white100.svg';
 import dot_symbol_grey from '../asset/img/dot_symbol_white300.svg';
 import dubbleCircle from '../asset/img/doubleCircle_symbol_white300.svg';
 import hbsCase from '../asset/img/hbsCase.webp';
+import leanCase from '../asset/img/leanCase.webp';
+
 import icon_basicHypo from '../asset/img/icon/icon_basicHypo.svg';
 import junior_courseStructure from '../asset/img/junior_courseStructure.webp';
 import lifeCase from '../asset/img/lifeCase.webp';
@@ -214,7 +216,7 @@ function Journey() {
             </p>
           </div>
           <div className="caseStudy__lean--img">
-            <img src={hbsCase} alt="hbsCase" className="hbsCaseImg" />
+            <img src={leanCase} alt="leanCase" className="hbsCaseImg" />
           </div>
         </div>
       </article>
@@ -508,15 +510,15 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--alumni')[0]
       .classList.remove('tab__item--default', 'tab__item--active');
-    document
-      .getElementsByClassName('tab__item--junior')[1]
-      .classList.remove('tab__item--default', 'tab__item--active');
-    document
-      .getElementsByClassName('tab__item--senior')[1]
-      .classList.remove('tab__item--default', 'tab__item--active');
-    document
-      .getElementsByClassName('tab__item--alumni')[1]
-      .classList.remove('tab__item--default', 'tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--junior')[1]
+    //   .classList.remove('tab__item--default', 'tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--senior')[1]
+    //   .classList.remove('tab__item--default', 'tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--alumni')[1]
+    //   .classList.remove('tab__item--default', 'tab__item--active');
   };
   const changeToJunior = () => {
     clearClass();

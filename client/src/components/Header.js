@@ -7,7 +7,7 @@ function Header({ title, content }) {
     <div className="header">
       <img src={rounds} alt="" className="header__stamp--rounds" />
       <div className="header__content">
-        <h4 className="content__title">{title}</h4>
+        <h2 className="content__title">{title}</h2>
         <h6 className="content__word">{content}</h6>
       </div>
       <img src={logo_red} alt="BizPro logo" className="header__logo" />

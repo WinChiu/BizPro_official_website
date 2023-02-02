@@ -131,10 +131,9 @@ function Article() {
       />
       <div className="article__detail--titleGroup">
         <div className="titleGroup__img">
-          <img src={props.avatar} alt="avatar" />
+          {/* <img src={props.avatar} alt="avatar" /> */}
           <p className="titleGroup__img--subTitle">
             {`${props.number} ${props.name}${'：'}`}
-            {/* <br /> */}
             {`${props.jobTitle}`}
           </p>
         </div>
@@ -144,6 +143,7 @@ function Article() {
       </div>
       <p className="article__detail--content">
         {props.content.replace(/\\+n/g, '<br/>')}
+        <div className="gradientBox" />
       </p>
     </section>
   );
