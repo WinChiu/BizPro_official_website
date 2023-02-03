@@ -45,7 +45,7 @@ function App() {
   return (
     <BrowserRouter>
       <NavBar />
-      {/* <LogoLoading /> */}
+      <LogoLoading />
       <Routes>
         <Route exact path="/" element={<About />} />
         <Route path="/journey" element={<Journey />} />
