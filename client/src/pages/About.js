@@ -34,79 +34,79 @@ TODO:
 
 function About() {
   useEffect(() => {
-    class Vec {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-      }
-      set(x, y) {
-        this.x = x;
-        this.y = y;
-      }
-      move(x, y) {
-        this.x += x;
-        this.y += y;
-      }
-      add(v) {
-        return new Vec(this.x + v.x, this.y + v.y);
-      }
-      sub(v) {
-        return new Vec(this.x - v.x, this.y - v.y);
-      }
-      mul(s) {
-        return new Vec(this.x * s, this.y * s);
-      }
-      get length() {
-        return Math.sqrt(this.x * this.x + this.y * this.y);
-      }
-      set length(nv) {
-        let temp = this.unit.mul(nv);
-        this.set(temp.x, temp.y);
-      }
-      clone() {
-        return new Vec(this.x, this.y);
-      }
-      toString() {
-        return `(${this.x}, ${this.y})`;
-      }
-      equal(v) {
-        return this.x == v.x && this.y == v.y;
-      }
-      get angle() {
-        return Math.atan2(this.y, this.x);
-      }
-      get unit() {
-        return this.mul(1 / this.length);
-      }
-    }
-    let mousePos = new Vec(0, 0);
-    const phoneScreen = window.matchMedia('(max-width: 414px)');
-    const headerAnimate = (e) => {
-      mousePos.set(e.pageX, e.pageY);
-      let tilt = mousePos.sub(
-        new Vec(window.innerWidth / 2, window.innerHeight / 2)
-      );
-      $('.connection__right, .connection__left, .circle4').css(
-        'transform',
-        `translate(${tilt.x / 35}px,${tilt.y / 35}px)`
-      );
-    };
-    const phoneScreenCancelAnimate = (x) => {
-      if (x.matches) {
-        window.removeEventListener('mousemove', (e) => {
-          headerAnimate(e);
-        });
-      } else {
-        window.addEventListener('mousemove', (e) => {
-          headerAnimate(e);
-        });
-      }
-    };
+    // class Vec {
+    //   constructor(x, y) {
+    //     this.x = x;
+    //     this.y = y;
+    //   }
+    //   set(x, y) {
+    //     this.x = x;
+    //     this.y = y;
+    //   }
+    //   move(x, y) {
+    //     this.x += x;
+    //     this.y += y;
+    //   }
+    //   add(v) {
+    //     return new Vec(this.x + v.x, this.y + v.y);
+    //   }
+    //   sub(v) {
+    //     return new Vec(this.x - v.x, this.y - v.y);
+    //   }
+    //   mul(s) {
+    //     return new Vec(this.x * s, this.y * s);
+    //   }
+    //   get length() {
+    //     return Math.sqrt(this.x * this.x + this.y * this.y);
+    //   }
+    //   set length(nv) {
+    //     let temp = this.unit.mul(nv);
+    //     this.set(temp.x, temp.y);
+    //   }
+    //   clone() {
+    //     return new Vec(this.x, this.y);
+    //   }
+    //   toString() {
+    //     return `(${this.x}, ${this.y})`;
+    //   }
+    //   equal(v) {
+    //     return this.x == v.x && this.y == v.y;
+    //   }
+    //   get angle() {
+    //     return Math.atan2(this.y, this.x);
+    //   }
+    //   get unit() {
+    //     return this.mul(1 / this.length);
+    //   }
+    // }
+    // let mousePos = new Vec(0, 0);
+    // const phoneScreen = window.matchMedia('(max-width: 414px)');
+    // const headerAnimate = (e) => {
+    //   mousePos.set(e.pageX, e.pageY);
+    //   let tilt = mousePos.sub(
+    //     new Vec(window.innerWidth / 2, window.innerHeight / 2)
+    //   );
+    //   $('.connection__right, .connection__left, .circle4').css(
+    //     'transform',
+    //     `translate(${tilt.x / 35}px,${tilt.y / 35}px)`
+    //   );
+    // };
+    // const phoneScreenCancelAnimate = (x) => {
+    //   if (x.matches) {
+    //     window.removeEventListener('mousemove', (e) => {
+    //       headerAnimate(e);
+    //     });
+    //   } else {
+    //     window.addEventListener('mousemove', (e) => {
+    //       headerAnimate(e);
+    //     });
+    //   }
+    // };
 
-    phoneScreen.addEventListener('change', () => {
-      phoneScreenCancelAnimate(phoneScreen);
-    });
-    phoneScreenCancelAnimate(phoneScreen);
+    // phoneScreen.addEventListener('change', () => {
+    //   phoneScreenCancelAnimate(phoneScreen);
+    // });
+    // phoneScreenCancelAnimate(phoneScreen);
     return () => {
       setTimeout(() => {
         $('.about__header--title, .about__header--logo').css({
