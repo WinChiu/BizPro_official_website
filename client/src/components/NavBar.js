@@ -59,7 +59,9 @@ function NavBar() {
   );
   const NavBarS = () => (
     <div className="navBar navBarS">
-      <img src={logo_red} alt="bizPro Logo" className="navBar__logo" />
+      <a href="/">
+        <img src={logo_red} alt="bizPro Logo" className="navBar__logo" />
+      </a>
       <div className="navBar__list">
         <img
           className="navBar__item navBar__hamburger"

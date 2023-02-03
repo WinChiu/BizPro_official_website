@@ -22,7 +22,7 @@ import title_symbol_left_lg from '../asset/img/title_symbol_left_lg.svg';
 import title_symbol_left_md from '../asset/img/title_symbol_left_md.svg';
 import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
 import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
-import vision_bg from '../asset/img/vision_bg.webp';
+import vision_bg from '../asset/img/circle_symbol_beige.webp';
 import MarqueeLogo from '../components/MarqueeLogo';
 import headerImg from '../asset/img/about_headerImg.webp';
 import $ from 'jquery';
@@ -93,12 +93,10 @@ function About() {
     };
     const phoneScreenCancelAnimate = (x) => {
       if (x.matches) {
-        console.log('notMatch');
         window.removeEventListener('mousemove', (e) => {
           headerAnimate(e);
         });
       } else {
-        console.log('match');
         window.addEventListener('mousemove', (e) => {
           headerAnimate(e);
         });
@@ -339,11 +337,11 @@ function About() {
         </div>
       </article>
       <article className="about__vision">
-        <img src={vision_bg} alt="circle_symbol_beige" className="bgCircle" />
         <div
           id="about__vision--content"
           className="about__vision--content hideVision"
         >
+          <img src={vision_bg} alt="circle_symbol_beige" className="bgCircle" />
           <div className="content--title sectionTitle sectionTitle--lg">
             <img
               src={title_symbol_left_md}

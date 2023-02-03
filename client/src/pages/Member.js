@@ -46,7 +46,7 @@ function Member() {
     let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
-        .get('http://localhost:5000/api/alumni/members')
+        .get('http://172.20.10.3:5000/api/alumni/members')
         .then((res) => {
           const gridColumnCount = window
             .getComputedStyle(
@@ -175,12 +175,7 @@ function Member() {
       onClick={() => {
         setPopupContent(filteredMemberData[props.id]);
         setTimeout(() => {
-          $('.member__popUp').css('display', 'flex');
-          $('.member__popupLayer').css('display', 'block');
-          $('.member__popUp').css('opacity', '1');
-          $('.member__popupLayer').css('opacity', '1');
-          $('body').css('overflow-y', 'hidden');
-          $('#memberSection').css('z-index', '');
+          openPopup();
         }, 100);
       }}
     >
@@ -201,10 +196,7 @@ function Member() {
         onClick={() => {
           setPopupContent(memberData[props.id]);
           setTimeout(() => {
-            $('.member__popUp').css('display', 'flex');
-            $('.member__popupLayer').css('display', 'block');
-            $('.member__popUp').css('opacity', '0');
-            $('.member__popupLayer').css('opacity', '0');
+            openPopup();
           }, 100);
         }}
       >
@@ -212,32 +204,55 @@ function Member() {
       </Button>
     </div>
   );
-  const PopUp = ({ props }) => {
-    return (
-      <section className="member__popUp">
-        <div className="member__popUp--img">
-          <img src={props.avatar} alt="" />
+  const PopUp = ({ props }) => (
+    <section
+      className="member__popUp"
+      onClick={(e) => {
+        let element = document.getElementsByTagName('ul')[0];
+        console.log(
+          element.scrollHeight > element.clientHeight ||
+            element.scrollWidth > element.clientWidth
+        );
+      }}
+    >
+      <div className="member__popUp--img">
+        <img src={props.avatar} alt="" />
+      </div>
+      <div className="member__popUp--content">
+        <h3>
+          {numberToRank(props.number)} {props.name}
+        </h3>
+        <p>{props.jobTitle}</p>
+        <div className="content__tags">
+          {props.tags.map((tag) => (
+            <div className="content__tags--tag">{tag}</div>
+          ))}
         </div>
-        <div className="member__popUp--content">
-          <h3>
-            {numberToRank(props.number)} {props.name}
-          </h3>
-          <p>{props.jobTitle}</p>
-          <div className="content__tags">
-            {props.tags.map((tag) => (
-              <div className="content__tags--tag">{tag}</div>
-            ))}
-          </div>
-          <ul>
-            {props.exp.map((exp) => (
-              <li>{exp}</li>
-            ))}
-          </ul>
-        </div>
-      </section>
-    );
-  };
+        <ul>
+          {props.exp.map((exp) => (
+            <li>{exp}</li>
+          ))}
+          <div className="gradientBox" />
+        </ul>
+      </div>
+    </section>
+  );
+  const openPopup = () => {
+    $('.member__popUp').css('display', 'flex');
+    $('.member__popupLayer').css('display', 'block');
+    $('.member__popUp').css('opacity', '1');
+    $('.member__popupLayer').css('opacity', '1');
+    $('body').css('overflow-y', 'hidden');
+    $('#memberSection').css('z-index', '');
 
+    let element = document.getElementsByTagName('ul')[0];
+    if (
+      element.scrollHeight > element.clientHeight ||
+      element.scrollWidth > element.clientWidth
+    ) {
+      $('.gradientBox').css('display', 'block');
+    }
+  };
   const switchPage = (direction, certainPage) => {
     switch (direction) {
       case 'next':
@@ -428,7 +443,7 @@ function Member() {
           onPageChange={(e) => {
             switchPage('certainPage', e.selected + 1);
           }}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={3}
           marginPagesDisplayed={1}
           pageCount={totalPage}
           previousLabel="‹"

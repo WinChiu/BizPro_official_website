@@ -15,6 +15,7 @@ function MarqueeLogo() {
       {logoList.map((logo, i) => {
         return (
           <img
+            key={i}
             src={logo}
             alt=""
             className="marquee__item"

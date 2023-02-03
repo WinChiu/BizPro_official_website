@@ -142,11 +142,7 @@ function Journey() {
               <div className="container__content--iconSet">
                 <JuniorIconItem icon={icon_advancedHypo} title="進階假說思考" />
                 <JuniorIconItem icon={icon_powerpoint} title="提案簡報設計" />
-                <JuniorIconItem
-                  icon={icon_speach}
-                  title="提案報告技巧
-"
-                />
+                <JuniorIconItem icon={icon_speach} title="提案報告技巧" />
                 <JuniorIconItem icon={icon_communication} title="溝通與表達" />
               </div>
             </div>
@@ -448,7 +444,7 @@ function Journey() {
             在 Senior 時期，Senior 們將與外部企業或組織合作，進行為期 3-4
             個月的團體專案，並配有 1-2 位 BizPro Alumni 作為專案 Mentor。
           </p>
-          <p className="content--paragraph">
+          <p className="content--paragraph" style={{ marginBottom: '24px' }}>
             不同於 Junior 時期的 Life Case，在 Senior Project 裡 Senior
             們將接受更高強度的訓練，研究更複雜的專案命題並產出更完整詳盡的解決方案。不論是硬性的資料搜集與分析、質化
             /
@@ -609,6 +605,7 @@ function Journey() {
           onClick={() => {
             changeToJunior();
             setTab('junior');
+            window.scrollTo(0, 0);
           }}
         >
           <p className="lg">Junior 新進社員</p>
@@ -619,6 +616,7 @@ function Journey() {
           onClick={() => {
             changeToSenior();
             setTab('senior');
+            window.scrollTo(0, 0);
           }}
         >
           <p className="lg">Senior 社團幹部</p>
@@ -629,6 +627,7 @@ function Journey() {
           onClick={() => {
             changeToAlumni();
             setTab('alumni');
+            window.scrollTo(0, 0);
           }}
         >
           <p className="lg">Alumni 歷屆成員</p>
