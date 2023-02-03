@@ -154,8 +154,9 @@ function About() {
       -240
     ) {
       let timeDelta = 100;
-      $('.about__vision--content').removeClass('hideVision');
+      $('.content--title').removeClass('hideVision');
 
+      $('.content--word').removeClass('hideVision');
       $('.iconList__item--1').removeClass('hideIcon');
       setTimeout(() => {
         $('.iconList__item--2').removeClass('hideIcon');
@@ -337,12 +338,9 @@ function About() {
         </div>
       </article>
       <article className="about__vision">
-        <div
-          id="about__vision--content"
-          className="about__vision--content hideVision"
-        >
+        <div id="about__vision--content" className="about__vision--content">
           <img src={vision_bg} alt="circle_symbol_beige" className="bgCircle" />
-          <div className="content--title sectionTitle sectionTitle--lg">
+          <div className="content--title sectionTitle sectionTitle--lg hideVision">
             <img
               src={title_symbol_left_md}
               alt="title__symbol_left"
@@ -355,7 +353,7 @@ function About() {
               className="title--symbolRight"
             />
           </div>
-          <p className="content--word">
+          <p className="content--word hideVision">
             BizPro
             的願景為培養充滿能量，且富有創造性的業界領袖人才。我們期許成員在
             BizPro

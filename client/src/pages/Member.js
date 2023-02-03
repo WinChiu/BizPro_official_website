@@ -205,16 +205,7 @@ function Member() {
     </div>
   );
   const PopUp = ({ props }) => (
-    <section
-      className="member__popUp"
-      onClick={(e) => {
-        let element = document.getElementsByTagName('ul')[0];
-        console.log(
-          element.scrollHeight > element.clientHeight ||
-            element.scrollWidth > element.clientWidth
-        );
-      }}
-    >
+    <section className="member__popUp">
       <div className="member__popUp--img">
         <img src={props.avatar} alt="" />
       </div>
@@ -276,8 +267,10 @@ function Member() {
         setNowPage(1);
         break;
       case 'certainPage':
-        document.getElementById('memberSection').scrollIntoView();
         setNowPage(certainPage);
+        setTimeout(() => {
+          document.getElementById('member__searchSection').scrollIntoView();
+        }, 0);
         break;
       default:
         break;
@@ -340,7 +333,7 @@ function Member() {
             $('body').css('overflow-y', 'scroll');
           }}
         />
-        <div className="member__searchSection">
+        <div className="member__searchSection" id="member__searchSection">
           <form
             action=""
             onSubmit={(e) => {

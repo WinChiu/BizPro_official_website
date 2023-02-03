@@ -2133,8 +2133,8 @@ html {
     align-items: center;
   }
   .about__header .connection__left {
-    transform: scaleY(-1) scale(0.5) rotate(15deg);
-    left: -420px;
+    transform: scaleY(-1) scale(0.7) rotate(15deg);
+    left: -300px;
     bottom: -223px;
   }
   .about__header .connection__right {
@@ -2143,8 +2143,8 @@ html {
     bottom: -80px;
   }
   .about__intro .connection__left {
-    transform: scaleY(-1) scale(0.5) rotate(15deg);
-    left: -420px;
+    transform: scaleY(-1) scale(0.7) rotate(15deg);
+    left: -300px;
     top: -268.5px;
   }
   .about__intro .connection__right {
@@ -2175,13 +2175,13 @@ html {
     right: -360px;
   }
   .about__header .connection__left {
-    transform: scaleY(-1) scale(0.5) rotate(15deg);
-    left: -480px;
+    transform: scaleY(-1) scale(0.7) rotate(15deg);
+    left: -320px;
     bottom: -223px;
   }
   .about__intro .connection__left {
-    transform: scaleY(-1) scale(0.5) rotate(15deg);
-    left: -480px;
+    transform: scaleY(-1) scale(0.7) rotate(15deg);
+    left: -320px;
     top: -268.5px;
   }
 }
