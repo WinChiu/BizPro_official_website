@@ -1,3 +1,4 @@
+const { query } = require('express');
 const express = require('express');
 const router = express.Router();
 const Alumni = require('../../models/Alumni');
@@ -44,7 +45,6 @@ function findQuery(req){
 
 router.get('/select', async (req, res) => {
     try{
-        //console.log(req.body);
         tags_length = req.body.tags.length;
         major_length = req.body.major.length;
         
@@ -62,15 +62,19 @@ router.get('/select', async (req, res) => {
     }
 });
 
-/*
+
 router.get('/search', async (req, res) => {
     try{
-        query = req.body.search;
+        let query = req.body.search;
+        console.log(query);
+
         const result = await Alumni.find({
             "$or": [{
-                ""
+                "number": {$regex: `${query}`}
             }, {
-                //
+                "tags": {$regex: `${query}`}
+            }, {
+                "major": {$regex: `${query}`}
             }
             ]
         });
@@ -85,6 +89,6 @@ router.get('/search', async (req, res) => {
     }
 });
 
-*/
+
 
 module.exports = router;
