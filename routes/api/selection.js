@@ -1,4 +1,3 @@
-const { query } = require('express');
 const express = require('express');
 const router = express.Router();
 const Alumni = require('../../models/Alumni');
@@ -51,6 +50,7 @@ router.get('/select', async (req, res) => {
         query = findQuery(req);
         console.log(query);
         const alumniData = await Alumni.find(query);
+
         if(!alumniData){
             res.status(400).json({ msg: 'No alumni data available' });
         }
@@ -62,12 +62,10 @@ router.get('/select', async (req, res) => {
     }
 });
 
-
 router.get('/search', async (req, res) => {
     try{
         let query = req.body.search;
-        console.log(query);
-
+        //console.log(query);
         const result = await Alumni.find({
             "$or": [{
                 "number": {$regex: `${query}`}
@@ -88,7 +86,5 @@ router.get('/search', async (req, res) => {
         res.status(500).json({msg: "Server Error!"});
     }
 });
-
-
 
 module.exports = router;
