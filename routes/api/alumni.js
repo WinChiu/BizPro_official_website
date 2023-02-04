@@ -5,7 +5,6 @@ const Alumni = require('../../models/alumni');
 router.get('/members', async (req, res) => {
   try {
     const alumniData = await Alumni.find();
-
     if (!alumniData) {
       return res.status(400).json({ msg: 'No alumni data available' });
     }
