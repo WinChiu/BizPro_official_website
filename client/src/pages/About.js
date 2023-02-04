@@ -22,69 +22,91 @@ import title_symbol_left_lg from '../asset/img/title_symbol_left_lg.svg';
 import title_symbol_left_md from '../asset/img/title_symbol_left_md.svg';
 import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
 import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
-import vision_bg from '../asset/img/vision_bg.webp';
+import vision_bg from '../asset/img/circle_symbol_beige.webp';
 import MarqueeLogo from '../components/MarqueeLogo';
 import headerImg from '../asset/img/about_headerImg.webp';
 import $ from 'jquery';
+
+/*
+TODO:
+- 進入動畫
+*/
+
 function About() {
   useEffect(() => {
-    class Vec {
-      constructor(x, y) {
-        this.x = x;
-        this.y = y;
-      }
-      set(x, y) {
-        this.x = x;
-        this.y = y;
-      }
-      move(x, y) {
-        this.x += x;
-        this.y += y;
-      }
-      add(v) {
-        return new Vec(this.x + v.x, this.y + v.y);
-      }
-      sub(v) {
-        return new Vec(this.x - v.x, this.y - v.y);
-      }
-      mul(s) {
-        return new Vec(this.x * s, this.y * s);
-      }
-      get length() {
-        return Math.sqrt(this.x * this.x + this.y * this.y);
-      }
-      set length(nv) {
-        let temp = this.unit.mul(nv);
-        this.set(temp.x, temp.y);
-      }
-      clone() {
-        return new Vec(this.x, this.y);
-      }
-      toString() {
-        return `(${this.x}, ${this.y})`;
-      }
-      equal(v) {
-        return this.x == v.x && this.y == v.y;
-      }
-      get angle() {
-        return Math.atan2(this.y, this.x);
-      }
-      get unit() {
-        return this.mul(1 / this.length);
-      }
-    }
-    let mousePos = new Vec(0, 0);
-    window.addEventListener('mousemove', (e) => {
-      mousePos.set(e.pageX, e.pageY);
-      let tilt = mousePos.sub(
-        new Vec(window.innerWidth / 2, window.innerHeight / 2)
-      );
+    // class Vec {
+    //   constructor(x, y) {
+    //     this.x = x;
+    //     this.y = y;
+    //   }
+    //   set(x, y) {
+    //     this.x = x;
+    //     this.y = y;
+    //   }
+    //   move(x, y) {
+    //     this.x += x;
+    //     this.y += y;
+    //   }
+    //   add(v) {
+    //     return new Vec(this.x + v.x, this.y + v.y);
+    //   }
+    //   sub(v) {
+    //     return new Vec(this.x - v.x, this.y - v.y);
+    //   }
+    //   mul(s) {
+    //     return new Vec(this.x * s, this.y * s);
+    //   }
+    //   get length() {
+    //     return Math.sqrt(this.x * this.x + this.y * this.y);
+    //   }
+    //   set length(nv) {
+    //     let temp = this.unit.mul(nv);
+    //     this.set(temp.x, temp.y);
+    //   }
+    //   clone() {
+    //     return new Vec(this.x, this.y);
+    //   }
+    //   toString() {
+    //     return `(${this.x}, ${this.y})`;
+    //   }
+    //   equal(v) {
+    //     return this.x == v.x && this.y == v.y;
+    //   }
+    //   get angle() {
+    //     return Math.atan2(this.y, this.x);
+    //   }
+    //   get unit() {
+    //     return this.mul(1 / this.length);
+    //   }
+    // }
+    // let mousePos = new Vec(0, 0);
+    // const phoneScreen = window.matchMedia('(max-width: 414px)');
+    // const headerAnimate = (e) => {
+    //   mousePos.set(e.pageX, e.pageY);
+    //   let tilt = mousePos.sub(
+    //     new Vec(window.innerWidth / 2, window.innerHeight / 2)
+    //   );
+    //   $('.connection__right, .connection__left, .circle4').css(
+    //     'transform',
+    //     `translate(${tilt.x / 35}px,${tilt.y / 35}px)`
+    //   );
+    // };
+    // const phoneScreenCancelAnimate = (x) => {
+    //   if (x.matches) {
+    //     window.removeEventListener('mousemove', (e) => {
+    //       headerAnimate(e);
+    //     });
+    //   } else {
+    //     window.addEventListener('mousemove', (e) => {
+    //       headerAnimate(e);
+    //     });
+    //   }
+    // };
 
-      $('.connection__right, .connection__left, .circle4').css(
-        'transform',
-        `translate(${tilt.x / 35}px,${tilt.y / 35}px)`
-      );
-    });
+    // phoneScreen.addEventListener('change', () => {
+    //   phoneScreenCancelAnimate(phoneScreen);
+    // });
+    // phoneScreenCancelAnimate(phoneScreen);
     return () => {
       setTimeout(() => {
         $('.about__header--title, .about__header--logo').css({
@@ -96,15 +118,136 @@ function About() {
             transform: 'translateY(0px)',
             opacity: '1',
           });
-        }, 500);
+          setTimeout(() => {
+            $('.about__header--readMore').css({
+              transform: 'translateY(0px)',
+              opacity: '1',
+            });
+          }, 500);
+        }, 400);
       }, 300);
     };
   }, []);
 
+  window.addEventListener('scroll', () => {
+    if (
+      document.getElementById('briefIntro__course').getBoundingClientRect().y -
+        window.innerHeight <
+      -100
+    ) {
+      $('.briefIntro__course--img').removeClass('hideToRight');
+      $('.briefIntro__course--word').removeClass('hideToLeft');
+    }
+    if (
+      document.getElementById('briefIntro__people').getBoundingClientRect().y -
+        window.innerHeight <
+      -100
+    ) {
+      $('.briefIntro__people--img').removeClass('hideToLeft');
+      $('.briefIntro__people--word').removeClass('hideToRight');
+    }
+
+    if (
+      document.getElementById('about__vision--iconList').getBoundingClientRect()
+        .y -
+        window.innerHeight <
+      -240
+    ) {
+      let timeDelta = 100;
+      $('.content--title').removeClass('hideVision');
+
+      $('.content--word').removeClass('hideVision');
+      $('.iconList__item--1').removeClass('hideIcon');
+      setTimeout(() => {
+        $('.iconList__item--2').removeClass('hideIcon');
+      }, timeDelta);
+      setTimeout(() => {
+        $('.iconList__item--3').removeClass('hideIcon');
+      }, timeDelta * 2);
+      setTimeout(() => {
+        $('.iconList__item--4').removeClass('hideIcon');
+      }, timeDelta * 3);
+      setTimeout(() => {
+        $('.iconList__item--5').removeClass('hideIcon');
+      }, timeDelta * 4);
+      setTimeout(() => {
+        $('.iconList__item--6').removeClass('hideIcon');
+      }, timeDelta * 5);
+    }
+    if (
+      document
+        .getElementById('about__achieve--numberList')
+        .getBoundingClientRect().y -
+        window.innerHeight <
+      -140
+    ) {
+      $('.achieveRank1').each(function () {
+        $(this)
+          .prop('Counter', 0)
+          .animate(
+            {
+              Counter: 500,
+            },
+            {
+              duration: 1500,
+              easing: 'swing',
+              step: function (now) {
+                $(this).text(Math.ceil(now));
+              },
+            }
+          );
+      });
+      $('.achieveRank2').each(function () {
+        $(this)
+          .prop('Counter', 0)
+          .animate(
+            {
+              Counter: 100,
+            },
+            {
+              duration: 1000,
+              easing: 'swing',
+              step: function (now) {
+                $(this).text(Math.ceil(now));
+              },
+            }
+          );
+      });
+      $('.achieveRank3').each(function () {
+        $(this)
+          .prop('Counter', 0)
+          .animate(
+            {
+              Counter: 150,
+            },
+            {
+              duration: 1200,
+              easing: 'swing',
+              step: function (now) {
+                $(this).text(Math.ceil(now));
+              },
+            }
+          );
+      });
+      $('.people_symbol').fadeIn(800);
+    }
+    if (
+      document
+        .getElementById('about__achieve--numberList')
+        .getBoundingClientRect().y -
+        window.innerHeight <
+      -200
+    ) {
+      $('.marquee__item').map((i, logo) => {
+        logo.style.transform = 'translate(0px,0px)';
+        logo.style.opacity = '1';
+      });
+    }
+  });
+
   return (
     <section className="about">
       <article className="about__header">
-        {/* TODO: 新增動畫效果，讓照片底圖延遲下滑 + 所有 symbol 隨著滑鼠移動做微小偏移  */}
         <img src={connection_symbol} alt="" className="connection__left" />
         <div className="headerImg"></div>
         <img src={connection_symbol} alt="" className="connection__right" />
@@ -114,8 +257,15 @@ function About() {
         <h3 className="about__header--subTitle">
           紮實課程 X 社群連結 X 量身打造
         </h3>
-        <div className="about__header--readMore">
-          <h4 className="readMore--word">繼續瀏覽</h4>
+        <div
+          className="about__header--readMore"
+          onClick={() => {
+            document.getElementById('about__intro').scrollIntoView({
+              behavior: 'smooth',
+            });
+          }}
+        >
+          <h4 className="readMore--word">下滑瀏覽</h4>
           <img
             src={icon_pointDown}
             alt="icon_pointDown"
@@ -123,7 +273,7 @@ function About() {
           />
         </div>
       </article>
-      <article className="about__intro">
+      <article className="about__intro" id="about__intro">
         <img src={connection_symbol_red} alt="" className="connection__left" />
         <img src={connection_symbol_red} alt="" className="connection__right" />
         <div className="about__intro--title sectionTitle sectionTitle--lg">
@@ -188,9 +338,9 @@ function About() {
         </div>
       </article>
       <article className="about__vision">
-        <img src={vision_bg} alt="circle_symbol_beige" className="bgCircle" />
-        <div className="about__vision--content">
-          <div className="content--title sectionTitle sectionTitle--lg">
+        <div id="about__vision--content" className="about__vision--content">
+          <img src={vision_bg} alt="circle_symbol_beige" className="bgCircle" />
+          <div className="content--title sectionTitle sectionTitle--lg hideVision">
             <img
               src={title_symbol_left_md}
               alt="title__symbol_left"
@@ -203,8 +353,7 @@ function About() {
               className="title--symbolRight"
             />
           </div>
-
-          <p className="content--word">
+          <p className="content--word hideVision">
             BizPro
             的願景為培養充滿能量，且富有創造性的業界領袖人才。我們期許成員在
             BizPro
@@ -214,8 +363,8 @@ function About() {
             期望能建立同儕、學界、業界三方的橋樑，讓優秀的學生與前輩透過頻繁的互動，創造新的價值，成為各行各業的領袖人才。
           </p>
         </div>
-        <div className="about__vision--iconList">
-          <div className="iconList__item">
+        <div className="about__vision--iconList" id="about__vision--iconList">
+          <div className="iconList__item iconList__item--1 hideIcon ">
             <img
               src={icon_courage}
               alt="icon_courage"
@@ -228,7 +377,7 @@ function About() {
               </p>
             </div>
           </div>
-          <div className="iconList__item">
+          <div className="iconList__item iconList__item--2 hideIcon">
             <img
               src={icon_creativity}
               alt="icon_creativity"
@@ -241,7 +390,7 @@ function About() {
               </p>
             </div>
           </div>
-          <div className="iconList__item">
+          <div className="iconList__item iconList__item--3 hideIcon">
             <img
               src={icon_trust}
               alt="icon_trust"
@@ -254,7 +403,7 @@ function About() {
               </p>
             </div>
           </div>
-          <div className="iconList__item">
+          <div className="iconList__item iconList__item--4 hideIcon">
             <img
               src={icon_integrity}
               alt="icon_integrity"
@@ -267,7 +416,7 @@ function About() {
               </p>
             </div>
           </div>
-          <div className="iconList__item">
+          <div className="iconList__item iconList__item--5 hideIcon">
             <img
               src={icon_share}
               alt="icon_share"
@@ -280,7 +429,10 @@ function About() {
               </p>
             </div>
           </div>
-          <div className="iconList__item" style={{ marginBottom: '0px' }}>
+          <div
+            className="iconList__item iconList__item--6 hideIcon"
+            style={{ marginBottom: '0px' }}
+          >
             <img
               src={icon_entrepreneurship}
               alt="icon_entrepreneurship"
@@ -303,7 +455,7 @@ function About() {
         />
         <div
           className="about__achieve--title sectionTitle sectionTitle--lg"
-          style={{ marginBottom: '48px' }}
+          style={{ marginBottom: '40px' }}
         >
           <img
             src={title_symbol_left_lg}
@@ -336,17 +488,26 @@ function About() {
           BizPro
           齊聚正向、積極、創新的夥伴，我們期許夥伴在經歷社團培訓後能為世界上各個領域帶來正向影響。
         </p>
-        <div className="about__achieve--numberList">
+        <div
+          id="about__achieve--numberList"
+          className="about__achieve--numberList"
+        >
           <div className="numberList__item">
-            <h1 className="numberList__item--title">500+</h1>
+            <h1 className="numberList__item--title">
+              <span className="achieveRank1">0</span> +
+            </h1>
             <h4 className="numberList__item--content">小時商業專業能力訓練</h4>
           </div>
           <div className="numberList__item">
-            <h1 className="numberList__item--title">100+</h1>
+            <h1 className="numberList__item--title">
+              <span className="achieveRank2">0</span> +
+            </h1>
             <h4 className="numberList__item--content">位社團 Alumni 成員</h4>
           </div>
           <div className="numberList__item" style={{ margin: '0px' }}>
-            <h1 className="numberList__item--title">150+</h1>
+            <h1 className="numberList__item--title">
+              <span className="achieveRank3">0</span> +
+            </h1>
             <h4 className="numberList__item--content">個企業人脈連結</h4>
           </div>
         </div>
@@ -361,8 +522,8 @@ function About() {
           className="double_circle"
         />
         <img src={connection_symbol} alt="" className="connection_symbol" />
-        <div className="briefIntro__course">
-          <div className="briefIntro__course--word">
+        <div className="briefIntro__course" id="briefIntro__course">
+          <div className="briefIntro__course--word hideToLeft">
             <h2 className="word--title">BizPro 的商業專業能力訓練</h2>
             <p className="word--content">
               BizPro
@@ -375,16 +536,16 @@ function About() {
             </Button>
           </div>
           <div
-            className="briefIntro__people--img"
+            className="briefIntro__course--img hideToRight"
             style={{ backgroundImage: `url(${briefIntro_course})` }}
           />
         </div>
-        <div className="briefIntro__people">
+        <div className="briefIntro__people" id="briefIntro__people">
           <div
-            className="briefIntro__people--img"
+            className="briefIntro__people--img hideToLeft"
             style={{ backgroundImage: `url(${briefIntro_people})` }}
           />
-          <div className="briefIntro__people--word">
+          <div className="briefIntro__people--word hideToRight">
             <h2 className="word--title">BizPro 社員人脈連結</h2>
             <p className="word--content">
               BizPro 創立至今已累積超過 100

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/style.css';
 import icon_facebook from '../asset/img/icon/icon_facebook.svg';
-import icon_linkedin from '../asset/img/icon/icon_linkedin.svg';
+import icon_instagram from '../asset/img/icon/icon_instagram.svg';
 import icon_email from '../asset/img/icon/icon_email.svg';
 
 function Footer() {
@@ -24,14 +24,14 @@ function Footer() {
         <a
           className="linkList__item"
           target="_blank"
-          href="https://www.linkedin.com/company/bizpro-taipei/mycompany/"
+          href="https://www.instagram.com/ntu_bizpro/"
         >
           <img
-            src={icon_linkedin}
-            alt="BizPro linkedin"
-            className="linkList__icon icon--linkedin"
+            src={icon_instagram}
+            alt="BizPro instagram"
+            className="linkList__icon icon--Instagram"
           />
-          <p className="linkList__word">BizPro Taipei</p>
+          <p className="linkList__word">ntu_bizpro</p>
         </a>
         <a
           className="linkList__item"

@@ -22,6 +22,7 @@
   "homepage": "https://github.com/yichunlo/BizPro_official_website#readme",
   "dependencies": {
     "config": "^3.3.8",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "jquery": "^3.6.1",
     "mongoose": "^6.6.5",

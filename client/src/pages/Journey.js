@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import briefIntro_people from '../asset/img/briefIntro_people.webp';
 import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
@@ -6,6 +6,8 @@ import dot_symbol from '../asset/img/dot_symbol_white100.svg';
 import dot_symbol_grey from '../asset/img/dot_symbol_white300.svg';
 import dubbleCircle from '../asset/img/doubleCircle_symbol_white300.svg';
 import hbsCase from '../asset/img/hbsCase.webp';
+import leanCase from '../asset/img/leanCase.webp';
+
 import icon_basicHypo from '../asset/img/icon/icon_basicHypo.svg';
 import junior_courseStructure from '../asset/img/junior_courseStructure.webp';
 import lifeCase from '../asset/img/lifeCase.webp';
@@ -29,6 +31,7 @@ import icon_speach from '../asset/img/icon/icon_speach.svg';
 import icon_communication from '../asset/img/icon/icon_communication.svg';
 import circle4 from '../asset/img/4Circle_symbol_white300.svg';
 import toggle_symbol from '../asset/img/toggle_symbol.svg';
+import icon_down from '../asset/img/icon/icon_down.svg';
 import $ from 'jquery';
 function Journey() {
   const headerWordingJunior = localDb.headerWording.journey.junior;
@@ -37,7 +40,7 @@ function Journey() {
 
   const [tab, setTab] = useState('junior');
 
-  const Junior_IconItem = ({ icon, title }) => (
+  const JuniorIconItem = ({ icon, title }) => (
     <div className="iconSet__items">
       <img src={icon} alt="icon_basicHypo" className="iconSet__items--icon" />
       <h4 className="iconSet__items--title">{title}</h4>
@@ -104,16 +107,17 @@ function Journey() {
                 原本大海撈針要花費的時間。而針對專案問題建立議題樹，更能協助釐清目前問題的著力點，以更高效率的方式拆解問題。
               </p>
               <div className="container__content--iconSet">
-                <Junior_IconItem icon={icon_basicHypo} title="初階假說思考" />
-                <Junior_IconItem icon={icon_interview} title="群體/個人訪談" />
-                <Junior_IconItem icon={icon_qualitative} title="質化訪綱設計" />
-                <Junior_IconItem
+                <JuniorIconItem icon={icon_basicHypo} title="初階假說思考" />
+                <JuniorIconItem icon={icon_interview} title="群體/個人訪談" />
+                <JuniorIconItem icon={icon_qualitative} title="質化訪綱設計" />
+                <JuniorIconItem
                   icon={icon_questionnaire}
                   title="量化問卷設計"
                 />
               </div>
             </div>
           </div>
+          <img src={icon_down} alt="" className="nextIcon containerMR" />
           <div className="courseStructure__infos--container containerMR">
             <h3 className="container__title">Info-Process 階段</h3>
             <div className="container__content">
@@ -121,19 +125,14 @@ function Journey() {
                 在資料分析階段，一個清晰的提案強調故事線邏輯，透過層層論證後的問題拆解，產出對應專案問題嚴謹的解方。我們安排社員學習建構故事邏輯，將所得資料進行分析與研究後，產出最具說服力的提案。
               </p>
               <div className="container__content--iconSet">
-                <Junior_IconItem
-                  icon={icon_advancedHypo}
-                  title="進階假說思考"
-                />
-                <Junior_IconItem icon={icon_mece} title="MECE 原則" />
-                <Junior_IconItem icon={icon_pyramid} title="金字塔原理" />
-                <Junior_IconItem
-                  icon={icon_quantitative}
-                  title="量化分析模型"
-                />
+                <JuniorIconItem icon={icon_advancedHypo} title="進階假說思考" />
+                <JuniorIconItem icon={icon_mece} title="MECE 原則" />
+                <JuniorIconItem icon={icon_pyramid} title="金字塔原理" />
+                <JuniorIconItem icon={icon_quantitative} title="量化分析模型" />
               </div>
             </div>
           </div>
+          <img src={icon_down} alt="" className="nextIcon containerMR" />
           <div className="courseStructure__infos--container">
             <h3 className="container__title">Info-Out 階段</h3>
             <div className="container__content">
@@ -141,17 +140,10 @@ function Journey() {
                 在資料呈現階段，商業簡報強調在視覺上快速讓讀者理解提案，透過簡報設計，將故事線邏輯可視化。此外，在簡報設計、口頭報告皆強調以結論先行的方式，最高效率讓聽者抓到提案重點。
               </p>
               <div className="container__content--iconSet">
-                <Junior_IconItem
-                  icon={icon_advancedHypo}
-                  title="進階假說思考"
-                />
-                <Junior_IconItem icon={icon_powerpoint} title="提案簡報設計" />
-                <Junior_IconItem
-                  icon={icon_speach}
-                  title="提案報告技巧
-"
-                />
-                <Junior_IconItem icon={icon_communication} title="溝通與表達" />
+                <JuniorIconItem icon={icon_advancedHypo} title="進階假說思考" />
+                <JuniorIconItem icon={icon_powerpoint} title="提案簡報設計" />
+                <JuniorIconItem icon={icon_speach} title="提案報告技巧" />
+                <JuniorIconItem icon={icon_communication} title="溝通與表達" />
               </div>
             </div>
           </div>
@@ -220,7 +212,7 @@ function Journey() {
             </p>
           </div>
           <div className="caseStudy__lean--img">
-            <img src={hbsCase} alt="hbsCase" className="hbsCaseImg" />
+            <img src={leanCase} alt="leanCase" className="hbsCaseImg" />
           </div>
         </div>
       </article>
@@ -261,7 +253,7 @@ function Journey() {
             className="title--symbolRight"
           />
         </div>
-        <div className="project__jp" style={{ marginBottom: '128px' }}>
+        <div className="project__jp" style={{ marginBottom: '80px' }}>
           <div className="project__jp--title">
             <h2 className="jp__title--title">Junior Project</h2>
             <p className="jp__title--content">
@@ -276,14 +268,14 @@ function Journey() {
             </div>
             <div className="content--feature">
               <div className="feature__item">
-                <h3 className="feature__item--title">個人專案管理</h3>
+                <h4 className="feature__item--title">個人專案管理</h4>
                 <p className="feature__item--content">
                   面對為期一學期的個人大型專案， Junior
                   將學習如何進行個人專案管理，以超過一般大學課程的標準，訓練專案規劃、執行、掌控進度的能力。
                 </p>
               </div>
               <div className="feature__item">
-                <h3 className="feature__item--title">職涯領域研究</h3>
+                <h4 className="feature__item--title">職涯領域研究</h4>
                 <p className="feature__item--content">
                   Junior
                   們在選擇個人學期專案題目時，可根據個人偏好之產業進行研究，深入探索與未來職涯相關的領域。此外，也可透過專家訪談或與相關領域
@@ -291,7 +283,7 @@ function Journey() {
                 </p>
               </div>
               <div className="feature__item" style={{ margin: '0px' }}>
-                <h3 className="feature__item--title">假說思考訓練</h3>
+                <h4 className="feature__item--title">假說思考訓練</h4>
                 <p className="feature__item--content">
                   Junior 們將實際應用假說思考於 Info-In、Info-Process、Info-Out
                   三大課程主軸；透過學期初、中、末三次的報告，與 Alumni
@@ -317,21 +309,21 @@ function Journey() {
             </div>
             <div className="content--feature">
               <div className="feature__item">
-                <h3 className="feature__item--title">實務經驗累積</h3>
+                <h4 className="feature__item--title">實務經驗累積</h4>
                 <p className="feature__item--content">
                   透過業主提供之真實問題，Junior 進行 Life Case
                   時將能與企業深度交流，並權衡提案需求、企業文化、業主期待等多重面向，調整提案內容，最終產出具備執行價值的提案。
                 </p>
               </div>
               <div className="feature__item">
-                <h3 className="feature__item--title">業主期待管理</h3>
+                <h4 className="feature__item--title">業主期待管理</h4>
                 <p className="feature__item--content">
                   在多次與業主交流的過程中，Junior
                   將從中練習對焦業主期待、向上管理技巧，以有效產出讓業主滿意的成果。
                 </p>
               </div>
               <div className="feature__item" style={{ margin: '0px' }}>
-                <h3 className="feature__item--title">團體專案研究</h3>
+                <h4 className="feature__item--title">團體專案研究</h4>
                 <p className="feature__item--content">
                   Life Case 是 Junior
                   們第一次以團體形式提案，練習在討論過程中將不同的意見彙整為共識。來自多元背景的
@@ -341,6 +333,14 @@ function Journey() {
             </div>
           </div>
         </div>
+        {/* <div className="bottomNavGroup">
+          <div className="prevButton">
+            <h4>{'<'} 查看 Junior</h4>
+          </div>
+          <div className="nextButton">
+            <h4>查看 Senior {'>'} </h4>
+          </div>
+        </div> */}
       </article>
     </section>
   );
@@ -361,21 +361,27 @@ function Journey() {
               可彈性運用 BizPro 資源客製化個人學習旅程。
             </p>
             <div className="content--toggleList">
-              <div className="toggleItem toggleItem--1">
-                <div
-                  className="toggleItem--title"
-                  onClick={() => {
-                    const height = $('.toggleItem--1').css('height');
-                    if (height === '38px') {
-                      $('.toggleItem--3').css('height', '38px');
-                      $('.toggleItem--2').css('height', '38px');
-                      $('.toggleItem--1').css('height', '116px');
-                    } else {
-                      $('.toggleItem--1').css('height', '38px');
-                    }
-                  }}
-                >
-                  <img src={toggle_symbol} alt="toggle_symbol" />
+              <div
+                className="toggleItem toggleItem--1"
+                onClick={() => {
+                  const height = $('.toggleItem--1').css('height');
+                  if (height === '38px') {
+                    $('.toggleItem--3').css('height', '38px');
+                    $('.toggleItem--2').css('height', '38px');
+                    $('.toggleItem--1').css('height', '116px');
+                    $('.toggle_symbol--1').css('transform', 'rotate(90deg)');
+                  } else {
+                    $('.toggleItem--1').css('height', '38px');
+                    $('.toggle_symbol--1').css('transform', 'rotate(0deg)');
+                  }
+                }}
+              >
+                <div className="toggleItem--title">
+                  <img
+                    src={toggle_symbol}
+                    alt="toggle_symbol"
+                    className="toggle_symbol toggle_symbol--1"
+                  />
                   <p>職涯分享</p>
                 </div>
                 <div className="toggleItem--content">
@@ -384,21 +390,27 @@ function Journey() {
                   <li>Career Sharing: Tencent</li>
                 </div>
               </div>
-              <div className="toggleItem toggleItem--2">
-                <div
-                  className="toggleItem--title"
-                  onClick={() => {
-                    const height = $('.toggleItem--2').css('height');
-                    if (height === '38px') {
-                      $('.toggleItem--1').css('height', '38px');
-                      $('.toggleItem--3').css('height', '38px');
-                      $('.toggleItem--2').css('height', '164px');
-                    } else {
-                      $('.toggleItem--2').css('height', '38px');
-                    }
-                  }}
-                >
-                  <img src={toggle_symbol} alt="toggle_symbol" />
+              <div
+                className="toggleItem toggleItem--2"
+                onClick={() => {
+                  const height = $('.toggleItem--2').css('height');
+                  if (height === '38px') {
+                    $('.toggleItem--1').css('height', '38px');
+                    $('.toggleItem--3').css('height', '38px');
+                    $('.toggleItem--2').css('height', '164px');
+                    $('.toggle_symbol--2').css('transform', 'rotate(90deg)');
+                  } else {
+                    $('.toggleItem--2').css('height', '38px');
+                    $('.toggle_symbol--2').css('transform', 'rotate(0deg)');
+                  }
+                }}
+              >
+                <div className="toggleItem--title">
+                  <img
+                    src={toggle_symbol}
+                    alt="toggle_symbol"
+                    className="toggle_symbol toggle_symbol--2"
+                  />
                   <p>產業技能</p>
                 </div>
                 <div className="toggleItem--content">
@@ -409,22 +421,27 @@ function Journey() {
                   <li>UX Research in Business Context</li>
                 </div>
               </div>
-              <div className="toggleItem toggleItem--3">
-                <div
-                  className="toggleItem--title"
-                  onClick={() => {
-                    const height = $('.toggleItem--3').css('height');
-                    if (height === '38px') {
-                      $('.toggleItem--1').css('height', '38px');
-                      $('.toggleItem--2').css('height', '38px');
-
-                      $('.toggleItem--3').css('height', '116px');
-                    } else {
-                      $('.toggleItem--3').css('height', '38px');
-                    }
-                  }}
-                >
-                  <img src={toggle_symbol} alt="toggle_symbol" />
+              <div
+                className="toggleItem toggleItem--3"
+                onClick={() => {
+                  const height = $('.toggleItem--3').css('height');
+                  if (height === '38px') {
+                    $('.toggleItem--1').css('height', '38px');
+                    $('.toggleItem--2').css('height', '38px');
+                    $('.toggleItem--3').css('height', '116px');
+                    $('.toggle_symbol--3').css('transform', 'rotate(90deg)');
+                  } else {
+                    $('.toggleItem--3').css('height', '38px');
+                    $('.toggle_symbol--3').css('transform', 'rotate(0deg)');
+                  }
+                }}
+              >
+                <div className="toggleItem--title">
+                  <img
+                    src={toggle_symbol}
+                    alt="toggle_symbol"
+                    className="toggle_symbol toggle_symbol--3"
+                  />
                   <p>職場技巧</p>
                 </div>
                 <div className="toggleItem--content">
@@ -444,7 +461,7 @@ function Journey() {
             在 Senior 時期，Senior 們將與外部企業或組織合作，進行為期 3-4
             個月的團體專案，並配有 1-2 位 BizPro Alumni 作為專案 Mentor。
           </p>
-          <p className="content--paragraph">
+          <p className="content--paragraph" style={{ marginBottom: '24px' }}>
             不同於 Junior 時期的 Life Case，在 Senior Project 裡 Senior
             們將接受更高強度的訓練，研究更複雜的專案命題並產出更完整詳盡的解決方案。不論是硬性的資料搜集與分析、質化
             /
@@ -458,7 +475,6 @@ function Journey() {
       </article>
     </section>
   );
-
   const Alumni = () => (
     <section className="alumni">
       <img src={dubbleCircle} alt="dubbleCircle" className="dubbleCircle" />
@@ -496,6 +512,7 @@ function Journey() {
       </div>
     </section>
   );
+
   const clearClass = () => {
     document
       .getElementsByClassName('tab__item--junior')[0]
@@ -506,6 +523,15 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--alumni')[0]
       .classList.remove('tab__item--default', 'tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--junior')[1]
+    //   .classList.remove('tab__item--default', 'tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--senior')[1]
+    //   .classList.remove('tab__item--default', 'tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--alumni')[1]
+    //   .classList.remove('tab__item--default', 'tab__item--active');
   };
   const changeToJunior = () => {
     clearClass();
@@ -519,10 +545,18 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--alumni')[0]
       .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--junior')[1]
+    //   .classList.add('tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--senior')[1]
+    //   .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--alumni')[1]
+    //   .classList.add('tab__item--default');
   };
   const changeToSenior = () => {
     clearClass();
-    console.log(document.getElementsByClassName('tab__item--junior')[0]);
     document
       .getElementsByClassName('tab__item--junior')[0]
       .classList.add('tab__item--default');
@@ -532,6 +566,15 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--alumni')[0]
       .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--junior')[1]
+    //   .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--senior')[1]
+    //   .classList.add('tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--alumni')[1]
+    //   .classList.add('tab__item--default');
   };
   const changeToAlumni = () => {
     clearClass();
@@ -544,6 +587,15 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--alumni')[0]
       .classList.add('tab__item--active');
+    // document
+    //   .getElementsByClassName('tab__item--junior')[1]
+    //   .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--senior')[1]
+    //   .classList.add('tab__item--default');
+    // document
+    //   .getElementsByClassName('tab__item--alumni')[1]
+    //   .classList.add('tab__item--active');
   };
 
   return (
@@ -570,6 +622,7 @@ function Journey() {
           onClick={() => {
             changeToJunior();
             setTab('junior');
+            window.scrollTo(0, 0);
           }}
         >
           <p className="lg">Junior 新進社員</p>
@@ -580,6 +633,7 @@ function Journey() {
           onClick={() => {
             changeToSenior();
             setTab('senior');
+            window.scrollTo(0, 0);
           }}
         >
           <p className="lg">Senior 社團幹部</p>
@@ -590,6 +644,7 @@ function Journey() {
           onClick={() => {
             changeToAlumni();
             setTab('alumni');
+            window.scrollTo(0, 0);
           }}
         >
           <p className="lg">Alumni 歷屆成員</p>

@@ -1,19 +1,29 @@
 import $ from 'jquery';
-import React, { useState } from 'react';
-import avatar from '../asset/img/avatar_sample.webp';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import localDb from '../config/localDb.json';
 import Button from 'react-bootstrap/Button';
 import Select from 'react-select';
-import Pagination from 'react-bootstrap/Pagination';
+import axios from 'axios';
+import numberToRank from '../utility/numberToRank.js';
+import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
+import ReactPaginate from 'react-paginate';
 
 /*
 TODO:
-- 換頁功能
-- 串上 API 後的篩選功能
+- loading 符號
 */
 
 function Member() {
+  const [memberData, setMemberData] = useState(null);
+  const [filteredMemberData, setFilteredMemberData] = useState([]);
+  const [gradeOptions, setGradeOptions] = useState([]);
+  const [fieldOptions, setFieldOptions] = useState([]);
+  const [majorOptions, setMajorOptions] = useState([]);
+  const [majorFilter, setMajorFilter] = useState([]);
+  const [fieldFilter, setFieldFilter] = useState([]);
+  const [gradeFilter, setGradeFilter] = useState('');
+  const [directSearch, setDirectSearch] = useState('');
   const [popupContent, setPopupContent] = useState({
     name: '',
     number: '',
@@ -21,84 +31,181 @@ function Member() {
     tags: [],
     exp: [],
   });
-  const [majorFilter, setMajorFilter] = useState([]);
-  const [fieldFilter, setFieldFilter] = useState([]);
-  const [gradeFilter, setGradeFilter] = useState('');
-  const [directSearch, setDirectSearch] = useState('');
-  //const [fieldOptions, setFieldOptions] = useState('');
-  const [memberData, setMemberData] = useState(localDb.memberTemp);
-
+  const [totalPage, setTotalPage] = useState(0);
+  const [nowPage, setNowPage] = useState(1);
+  const [onePageMemberCount, setOnePageMemberCount] = useState(1);
+  const [memberColumnCount, setMemberColumnCount] = useState(1);
+  const [fetchDataError, setFetchDataError] = useState(false);
   const headerWording = localDb.headerWording.member;
-  const rawMemberData = localDb.memberTemp;
 
-  //let fieldOptions = [];
-  // rawMemberData.forEach((member) => {
-  //   member.tags.forEach((tag) => {
-  //     if (!fieldOptions.includes(tag)) {
-  //       fieldOptions.push(tag);
-  //     }
-  //   });
-  // });
-  //console.log(fieldOptions);
-  // const fieldOptions2 = rawMemberData.for;
-  // console.log(fieldOptions2);
-  const majorOptions = [
-    { value: '經濟學系', label: '經濟學系' },
-    { value: '國際企業學系', label: '國際企業學系' },
-    { value: '財務金融學系', label: '財務金融學系' },
-    { value: '電子機械系', label: '電子機械系' },
-  ];
-  const fieldOptions = [
-    { value: '金融業', label: '金融業' },
-    { value: '顧問業', label: '顧問業' },
-    { value: '科技業', label: '科技業' },
-    { value: '社會創新', label: '社會創新' },
-  ];
-  const gradeOptions = [
-    { value: '0', label: '全部屆數' },
-    { value: '1', label: '1' },
-    { value: '2', label: '2' },
-    { value: '3', label: '3' },
-    { value: '4', label: '4' },
-    { value: '5', label: '5' },
-    { value: '6', label: '6' },
-    { value: '7', label: '7' },
-    { value: '8', label: '8' },
-    { value: '9', label: '9' },
-    { value: '10', label: '10' },
-    { value: '11', label: '11' },
-    { value: '12', label: '12' },
-    { value: '13', label: '13' },
-  ];
+  useEffect(() => {
+    let grade = [];
+    let field = [];
+    let major = [];
+    let gradeOptionsTemp = [{ value: '0', label: '全部屆數' }];
+    let fieldOptionsTemp = [];
+    let majorOptionsTemp = [];
+    const fetchData = async () => {
+      await axios
+        .get('http://localhost:5000/api/alumni/members')
+        .then((res) => {
+          const gridColumnCount = window
+            .getComputedStyle(
+              document.getElementsByClassName('member__items')[0]
+            )
+            .getPropertyValue('grid-template-columns')
+            .split(' ').length;
+
+          // set onePageMemberCount
+          let onePageMemberCountTemp = 1;
+          if (gridColumnCount === 1) {
+            onePageMemberCountTemp = 10;
+            setOnePageMemberCount(10);
+          } else if (gridColumnCount === 2) {
+            onePageMemberCountTemp = 12;
+            setOnePageMemberCount(12);
+          } else if (gridColumnCount === 3) {
+            onePageMemberCountTemp = 18;
+            setOnePageMemberCount(18);
+          } else if (gridColumnCount === 4) {
+            onePageMemberCountTemp = 20;
+            setOnePageMemberCount(20);
+          } else if (gridColumnCount === 5) {
+            onePageMemberCountTemp = 20;
+            setOnePageMemberCount(20);
+          } else {
+            onePageMemberCountTemp = gridColumnCount * 4;
+            setOnePageMemberCount(gridColumnCount * 4);
+          }
+
+          // Set options
+          res.data.map((member) => {
+            console.log(member);
+            if (!grade.includes(member.number)) {
+              grade.push(member.number);
+            }
+            member.tags.map((tag) => {
+              if (!field.includes(tag)) {
+                field.push(tag);
+              }
+            });
+            member.major.map((m) => {
+              if (!major.includes(m)) {
+                if (m !== 'Unknown') {
+                  major.push(m);
+                }
+              }
+            });
+          });
+          grade.map((item) => {
+            gradeOptionsTemp.push({ value: item, label: item });
+          });
+          field.map((item) => {
+            fieldOptionsTemp.push({ value: item, label: item });
+          });
+          major.map((item) => {
+            majorOptionsTemp.push({
+              value: item,
+              label: item.replace('臺灣大學', ''),
+            });
+          });
+
+          setMemberData(res.data);
+          setFilteredMemberData(res.data);
+          setTotalPage(Math.ceil(res.data.length / onePageMemberCountTemp));
+          setFieldOptions(fieldOptionsTemp);
+          setGradeOptions(gradeOptionsTemp);
+          setMajorOptions(majorOptionsTemp);
+        })
+        .catch((error) => {
+          setFetchDataError(true);
+          console.log(error);
+        });
+    };
+    fetchData();
+    window.addEventListener('resize', () => {
+      if (
+        $('.member__popUp').css('display') === 'none' &&
+        $('.member__popupLayer').css('display') === 'block'
+      ) {
+        $('.member__popUp').css('display', 'flex');
+        $('.member__popUp').css('opacity', '1');
+      }
+
+      let column = window
+        .getComputedStyle(document.getElementsByClassName('member__items')[0])
+        .getPropertyValue('grid-template-columns')
+        .split(' ').length;
+      if (column !== memberColumnCount) {
+        setMemberColumnCount(column);
+      }
+    });
+    return;
+  }, []);
+
+  useEffect(() => {
+    const gridColumnCount = window
+      .getComputedStyle(document.getElementsByClassName('member__items')[0])
+      .getPropertyValue('grid-template-columns')
+      .split(' ').length;
+
+    // set onePageMemberCount
+    let onePageMemberCountTemp = 1;
+    if (gridColumnCount === 1) {
+      onePageMemberCountTemp = 10;
+      setOnePageMemberCount(10);
+    } else if (gridColumnCount === 2) {
+      onePageMemberCountTemp = 12;
+      setOnePageMemberCount(12);
+    } else if (gridColumnCount === 3) {
+      onePageMemberCountTemp = 18;
+      setOnePageMemberCount(18);
+    } else if (gridColumnCount === 4) {
+      onePageMemberCountTemp = 20;
+      setOnePageMemberCount(20);
+    } else if (gridColumnCount === 5) {
+      onePageMemberCountTemp = 20;
+      setOnePageMemberCount(20);
+    } else {
+      onePageMemberCountTemp = gridColumnCount * 4;
+      setOnePageMemberCount(gridColumnCount * 4);
+    }
+    if (filteredMemberData)
+      setTotalPage(
+        Math.ceil(filteredMemberData.length / onePageMemberCountTemp)
+      );
+
+    return;
+  }, [memberColumnCount]);
 
   const MemberItem = (props) => (
     <div
       className="member__items--item"
       onClick={() => {
-        setPopupContent(memberData[props.id]);
+        setPopupContent(filteredMemberData[props.id]);
         setTimeout(() => {
-          $('.member__popUp').css('display', 'flex');
-          $('.member__popupLayer').css('display', 'block');
+          openPopup();
         }, 100);
       }}
     >
-      <div className="item__img">
-        <div className="mask">查看成員經歷</div>
-        <img src={props.avatar} alt="avatar" className="item__img--img" />
-      </div>
-      <div className="item__content">
-        <p className="item__content--title">
-          {props.number} {props.name}
-        </p>
-        <p className="item__content--subTitle">{props.jobTitle}</p>
+      <div className="item__container">
+        <div className="item__container--img">
+          <div className="mask">查看成員經歷</div>
+          <img src={props.avatar} alt="avatar" className="item__img--img" />
+        </div>
+        <div className="item__container--content">
+          <p className="item__content--title">
+            {numberToRank(props.number)} {props.name}
+          </p>
+          <p className="item__content--subTitle">{props.jobTitle}</p>
+        </div>
       </div>
       <Button
         variant="primary"
         onClick={() => {
           setPopupContent(memberData[props.id]);
           setTimeout(() => {
-            $('.member__popUp').css('display', 'flex');
-            $('.member__popupLayer').css('display', 'block');
+            openPopup();
           }, 100);
         }}
       >
@@ -109,11 +216,11 @@ function Member() {
   const PopUp = ({ props }) => (
     <section className="member__popUp">
       <div className="member__popUp--img">
-        <img src={avatar} alt="" />
+        <img src={props.avatar} alt="" />
       </div>
       <div className="member__popUp--content">
         <h3>
-          {props.number} {props.name}
+          {numberToRank(props.number)} {props.name}
         </h3>
         <p>{props.jobTitle}</p>
         <div className="content__tags">
@@ -125,51 +232,117 @@ function Member() {
           {props.exp.map((exp) => (
             <li>{exp}</li>
           ))}
+          <div className="gradientBox" />
         </ul>
       </div>
     </section>
   );
-  const PaginationComponent = () => (
-    <Pagination>
-      <Pagination.First />
-      <Pagination.Prev />
-      <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Ellipsis />
+  const openPopup = () => {
+    $('.member__popUp').css('display', 'flex');
+    $('.member__popupLayer').css('display', 'block');
+    $('.member__popUp').css('opacity', '1');
+    $('.member__popupLayer').css('opacity', '1');
+    $('body').css('overflow-y', 'hidden');
+    $('#memberSection').css('z-index', '');
 
-      <Pagination.Item>{11}</Pagination.Item>
-      <Pagination.Item active>{12}</Pagination.Item>
-      <Pagination.Item>{13}</Pagination.Item>
+    let element = document.getElementsByTagName('ul')[0];
+    if (
+      element.scrollHeight > element.clientHeight ||
+      element.scrollWidth > element.clientWidth
+    ) {
+      $('.gradientBox').css('display', 'block');
+    }
+  };
+  const switchPage = (direction, certainPage) => {
+    switch (direction) {
+      case 'next':
+        if (nowPage < totalPage) {
+          document.getElementById('memberSection').scrollIntoView();
+          setNowPage(nowPage + 1);
+        }
+        break;
+      case 'prev':
+        if (nowPage > 1) {
+          document.getElementById('memberSection').scrollIntoView();
+          setNowPage(nowPage - 1);
+        }
+        break;
+      case 'last':
+        document.getElementById('memberSection').scrollIntoView();
+        setNowPage(totalPage);
+        break;
+      case 'first':
+        document.getElementById('memberSection').scrollIntoView();
+        setNowPage(1);
+        break;
+      case 'certainPage':
+        setNowPage(certainPage);
+        setTimeout(() => {
+          document.getElementById('member__searchSection').scrollIntoView();
+        }, 0);
+        break;
+      default:
+        break;
+    }
+  };
+  const startFilter = (major, field, grade) => {
+    let filteredMemberDataTemp = memberData;
 
-      <Pagination.Ellipsis />
-      <Pagination.Item>{20}</Pagination.Item>
-      <Pagination.Next />
-      <Pagination.Last />
-    </Pagination>
-  );
+    // field filter
 
-  const startFilter = (field) => {
     if (field[0]) {
-      let filteredMemberData = rawMemberData.filter((member) =>
+      filteredMemberDataTemp = filteredMemberDataTemp.filter((member) =>
         field.some((e) => member.tags.includes(e))
       );
-      setMemberData(filteredMemberData);
-    } else {
-      setMemberData(rawMemberData);
     }
+
+    //grade filter
+    if (major[0]) {
+      filteredMemberDataTemp = filteredMemberDataTemp.filter((member) => {
+        return major.some((e) => member.major.includes(e));
+      });
+    }
+
+    if (grade && grade !== '0') {
+      filteredMemberDataTemp = filteredMemberDataTemp.filter(
+        (member) => member.number === grade
+      );
+    }
+    setNowPage(1);
+    setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
+    setFilteredMemberData(filteredMemberDataTemp);
+
+    // Set pagination to page 1
+    $('.page-link').map((id, el) => {
+      if (el.getAttribute('aria-label') === 'Page 1') {
+        el.click();
+      }
+    });
   };
   return (
     <React.Fragment>
       <Header title={headerWording.title} content={headerWording.content} />
-      <section className="member">
+      <section className="member" id="memberSection">
+        <img
+          src={connectionSymbol}
+          alt="connectionSymbol"
+          className="connectionSymbolTop connectionSymbol"
+        />
+        <img
+          src={connectionSymbol}
+          alt="connectionSymbol"
+          className="connectionSymbolBottom connectionSymbol"
+        />
         <PopUp props={popupContent} />
         <div
           className="member__popupLayer"
           onClick={() => {
             $('.member__popUp').css('display', 'none');
             $('.member__popupLayer').css('display', 'none');
+            $('body').css('overflow-y', 'scroll');
           }}
         />
-        <div className="member__searchSection">
+        <div className="member__searchSection" id="member__searchSection">
           <form
             action=""
             onSubmit={(e) => {
@@ -186,7 +359,7 @@ function Member() {
                 <div className="filter__major">
                   <Select
                     classNamePrefix="filter__field--selector"
-                    placeholder="選擇科系"
+                    placeholder="選擇科系（限臺大）"
                     isMulti
                     options={majorOptions}
                     onChange={(choice) => {
@@ -195,6 +368,7 @@ function Member() {
                         tempArray.push(`${option.value}`);
                       });
                       setMajorFilter(tempArray);
+                      startFilter(tempArray, fieldFilter, gradeFilter);
                     }}
                   />
                 </div>
@@ -210,7 +384,7 @@ function Member() {
                         tempArray.push(`${option.value}`);
                       });
                       setFieldFilter(tempArray);
-                      startFilter(tempArray);
+                      startFilter(majorFilter, tempArray, gradeFilter);
                     }}
                   />
                 </div>
@@ -221,6 +395,7 @@ function Member() {
                     options={gradeOptions}
                     onChange={(choice) => {
                       setGradeFilter(choice.value);
+                      startFilter(majorFilter, fieldFilter, choice.value);
                     }}
                   />
                 </div>
@@ -243,21 +418,58 @@ function Member() {
           </form>
         </div>
         <div className="member__items">
-          {memberData?.map((member, i) => {
-            return (
-              <MemberItem
-                name={`${member.name}`}
-                number={`${member.number}`}
-                jobTitle={`${member.jobTitle}`}
-                exp={`${member.exp}`}
-                tags={`${member.tags}`}
-                avatar={`${member.avatar}`}
-                id={i}
-              />
-            );
-          })}
+          {fetchDataError ? (
+            <h4 className="member__items--warning">
+              資料載入錯誤：請確認網際網路連線狀態，或連繫網站管理員
+            </h4>
+          ) : filteredMemberData.length !== 0 ? (
+            filteredMemberData.map((member, i) => {
+              if (
+                (nowPage - 1) * onePageMemberCount <= i &&
+                i < nowPage * onePageMemberCount
+              ) {
+                return (
+                  <MemberItem
+                    name={`${member.name}`}
+                    number={`${member.number}`}
+                    jobTitle={`${member.jobTitle}`}
+                    exp={`${member.exp}`}
+                    tags={`${member.tags}`}
+                    avatar={`${member.avatar}`}
+                    key={i}
+                    id={i}
+                  />
+                );
+              } else {
+                return;
+              }
+            })
+          ) : (
+            <h4 className="member__items--warning">無搜尋結果</h4>
+          )}
         </div>
-        <PaginationComponent />
+        <ReactPaginate
+          nextLabel="›"
+          onPageChange={(e) => {
+            switchPage('certainPage', e.selected + 1);
+          }}
+          pageRangeDisplayed={3}
+          marginPagesDisplayed={1}
+          pageCount={totalPage}
+          previousLabel="‹"
+          pageClassName="page-item"
+          pageLinkClassName="page-link"
+          previousClassName="page-item"
+          previousLinkClassName="page-link"
+          nextClassName="page-item"
+          nextLinkClassName="page-link"
+          breakLabel="..."
+          breakClassName="page-item"
+          breakLinkClassName="page-link"
+          containerClassName="pagination"
+          activeClassName="active"
+          renderOnZeroPageCount={null}
+        />
       </section>
     </React.Fragment>
   );
