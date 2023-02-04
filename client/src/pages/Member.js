@@ -16,7 +16,7 @@ TODO:
 
 function Member() {
   const [memberData, setMemberData] = useState(null);
-  const [filteredMemberData, setFilteredMemberData] = useState(null);
+  const [filteredMemberData, setFilteredMemberData] = useState([]);
   const [gradeOptions, setGradeOptions] = useState([]);
   const [fieldOptions, setFieldOptions] = useState([]);
   const [majorOptions, setMajorOptions] = useState([]);
@@ -35,6 +35,7 @@ function Member() {
   const [nowPage, setNowPage] = useState(1);
   const [onePageMemberCount, setOnePageMemberCount] = useState(1);
   const [memberColumnCount, setMemberColumnCount] = useState(1);
+  const [fetchDataError, setFetchDataError] = useState(false);
   const headerWording = localDb.headerWording.member;
 
   useEffect(() => {
@@ -46,7 +47,7 @@ function Member() {
     let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
-        .get('http://172.20.10.3:5000/api/alumni/members')
+        .get('http://localhost:5000/api/alumni/members')
         .then((res) => {
           const gridColumnCount = window
             .getComputedStyle(
@@ -79,6 +80,7 @@ function Member() {
 
           // Set options
           res.data.map((member) => {
+            console.log(member);
             if (!grade.includes(member.number)) {
               grade.push(member.number);
             }
@@ -87,9 +89,13 @@ function Member() {
                 field.push(tag);
               }
             });
-            if (!major.includes(member.major)) {
-              if (member.major !== 'Unknown') major.push(member.major);
-            }
+            member.major.map((m) => {
+              if (!major.includes(m)) {
+                if (m !== 'Unknown') {
+                  major.push(m);
+                }
+              }
+            });
           });
           grade.map((item) => {
             gradeOptionsTemp.push({ value: item, label: item });
@@ -99,7 +105,7 @@ function Member() {
           });
           major.map((item) => {
             majorOptionsTemp.push({
-              value: item.replace('臺灣大學', ''),
+              value: item,
               label: item.replace('臺灣大學', ''),
             });
           });
@@ -111,7 +117,10 @@ function Member() {
           setGradeOptions(gradeOptionsTemp);
           setMajorOptions(majorOptionsTemp);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          setFetchDataError(true);
+          console.log(error);
+        });
     };
     fetchData();
     window.addEventListener('resize', () => {
@@ -409,27 +418,35 @@ function Member() {
           </form>
         </div>
         <div className="member__items">
-          {filteredMemberData?.map((member, i) => {
-            if (
-              (nowPage - 1) * onePageMemberCount <= i &&
-              i < nowPage * onePageMemberCount
-            ) {
-              return (
-                <MemberItem
-                  name={`${member.name}`}
-                  number={`${member.number}`}
-                  jobTitle={`${member.jobTitle}`}
-                  exp={`${member.exp}`}
-                  tags={`${member.tags}`}
-                  avatar={`${member.avatar}`}
-                  key={i}
-                  id={i}
-                />
-              );
-            } else {
-              return;
-            }
-          })}
+          {fetchDataError ? (
+            <h4 className="member__items--warning">
+              資料載入錯誤：請確認網際網路連線狀態，或連繫網站管理員
+            </h4>
+          ) : filteredMemberData.length !== 0 ? (
+            filteredMemberData.map((member, i) => {
+              if (
+                (nowPage - 1) * onePageMemberCount <= i &&
+                i < nowPage * onePageMemberCount
+              ) {
+                return (
+                  <MemberItem
+                    name={`${member.name}`}
+                    number={`${member.number}`}
+                    jobTitle={`${member.jobTitle}`}
+                    exp={`${member.exp}`}
+                    tags={`${member.tags}`}
+                    avatar={`${member.avatar}`}
+                    key={i}
+                    id={i}
+                  />
+                );
+              } else {
+                return;
+              }
+            })
+          ) : (
+            <h4 className="member__items--warning">無搜尋結果</h4>
+          )}
         </div>
         <ReactPaginate
           nextLabel="›"

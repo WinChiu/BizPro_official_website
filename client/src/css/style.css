@@ -1806,15 +1806,16 @@ html {
   display: none;
 }
 .about__achieve--content {
-  font-family: "PingFangTC-Semibold";
-  font-size: 20px;
+  font-family: "PingFangTC-Regular";
+  font-size: 16px;
   line-height: 150%;
   margin: 0;
+  color: #1e1e1e;
   color: #ffffff;
   margin-bottom: 60px;
   max-width: 590px;
   text-align: center;
-  font-weight: normal;
+  font-size: 20px;
 }
 .about__achieve--numberList {
   display: flex;
@@ -1835,6 +1836,7 @@ html {
   margin: 0;
   color: #ffffff;
   margin-bottom: 8px;
+  white-space: nowrap;
 }
 .about__achieve--numberList .numberList__item--content {
   font-family: "PingFangTC-Semibold";
@@ -3017,6 +3019,18 @@ html {
   justify-content: space-between;
   width: 100%;
   margin-bottom: 80px;
+  position: relative;
+}
+.member__items--warning {
+  padding: 32px 0px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-family: "PingFangTC-Semibold";
+  font-size: 20px;
+  line-height: 150%;
+  margin: 0;
+  color: #4c5263;
 }
 .member__items--item {
   cursor: pointer;

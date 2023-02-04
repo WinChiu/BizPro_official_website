@@ -1613,12 +1613,12 @@ html {
       display: none;
     }
     &--content {
-      @include h4();
+      @include body1();
       color: $white_100;
       margin-bottom: 60px;
       max-width: 590px;
       text-align: center;
-      font-weight: normal;
+      font-size: 20px;
     }
 
     &--numberList {
@@ -1633,6 +1633,7 @@ html {
             margin: 0;
             color: $white_100;
             margin-bottom: 8px;
+            white-space: nowrap;
           }
           &--content {
             @include h4();
@@ -2772,7 +2773,15 @@ html {
     justify-content: space-between;
     width: 100%;
     margin-bottom: 80px;
-
+    position: relative;
+    &--warning {
+      padding: 32px 0px;
+      position: absolute;
+      width: 100%;
+      text-align: center;
+      @include h4();
+      color: $grey;
+    }
     &--item {
       cursor: pointer;
       max-width: 180px;

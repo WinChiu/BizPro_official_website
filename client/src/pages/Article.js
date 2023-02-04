@@ -33,7 +33,7 @@ function Article() {
     let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
-        .get('http://172.20.10.3:5000/api/article/member_talk')
+        .get('http://localhost:5000/api/article/member_talk')
         .then((res) => {
           console.log(res.data);
           setArticleData(res.data);
@@ -198,9 +198,9 @@ function Article() {
                   // setMajorFilter(tempArray);
                 }}
               />{' '}
-              <Button variant="primary" type="submit">
+              {/* <Button variant="primary" type="submit">
                 篩選
-              </Button>
+              </Button> */}
             </div>
           </form>
         </div>

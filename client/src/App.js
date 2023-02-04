@@ -32,15 +32,19 @@ function App() {
   window.addEventListener('resize', setVh);
 
   window.onload = () => {
-    console.log('Success load');
-    $('.logoContainer').css('animation-iteration-count', '1');
-    setTimeout(() => {
-      $('.logoContainer').css('width', '200px');
+    let nowLocation = window.location.href;
+    if (nowLocation[nowLocation.length - 1] === '/') {
+      $('.logoContainer').css('animation-iteration-count', '1');
       setTimeout(() => {
-        $('.logoLoading').fadeOut();
-        $('body').css('overflow-y', 'scroll');
+        $('.logoContainer').css('width', '200px');
+        setTimeout(() => {
+          $('.logoLoading').fadeOut();
+        }, 1200);
       }, 1200);
-    }, 1200);
+    } else {
+      $('.logoLoading').fadeOut();
+      $('body').css('overflow-y', 'scroll');
+    }
   };
   return (
     <BrowserRouter>
