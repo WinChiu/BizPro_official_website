@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Alumni = require('../../models/Alumni');
+const Alumni = require('../../models/alumni');
 
 router.get('/update', async (req, res) => {
   try {

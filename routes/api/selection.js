@@ -6,9 +6,10 @@ function findQuery(req) {
   let search_all_number = false;
   let search_all_major = false;
   let search_all_tags = false;
-  if (req.body.number == '0') search_all_number = true;
-  if (req.body.major.length == 0) search_all_major = true;
-  if (req.body.tags.length == 0) search_all_tags = true;
+  if (req.body.number === '0' || req.body.number === '')
+    search_all_number = true;
+  if (req.body.major.length === 0) search_all_major = true;
+  if (req.body.tags.length === 0) search_all_tags = true;
   console.log('search all number:', search_all_number);
   console.log('search all major:', search_all_major);
   console.log('search all tags:', search_all_tags);
@@ -37,14 +38,9 @@ function findQuery(req) {
   return query;
 }
 
-router.get('/select', async (req, res) => {
+router.post('/select', async (req, res) => {
   try {
-    //console.log(req.body);
-    tags_length = req.body.tags.length;
-    major_length = req.body.major.length;
-
-    query = findQuery(req);
-    console.log(query);
+    let query = findQuery(req);
     const alumniData = await Alumni.find(query);
     if (!alumniData) {
       res.status(400).json({ msg: 'No alumni data available' });
@@ -78,7 +74,6 @@ router.get('/search', async (req, res) => {
         res.status(500).json({msg: "Server Error!"});
     }
 });
-
 */
 
 module.exports = router;
