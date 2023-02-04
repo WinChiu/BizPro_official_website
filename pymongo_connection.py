@@ -38,11 +38,9 @@ cluster = MongoClient("mongodb+srv://BizPro:Tl0nWi08cfVtIX7m@cluster0.btdw0vd.mo
 
 db = cluster["BP"]
 collection_alumni = db["alumni"]
-tmp_collection = db["alumni_temp"]
-#new_values = {"$rename", {"avater": "avatar"}}
-#collection_alumni.update_many({}, new_values)
+#tmp_collection = db["alumni_backup"]
 
-alimni_data = tmp_collection.find()
+alimni_data = collection_alumni.find()
 cnt = 0
 nameList = []
 numberList = []
@@ -56,6 +54,9 @@ articleAvatarList = []
 majorList = []
 #f = open('alumni_data.txt', 'w')
 
+idxList = []
+majorDict = {}
+
 for data in alimni_data:
     cnt += 1
     if cnt > 125:
@@ -65,10 +66,38 @@ for data in alimni_data:
     jobTitleList.append(data['jobTitle'])
     expList.append(data['exp'])
     avatarList.append(data['avatar'])
-    majorList.append(data['major'])
-    #majorList.append(find_major(data['jobTitle'], data['exp']))
+    
+    idx = cnt-1
 
-for i in range(cnt-1):
+    majors = data['major']
+    '''
+    #majors = data['major'].split('、')
+    if len(majors) > 1:
+        sec_major = majors[1]
+        if sec_major[-3:] == '輔修）' or sec_major[-3:] == '輔修)':
+            sec_major = sec_major[:-4]
+        if sec_major[-3:] == '主修）' or sec_major[-3:] == '主修)':
+            sec_major = sec_major[:-5]
+        print(sec_major)
+        print(idx+1)
+    '''
+    for m in majors:
+        if m not in majorDict:
+            majorDict[m] = 1
+        else:
+            majorDict[m] += 1
+
+        if m[-2:] == "學程" or m == "臺灣大學材料科學暨工程學系":
+            print(idx+1)
+    
+    majorList.append(majors)
+
+for key in majorDict:
+    s = key + ": " + str(majorDict[key])
+    #print(s)
+
+'''
+for i in range(cnt):
     alumni_dict = {
         "name": nameList[i],
         "number": numberList[i],
@@ -79,14 +108,16 @@ for i in range(cnt-1):
         "major": majorList[i],
     }
     collection_alumni.insert_one(alumni_dict)
-'''
-collection_alumni.insert_one({
+
+
+tmp_collection.insert_one({
     "name": "Jim", 
     "number": "21", 
     "jobTitle": "Graphen Data Scientist Intern",
     "exp": ["臺灣大學資訊工程學系"],
-    "tags": [""],
-    "avatar": "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_960,w_480,f_auto,q_auto/89241/385535_892520.jpeg"
+    "tags": [],
+    "avatar": "https://custom-images.strikinglycdn.com/res/hrscywv4p/image/upload/c_limit,fl_lossy,h_960,w_480,f_auto,q_auto/89241/385535_892520.jpeg",
+    "major": ["臺灣大學資訊工程學系"]
 })
 
 
