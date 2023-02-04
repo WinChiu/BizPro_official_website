@@ -104,7 +104,7 @@ html {
   align-items: center;
 }
 .navBar__item {
-  color: #1e1e1e;
+  color: #312f2f;
   cursor: pointer;
 }
 .navBar__item a {
@@ -112,6 +112,7 @@ html {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   font-family: "PingFangTC-Regular";
   font-size: 18px;
   margin-left: 40px;
@@ -139,7 +140,7 @@ html {
   z-index: 100;
 }
 .navBar__dropdown .dropdown__item {
-  color: #1e1e1e;
+  color: #312f2f;
   line-height: 150%;
   padding: 16px 32px 16px 20px;
   width: 100%;
@@ -151,6 +152,7 @@ html {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   font-family: "PingFangTC-Regular";
   font-size: 18px;
   font-weight: normal;
@@ -239,7 +241,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: bold;
   color: #e8e4da;
 }
@@ -269,6 +271,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  color: #312f2f;
   color: #e8e4da;
   text-decoration: none;
   margin: 0;
@@ -316,7 +319,9 @@ html {
   font-size: 34px;
   line-height: 120%;
   margin: 0;
+  color: #312f2f;
   margin-bottom: 12px;
+  color: white;
 }
 @media screen and (max-width: 768px) {
   .header__content .content__title {
@@ -328,7 +333,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   color: #ffffff;
 }
 .header__stamp--rounds {
@@ -381,12 +386,14 @@ html {
     font-size: 24px;
     line-height: 150%;
     margin: 0;
+    color: #312f2f;
     margin-bottom: 8px;
   }
   .header__content .content__word {
     font-family: "PingFangTC-Regular";
     font-size: 14px;
     line-height: 150%;
+    color: #312f2f;
     color: #ffffff;
   }
 }
@@ -424,6 +431,7 @@ html {
   font-size: 34px;
   line-height: 120%;
   margin: 0;
+  color: #312f2f;
   margin-bottom: 24px;
 }
 @media screen and (max-width: 768px) {
@@ -436,7 +444,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
 }
 .activity__content--img {
   flex: 1;
@@ -569,6 +577,7 @@ html {
   font-size: 34px;
   line-height: 120%;
   margin: 0;
+  color: #312f2f;
   margin: 0 16px 0 16px;
   white-space: nowrap;
   text-align: center;
@@ -586,7 +595,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
 }
 .junior .courseStructure__intro--img {
   flex: 1;
@@ -618,6 +627,7 @@ html {
   font-size: 24px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   margin-bottom: 16px;
   text-align: center;
 }
@@ -634,7 +644,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   text-align: center;
 }
 .junior .courseStructure__infos--container .container__content--iconSet {
@@ -661,7 +671,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-size: 18px;
   font-weight: bold;
 }
@@ -697,6 +707,7 @@ html {
   font-size: 34px;
   line-height: 120%;
   margin: 0;
+  color: #312f2f;
   margin: 0 16px 0 16px;
   white-space: nowrap;
   text-align: center;
@@ -710,7 +721,7 @@ html {
   color: #ffffff;
 }
 .junior .caseStudy__hbs {
-  margin-bottom: 48px;
+  margin-bottom: 80px;
 }
 .junior .caseStudy__hbs, .junior .caseStudy__lean {
   z-index: 10;
@@ -741,6 +752,7 @@ html {
   font-size: 34px;
   line-height: 120%;
   margin: 0;
+  color: #312f2f;
   margin-bottom: 24px;
 }
 @media screen and (max-width: 768px) {
@@ -753,7 +765,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
 }
 .junior .project {
   padding: 80px 128px 80px 128px;
@@ -795,6 +807,7 @@ html {
   font-size: 34px;
   line-height: 120%;
   margin: 0;
+  color: #312f2f;
   margin: 0 16px 0 16px;
   white-space: nowrap;
   text-align: center;
@@ -815,6 +828,7 @@ html {
   font-size: 34px;
   line-height: 120%;
   margin: 0;
+  color: #312f2f;
   margin-bottom: 24px;
 }
 @media screen and (max-width: 768px) {
@@ -827,7 +841,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   width: 80%;
 }
 .junior .project__jp--content, .junior .project__lc--content {
@@ -849,12 +863,13 @@ html {
 .junior .project__jp--content .content--feature .feature__item, .junior .project__lc--content .content--feature .feature__item {
   margin-bottom: 32px;
 }
-.junior .project__jp--content .content--feature .feature__item h3, .junior .project__lc--content .content--feature .feature__item h3 {
+.junior .project__jp--content .content--feature .feature__item h4, .junior .project__lc--content .content--feature .feature__item h4 {
   font-family: "PingFangTC-Semibold";
-  font-size: 24px;
+  font-size: 20px;
   line-height: 150%;
   margin: 0;
-  margin-bottom: 12px;
+  color: #312f2f;
+  margin-bottom: 8px;
 }
 @media screen and (max-width: 1200px) {
   .junior .courseStructure {
@@ -1067,7 +1082,7 @@ html {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 .senior__course--content, .senior__project--content {
   flex: 1;
@@ -1083,7 +1098,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   margin-bottom: 16px;
 }
 .senior__course--content .contentContainer .content--toggleList, .senior__project--content .contentContainer .content--toggleList {
@@ -1101,6 +1116,9 @@ html {
   transition-duration: 0.1s;
   height: 38px;
 }
+.senior__course--content .contentContainer .content--toggleList .toggleItem:hover, .senior__project--content .contentContainer .content--toggleList .toggleItem:hover {
+  cursor: pointer;
+}
 .senior__course--content .contentContainer .content--toggleList .toggleItem--title, .senior__project--content .contentContainer .content--toggleList .toggleItem--title {
   display: flex;
   flex-direction: row;
@@ -1109,18 +1127,16 @@ html {
   margin-bottom: 4px;
   width: 100%;
 }
-.senior__course--content .contentContainer .content--toggleList .toggleItem--title:hover, .senior__project--content .contentContainer .content--toggleList .toggleItem--title:hover {
-  cursor: pointer;
-}
 .senior__course--content .contentContainer .content--toggleList .toggleItem--title img, .senior__project--content .contentContainer .content--toggleList .toggleItem--title img {
   margin-right: 8px;
+  transition-duration: 0.2s;
 }
 .senior__course--content .contentContainer .content--toggleList .toggleItem--title p, .senior__project--content .contentContainer .content--toggleList .toggleItem--title p {
   font-family: "PingFangTC-Regular";
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   color: white;
   font-weight: bold;
 }
@@ -1129,7 +1145,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   padding-left: 8px;
   color: white;
 }
@@ -1138,6 +1154,7 @@ html {
   font-size: 34px;
   line-height: 120%;
   margin: 0;
+  color: #312f2f;
   margin-bottom: 24px;
 }
 @media screen and (max-width: 768px) {
@@ -1165,6 +1182,9 @@ html {
 }
 .senior__project--content {
   margin-right: 48px;
+}
+.senior__project--content p {
+  color: #312f2f;
 }
 @media screen and (max-width: 1200px) {
   .senior {
@@ -1291,7 +1311,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: bold;
   color: white;
   padding: 8px 16px 8px 16px;
@@ -1313,6 +1333,7 @@ html {
   font-size: 24px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   margin-bottom: 12px;
 }
 .alumni__content--item p {
@@ -1320,7 +1341,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
 }
 @media screen and (max-width: 1200px) {
   .alumni__content {
@@ -1390,7 +1411,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: bold;
 }
 .tab__item .sm {
@@ -1445,6 +1466,7 @@ html {
   font-size: 34px;
   line-height: 120%;
   margin: 0;
+  color: #312f2f;
   margin: 0 16px 0 16px;
   white-space: nowrap;
   text-align: center;
@@ -1563,6 +1585,7 @@ html {
   font-size: 48px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   font-size: 56px;
   color: #ffffff;
   margin: 8px 0 8px 0;
@@ -1575,6 +1598,7 @@ html {
   font-size: 24px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   font-weight: bold;
   color: #ffffff;
   transform: translateY(20px);
@@ -1597,6 +1621,7 @@ html {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   color: #ffffff;
   margin-right: 4px;
 }
@@ -1662,7 +1687,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   margin-bottom: 32px;
   padding-right: 56px;
 }
@@ -1671,6 +1696,7 @@ html {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   color: #ae0023;
   padding-right: 56px;
 }
@@ -1743,7 +1769,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   padding-right: 56px;
 }
 .about__vision--iconList {
@@ -1768,8 +1794,9 @@ html {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   font-size: 18px;
-  color: #1e1e1e;
+  color: #312f2f;
   margin-bottom: 4px;
 }
 .about__vision--iconList .iconList__item--content .content--word {
@@ -1777,7 +1804,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
 }
 .about__vision .hideIcon {
   transform: translateY(20px);
@@ -1810,7 +1837,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   color: #ffffff;
   margin-bottom: 60px;
   max-width: 590px;
@@ -1843,6 +1870,7 @@ html {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   color: #ffffff;
   text-align: center;
 }
@@ -1892,7 +1920,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: bold;
   color: white;
   padding: 8px 16px 8px 16px;
@@ -1914,6 +1942,7 @@ html {
   font-size: 34px;
   line-height: 120%;
   margin: 0;
+  color: #312f2f;
   margin-bottom: 32px;
 }
 @media screen and (max-width: 768px) {
@@ -1926,7 +1955,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   margin-bottom: 32px;
 }
 .about__briefIntro .briefIntro__course--img, .about__briefIntro .briefIntro__people--img {
@@ -2004,6 +2033,7 @@ html {
     font-size: 48px;
     line-height: 150%;
     margin: 0;
+    color: #312f2f;
   }
   .about__header .connection__left {
     transform: scaleY(-1) scale(0.6) rotate(15deg);
@@ -2228,6 +2258,7 @@ html {
     font-size: 20px;
     line-height: 150%;
     margin: 0;
+    color: #312f2f;
   }
   .about__header .connection__left {
     transform: scaleY(-1) scale(0.8) rotate(15deg);
@@ -2300,7 +2331,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: bold;
   color: white;
   padding: 8px 16px 8px 16px;
@@ -2333,6 +2364,7 @@ html {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   margin-right: 16px;
   font-weight: normal;
   white-space: nowrap;
@@ -2361,6 +2393,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  color: #312f2f;
   color: white;
 }
 .article__searchSection--filter .filter__major--selector__option:hover,
@@ -2420,7 +2453,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: bold;
 }
 .article__detail--titleGroup .titleGroup__word--title {
@@ -2428,6 +2461,7 @@ html {
   font-size: 24px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   font-weight: bold;
 }
 .article__detail--content {
@@ -2435,7 +2469,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   overflow-y: scroll;
   white-space: pre-wrap;
   height: 100%;
@@ -2490,7 +2524,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: bold;
   margin-bottom: 4px;
 }
@@ -2499,6 +2533,7 @@ html {
   font-size: 24px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   font-weight: bold;
   margin-bottom: 8px;
   display: -webkit-box;
@@ -2511,7 +2546,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   margin-bottom: 12px;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -2530,6 +2565,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  color: #312f2f;
   padding: 4px 16px 2px 16px;
   border-radius: 16px;
   background-color: #ae0023;
@@ -2545,12 +2581,12 @@ html {
   margin-bottom: 0;
 }
 .article .pagination .page-item a {
-  color: #1e1e1e;
+  color: #312f2f;
 }
 .article .pagination .page-item a:hover {
   background-color: rgba(174, 0, 35, 0.1);
   border-color: white;
-  color: #1e1e1e;
+  color: #312f2f;
 }
 .article .pagination .page-item a:active {
   background-color: none;
@@ -2614,7 +2650,7 @@ html {
     font-size: 16px;
     line-height: 150%;
     margin: 0;
-    color: #1e1e1e;
+    color: #312f2f;
     font-weight: bold;
     margin-bottom: 4px;
   }
@@ -2624,7 +2660,7 @@ html {
     font-size: 16px;
     line-height: 150%;
     margin: 0;
-    color: #1e1e1e;
+    color: #312f2f;
     margin-bottom: 8px;
   }
   .article__item--content .content {
@@ -2633,6 +2669,7 @@ html {
     font-family: "PingFangTC-Regular";
     font-size: 14px;
     line-height: 150%;
+    color: #312f2f;
   }
   .article__item--content .tags .tag {
     font-family: "PingFangTC-Regular";
@@ -2653,6 +2690,7 @@ html {
     font-size: 20px;
     line-height: 150%;
     margin: 0;
+    color: #312f2f;
     margin-right: 0px;
     margin-bottom: 16px;
   }
@@ -2694,6 +2732,7 @@ html {
     font-size: 20px;
     line-height: 150%;
     margin: 0;
+    color: #312f2f;
   }
   .article__detail--content .gradientBox {
     height: 40px;
@@ -2720,6 +2759,7 @@ html {
     font-family: "PingFangTC-Regular";
     font-size: 14px;
     line-height: 150%;
+    color: #312f2f;
     display: -webkit-box;
     -webkit-line-clamp: 3;
   }
@@ -2793,6 +2833,7 @@ html {
   font-size: 24px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   -webkit-font-smoothing: antialiased;
 }
 .member__popUp--content p,
@@ -2801,7 +2842,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   -webkit-font-smoothing: antialiased;
 }
 .member__popUp--content ul {
@@ -2894,7 +2935,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: bold;
   color: white;
   padding: 8px 16px 8px 16px;
@@ -2919,6 +2960,7 @@ html {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   margin-right: 16px;
   font-weight: normal;
   white-space: nowrap;
@@ -2936,7 +2978,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: normal;
   border-radius: 4px;
   border: 1px solid #cccccc;
@@ -2959,6 +3001,7 @@ html {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   margin-right: 16px;
   font-weight: normal;
   white-space: nowrap;
@@ -2986,6 +3029,7 @@ html {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   margin-right: 16px;
   font-weight: normal;
   white-space: nowrap;
@@ -3003,6 +3047,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  color: #312f2f;
   color: white;
 }
 .member__searchSection--filter .filterContainer .filter__major--selector__option:hover, .member__searchSection--filter .filterContainer .filter__field--selector__option:hover, .member__searchSection--filter .filterContainer .filter__grade--selector__option:hover {
@@ -3030,6 +3075,7 @@ html {
   font-size: 20px;
   line-height: 150%;
   margin: 0;
+  color: #312f2f;
   color: #4c5263;
 }
 .member__items--item {
@@ -3070,7 +3116,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: bold;
   color: white;
   transition-duration: 0.3s;
@@ -3086,7 +3132,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: bold;
   margin-bottom: 8px;
   text-align: center;
@@ -3096,7 +3142,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   text-align: center;
   margin-bottom: 8px;
 }
@@ -3114,6 +3160,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  color: #312f2f;
   font-weight: bold;
   color: white;
   padding: 8px 16px 6px 16px;
@@ -3139,12 +3186,12 @@ html {
   margin-bottom: 0;
 }
 .member .pagination .page-item a {
-  color: #1e1e1e;
+  color: #312f2f;
 }
 .member .pagination .page-item a:hover {
   background-color: rgba(174, 0, 35, 0.1);
   border-color: white;
-  color: #1e1e1e;
+  color: #312f2f;
 }
 .member .pagination .page-item a:active {
   background-color: none;
@@ -3393,7 +3440,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   color: #e8e4da;
 }
 .backstage .sidebar .sign {
@@ -3454,7 +3501,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   color: #ffffff;
   margin-right: 40px;
   line-height: 100%;
@@ -3502,7 +3549,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   color: white;
   padding: 8px 12px 6px 12px;
   margin-right: 8px;
@@ -3515,7 +3562,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   color: white;
   padding: 8px 12px 6px 12px;
 }
@@ -3525,7 +3572,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   font-weight: normal;
   border-radius: 4px;
   border: 1px solid #cccccc;
@@ -3536,7 +3583,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   white-space: nowrap;
   margin-right: 8px;
 }
@@ -3548,6 +3595,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  color: #312f2f;
   font-weight: normal;
   border-radius: 4px;
   border: 1px solid #cccccc;
@@ -3567,7 +3615,7 @@ html {
   font-size: 16px;
   line-height: 150%;
   margin: 0;
-  color: #1e1e1e;
+  color: #312f2f;
   color: white;
   padding: 8px 16px 6px 16px;
   margin-right: 8px;
@@ -3578,6 +3626,7 @@ html {
   font-size: 34px;
   line-height: 120%;
   margin: 0;
+  color: #312f2f;
   width: 100%;
 }
 @media screen and (max-width: 768px) {
@@ -3596,7 +3645,7 @@ html {
 .backstage .settingPage .table tbody tr td {
   vertical-align: middle;
   background-color: #ffffff;
-  color: #1e1e1e;
+  color: #312f2f;
   max-width: 200px;
   white-space: nowrap;
   overflow: hidden;
@@ -3608,6 +3657,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  color: #312f2f;
   color: white;
   padding: 8px 12px 6px 12px;
   margin-right: 8px;
@@ -3618,6 +3668,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  color: #312f2f;
   color: white;
   padding: 8px 12px 6px 12px;
 }
@@ -3626,15 +3677,17 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  color: #312f2f;
   color: white;
   padding: 8px 12px 6px 12px;
   margin-right: 8px;
 }
 .backstage .settingPage .table tbody tr td a {
-  color: #1e1e1e;
+  color: #312f2f;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  color: #312f2f;
 }
 .backstage .settingPage .table tbody tr td a:hover {
   color: #4c5263;
@@ -3654,7 +3707,7 @@ html {
   background-color: rgb(255, 234, 230);
 }
 .backstage .pagination .page-item a {
-  color: #1e1e1e;
+  color: #312f2f;
 }
 .backstage .pagination .page-item a:hover {
   background-color: rgba(174, 0, 35, 0);

@@ -268,14 +268,14 @@ function Journey() {
             </div>
             <div className="content--feature">
               <div className="feature__item">
-                <h3 className="feature__item--title">個人專案管理</h3>
+                <h4 className="feature__item--title">個人專案管理</h4>
                 <p className="feature__item--content">
                   面對為期一學期的個人大型專案， Junior
                   將學習如何進行個人專案管理，以超過一般大學課程的標準，訓練專案規劃、執行、掌控進度的能力。
                 </p>
               </div>
               <div className="feature__item">
-                <h3 className="feature__item--title">職涯領域研究</h3>
+                <h4 className="feature__item--title">職涯領域研究</h4>
                 <p className="feature__item--content">
                   Junior
                   們在選擇個人學期專案題目時，可根據個人偏好之產業進行研究，深入探索與未來職涯相關的領域。此外，也可透過專家訪談或與相關領域
@@ -283,7 +283,7 @@ function Journey() {
                 </p>
               </div>
               <div className="feature__item" style={{ margin: '0px' }}>
-                <h3 className="feature__item--title">假說思考訓練</h3>
+                <h4 className="feature__item--title">假說思考訓練</h4>
                 <p className="feature__item--content">
                   Junior 們將實際應用假說思考於 Info-In、Info-Process、Info-Out
                   三大課程主軸；透過學期初、中、末三次的報告，與 Alumni
@@ -309,21 +309,21 @@ function Journey() {
             </div>
             <div className="content--feature">
               <div className="feature__item">
-                <h3 className="feature__item--title">實務經驗累積</h3>
+                <h4 className="feature__item--title">實務經驗累積</h4>
                 <p className="feature__item--content">
                   透過業主提供之真實問題，Junior 進行 Life Case
                   時將能與企業深度交流，並權衡提案需求、企業文化、業主期待等多重面向，調整提案內容，最終產出具備執行價值的提案。
                 </p>
               </div>
               <div className="feature__item">
-                <h3 className="feature__item--title">業主期待管理</h3>
+                <h4 className="feature__item--title">業主期待管理</h4>
                 <p className="feature__item--content">
                   在多次與業主交流的過程中，Junior
                   將從中練習對焦業主期待、向上管理技巧，以有效產出讓業主滿意的成果。
                 </p>
               </div>
               <div className="feature__item" style={{ margin: '0px' }}>
-                <h3 className="feature__item--title">團體專案研究</h3>
+                <h4 className="feature__item--title">團體專案研究</h4>
                 <p className="feature__item--content">
                   Life Case 是 Junior
                   們第一次以團體形式提案，練習在討論過程中將不同的意見彙整為共識。來自多元背景的
@@ -361,21 +361,27 @@ function Journey() {
               可彈性運用 BizPro 資源客製化個人學習旅程。
             </p>
             <div className="content--toggleList">
-              <div className="toggleItem toggleItem--1">
-                <div
-                  className="toggleItem--title"
-                  onClick={() => {
-                    const height = $('.toggleItem--1').css('height');
-                    if (height === '38px') {
-                      $('.toggleItem--3').css('height', '38px');
-                      $('.toggleItem--2').css('height', '38px');
-                      $('.toggleItem--1').css('height', '116px');
-                    } else {
-                      $('.toggleItem--1').css('height', '38px');
-                    }
-                  }}
-                >
-                  <img src={toggle_symbol} alt="toggle_symbol" />
+              <div
+                className="toggleItem toggleItem--1"
+                onClick={() => {
+                  const height = $('.toggleItem--1').css('height');
+                  if (height === '38px') {
+                    $('.toggleItem--3').css('height', '38px');
+                    $('.toggleItem--2').css('height', '38px');
+                    $('.toggleItem--1').css('height', '116px');
+                    $('.toggle_symbol--1').css('transform', 'rotate(90deg)');
+                  } else {
+                    $('.toggleItem--1').css('height', '38px');
+                    $('.toggle_symbol--1').css('transform', 'rotate(0deg)');
+                  }
+                }}
+              >
+                <div className="toggleItem--title">
+                  <img
+                    src={toggle_symbol}
+                    alt="toggle_symbol"
+                    className="toggle_symbol toggle_symbol--1"
+                  />
                   <p>職涯分享</p>
                 </div>
                 <div className="toggleItem--content">
@@ -384,21 +390,27 @@ function Journey() {
                   <li>Career Sharing: Tencent</li>
                 </div>
               </div>
-              <div className="toggleItem toggleItem--2">
-                <div
-                  className="toggleItem--title"
-                  onClick={() => {
-                    const height = $('.toggleItem--2').css('height');
-                    if (height === '38px') {
-                      $('.toggleItem--1').css('height', '38px');
-                      $('.toggleItem--3').css('height', '38px');
-                      $('.toggleItem--2').css('height', '164px');
-                    } else {
-                      $('.toggleItem--2').css('height', '38px');
-                    }
-                  }}
-                >
-                  <img src={toggle_symbol} alt="toggle_symbol" />
+              <div
+                className="toggleItem toggleItem--2"
+                onClick={() => {
+                  const height = $('.toggleItem--2').css('height');
+                  if (height === '38px') {
+                    $('.toggleItem--1').css('height', '38px');
+                    $('.toggleItem--3').css('height', '38px');
+                    $('.toggleItem--2').css('height', '164px');
+                    $('.toggle_symbol--2').css('transform', 'rotate(90deg)');
+                  } else {
+                    $('.toggleItem--2').css('height', '38px');
+                    $('.toggle_symbol--2').css('transform', 'rotate(0deg)');
+                  }
+                }}
+              >
+                <div className="toggleItem--title">
+                  <img
+                    src={toggle_symbol}
+                    alt="toggle_symbol"
+                    className="toggle_symbol toggle_symbol--2"
+                  />
                   <p>產業技能</p>
                 </div>
                 <div className="toggleItem--content">
@@ -409,22 +421,27 @@ function Journey() {
                   <li>UX Research in Business Context</li>
                 </div>
               </div>
-              <div className="toggleItem toggleItem--3">
-                <div
-                  className="toggleItem--title"
-                  onClick={() => {
-                    const height = $('.toggleItem--3').css('height');
-                    if (height === '38px') {
-                      $('.toggleItem--1').css('height', '38px');
-                      $('.toggleItem--2').css('height', '38px');
-
-                      $('.toggleItem--3').css('height', '116px');
-                    } else {
-                      $('.toggleItem--3').css('height', '38px');
-                    }
-                  }}
-                >
-                  <img src={toggle_symbol} alt="toggle_symbol" />
+              <div
+                className="toggleItem toggleItem--3"
+                onClick={() => {
+                  const height = $('.toggleItem--3').css('height');
+                  if (height === '38px') {
+                    $('.toggleItem--1').css('height', '38px');
+                    $('.toggleItem--2').css('height', '38px');
+                    $('.toggleItem--3').css('height', '116px');
+                    $('.toggle_symbol--3').css('transform', 'rotate(90deg)');
+                  } else {
+                    $('.toggleItem--3').css('height', '38px');
+                    $('.toggle_symbol--3').css('transform', 'rotate(0deg)');
+                  }
+                }}
+              >
+                <div className="toggleItem--title">
+                  <img
+                    src={toggle_symbol}
+                    alt="toggle_symbol"
+                    className="toggle_symbol toggle_symbol--3"
+                  />
                   <p>職場技巧</p>
                 </div>
                 <div className="toggleItem--content">
