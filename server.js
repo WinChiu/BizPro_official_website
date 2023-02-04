@@ -11,7 +11,7 @@ app.use(express.json());
 
 app.use('/api/alumni', require('./routes/api/alumni'));
 app.use('/api/article', require('./routes/api/article'));
-app.use('/api/alumni', require('./routes/api/updateField'));
+app.use('/api/alumni', require('./routes/api/selection'));
 
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
