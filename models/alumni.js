@@ -25,7 +25,7 @@ const AlumniSchema = new mongoose.Schema(
       type: String,
     },
     major: {
-      type: String,
+      type: [String],
     },
   },
   { collection: 'alumni' }
