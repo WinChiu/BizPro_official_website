@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Alumni = require('../../models/Alumni');
+const Alumni = require('../../models/alumni');
 
 function findQuery(req){
     let search_all_number = false;
     let search_all_major = false;
     let search_all_tags = false;
-    if(req.body.number == '0')
+    if(req.body.number === '0')
         search_all_number = true;
     if(req.body.major.length == 0)
         search_all_major = true;
@@ -44,9 +44,6 @@ function findQuery(req){
 
 router.get('/select', async (req, res) => {
     try{
-        tags_length = req.body.tags.length;
-        major_length = req.body.major.length;
-        
         query = findQuery(req);
         console.log(query);
         const alumniData = await Alumni.find(query);
@@ -64,16 +61,23 @@ router.get('/select', async (req, res) => {
 
 router.get('/search', async (req, res) => {
     try{
-        let query = req.body.search;
-        //console.log(query);
+        let query = findQuery(req);
+        let searchData = req.body.search;
+        //console.log(searchData);
         const result = await Alumni.find({
             "$or": [{
-                "number": {$regex: `${query}`}
+                "number": {$regex: `${searchData}`}
             }, {
-                "tags": {$regex: `${query}`}
+                "name": {$regex: `${searchData}`}
             }, {
-                "major": {$regex: `${query}`}
-            }
+                "major": {$regex: `${searchData}`}
+            }, {
+                "exp": {$regex: `${searchData}`}
+            }, {
+                "jobTitle": {$regex: `${searchData}`}
+            }, {
+                "tags": {$regex: `${searchData}`}
+            }, query
             ]
         });
         if(!result){
