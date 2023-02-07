@@ -62,9 +62,11 @@ router.get('/select', async (req, res) => {
 router.get('/search', async (req, res) => {
     try{
         let query = findQuery(req);
+        console.log(query);
         let searchData = req.body.search;
         //console.log(searchData);
         const result = await Alumni.find({
+            ...query, 
             "$or": [{
                 "number": {$regex: `${searchData}`}
             }, {
@@ -77,8 +79,7 @@ router.get('/search', async (req, res) => {
                 "jobTitle": {$regex: `${searchData}`}
             }, {
                 "tags": {$regex: `${searchData}`}
-            }, query
-            ]
+            }]
         });
         if(!result){
             res.status(400).json({ msg: 'No alumni data available' });
