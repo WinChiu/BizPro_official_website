@@ -52,28 +52,31 @@ router.post('/select', async (req, res) => {
   }
 });
 
-/*
-router.get('/search', async (req, res) => {
-    try{
-        query = req.body.search;
-        const result = await Alumni.find({
-            "$or": [{
-                ""
-            }, {
-                //
-            }
-            ]
-        });
-        if(!result){
-            res.status(400).json({ msg: 'No alumni data available' });
-        }
-        res.status(200).json(result);
+router.post('/search', async (req, res) => {
+  try {
+    let query = req.body.search;
+
+    const result = await Alumni.find({
+      $or: [
+        {
+          number: { $regex: `${query}` },
+        },
+        {
+          tags: { $regex: `${query}` },
+        },
+        {
+          major: { $regex: `${query}` },
+        },
+      ],
+    });
+    if (!result) {
+      res.status(400).json({ msg: 'No alumni data available' });
     }
-    catch(e){
-        console.error(e);
-        res.status(500).json({msg: "Server Error!"});
-    }
+    res.status(200).json(result);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ msg: 'Server Error!' });
+  }
 });
-*/
 
 module.exports = router;

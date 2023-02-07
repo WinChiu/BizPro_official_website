@@ -3533,6 +3533,7 @@ html {
   transform: translate(-50%, -50%);
   margin: auto auto;
   min-width: 480px;
+  width: 500px;
 }
 .backstage .settingPage .modal .modal-dialog .container {
   display: flex;
@@ -3540,7 +3541,16 @@ html {
   justify-content: center;
   align-items: center;
   padding: 0;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
+}
+.backstage .settingPage .modal .modal-dialog .container__row4 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+}
+.backstage .settingPage .modal .modal-dialog .container__row4 label {
+  padding-top: 6px;
 }
 .backstage .settingPage .modal .modal-dialog .btn-primary {
   background-color: #38323c;
@@ -3646,31 +3656,54 @@ html {
   vertical-align: middle;
   background-color: #ffffff;
   color: #312f2f;
-  max-width: 200px;
+  max-width: 180px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.backstage .settingPage .table tbody tr td .btn-primary {
-  background-color: #38323c;
-  border: none;
+.backstage .settingPage .table tbody tr td .btn-edit {
+  background-color: transparent;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
   color: #312f2f;
+  border: none;
+  color: white;
+  padding: 8px 10px 8px 10px;
+  margin-right: 8px;
+}
+.backstage .settingPage .table tbody tr td .btn-edit:hover {
+  background-color: #ededed;
+}
+.backstage .settingPage .table tbody tr td .btn-edit img {
+  z-index: -1;
+}
+.backstage .settingPage .table tbody tr td .btn-reupload {
+  background-color: #38323c;
+  font-family: "PingFangTC-Regular";
+  font-size: 14px;
+  line-height: 150%;
+  color: #312f2f;
+  border: none;
   color: white;
   padding: 8px 12px 6px 12px;
   margin-right: 8px;
 }
+.backstage .settingPage .table tbody tr td .btn-reupload:hover {
+  background-color: #4c5263;
+}
 .backstage .settingPage .table tbody tr td .btn-danger {
-  background-color: #ae0023;
+  background-color: transparent;
   border: none;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
   color: #312f2f;
   color: white;
-  padding: 8px 12px 6px 12px;
+  padding: 8px 10px 8px 10px;
+}
+.backstage .settingPage .table tbody tr td .btn-danger:hover {
+  background-color: #ededed;
 }
 .backstage .settingPage .table tbody tr td .btn-success {
   border: none;
@@ -3679,8 +3712,12 @@ html {
   line-height: 150%;
   color: #312f2f;
   color: white;
-  padding: 8px 12px 6px 12px;
   margin-right: 8px;
+  background-color: transparent;
+  padding: 8px 10px 8px 10px;
+}
+.backstage .settingPage .table tbody tr td .btn-success:hover {
+  background-color: #ededed;
 }
 .backstage .settingPage .table tbody tr td a {
   color: #312f2f;
@@ -3706,15 +3743,28 @@ html {
   text-overflow: ellipsis;
   background-color: rgb(255, 234, 230);
 }
+.backstage .pagination {
+  margin-top: 24px;
+  margin-bottom: 0;
+}
 .backstage .pagination .page-item a {
   color: #312f2f;
 }
 .backstage .pagination .page-item a:hover {
-  background-color: rgba(174, 0, 35, 0);
+  background-color: rgba(174, 0, 35, 0.1);
+  border-color: white;
+  color: #312f2f;
+}
+.backstage .pagination .page-item a:active {
+  background-color: none;
+}
+.backstage .pagination .page-item a:focus {
+  box-shadow: none;
 }
 .backstage .pagination .active .page-link {
   background-color: #ae0023;
   border-color: #ae0023;
+  color: white;
 }
 
 select-pure {
