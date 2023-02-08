@@ -8,7 +8,12 @@ const ArticleTest = require('../../models/article_test');
 
 router.get('/member_talk', async (req, res) => {
   try {
-    const article = await Article.find({});
+    const article = await ArticleTest.find().populate('alumni', [
+      'name',
+      'number',
+      'jobTitle',
+      'tags',
+    ]);
     if (!article) {
       return res.status(400).json({ msg: 'Article data is not available' });
     }
