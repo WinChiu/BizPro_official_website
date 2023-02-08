@@ -7,6 +7,11 @@ import cross from '../asset/img/icon/icon_crossWhite.svg';
 import Modal from 'react-bootstrap/Modal';
 import $ from 'jquery';
 import numberToRank from '../utility/numberToRank';
+import icon_x from '../asset/img/icon/icon_x.svg';
+import icon_edit from '../asset/img/icon/icon_edit.svg';
+import icon_x_circle from '../asset/img/icon/icon_x_circle.svg';
+import icon_upload from '../asset/img/icon/icon_upload.svg';
+import ReactPaginate from 'react-paginate';
 
 function BackstageArticleTable() {
   const [articleData, setArticleData] = useState(null);
@@ -30,7 +35,6 @@ function BackstageArticleTable() {
       await axios
         .get('http://localhost:5000/api/article/member_talk')
         .then((res) => {
-          console.log(res.data[0].content.replace(/\n/g, `\\r\\n`));
           setArticleData(res.data);
           setTotalPage(Math.ceil(res.data.length / 10));
         })
@@ -140,89 +144,101 @@ function BackstageArticleTable() {
               <strong>編輯或新增心得</strong>
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <div className="container container__row1">
-              <label>姓名</label>
-              <input
-                type="text"
-                name="name"
-                placeholder="nameInput"
-                className="nameInput"
-                defaultValue={`${targetArticle.name ? targetArticle.name : ''}`}
-              />
-              <label>屆數</label>
-              <input
-                type="number"
-                name="name"
-                placeholder="屆數"
-                className="numberInput"
-                defaultValue={`${
-                  targetArticle.number ? targetArticle.number : ''
-                }`}
-              />
-            </div>
-            <div className="container container__row2">
-              <label>頭銜</label>
-              <input
-                type="text"
-                name="name"
-                placeholder="頭銜"
-                className="titleInput"
-                defaultValue={`${
-                  targetArticle.jobTitle ? targetArticle.jobTitle : ''
-                }`}
-              />
-            </div>
-            <div className="container container__row3">
-              <label>標題</label>
-              <input
-                type="text"
-                name="name"
-                placeholder="心得文標題"
-                className="articleTitleInput"
-                defaultValue={`${
-                  targetArticle.title ? targetArticle.title : ''
-                }`}
-              />
-            </div>
-            <div className="container container__row4">
-              <textarea
-                className="contentInput"
-                name="content"
-                id=""
-                cols="30"
-                rows="10"
-                defaultValue={`jkl\r\nkl`}
-                // defaultValue={`  ${
-                //   targetArticle.content ? targetArticle.content : ''
-                // }`}
-              ></textarea>
-            </div>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="primary"
-              onClick={() => {
-                $('.modal').css('display', 'none');
-              }}
-            >
-              取消
-            </Button>
-            <Button
-              variant="success"
-              onClick={() => {
-                updateAvatar();
-              }}
-            >
-              更新
-            </Button>
-          </Modal.Footer>
+          <form
+            onSubmit={() => {
+              updateAvatar();
+            }}
+          >
+            <Modal.Body>
+              <div className="container container__row1">
+                <label>姓名</label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="姓名"
+                  className="nameInput"
+                  defaultValue={`${
+                    targetArticle.name ? targetArticle.name : ''
+                  }`}
+                />
+                <label>屆數</label>
+                <input
+                  type="text"
+                  name="number"
+                  placeholder="屆數"
+                  className="numberInput"
+                  defaultValue={`${
+                    targetArticle.number ? targetArticle.number : ''
+                  }`}
+                />
+              </div>
+              <div className="container container__row2">
+                <label>頭銜</label>
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="頭銜"
+                  className="titleInput"
+                  defaultValue={`${
+                    targetArticle.jobTitle ? targetArticle.jobTitle : ''
+                  }`}
+                />
+              </div>
+              <div className="container container__row3">
+                <label>標題</label>
+                <input
+                  type="text"
+                  name="articleTitle"
+                  placeholder="心得文標題"
+                  className="articleTitleInput"
+                  defaultValue={`${
+                    targetArticle.title ? targetArticle.title : ''
+                  }`}
+                />
+              </div>
+              <div className="container container__row4">
+                <label>內文</label>
+                <textarea
+                  className="contentInput"
+                  name="content"
+                  cols="30"
+                  rows="10"
+                  defaultValue={targetArticle.content}
+                  placeholder="心得文內文"
+                ></textarea>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  $('.modal').css('display', 'none');
+                }}
+              >
+                取消
+              </Button>
+              <Button
+                type="submit"
+                variant="success"
+                onClick={(e) => {
+                  updateAvatar();
+                }}
+              >
+                更新
+              </Button>
+            </Modal.Footer>
+          </form>
         </Modal.Dialog>
       </div>
     );
   };
   const ArticleRow = ({ name, number, jobTitle, title, avatar, content }) => (
-    <tr data-name={name} data-number={number} data-avatar={avatar}>
+    <tr
+      data-name={name}
+      data-number={number}
+      data-avatar={avatar}
+      data-content={content}
+    >
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
@@ -268,7 +284,7 @@ function BackstageArticleTable() {
                 getTargetAlumni(e);
                 setTimeout(() => {
                   $('.pictureModal').css('display', 'block');
-                }, 0);
+                }, 100);
               }}
             >
               重新上傳
@@ -303,7 +319,7 @@ function BackstageArticleTable() {
             }, 0);
           }}
         >
-          編輯
+          <img src={icon_edit} alt="icon_edit" />
         </Button>
         <Button
           variant="danger"
@@ -312,7 +328,7 @@ function BackstageArticleTable() {
             triggerWarningModal(e);
           }}
         >
-          刪除
+          <img src={icon_x} alt="icon_x" />
         </Button>
         <Button
           variant="success"
@@ -321,7 +337,7 @@ function BackstageArticleTable() {
             updateArticle(e);
           }}
         >
-          更新
+          <img src={icon_upload} alt="icon_upload" />
         </Button>
         <Button
           variant="danger"
@@ -330,7 +346,7 @@ function BackstageArticleTable() {
             endEdit(e);
           }}
         >
-          取消
+          <img src={icon_x_circle} alt="icon_x_circle" />
         </Button>
       </td>
     </tr>
@@ -386,10 +402,8 @@ function BackstageArticleTable() {
 
   const getTargetAlumni = (e) => {
     let jobTitle,
-      title,
-      content = null;
+      title = null;
     let targetArticleData = e.target.parentNode.parentNode.dataset;
-    console.log(e.target.parentNode.parentNode.childNodes);
     e.target.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[0] === 'jobTitleContent') {
         jobTitle = child.innerText;
@@ -397,17 +411,25 @@ function BackstageArticleTable() {
       if (child.classList[0] === 'titleContent') {
         title = child.innerText;
       }
-      if (child.classList[0] === 'contentContent') {
-        content = child.innerText;
-      }
     });
+
     setTargetArticle({
       name: targetArticleData.name,
       number: targetArticleData.number,
       jobTitle: jobTitle,
       title: title,
-      content: content,
+      content: targetArticleData.content,
       avatar: targetArticleData.avatar,
+    });
+  };
+  const clearTargetAlumni = () => {
+    setTargetArticle({
+      name: '',
+      number: '',
+      jobTitle: '',
+      title: '',
+      content: '',
+      avatar: '',
     });
   };
   const startEdit = (e) => {
@@ -483,7 +505,6 @@ function BackstageArticleTable() {
     let name = '';
     let number = '';
     e.target.parentNode.parentNode.childNodes.forEach((child) => {
-      console.log(child);
       if (child.classList[0] === 'nameContent') name = child.innerText;
       if (child.classList[0] === 'numberContent') number = child.innerText;
     });
@@ -507,7 +528,7 @@ function BackstageArticleTable() {
   };
   const updateAvatar = () => {
     // TODO: avatar update api
-
+    console.log('call avatar update api');
     // if update success
     setToastContent(
       `成功更新 ${numberToRank(targetArticle.number)} ${
@@ -520,7 +541,6 @@ function BackstageArticleTable() {
     }, 0);
 
     // TODO: if update fail, show what's wrong
-
     $('.modal').css('display', 'none');
   };
   // TODO: delete and update api call to be add
@@ -540,7 +560,6 @@ function BackstageArticleTable() {
     let name = '';
     let number = '';
     e.target.parentNode.parentNode.childNodes.forEach((child) => {
-      console.log(child);
       if (child.classList[0] === 'nameContent') name = child.innerText;
       if (child.classList[0] === 'numberContent') number = child.innerText;
     });
@@ -557,35 +576,9 @@ function BackstageArticleTable() {
   };
   const addArticle = () => {};
 
-  const switchPage = (direction, certainPage) => {
-    switch (direction) {
-      case 'next':
-        if (nowPage < totalPage) {
-          document.getElementById('settingPageSection').scrollIntoView();
-          setNowPage(nowPage + 1);
-        }
-        break;
-      case 'prev':
-        if (nowPage > 1) {
-          document.getElementById('settingPageSection').scrollIntoView();
-          setNowPage(nowPage - 1);
-        }
-        break;
-      case 'last':
-        document.getElementById('settingPageSection').scrollIntoView();
-        setNowPage(totalPage);
-        break;
-      case 'first':
-        document.getElementById('settingPageSection').scrollIntoView();
-        setNowPage(1);
-        break;
-      case 'certainPage':
-        document.getElementById('settingPageSection').scrollIntoView();
-        setNowPage(certainPage);
-        break;
-      default:
-        break;
-    }
+  const switchPage = (certainPage) => {
+    document.getElementById('settingPageSection').scrollIntoView();
+    setNowPage(certainPage);
   };
 
   return (
@@ -597,7 +590,17 @@ function BackstageArticleTable() {
       <DataEditModal />
       <div className="titleSection">
         <h2 className="title">歷屆心得文資料庫</h2>
-        <Button variant="primary">新增心得文</Button>
+        <Button
+          variant="primary"
+          onClick={() => {
+            clearTargetAlumni();
+            setTimeout(() => {
+              $('.dataModal').css('display', 'block');
+            }, 0);
+          }}
+        >
+          新增心得文
+        </Button>
       </div>
       <Table bordered>
         <thead>
@@ -621,7 +624,7 @@ function BackstageArticleTable() {
                   number={article.number}
                   jobTitle={article.jobTitle}
                   title={article.title}
-                  content={article.content.replace(/\n/g, `\\r\\n`)}
+                  content={article.content.replace(/(\r\n|\n|\r)/g, `\r\n`)}
                   avatar={article.avatar}
                 />
               );
@@ -631,7 +634,28 @@ function BackstageArticleTable() {
           })}
         </tbody>
       </Table>
-      <PaginationComponent />
+      <ReactPaginate
+        nextLabel="›"
+        onPageChange={(e) => {
+          switchPage(e.selected + 1);
+        }}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={1}
+        pageCount={totalPage}
+        previousLabel="‹"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={null}
+      />
     </React.Fragment>
   );
 }

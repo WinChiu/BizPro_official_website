@@ -80,7 +80,6 @@ function Member() {
 
           // Set options
           res.data.map((member) => {
-            console.log(member);
             if (!grade.includes(member.number)) {
               grade.push(member.number);
             }
@@ -253,64 +252,56 @@ function Member() {
       $('.gradientBox').css('display', 'block');
     }
   };
-  const switchPage = (direction, certainPage) => {
-    switch (direction) {
-      case 'next':
-        if (nowPage < totalPage) {
-          document.getElementById('memberSection').scrollIntoView();
-          setNowPage(nowPage + 1);
-        }
-        break;
-      case 'prev':
-        if (nowPage > 1) {
-          document.getElementById('memberSection').scrollIntoView();
-          setNowPage(nowPage - 1);
-        }
-        break;
-      case 'last':
-        document.getElementById('memberSection').scrollIntoView();
-        setNowPage(totalPage);
-        break;
-      case 'first':
-        document.getElementById('memberSection').scrollIntoView();
-        setNowPage(1);
-        break;
-      case 'certainPage':
-        setNowPage(certainPage);
-        setTimeout(() => {
-          document.getElementById('member__searchSection').scrollIntoView();
-        }, 0);
-        break;
-      default:
-        break;
-    }
+  const switchPage = (certainPage) => {
+    setNowPage(certainPage);
+    window.scrollTo(0, 240);
   };
-  const startFilter = (major, field, grade) => {
-    let filteredMemberDataTemp = memberData;
 
+  const startFilter = async (major, field, grade) => {
+    //let filteredMemberDataTemp = memberData;
+    let filteredMemberDataTemp = [];
     // field filter
-
-    if (field[0]) {
-      filteredMemberDataTemp = filteredMemberDataTemp.filter((member) =>
-        field.some((e) => member.tags.includes(e))
-      );
-    }
-
-    //grade filter
-    if (major[0]) {
-      filteredMemberDataTemp = filteredMemberDataTemp.filter((member) => {
-        return major.some((e) => member.major.includes(e));
+    filteredMemberDataTemp = await axios
+      .post('http://localhost:5000/api/alumni/select', {
+        number: grade,
+        major: major,
+        tags: field,
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
-    }
 
-    if (grade && grade !== '0') {
-      filteredMemberDataTemp = filteredMemberDataTemp.filter(
-        (member) => member.number === grade
-      );
-    }
     setNowPage(1);
     setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
     setFilteredMemberData(filteredMemberDataTemp);
+
+    // Set pagination to page 1
+    $('.page-link').map((id, el) => {
+      if (el.getAttribute('aria-label') === 'Page 1') {
+        el.click();
+      }
+    });
+  };
+
+  const startSearch = async (searchData) => {
+    console.log({
+      number: gradeFilter,
+      major: majorFilter,
+      tags: fieldFilter,
+      search: searchData,
+    });
+    // const result = await axios.post('http://localhost:5000/api/alumni/search', {
+    //   number: gradeFilter,
+    //   major: majorFilter,
+    //   tags: fieldFilter,
+    //   search: searchData,
+    // });
+    // setNowPage(1);
+    // setTotalPage(Math.ceil(result.length / onePageMemberCount));
+    // setFilteredMemberData(result);
 
     // Set pagination to page 1
     $('.page-link').map((id, el) => {
@@ -344,12 +335,12 @@ function Member() {
         />
         <div className="member__searchSection" id="member__searchSection">
           <form
-            action=""
             onSubmit={(e) => {
               e.preventDefault();
               const formData = new FormData(e.target);
               for (const pair of formData.entries()) {
                 setDirectSearch(pair[1]);
+                startSearch(pair[1]);
               }
             }}
           >
@@ -408,6 +399,7 @@ function Member() {
                   type="text"
                   name="search"
                   placeholder="直接搜尋"
+                  defaultValue={directSearch}
                   className="search--directSearchInput"
                 />
                 <Button variant="primary" type="submit">
@@ -451,7 +443,7 @@ function Member() {
         <ReactPaginate
           nextLabel="›"
           onPageChange={(e) => {
-            switchPage('certainPage', e.selected + 1);
+            switchPage(e.selected + 1);
           }}
           pageRangeDisplayed={3}
           marginPagesDisplayed={1}

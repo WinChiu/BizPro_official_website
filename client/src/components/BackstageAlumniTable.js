@@ -7,7 +7,11 @@ import cross from '../asset/img/icon/icon_crossWhite.svg';
 import Modal from 'react-bootstrap/Modal';
 import $ from 'jquery';
 import numberToRank from '../utility/numberToRank';
-
+import icon_x from '../asset/img/icon/icon_x.svg';
+import icon_edit from '../asset/img/icon/icon_edit.svg';
+import icon_x_circle from '../asset/img/icon/icon_x_circle.svg';
+import ReactPaginate from 'react-paginate';
+import icon_upload from '../asset/img/icon/icon_upload.svg';
 function BackstageAlumniTable() {
   const [memberData, setMemberData] = useState(null);
   const [totalPage, setTotalPage] = useState(0);
@@ -177,7 +181,7 @@ function BackstageAlumniTable() {
         suppressContentEditableWarning="true"
         className="tagsContent data"
       >
-        {tags === [''] ? (
+        {tags.length !== 0 ? (
           tags.map((data, i) => {
             if (i !== tags.length - 1) {
               return data + '；';
@@ -227,19 +231,32 @@ function BackstageAlumniTable() {
           variant="primary"
           className="btn-edit"
           onClick={(e) => {
-            startEdit(e);
+            startEdit(e.target);
           }}
         >
-          編輯
+          <img
+            src={icon_edit}
+            alt="icon_edit"
+            onClick={(e) => {
+              startEdit(e.target.parentNode);
+            }}
+          />
         </Button>
         <Button
           variant="danger"
           className="btn-delete"
           onClick={(e) => {
             triggerWarningModal(e);
+            getTargetAlumni(e);
           }}
         >
-          刪除
+          <img
+            src={icon_x}
+            alt="icon_x"
+            onClick={(e) => {
+              startEdit(e.target.parentNode);
+            }}
+          />
         </Button>
         <Button
           variant="success"
@@ -248,7 +265,13 @@ function BackstageAlumniTable() {
             updateAlumni(e);
           }}
         >
-          更新
+          <img
+            src={icon_upload}
+            alt="icon_upload"
+            onClick={(e) => {
+              startEdit(e.target.parentNode);
+            }}
+          />
         </Button>
         <Button
           variant="danger"
@@ -257,7 +280,13 @@ function BackstageAlumniTable() {
             endEdit(e);
           }}
         >
-          取消
+          <img
+            src={icon_x_circle}
+            alt="icon_x_circle"
+            onClick={(e) => {
+              startEdit(e.target.parentNode);
+            }}
+          />
         </Button>
       </td>
     </tr>
@@ -308,7 +337,113 @@ function BackstageAlumniTable() {
       />
     </Pagination>
   );
-
+  const AddAlumniModal = () => {
+    return (
+      <div className="modal show dataModal" style={{ display: 'block' }}>
+        <Modal.Dialog>
+          <Modal.Header>
+            <Modal.Title>
+              <strong>新增 Alumni</strong>
+            </Modal.Title>
+          </Modal.Header>
+          <form
+            onSubmit={() => {
+              updateAvatar();
+            }}
+          >
+            <Modal.Body>
+              <div className="container container__row1">
+                <label>姓名</label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="姓名"
+                  className="nameInput"
+                  defaultValue={`${targetAlumni.name ? targetAlumni.name : ''}`}
+                />
+                <label>屆數</label>
+                <input
+                  type="text"
+                  name="number"
+                  placeholder="屆數"
+                  className="numberInput"
+                  defaultValue={`${
+                    targetAlumni.number ? targetAlumni.number : ''
+                  }`}
+                />
+              </div>
+              <div className="container container__row2">
+                <label>頭銜</label>
+                <input
+                  type="text"
+                  name="title"
+                  placeholder="頭銜"
+                  className="titleInput"
+                  defaultValue={`${
+                    targetAlumni.jobTitle ? targetAlumni.jobTitle : ''
+                  }`}
+                />
+              </div>{' '}
+              <div className="container container__row3">
+                <label>學歷</label>
+                <input
+                  type="text"
+                  name="major"
+                  placeholder="學歷"
+                  className="majorInput"
+                  defaultValue={`${
+                    targetAlumni.major ? targetAlumni.major : ''
+                  }`}
+                />
+              </div>
+              <div className="container container__row4">
+                <label>標題</label>
+                <input
+                  type="text"
+                  name="articleTitle"
+                  placeholder="心得文標題"
+                  className="articleTitleInput"
+                  defaultValue={`${
+                    targetAlumni.title ? targetAlumni.title : ''
+                  }`}
+                />
+              </div>
+              <div className="container container__row5">
+                <label>內文</label>
+                <textarea
+                  className="contentInput"
+                  name="content"
+                  cols="30"
+                  rows="10"
+                  defaultValue={targetAlumni.content}
+                  placeholder="心得文內文"
+                ></textarea>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  $('.modal').css('display', 'none');
+                }}
+              >
+                取消
+              </Button>
+              <Button
+                type="submit"
+                variant="success"
+                onClick={(e) => {
+                  updateAvatar();
+                }}
+              >
+                更新
+              </Button>
+            </Modal.Footer>
+          </form>
+        </Modal.Dialog>
+      </div>
+    );
+  };
   // Utilities
 
   const getTargetAlumni = (e) => {
@@ -320,7 +455,7 @@ function BackstageAlumniTable() {
     });
   };
   const startEdit = (e) => {
-    e.target.parentNode.parentNode.childNodes.forEach((child) => {
+    e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[1] === 'data') {
         child.classList.add('editable');
         child.setAttribute('contentEditable', true);
@@ -397,6 +532,7 @@ function BackstageAlumniTable() {
       if (child.classList[0] === 'numberContent') number = child.innerText;
     });
     setModalContent(`你確定要刪除 ${numberToRank(number)} ${name} 的資料？`);
+
     setTimeout(() => {
       $('.warningModal').css('display', 'block');
     }, 20);
@@ -432,6 +568,16 @@ function BackstageAlumniTable() {
 
     $('.modal').css('display', 'none');
   };
+
+  const refreshAlumniData = async () => {
+    await axios
+      .get('http://localhost:5000/api/alumni/members')
+      .then((res) => {
+        setMemberData(res.data);
+        setTotalPage(Math.ceil(res.data.length / 10));
+      })
+      .catch((error) => console.log(error));
+  };
   // TODO: delete and update api call to be add
   const deleteAlumni = (target) => {
     setToastContent(
@@ -466,35 +612,9 @@ function BackstageAlumniTable() {
   };
   const addAlumni = () => {};
 
-  const switchPage = (direction, certainPage) => {
-    switch (direction) {
-      case 'next':
-        if (nowPage < totalPage) {
-          document.getElementById('settingPageSection').scrollIntoView();
-          setNowPage(nowPage + 1);
-        }
-        break;
-      case 'prev':
-        if (nowPage > 1) {
-          document.getElementById('settingPageSection').scrollIntoView();
-          setNowPage(nowPage - 1);
-        }
-        break;
-      case 'last':
-        document.getElementById('settingPageSection').scrollIntoView();
-        setNowPage(totalPage);
-        break;
-      case 'first':
-        document.getElementById('settingPageSection').scrollIntoView();
-        setNowPage(1);
-        break;
-      case 'certainPage':
-        document.getElementById('settingPageSection').scrollIntoView();
-        setNowPage(certainPage);
-        break;
-      default:
-        break;
-    }
+  const switchPage = (certainPage) => {
+    document.getElementById('settingPageSection').scrollIntoView();
+    setNowPage(certainPage);
   };
 
   return (
@@ -503,6 +623,7 @@ function BackstageAlumniTable() {
       <WarningToast />
       <WarningModal />
       <PictureUploadModal />
+      <AddAlumniModal />
       <div className="titleSection">
         <h2 className="title">Alumni 資料庫</h2>
         <Button variant="primary">新增 Alumni</Button>
@@ -541,7 +662,28 @@ function BackstageAlumniTable() {
           })}
         </tbody>
       </Table>
-      <PaginationComponent />
+      <ReactPaginate
+        nextLabel="›"
+        onPageChange={(e) => {
+          switchPage(e.selected + 1);
+        }}
+        pageRangeDisplayed={3}
+        marginPagesDisplayed={1}
+        pageCount={totalPage}
+        previousLabel="‹"
+        pageClassName="page-item"
+        pageLinkClassName="page-link"
+        previousClassName="page-item"
+        previousLinkClassName="page-link"
+        nextClassName="page-item"
+        nextLinkClassName="page-link"
+        breakLabel="..."
+        breakClassName="page-item"
+        breakLinkClassName="page-link"
+        containerClassName="pagination"
+        activeClassName="active"
+        renderOnZeroPageCount={null}
+      />
     </React.Fragment>
   );
 }

@@ -6,9 +6,10 @@ function findQuery(req) {
   let search_all_number = false;
   let search_all_major = false;
   let search_all_tags = false;
-  if (req.body.number === '0') search_all_number = true;
-  if (req.body.major.length == 0) search_all_major = true;
-  if (req.body.tags.length == 0) search_all_tags = true;
+  if (req.body.number === '0' || req.body.number === '')
+    search_all_number = true;
+  if (req.body.major.length === 0) search_all_major = true;
+  if (req.body.tags.length === 0) search_all_tags = true;
   console.log('search all number:', search_all_number);
   console.log('search all major:', search_all_major);
   console.log('search all tags:', search_all_tags);
@@ -21,7 +22,6 @@ function findQuery(req) {
     query = { tags: req.body.tags };
   else if (search_all_major && search_all_tags) {
     query = { number: req.body.number };
-    console.log('Success');
   } else if (search_all_number)
     query = { tags: req.body.tags, major: req.body.major };
   else if (search_all_major)
@@ -37,12 +37,11 @@ function findQuery(req) {
   return query;
 }
 
-router.get('/select', async (req, res) => {
+router.post('/select', async (req, res) => {
   try {
-    query = findQuery(req);
-    console.log(query);
+    let query = findQuery(req);
     const alumniData = await Alumni.find(query);
-
+    console.log('api');
     if (!alumniData) {
       res.status(400).json({ msg: 'No alumni data available' });
     }

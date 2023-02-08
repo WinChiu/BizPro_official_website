@@ -39,6 +39,7 @@ function App() {
         $('.logoContainer').css('width', '200px');
         setTimeout(() => {
           $('.logoLoading').fadeOut();
+          $('body').css('overflow-y', 'scroll');
         }, 1200);
       }, 1200);
     } else {
@@ -48,7 +49,7 @@ function App() {
   };
   return (
     <BrowserRouter>
-      <NavBar />
+      {/* <NavBar /> */}
       <LogoLoading />
       <Routes>
         <Route exact path="/" element={<About />} />
@@ -57,7 +58,7 @@ function App() {
         <Route path="/members" element={<Member />} />
         <Route path="/backstage" element={<Backstage />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </BrowserRouter>
   );
 }
