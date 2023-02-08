@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const Alumni = require('../../models/alumni');
+const findQuery = require('../../core/findQuery');
 
+/*
 function findQuery(req) {
   let search_all_number = false;
   let search_all_major = false;
@@ -36,6 +38,7 @@ function findQuery(req) {
     };
   return query;
 }
+*/
 
 router.post('/select', async (req, res) => {
   try {
