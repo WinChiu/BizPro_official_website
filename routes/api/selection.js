@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const Alumni = require('../../models/alumni');
+const Alumni = require('../../models/alumni');
 
 function findQuery(req) {
   let search_all_number = false;
   let search_all_major = false;
   let search_all_tags = false;
   if (req.body.number === '0') search_all_number = true;
-  if (req.body.major.length === 0) search_all_major = true;
-  if (req.body.tags.length === 0) search_all_tags = true;
+  if (req.body.major.length == 0) search_all_major = true;
+  if (req.body.tags.length == 0) search_all_tags = true;
   console.log('search all number:', search_all_number);
   console.log('search all major:', search_all_major);
   console.log('search all tags:', search_all_tags);
@@ -37,9 +38,10 @@ function findQuery(req) {
   return query;
 }
 
-router.post('/select', async (req, res) => {
+router.get('/select', async (req, res) => {
   try {
-    let query = findQuery(req);
+    query = findQuery(req);
+    console.log(query);
     const alumniData = await Alumni.find(query);
 
     if (!alumniData) {
@@ -52,20 +54,30 @@ router.post('/select', async (req, res) => {
   }
 });
 
-router.post('/search', async (req, res) => {
+router.get('/search', async (req, res) => {
   try {
-    let query = req.body.search;
-    //console.log(query);
+    let query = findQuery(req);
+    let searchData = req.body.search;
     const result = await Alumni.find({
+      ...query,
       $or: [
         {
-          number: { $regex: `${query}` },
+          number: { $regex: `${searchData}` },
         },
         {
-          tags: { $regex: `${query}` },
+          name: { $regex: `${searchData}` },
         },
         {
-          major: { $regex: `${query}` },
+          major: { $regex: `${searchData}` },
+        },
+        {
+          exp: { $regex: `${searchData}` },
+        },
+        {
+          jobTitle: { $regex: `${searchData}` },
+        },
+        {
+          tags: { $regex: `${searchData}` },
         },
       ],
     });
@@ -77,6 +89,7 @@ router.post('/search', async (req, res) => {
     console.error(e);
     res.status(500).json({ msg: 'Server Error!' });
   }
+  res.status(200).json(result);
 });
 
 module.exports = router;
