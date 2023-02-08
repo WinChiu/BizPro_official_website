@@ -39,6 +39,7 @@ cluster = MongoClient("mongodb+srv://BizPro:Tl0nWi08cfVtIX7m@cluster0.btdw0vd.mo
 db = cluster["BP"]
 collection_alumni = db["alumni"]
 #tmp_collection = db["alumni_backup"]
+article_backup = db["article_backup"]
 
 alimni_data = collection_alumni.find()
 cnt = 0
@@ -52,6 +53,7 @@ tagsList = []
 avatarList = []
 articleAvatarList = []
 majorList = []
+alumniIdDict = {}
 #f = open('alumni_data.txt', 'w')
 
 idxList = []
@@ -61,13 +63,15 @@ for data in alimni_data:
     cnt += 1
     if cnt > 125:
         break
+    alumniIdDict[(data['name'], data['number'])] = data['_id']
     nameList.append(data['name'])
     numberList.append(data['number'])
     jobTitleList.append(data['jobTitle'])
+    tagsList.append(data['tags'])
     expList.append(data['exp'])
     avatarList.append(data['avatar'])
     
-    idx = cnt-1
+    #idx = cnt-1
 
     majors = data['major']
     '''
@@ -80,7 +84,7 @@ for data in alimni_data:
             sec_major = sec_major[:-5]
         print(sec_major)
         print(idx+1)
-    '''
+    
     for m in majors:
         if m not in majorDict:
             majorDict[m] = 1
@@ -89,13 +93,13 @@ for data in alimni_data:
 
         if m[-2:] == "學程" or m == "臺灣大學材料科學暨工程學系":
             print(idx+1)
-    
+    '''
     majorList.append(majors)
 
-for key in majorDict:
+"""for key in majorDict:
     s = key + ": " + str(majorDict[key])
     #print(s)
-
+"""
 '''
 for i in range(cnt):
     alumni_dict = {
@@ -103,11 +107,11 @@ for i in range(cnt):
         "number": numberList[i],
         "jobTitle": jobTitleList[i],
         "exp": expList[i],
-		"tags": [], 
+		"tags": tagsList[i], 
         "avatar": avatarList[i],
         "major": majorList[i],
     }
-    collection_alumni.insert_one(alumni_dict)
+    #tmp_collection.insert_one(alumni_dict)
 
 
 tmp_collection.insert_one({
@@ -120,24 +124,40 @@ tmp_collection.insert_one({
     "major": ["臺灣大學資訊工程學系"]
 })
 
-
+'''
 collection_article = db["article"]
 
-f = open('article.txt', 'r')
-lines = f.readlines()
+#f = open('article.txt', 'r')
+#lines = f.readlines()
 
-nameList = []
-numberList = []
-jobTitleList = []
+article_data = collection_article.find()
+
 titleList = []
 contentList = []
-tagsList = []
 articleAvatarList = []
+alumniIdList = []
 
 content = ""
 tags = []
 num = 0
 cnt = 0
+
+for data in article_data:
+    titleList.append(data['title'])
+    contentList.append(data['content'])
+    articleAvatarList.append(data['avatar'])
+    alumniIdList.append(alumniIdDict[(data['name'], data['number'])])
+    
+for i in range(len(titleList)):
+    articleDict = {
+        "alumni": alumniIdList[i],
+        "title": titleList[i],
+        "content": contentList[i],
+        "avatar": articleAvatarList[i],
+    }
+    article_backup.insert_one(articleDict)
+
+'''
 
 while num < 28 or cnt < len(lines):
     if lines[cnt][:4] == "### ":
