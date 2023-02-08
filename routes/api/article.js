@@ -19,18 +19,19 @@ router.get('/member_talk', async (req, res) => {
   }
 });
 
-
-router.get('/test', async(req, res) => {
-  try{
-    const tmp_article = await ArticleTest.find().populate(
-      'alumni', ['name', 'number', 'jobTitle', 'tags']
-    );
+router.get('/test', async (req, res) => {
+  try {
+    const tmp_article = await ArticleTest.find().populate('alumni', [
+      'name',
+      'number',
+      'jobTitle',
+      'tags',
+    ]);
     if (!tmp_article) {
       return res.status(400).json({ msg: 'Article data is not available' });
     }
     res.status(200).json(tmp_article);
-  }
-  catch (e){
+  } catch (e) {
     console.error(e.message);
     res.status(500).send('Server Error!');
   }
