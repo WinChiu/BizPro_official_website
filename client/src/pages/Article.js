@@ -216,12 +216,12 @@ function Article() {
           if ((nowPage - 1) * 6 <= i && i < nowPage * 6) {
             return (
               <Item
-                number={`${data.number}`}
-                name={`${data.name}`}
-                jobTitle={`${data.jobTitle}`}
+                number={`${data.alumni.number}`}
+                name={`${data.alumni.name}`}
+                jobTitle={`${data.alumni.jobTitle}`}
                 title={`${data.title}`}
                 content={`${data.content}`}
-                tags={data.tags}
+                tags={data.alumni.tags}
                 avatar={data.avatar}
                 id={i}
               />
