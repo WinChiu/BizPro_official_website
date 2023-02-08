@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const Alumni = require('../../models/alumni');
-const Alumni = require('../../models/alumni');
 
 function findQuery(req) {
   let search_all_number = false;
