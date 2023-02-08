@@ -2186,7 +2186,7 @@ html {
         z-index: 1;
       }
       .css-b62m3t-container {
-        max-width: 267px;
+        //max-width: 267px;
         width: 100%;
         margin-right: 16px;
       }
@@ -2195,7 +2195,7 @@ html {
         &--selector {
           &__control {
             min-width: 140px;
-            max-width: 267px;
+            //max-width: 267px;
             width: 100%;
             padding: 2px 6px 2px 6px;
           }
@@ -2276,8 +2276,9 @@ html {
       padding-right: 4px;
       box-sizing: border-box;
       position: relative;
+      padding-bottom: 40px;
       .gradientBox {
-        width: calc(100% - 40px);
+        width: calc(100% - 42px);
         height: 60px;
         position: fixed;
         bottom: 28px;

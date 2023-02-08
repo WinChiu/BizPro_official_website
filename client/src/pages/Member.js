@@ -261,19 +261,33 @@ function Member() {
     //let filteredMemberDataTemp = memberData;
     let filteredMemberDataTemp = [];
     // field filter
-    filteredMemberDataTemp = await axios
-      .post('http://localhost:5000/api/alumni/select', {
-        number: grade,
-        major: major,
-        tags: field,
-      })
-      .then((res) => {
-        return res.data;
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-
+    if (directSearch === '')
+      filteredMemberDataTemp = await axios
+        .post('http://localhost:5000/api/alumni/select', {
+          number: grade,
+          major: major,
+          tags: field,
+        })
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    else
+      filteredMemberDataTemp = await axios
+        .post('http://localhost:5000/api/alumni/search', {
+          number: grade,
+          major: major,
+          tags: field,
+          search: directSearch,
+        })
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     setNowPage(1);
     setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
     setFilteredMemberData(filteredMemberDataTemp);
@@ -287,21 +301,25 @@ function Member() {
   };
 
   const startSearch = async (searchData) => {
-    console.log({
-      number: gradeFilter,
-      major: majorFilter,
-      tags: fieldFilter,
-      search: searchData,
-    });
-    // const result = await axios.post('http://localhost:5000/api/alumni/search', {
-    //   number: gradeFilter,
-    //   major: majorFilter,
-    //   tags: fieldFilter,
-    //   search: searchData,
-    // });
-    // setNowPage(1);
-    // setTotalPage(Math.ceil(result.length / onePageMemberCount));
-    // setFilteredMemberData(result);
+    let filteredMemberDataTemp = [];
+    filteredMemberDataTemp = await axios
+      .post('http://localhost:5000/api/alumni/search', {
+        number: gradeFilter,
+        major: majorFilter,
+        tags: fieldFilter,
+        search: searchData,
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    console.log(filteredMemberDataTemp);
+    setNowPage(1);
+    setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
+    setFilteredMemberData(filteredMemberDataTemp);
 
     // Set pagination to page 1
     $('.page-link').map((id, el) => {
@@ -401,6 +419,9 @@ function Member() {
                   placeholder="直接搜尋"
                   defaultValue={directSearch}
                   className="search--directSearchInput"
+                  onChange={(e) => {
+                    setDirectSearch(e.target.value);
+                  }}
                 />
                 <Button variant="primary" type="submit">
                   搜尋

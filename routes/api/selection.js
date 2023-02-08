@@ -17,22 +17,22 @@ function findQuery(req) {
   let query = {};
   if (search_all_number && search_all_major && search_all_tags) query = {};
   else if (search_all_number && search_all_tags)
-    query = { major: req.body.major };
+    query = { major: { $all: req.body.major } };
   else if (search_all_number && search_all_major)
-    query = { tags: req.body.tags };
+    query = { tags: { $all: req.body.tags } };
   else if (search_all_major && search_all_tags) {
     query = { number: req.body.number };
   } else if (search_all_number)
-    query = { tags: req.body.tags, major: req.body.major };
+    query = { tags: { $all: req.body.tags }, major: { $all: req.body.major } };
   else if (search_all_major)
-    query = { tags: req.body.tags, number: req.body.number };
+    query = { tags: { $all: req.body.tags }, number: req.body.number };
   else if (search_all_tags)
-    query = { number: req.body.number, major: req.body.major };
+    query = { number: req.body.number, major: { $all: req.body.major } };
   else
     query = {
       number: req.body.number,
-      major: req.body.major,
-      tags: req.body.tags,
+      major: { $all: req.body.major },
+      tags: { $all: req.body.tags },
     };
   return query;
 }
@@ -41,7 +41,7 @@ router.post('/select', async (req, res) => {
   try {
     let query = findQuery(req);
     const alumniData = await Alumni.find(query);
-    console.log('api');
+    console.log(alumniData);
     if (!alumniData) {
       res.status(400).json({ msg: 'No alumni data available' });
     }
@@ -52,7 +52,7 @@ router.post('/select', async (req, res) => {
   }
 });
 
-router.get('/search', async (req, res) => {
+router.post('/search', async (req, res) => {
   try {
     let query = findQuery(req);
     let searchData = req.body.search;
@@ -60,22 +60,22 @@ router.get('/search', async (req, res) => {
       ...query,
       $or: [
         {
-          number: { $regex: `${searchData}` },
+          number: { $regex: `${searchData}`, $options: 'i' },
         },
         {
-          name: { $regex: `${searchData}` },
+          name: { $regex: `${searchData}`, $options: 'i' },
         },
         {
-          major: { $regex: `${searchData}` },
+          major: { $regex: `${searchData}`, $options: 'i' },
         },
         {
-          exp: { $regex: `${searchData}` },
+          exp: { $regex: `${searchData}`, $options: 'i' },
         },
         {
-          jobTitle: { $regex: `${searchData}` },
+          jobTitle: { $regex: `${searchData}`, $options: 'i' },
         },
         {
-          tags: { $regex: `${searchData}` },
+          tags: { $regex: `${searchData}`, $options: 'i' },
         },
       ],
     });
@@ -87,7 +87,6 @@ router.get('/search', async (req, res) => {
     console.error(e);
     res.status(500).json({ msg: 'Server Error!' });
   }
-  res.status(200).json(result);
 });
 
 module.exports = router;

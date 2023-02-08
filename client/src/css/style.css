@@ -2313,14 +2313,12 @@ html {
   z-index: 1;
 }
 .article__searchSection--filter .css-b62m3t-container {
-  max-width: 267px;
   width: 100%;
   margin-right: 16px;
 }
 .article__searchSection--filter .filter__major--selector__control,
 .article__searchSection--filter .filter__field--selector__control {
   min-width: 140px;
-  max-width: 267px;
   width: 100%;
   padding: 2px 6px 2px 6px;
 }
@@ -2418,9 +2416,10 @@ html {
   padding-right: 4px;
   box-sizing: border-box;
   position: relative;
+  padding-bottom: 40px;
 }
 .article__detail--content .gradientBox {
-  width: calc(100% - 40px);
+  width: calc(100% - 42px);
   height: 60px;
   position: fixed;
   bottom: 28px;
