@@ -3,12 +3,11 @@ const router = express.Router();
 const Alumni = require('../../models/alumni');
 const findQuery = require('../../core/findQuery');
 
-
 router.post('/select', async (req, res) => {
   try {
     let query = findQuery(req);
     const alumniData = await Alumni.find(query);
-    console.log('api');
+    console.log(query);
     if (!alumniData) {
       res.status(400).json({ msg: 'No alumni data available' });
     }
