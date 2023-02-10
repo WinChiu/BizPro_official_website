@@ -3,7 +3,6 @@ const router = express.Router();
 const Alumni = require('../../models/alumni');
 const findQuery = require('../../core/findQuery');
 
-
 router.post('/select', async (req, res) => {
   try {
     let query = findQuery(req);
