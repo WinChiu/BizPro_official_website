@@ -263,7 +263,6 @@ function Member() {
   };
 
   const startFilter = async (major, field, grade) => {
-    //let filteredMemberDataTemp = memberData;
     let filteredMemberDataTemp = [];
     // field filter
     if (directSearch === '')
