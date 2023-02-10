@@ -47,7 +47,7 @@ function Member() {
     let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
-        .get('http://172.20.10.3:5000/api/alumni/members')
+        .get('http://localhost:5000/api/alumni/members')
         .then((res) => {
           const gridColumnCount = window
             .getComputedStyle(
