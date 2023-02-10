@@ -35,7 +35,7 @@ function Backstage() {
   const WarningToast = () => {
     <div className="toastComponent warning">
       <p>{toastContent ? toastContent : '無提示訊息'}</p>
-      <img src={cross} alt="" className="toastClose" />
+      <img src={cross} alt="toastClose" className="toastClose" />
     </div>;
   };
   const SuccessToast = () => (

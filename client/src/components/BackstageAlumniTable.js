@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import Pagination from 'react-bootstrap/Pagination';
-import cross from '../asset/img/icon/icon_crossWhite.svg';
-import Modal from 'react-bootstrap/Modal';
 import $ from 'jquery';
-import numberToRank from '../utility/numberToRank';
-import icon_x from '../asset/img/icon/icon_x.svg';
-import icon_edit from '../asset/img/icon/icon_edit.svg';
-import icon_x_circle from '../asset/img/icon/icon_x_circle.svg';
+import React, { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Pagination from 'react-bootstrap/Pagination';
+import Table from 'react-bootstrap/Table';
 import ReactPaginate from 'react-paginate';
+import cross from '../asset/img/icon/icon_crossWhite.svg';
+import icon_edit from '../asset/img/icon/icon_edit.svg';
 import icon_upload from '../asset/img/icon/icon_upload.svg';
+import icon_x from '../asset/img/icon/icon_x.svg';
+import icon_x_circle from '../asset/img/icon/icon_x_circle.svg';
+import numberToRank from '../utility/numberToRank';
 function BackstageAlumniTable() {
   const [memberData, setMemberData] = useState(null);
   const [totalPage, setTotalPage] = useState(0);
@@ -46,7 +46,7 @@ function BackstageAlumniTable() {
   const WarningToast = () => {
     <div className="toastComponent warning">
       <p>{toastContent ? toastContent : '無提示訊息'}</p>
-      <img src={cross} alt="" className="toastClose" />
+      <img src={cross} alt="toastClose" className="toastClose" />
     </div>;
   };
   const SuccessToast = () => (

@@ -1,14 +1,16 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery';
 import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Marquee from 'react-fast-marquee';
 import Circle4_symbol_white300 from '../asset/img/4Circle_symbol_white300.svg';
 import briefIntro_course from '../asset/img/briefIntro_course.webp';
 import briefIntro_people from '../asset/img/briefIntro_people.webp';
+import vision_bg from '../asset/img/circle_symbol_beige.webp';
 import circle_symbol_gradient from '../asset/img/circle_symbol_gradient.svg';
-import connection_symbol from '../asset/img/connection_symbol_white300.svg';
 import connection_symbol_red from '../asset/img/connection_symbol_recommandRed.svg';
-import double_circle from '../asset/img/doubleCircle_symbol_white300.svg';
+import connection_symbol from '../asset/img/connection_symbol_white300.svg';
+import double_circle from '../asset/img/doubleCircle_symbol_white300_2.svg';
 import icon_courage from '../asset/img/icon/icon_courage.svg';
 import icon_creativity from '../asset/img/icon/icon_creativity.svg';
 import icon_entrepreneurship from '../asset/img/icon/icon_entrepreneurship.svg';
@@ -22,10 +24,7 @@ import title_symbol_left_lg from '../asset/img/title_symbol_left_lg.svg';
 import title_symbol_left_md from '../asset/img/title_symbol_left_md.svg';
 import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
 import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
-import vision_bg from '../asset/img/circle_symbol_beige.webp';
 import MarqueeLogo from '../components/MarqueeLogo';
-import headerImg from '../asset/img/about_headerImg.webp';
-import $ from 'jquery';
 
 /*
 TODO:
@@ -248,10 +247,22 @@ function About() {
   return (
     <section className="about">
       <article className="about__header">
-        <img src={connection_symbol} alt="" className="connection__left" />
+        <img
+          src={connection_symbol}
+          alt="connection_symbol"
+          className="connection__left"
+        />
         <div className="headerImg"></div>
-        <img src={connection_symbol} alt="" className="connection__right" />
-        <img src={Circle4_symbol_white300} alt="" className="circle4" />
+        <img
+          src={connection_symbol}
+          alt="connection_symbol"
+          className="connection__right"
+        />
+        <img
+          src={Circle4_symbol_white300}
+          alt="circle_symbol"
+          className="circle4"
+        />
         <img src={logo} alt="logo" className="about__header--logo" />
         <h1 className="about__header--title">BizPro 台大商學研究社</h1>
         <h3 className="about__header--subTitle">
@@ -274,8 +285,16 @@ function About() {
         </div>
       </article>
       <article className="about__intro" id="about__intro">
-        <img src={connection_symbol_red} alt="" className="connection__left" />
-        <img src={connection_symbol_red} alt="" className="connection__right" />
+        <img
+          src={connection_symbol_red}
+          alt="connection_symbol"
+          className="connection__left"
+        />
+        <img
+          src={connection_symbol_red}
+          alt="connection_symbol"
+          className="connection__right"
+        />
         <div className="about__intro--title sectionTitle sectionTitle--lg">
           <img
             src={title_symbol_left_lg}
@@ -423,7 +442,9 @@ function About() {
               className="iconList__item--icon"
             />
             <div className="iconList__item--content">
-              <h4 className="content--title">企業家精神 Entrepreneurship</h4>
+              <h4 className="content--title">
+                分享和貢獻 Sharing ＆ Contribution
+              </h4>
               <p className="content--word">
                 理解分享、貢獻的價值，並且身體力行。
               </p>
@@ -521,7 +542,11 @@ function About() {
           alt="double_circle"
           className="double_circle"
         />
-        <img src={connection_symbol} alt="" className="connection_symbol" />
+        <img
+          src={connection_symbol}
+          alt="connection_symbol"
+          className="connection_symbol"
+        />
         <div className="briefIntro__course" id="briefIntro__course">
           <div className="briefIntro__course--word hideToLeft">
             <h2 className="word--title">BizPro 的商業專業能力訓練</h2>

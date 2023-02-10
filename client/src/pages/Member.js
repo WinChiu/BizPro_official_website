@@ -1,13 +1,13 @@
+import axios from 'axios';
 import $ from 'jquery';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import ReactPaginate from 'react-paginate';
+import Select from 'react-select';
+import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
 import Header from '../components/Header';
 import localDb from '../config/localDb.json';
-import Button from 'react-bootstrap/Button';
-import Select from 'react-select';
-import axios from 'axios';
 import numberToRank from '../utility/numberToRank.js';
-import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
-import ReactPaginate from 'react-paginate';
 
 /*
 TODO:
@@ -47,7 +47,7 @@ function Member() {
     let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
-        .get('http://localhost:5000/api/alumni/members')
+        .get('http://172.20.10.3:5000/api/alumni/members')
         .then((res) => {
           const gridColumnCount = window
             .getComputedStyle(
@@ -108,7 +108,12 @@ function Member() {
               label: item.replace('臺灣大學', ''),
             });
           });
-
+          majorOptionsTemp = majorOptionsTemp.sort(
+            (a, b) => a.label[0].charCodeAt(0) - b.label[0].charCodeAt(0)
+          );
+          fieldOptionsTemp = fieldOptionsTemp.sort(
+            (a, b) => a.label[0].charCodeAt(0) - b.label[0].charCodeAt(0)
+          );
           setMemberData(res.data);
           setFilteredMemberData(res.data);
           setTotalPage(Math.ceil(res.data.length / onePageMemberCountTemp));
@@ -215,7 +220,7 @@ function Member() {
   const PopUp = ({ props }) => (
     <section className="member__popUp">
       <div className="member__popUp--img">
-        <img src={props.avatar} alt="" />
+        <img src={props.avatar} alt="avatar" />
       </div>
       <div className="member__popUp--content">
         <h3>
@@ -379,6 +384,7 @@ function Member() {
                       setMajorFilter(tempArray);
                       startFilter(tempArray, fieldFilter, gradeFilter);
                     }}
+                    maxMenuHeight={220}
                   />
                 </div>
                 <div className="filter__field">
@@ -395,6 +401,7 @@ function Member() {
                       setFieldFilter(tempArray);
                       startFilter(majorFilter, tempArray, gradeFilter);
                     }}
+                    maxMenuHeight={220}
                   />
                 </div>
                 <div className="filter__grade">
@@ -406,6 +413,7 @@ function Member() {
                       setGradeFilter(choice.value);
                       startFilter(majorFilter, fieldFilter, choice.value);
                     }}
+                    maxMenuHeight={220}
                   />
                 </div>
               </div>

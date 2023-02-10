@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import backstage_logo from '../asset/img/backstage_logo.svg';
 import icon_alumniData from '../asset/img/icon/icon_alumniData.svg';
 import icon_alumniTalk from '../asset/img/icon/icon_alumniTalk.svg';
@@ -6,7 +6,6 @@ import BackstageAlumniTable from '../components/BackstageAlumniTable';
 import BackstageArticleTable from '../components/BackstageArticleTable';
 function Backstage() {
   const [nowTab, setNowTab] = useState('alumni');
-  // Components
   const Tab = ({ icon, title, tabName }) => (
     <div
       className="sideBarTab"

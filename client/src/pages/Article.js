@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import localDb from '../config/localDb.json';
-import Header from '../components/Header';
-import doubleCircleSymbol from '../asset/img/doubleCircle_symbol_white300.svg';
-import $ from 'jquery';
-import Select from 'react-select';
-import Button from 'react-bootstrap/Button';
 import axios from 'axios';
-import Pagination from 'react-bootstrap/Pagination';
-import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
+import $ from 'jquery';
+import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import Select from 'react-select';
+import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
+import doubleCircleSymbol from '../asset/img/doubleCircle_symbol_white300.svg';
+import Header from '../components/Header';
+import localDb from '../config/localDb.json';
 function Article() {
   const [articleData, setArticleData] = useState(null);
   const [fieldOptions, setFieldOptions] = useState([]);
@@ -184,6 +182,7 @@ function Article() {
                   });
                   // setMajorFilter(tempArray);
                 }}
+                maxMenuHeight={220}
               />
               <Select
                 classNamePrefix="filter__field--selector"
@@ -197,10 +196,8 @@ function Article() {
                   });
                   // setMajorFilter(tempArray);
                 }}
-              />{' '}
-              {/* <Button variant="primary" type="submit">
-                篩選
-              </Button> */}
+                maxMenuHeight={220}
+              />
             </div>
           </form>
         </div>

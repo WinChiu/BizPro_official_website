@@ -1,15 +1,28 @@
+import $ from 'jquery';
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import circle4 from '../asset/img/4Circle_symbol_white300.svg';
 import briefIntro_people from '../asset/img/briefIntro_people.webp';
 import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
 import dot_symbol from '../asset/img/dot_symbol_white100.svg';
 import dot_symbol_grey from '../asset/img/dot_symbol_white300.svg';
-import dubbleCircle from '../asset/img/doubleCircle_symbol_white300.svg';
+import dubbleCircle from '../asset/img/doubleCircle_symbol_white300_2.svg';
 import hbsCase from '../asset/img/hbsCase.webp';
-import leanCase from '../asset/img/leanCase.webp';
-
+import icon_advancedHypo from '../asset/img/icon/icon_advancedHypo.svg';
 import icon_basicHypo from '../asset/img/icon/icon_basicHypo.svg';
+import icon_communication from '../asset/img/icon/icon_communication.svg';
+import icon_down from '../asset/img/icon/icon_down.svg';
+import icon_interview from '../asset/img/icon/icon_interview.svg';
+import icon_mece from '../asset/img/icon/icon_mece.svg';
+import icon_powerpoint from '../asset/img/icon/icon_powerpoint.svg';
+import icon_pyramid from '../asset/img/icon/icon_pyramid.svg';
+import icon_qualitative from '../asset/img/icon/icon_qualitative.svg';
+import icon_quantitative from '../asset/img/icon/icon_quantitative.svg';
+import icon_questionnaire from '../asset/img/icon/icon_questionnaire.svg';
+import icon_speach from '../asset/img/icon/icon_speach.svg';
+import juniorProject from '../asset/img/juniorProject.webp';
 import junior_courseStructure from '../asset/img/junior_courseStructure.webp';
+import leanCase from '../asset/img/leanCase.webp';
 import lifeCase from '../asset/img/lifeCase.webp';
 import seniorCourseImg from '../asset/img/seniorCourseImg.webp';
 import seniorProjectImg from '../asset/img/seniorProjectImg.webp';
@@ -17,22 +30,9 @@ import title_symbol_left_lg from '../asset/img/title_symbol_left_lg.svg';
 import title_symbol_left_md from '../asset/img/title_symbol_left_md.svg';
 import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
 import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
+import toggle_symbol from '../asset/img/toggle_symbol.svg';
 import Header from '../components/Header';
 import localDb from '../config/localDb.json';
-import icon_interview from '../asset/img/icon/icon_interview.svg';
-import icon_qualitative from '../asset/img/icon/icon_qualitative.svg';
-import icon_questionnaire from '../asset/img/icon/icon_questionnaire.svg';
-import icon_advancedHypo from '../asset/img/icon/icon_advancedHypo.svg';
-import icon_mece from '../asset/img/icon/icon_mece.svg';
-import icon_pyramid from '../asset/img/icon/icon_pyramid.svg';
-import icon_quantitative from '../asset/img/icon/icon_quantitative.svg';
-import icon_powerpoint from '../asset/img/icon/icon_powerpoint.svg';
-import icon_speach from '../asset/img/icon/icon_speach.svg';
-import icon_communication from '../asset/img/icon/icon_communication.svg';
-import circle4 from '../asset/img/4Circle_symbol_white300.svg';
-import toggle_symbol from '../asset/img/toggle_symbol.svg';
-import icon_down from '../asset/img/icon/icon_down.svg';
-import $ from 'jquery';
 function Journey() {
   const headerWordingJunior = localDb.headerWording.journey.junior;
   const headerWordingSenior = localDb.headerWording.journey.senior;
@@ -92,7 +92,7 @@ function Journey() {
           <div className="courseStructure__intro--img">
             <img
               src={junior_courseStructure}
-              alt=""
+              alt="courseStructureImg"
               className="courseStructureImg"
             />
           </div>
@@ -117,7 +117,11 @@ function Journey() {
               </div>
             </div>
           </div>
-          <img src={icon_down} alt="" className="nextIcon containerMR" />
+          <img
+            src={icon_down}
+            alt="icon_down"
+            className="nextIcon containerMR"
+          />
           <div className="courseStructure__infos--container containerMR">
             <h3 className="container__title">Info-Process 階段</h3>
             <div className="container__content">
@@ -132,7 +136,11 @@ function Journey() {
               </div>
             </div>
           </div>
-          <img src={icon_down} alt="" className="nextIcon containerMR" />
+          <img
+            src={icon_down}
+            alt="icon_down"
+            className="nextIcon containerMR"
+          />
           <div className="courseStructure__infos--container">
             <h3 className="container__title">Info-Out 階段</h3>
             <div className="container__content">
@@ -264,7 +272,7 @@ function Journey() {
           </div>
           <div className="project__jp--content">
             <div className="content--img">
-              <img src={hbsCase} alt="" />
+              <img src={juniorProject} alt="juniorProject" />
             </div>
             <div className="content--feature">
               <div className="feature__item">
