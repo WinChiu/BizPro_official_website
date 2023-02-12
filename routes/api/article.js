@@ -2,7 +2,6 @@ const express = require('express');
 //const Alumni = require('../../models/alumni');
 const router = express.Router();
 
-
 const Article = require('../../models/article');
 const ArticleTest = require('../../models/article_test');
 
@@ -42,13 +41,12 @@ router.get('/test', async (req, res) => {
   }
 });
 
-router.get('/select', async(req, res) => {
-  try{
+router.get('/select', async (req, res) => {
+  try {
     let query = findQuery(req);
-  }
-  catch(e){
+  } catch (e) {
     console.error(e.message);
-    res.status(500).json({msg: "Server Error"});
+    res.status(500).json({ msg: 'Server Error' });
   }
 });
 

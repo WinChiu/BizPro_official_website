@@ -151,7 +151,7 @@ p {
 ::-webkit-scrollbar-track {
   border-radius: 10px;
   background-color: $white_200;
-  display: none;
+  //display: block;
 }
 
 ::-webkit-scrollbar {
@@ -411,9 +411,11 @@ html {
       .content__title {
         @include h3();
         margin-bottom: 8px;
+        color: $white_100;
       }
       .content__word {
         @include body2();
+        color: $white_100;
         color: $white_100;
       }
     }
@@ -906,7 +908,6 @@ html {
         }
         &--md {
           display: flex;
-          margin-bottom: 40px;
         }
       }
     }
@@ -1356,7 +1357,7 @@ html {
         position: absolute;
         transform: scaleY(-1) scale(0.7) rotate(15deg);
         left: -180px;
-        bottom: -223px;
+        bottom: -228px;
         opacity: 0.8;
       }
       &__right {
@@ -1364,10 +1365,9 @@ html {
         transform: scaleY(-1) scale(1.5);
         opacity: 15%;
         right: -380px;
-        bottom: -80px;
+        bottom: -84px;
         -webkit-animation: fading 2s ease-in-out 1s infinite;
         animation: fading 2s ease-in-out 1s infinite;
-        transform: translate(0px, 0px);
         @-webkit-keyframes fading {
           0% {
             opacity: 15%;
@@ -1560,7 +1560,7 @@ html {
       height: -moz-fit-content;
       height: fit-content;
       flex: 1;
-      margin-bottom: 108px;
+      //
       .content--title {
         margin-bottom: 40px;
         padding-right: 56px;
@@ -1800,6 +1800,7 @@ html {
     &__header {
       &--title {
         @include h1();
+        color: $white_100;
       }
     }
     //symbol
@@ -2078,12 +2079,13 @@ html {
       padding-top: 60px;
 
       &--title {
-        //@include h2();
         font-size: 34px;
         margin: 32px 0 8px 0;
+        color: $white_100;
       }
       &--subTitle {
         @include h4();
+        color: $white_100;
       }
       .connection {
         &__left {
@@ -2538,11 +2540,12 @@ html {
 }
 
 .member {
-  @include flex(column, center, center);
+  @include flex(column, flex-start, center);
   padding: 120px 128px 120px 128px;
   position: relative;
   background-color: $white_200;
   overflow: hidden;
+  min-height: 100vh;
   .connectionSymbol {
     position: absolute;
     z-index: -1;
@@ -2617,7 +2620,7 @@ html {
           );
 
           position: sticky;
-          bottom: 0px;
+          bottom: -2px;
         }
       }
       .content__tags {
@@ -2832,7 +2835,6 @@ html {
           .item__content--subTitle {
             @include body1();
             text-align: center;
-            margin-bottom: 8px;
           }
         }
       }
@@ -2845,11 +2847,11 @@ html {
         border-color: $grey;
       }
       .btn-primary {
-        background-color: $black_secondary;
-        border: none;
+        background-color: $white_200;
+        border: $black_secondary solid 1px;
         @include body2();
         font-weight: bold;
-        color: white;
+        color: $black_secondary;
         padding: 8px 16px 6px 16px;
         width: 100%;
         display: none;
