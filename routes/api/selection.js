@@ -8,11 +8,7 @@ router.post('/select', async (req, res) => {
     let query = findQuery(req);
 
     const alumniData = await Alumni.find(query);
-<<<<<<< HEAD
     console.log(query);
-=======
-
->>>>>>> 906b6cbac21e2a8ecfe97dae190ec712cbfa043a
     if (!alumniData) {
       res.status(400).json({ msg: 'No alumni data available' });
     } else {
