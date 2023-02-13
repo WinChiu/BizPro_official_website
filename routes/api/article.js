@@ -1,9 +1,10 @@
 const express = require('express');
-//const Alumni = require('../../models/alumni');
 const router = express.Router();
 
 const Article = require('../../models/article');
+const Alumni = require('../../models/alumni');
 const ArticleTest = require('../../models/article_test');
+const articleQuery = require('../../core/articleQuery');
 
 router.get('/member_talk', async (req, res) => {
   try {
@@ -23,27 +24,32 @@ router.get('/member_talk', async (req, res) => {
   }
 });
 
-router.get('/test', async (req, res) => {
+router.get('/select', async (req, res) => {
   try {
-    const tmp_article = await ArticleTest.find().populate('alumni', [
+    let query = articleQuery(req);
+    console.log(query);
+    IDList = [];
+    const alimniData = Alumni.find(query).cursor();
+    for (let doc = await alimniData.next(); doc != null; doc = await alimniData.next()){
+      //console.log(doc._id.valueOf());
+      IDList.push(doc._id.valueOf());
+    }
+
+    //console.log(IDList.length);
+    let newQuery = {
+      alumni: {$in: IDList}
+    };
+
+    const articleData = await ArticleTest.find(newQuery).populate('alumni', [
       'name',
       'number',
       'jobTitle',
       'tags',
     ]);
-    if (!tmp_article) {
-      return res.status(400).json({ msg: 'Article data is not available' });
+    if (!articleData){
+      return res.status(400).json({msg: "article data not found"});
     }
-    res.status(200).json(tmp_article);
-  } catch (e) {
-    console.error(e.message);
-    res.status(500).send('Server Error!');
-  }
-});
-
-router.get('/select', async (req, res) => {
-  try {
-    let query = findQuery(req);
+    res.status(200).json(articleData);
   } catch (e) {
     console.error(e.message);
     res.status(500).json({ msg: 'Server Error' });
