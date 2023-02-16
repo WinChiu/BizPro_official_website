@@ -360,6 +360,7 @@ function BackstageAlumniTable() {
                   placeholder="姓名"
                   className="nameInput"
                   defaultValue={`${targetAlumni.name ? targetAlumni.name : ''}`}
+                  required
                 />
                 <label>屆數</label>
                 <input
@@ -370,6 +371,7 @@ function BackstageAlumniTable() {
                   defaultValue={`${
                     targetAlumni.number ? targetAlumni.number : ''
                   }`}
+                  required
                 />
               </div>
               <div className="container container__row2">
@@ -432,7 +434,7 @@ function BackstageAlumniTable() {
               <Button
                 type="submit"
                 variant="success"
-                onClick={(e) => {
+                onClick={() => {
                   updateAvatar();
                 }}
               >

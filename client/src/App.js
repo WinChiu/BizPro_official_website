@@ -23,7 +23,6 @@ TODO:
 */
 
 function App() {
-  // axios.defaults.baseURL = 'http://localhost:5000/';
   const setVh = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -33,6 +32,7 @@ function App() {
 
   window.onload = () => {
     let nowLocation = window.location.href;
+    console.log(nowLocation);
     if (nowLocation[nowLocation.length - 1] === '/') {
       $('.logoContainer').css('animation-iteration-count', '1');
       setTimeout(() => {
