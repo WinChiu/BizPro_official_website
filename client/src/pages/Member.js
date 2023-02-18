@@ -8,7 +8,6 @@ import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
 import Header from '../components/Header';
 import localDb from '../config/localDb.json';
 import numberToRank from '../utility/numberToRank.js';
-
 /*
 TODO:
 - loading 符號
@@ -294,7 +293,7 @@ function Member() {
           console.log(err.message);
         });
     setNowPage(1);
-    console.log(filteredMemberDataTemp);
+
     setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
     setFilteredMemberData(filteredMemberDataTemp);
 

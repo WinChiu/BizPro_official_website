@@ -7,17 +7,22 @@ import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
 import doubleCircleSymbol from '../asset/img/doubleCircle_symbol_white300.svg';
 import Header from '../components/Header';
 import localDb from '../config/localDb.json';
+import numberToRank from '../utility/numberToRank';
 function Article() {
   const [articleData, setArticleData] = useState(null);
+  const [filteredArticleData, setFilteredArticleData] = useState([]);
+
   const [fieldOptions, setFieldOptions] = useState([]);
   const [majorOptions, setMajorOptions] = useState([]);
+  const [majorFilter, setMajorFilter] = useState([]);
+  const [fieldFilter, setFieldFilter] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
   const [nowPage, setNowPage] = useState(1);
   const headerWording = localDb.headerWording.article;
+  const [fetchDataError, setFetchDataError] = useState(false);
+
   const [popupContent, setPopupContent] = useState({
-    name: '',
-    number: '',
-    jobTitle: '',
+    alumni: { name: '', number: '', jobTitle: '' },
     title: '',
     content: '',
     avatar: '',
@@ -34,60 +39,70 @@ function Article() {
         .get('http://localhost:5000/api/article/member_talk')
         .then((res) => {
           console.log(res.data);
-          setArticleData(res.data);
-          setTotalPage(Math.ceil(res.data.length / 6));
+
           res.data.map((article) => {
-            article.tags.map((tag) => {
+            article.alumni.tags.map((tag) => {
               if (!field.includes(tag)) {
                 field.push(tag);
               }
             });
-            if (!major.includes(article.major)) {
-              major.push(article.major);
-            }
+            article.alumni.major.map((m) => {
+              if (!major.includes(m)) {
+                if (m !== 'Unknown') {
+                  major.push(m);
+                }
+              }
+            });
           });
+          // Set options
           field.map((item) => {
             fieldOptionsTemp.push({ value: item, label: item });
           });
           major.map((item) => {
-            majorOptionsTemp.push({ value: item, label: item });
+            majorOptionsTemp.push({
+              value: item,
+              label: item.replace('臺灣大學', ''),
+            });
           });
+          setArticleData(res.data);
+          setTotalPage(Math.ceil(res.data.length / 6));
+          setFilteredArticleData(res.data);
           setFieldOptions(fieldOptionsTemp);
           setMajorOptions(majorOptionsTemp);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          setFetchDataError(true);
+          console.log(error);
+        });
     };
     fetchData();
   }, []);
-  const switchPage = (direction, certainPage) => {
-    switch (direction) {
-      case 'next':
-        if (nowPage < totalPage) {
-          document.getElementById('articleSection').scrollIntoView();
-          setNowPage(nowPage + 1);
-        }
-        break;
-      case 'prev':
-        if (nowPage > 1) {
-          document.getElementById('articleSection').scrollIntoView();
-          setNowPage(nowPage - 1);
-        }
-        break;
-      case 'last':
-        document.getElementById('articleSection').scrollIntoView();
-        setNowPage(totalPage);
-        break;
-      case 'first':
-        document.getElementById('articleSection').scrollIntoView();
-        setNowPage(1);
-        break;
-      case 'certainPage':
-        document.getElementById('articleSection').scrollIntoView();
-        setNowPage(certainPage);
-        break;
-      default:
-        break;
-    }
+  const switchPage = (certainPage) => {
+    document.getElementById('articleSection').scrollIntoView();
+    setNowPage(certainPage);
+  };
+  const startFilter = async (major, field) => {
+    console.log(major, field);
+    let filteredArticleDataTemp = await axios
+      .post('http://localhost:5000/api/article/select', {
+        major: major,
+        tags: field,
+      })
+      .then((res) => {
+        return res.data;
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+    setNowPage(1);
+    setTotalPage(Math.ceil(filteredArticleDataTemp.length / 6));
+    setFilteredArticleData(filteredArticleDataTemp);
+    // Set pagination to page 1
+    $('.page-link').map((id, el) => {
+      if (el.getAttribute('aria-label') === 'Page 1') {
+        el.click();
+      }
+    });
   };
   const Item = (props) => {
     return (
@@ -113,7 +128,11 @@ function Article() {
           <p className="content">{props.content.replace(/\\+n/g, '<br/>')}</p>
           <div className="tags">
             {props.tags?.map((tag, i) => {
-              return <div className="tag" key={i}>{`測試行業`}</div>;
+              return (
+                <div className="tag" key={i}>
+                  {tag}
+                </div>
+              );
             })}
           </div>
         </div>
@@ -129,10 +148,9 @@ function Article() {
       />
       <div className="article__detail--titleGroup">
         <div className="titleGroup__img">
-          {/* <img src={props.avatar} alt="avatar" /> */}
           <p className="titleGroup__img--subTitle">
-            {`${props.number} ${props.name}${'：'}`}
-            {`${props.jobTitle}`}
+            {`${numberToRank(props.alumni.number)} ${props.alumni.name}${'：'}`}
+            {`${props.alumni.jobTitle}`}
           </p>
         </div>
         <div className="titleGroup__word">
@@ -178,9 +196,11 @@ function Article() {
                 onChange={(choice) => {
                   let tempArray = [];
                   choice.map((option) => {
+                    console.log(option.value);
                     tempArray.push(`${option.value}`);
                   });
-                  // setMajorFilter(tempArray);
+                  setMajorFilter(tempArray);
+                  startFilter(tempArray, fieldFilter);
                 }}
                 maxMenuHeight={220}
               />
@@ -194,7 +214,8 @@ function Article() {
                   choice.map((option) => {
                     tempArray.push(`${option.value}`);
                   });
-                  // setMajorFilter(tempArray);
+                  setFieldFilter(tempArray);
+                  startFilter(majorFilter, tempArray);
                 }}
                 maxMenuHeight={220}
               />
@@ -209,28 +230,36 @@ function Article() {
             $('body').css('overflow-y', 'scroll');
           }}
         />
-        {articleData?.map((data, i) => {
-          if ((nowPage - 1) * 6 <= i && i < nowPage * 6) {
-            return (
-              <Item
-                number={`${data.alumni.number}`}
-                name={`${data.alumni.name}`}
-                jobTitle={`${data.alumni.jobTitle}`}
-                title={`${data.title}`}
-                content={`${data.content}`}
-                tags={data.alumni.tags}
-                avatar={data.avatar}
-                id={i}
-              />
-            );
-          } else {
-            return;
-          }
-        })}
+        {fetchDataError ? (
+          <h4 className="member__items--warning">
+            資料載入錯誤：請確認網際網路連線狀態，或連繫網站管理員
+          </h4>
+        ) : filteredArticleData.length !== 0 ? (
+          filteredArticleData.map((data, i) => {
+            if ((nowPage - 1) * 6 <= i && i < nowPage * 6) {
+              return (
+                <Item
+                  number={`${numberToRank(data.alumni.number)}`}
+                  name={`${data.alumni.name}`}
+                  jobTitle={`${data.alumni.jobTitle}`}
+                  title={`${data.title}`}
+                  content={`${data.content}`}
+                  tags={data.alumni.tags}
+                  avatar={data.avatar}
+                  id={i}
+                />
+              );
+            } else {
+              return;
+            }
+          })
+        ) : (
+          <h4 className="member__items--warning">無搜尋結果</h4>
+        )}
         <ReactPaginate
           nextLabel="›"
           onPageChange={(e) => {
-            switchPage('certainPage', e.selected + 1);
+            switchPage(e.selected + 1);
           }}
           pageRangeDisplayed={5}
           marginPagesDisplayed={1}

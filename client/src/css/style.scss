@@ -1394,34 +1394,34 @@ html {
     }
     &--logo {
       height: 40px;
-      transform: translateY(20px);
-      opacity: 0;
-      transition-duration: 1s;
+      // transform: translateY(20px);
+      // opacity: 0;
+      // transition-duration: 1s;
     }
     &--title {
       @include h1();
       font-size: 56px;
       color: $white_100;
       margin: 8px 0 8px 0;
-      transform: translateY(20px);
-      opacity: 0;
-      transition-duration: 0.8s;
+      // transform: translateY(20px);
+      // opacity: 0;
+      // transition-duration: 0.8s;
     }
     &--subTitle {
       @include h3();
       font-weight: bold;
       color: $white_100;
-      transform: translateY(20px);
-      opacity: 0;
-      transition-duration: 0.8s;
+      // transform: translateY(20px);
+      // opacity: 0;
+      // transition-duration: 0.8s;
     }
     &--readMore {
       margin-bottom: 120px;
       margin-top: 64px;
       @include flex(row, center, center);
-      transform: translateY(20px);
-      opacity: 0;
-      transition-duration: 0.8s;
+      // transform: translateY(20px);
+      // opacity: 0;
+      // transition-duration: 0.8s;
 
       .readMore {
         &--word {
@@ -2278,10 +2278,10 @@ html {
       padding-right: 4px;
       box-sizing: border-box;
       position: relative;
-      padding-bottom: 40px;
+      padding-bottom: 16px;
       .gradientBox {
         width: calc(100% - 42px);
-        height: 60px;
+        height: 20px;
         position: fixed;
         bottom: 28px;
         left: 0;
@@ -2350,8 +2350,9 @@ html {
         @include flex(row, flex-end, center);
         .tag {
           @include body2();
-          padding: 4px 16px 2px 16px;
+          padding: 4px 12px 2px 12px;
           border-radius: 16px;
+
           background-color: $red_primary;
           color: white;
           margin-left: 12px;

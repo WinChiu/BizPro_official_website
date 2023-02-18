@@ -13,6 +13,7 @@ router.get('/member_talk', async (req, res) => {
       'number',
       'jobTitle',
       'tags',
+      'major',
     ]);
     if (!article) {
       return res.status(400).json({ msg: 'Article data is not available' });
@@ -24,20 +25,24 @@ router.get('/member_talk', async (req, res) => {
   }
 });
 
-router.get('/select', async (req, res) => {
+router.post('/select', async (req, res) => {
   try {
     let query = articleQuery(req);
     console.log(query);
     IDList = [];
-    const alimniData = Alumni.find(query).cursor();
-    for (let doc = await alimniData.next(); doc != null; doc = await alimniData.next()){
+    const alumniData = Alumni.find(query).cursor();
+    for (
+      let doc = await alumniData.next();
+      doc != null;
+      doc = await alumniData.next()
+    ) {
       //console.log(doc._id.valueOf());
       IDList.push(doc._id.valueOf());
     }
 
     //console.log(IDList.length);
     let newQuery = {
-      alumni: {$in: IDList}
+      alumni: { $in: IDList },
     };
 
     const articleData = await ArticleTest.find(newQuery).populate('alumni', [
@@ -46,8 +51,8 @@ router.get('/select', async (req, res) => {
       'jobTitle',
       'tags',
     ]);
-    if (!articleData){
-      return res.status(400).json({msg: "article data not found"});
+    if (!articleData) {
+      return res.status(400).json({ msg: 'article data not found' });
     }
     res.status(200).json(articleData);
   } catch (e) {
