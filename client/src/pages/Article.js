@@ -36,7 +36,7 @@ function Article() {
     let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
-        .get('http://localhost:5000/api/article/member_talk')
+        .get('/api/article/member_talk')
         .then((res) => {
           console.log(res.data);
 
@@ -84,7 +84,7 @@ function Article() {
   const startFilter = async (major, field) => {
     console.log(major, field);
     let filteredArticleDataTemp = await axios
-      .post('http://localhost:5000/api/article/select', {
+      .post('/api/article/select', {
         major: major,
         tags: field,
       })
@@ -231,7 +231,7 @@ function Article() {
           }}
         />
         {fetchDataError ? (
-          <h4 className="member__items--warning">
+          <h4 className="article__items--warning">
             資料載入錯誤：請確認網際網路連線狀態，或連繫網站管理員
           </h4>
         ) : filteredArticleData.length !== 0 ? (
@@ -254,7 +254,7 @@ function Article() {
             }
           })
         ) : (
-          <h4 className="member__items--warning">無搜尋結果</h4>
+          <h4 className="article__items--warning">無搜尋結果</h4>
         )}
         <ReactPaginate
           nextLabel="›"

@@ -46,7 +46,7 @@ function Member() {
     let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
-        .get('http://localhost:5000/api/alumni/members')
+        .get('/api/alumni/members')
         .then((res) => {
           const gridColumnCount = window
             .getComputedStyle(
@@ -267,7 +267,7 @@ function Member() {
     // field filter
     if (directSearch === '')
       filteredMemberDataTemp = await axios
-        .post('http://localhost:5000/api/alumni/select', {
+        .post('/api/alumni/select', {
           number: grade,
           major: major,
           tags: field,
@@ -280,7 +280,7 @@ function Member() {
         });
     else
       filteredMemberDataTemp = await axios
-        .post('http://localhost:5000/api/alumni/search', {
+        .post('/api/alumni/search', {
           number: grade,
           major: major,
           tags: field,
@@ -308,7 +308,7 @@ function Member() {
   const startSearch = async (searchData) => {
     let filteredMemberDataTemp = [];
     filteredMemberDataTemp = await axios
-      .post('http://localhost:5000/api/alumni/search', {
+      .post('/api/alumni/search', {
         number: gradeFilter,
         major: majorFilter,
         tags: fieldFilter,

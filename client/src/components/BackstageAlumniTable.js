@@ -29,7 +29,7 @@ function BackstageAlumniTable() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get('http://localhost:5000/api/alumni/members')
+        .get('/api/alumni/members')
         .then((res) => {
           setMemberData(res.data);
 
@@ -573,7 +573,7 @@ function BackstageAlumniTable() {
 
   const refreshAlumniData = async () => {
     await axios
-      .get('http://localhost:5000/api/alumni/members')
+      .get('/api/alumni/members')
       .then((res) => {
         setMemberData(res.data);
         setTotalPage(Math.ceil(res.data.length / 10));

@@ -492,7 +492,7 @@ function Backstage() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get('http://localhost:5000/api/alumni/members')
+        .get('/api/alumni/members')
         .then((res) => {
           setMemberData(res.data);
 

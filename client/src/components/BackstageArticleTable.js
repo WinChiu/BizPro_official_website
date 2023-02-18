@@ -33,7 +33,7 @@ function BackstageArticleTable() {
   useEffect(() => {
     const fetchData = async () => {
       await axios
-        .get('http://localhost:5000/api/article/member_talk')
+        .get('/api/article/member_talk')
         .then((res) => {
           setArticleData(res.data);
           setTotalPage(Math.ceil(res.data.length / 10));
