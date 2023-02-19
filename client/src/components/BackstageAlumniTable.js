@@ -158,7 +158,18 @@ function BackstageAlumniTable() {
         suppressContentEditableWarning="true"
         className="majorContent data"
       >
-        {major ? major : <span className="noData">查無資料</span>}
+        {major[0] === 'Unknown' ? (
+          <span className="noData">查無資料</span>
+        ) : major.length !== 0 ? (
+          major.map((data, i) => {
+            if (i !== major.length - 1) {
+              return data + '；';
+            }
+            return data;
+          })
+        ) : (
+          <span className="noData">查無資料</span>
+        )}
       </td>
       <td
         contentEditable="false"
@@ -339,7 +350,7 @@ function BackstageAlumniTable() {
   );
   const AddAlumniModal = () => {
     return (
-      <div className="modal show dataModal" style={{ display: 'block' }}>
+      <div className="modal show dataModal">
         <Modal.Dialog>
           <Modal.Header>
             <Modal.Title>
@@ -353,16 +364,20 @@ function BackstageAlumniTable() {
           >
             <Modal.Body>
               <div className="container container__row1">
-                <label>姓名</label>
+                <label>
+                  姓名<span className="requiredDot">*</span>
+                </label>
                 <input
                   type="text"
                   name="name"
                   placeholder="姓名"
                   className="nameInput"
                   defaultValue={`${targetAlumni.name ? targetAlumni.name : ''}`}
-                  required
+                  required="required"
                 />
-                <label>屆數</label>
+                <label>
+                  屆數<span className="requiredDot">*</span>
+                </label>
                 <input
                   type="text"
                   name="number"
@@ -375,51 +390,59 @@ function BackstageAlumniTable() {
                 />
               </div>
               <div className="container container__row2">
-                <label>頭銜</label>
+                <label>
+                  頭銜<span className="requiredDot">*</span>
+                </label>
                 <input
                   type="text"
                   name="title"
                   placeholder="頭銜"
                   className="titleInput"
-                  defaultValue={`${
-                    targetAlumni.jobTitle ? targetAlumni.jobTitle : ''
-                  }`}
                 />
-              </div>{' '}
+              </div>
               <div className="container container__row3">
-                <label>學歷</label>
+                <label>
+                  學歷<span className="requiredDot">*</span>
+                </label>
                 <input
                   type="text"
                   name="major"
-                  placeholder="學歷"
+                  placeholder="學歷（使用；隔開）"
                   className="majorInput"
-                  defaultValue={`${
-                    targetAlumni.major ? targetAlumni.major : ''
-                  }`}
                 />
               </div>
               <div className="container container__row4">
-                <label>標題</label>
+                <label>
+                  經歷<span className="requiredDot">*</span>
+                </label>
                 <input
                   type="text"
-                  name="articleTitle"
-                  placeholder="心得文標題"
-                  className="articleTitleInput"
-                  defaultValue={`${
-                    targetAlumni.title ? targetAlumni.title : ''
-                  }`}
+                  name="exp"
+                  placeholder="經歷（使用；隔開）"
+                  className="expInput"
                 />
               </div>
               <div className="container container__row5">
-                <label>內文</label>
-                <textarea
-                  className="contentInput"
-                  name="content"
-                  cols="30"
-                  rows="10"
-                  defaultValue={targetAlumni.content}
-                  placeholder="心得文內文"
-                ></textarea>
+                <label>
+                  產業<span className="requiredDot">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="exp"
+                  placeholder="產業標籤（使用；隔開）"
+                  className="expInput"
+                />
+              </div>
+              <div className="container container__row6">
+                <label>
+                  照片<span className="requiredDot">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="exp"
+                  placeholder="照片連結"
+                  className="expInput"
+                />
               </div>
             </Modal.Body>
             <Modal.Footer>
@@ -628,7 +651,14 @@ function BackstageAlumniTable() {
       <AddAlumniModal />
       <div className="titleSection">
         <h2 className="title">Alumni 資料庫</h2>
-        <Button variant="primary">新增 Alumni</Button>
+        <Button
+          variant="primary"
+          onClick={() => {
+            $('.dataModal').css('display', 'block');
+          }}
+        >
+          新增 Alumni
+        </Button>
       </div>
       <Table bordered>
         <thead>
