@@ -1233,7 +1233,11 @@ html {
 .tab {
   @include flex(row, center, center);
   width: 100%;
-  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 56px;
+  z-index: 100;
+
   &__item {
     @include flex(row, center, center);
     z-index: 0;
@@ -3213,6 +3217,7 @@ html {
       max-height: 100vh;
       position: fixed;
       background-color: rgba(0, 0, 0, 0.5);
+
       .modal-dialog {
         position: absolute;
         top: 50%;
@@ -3221,13 +3226,16 @@ html {
         margin: auto auto;
         min-width: 480px;
         width: 500px;
+        .requiredDot {
+          color: $red_primary;
+        }
         .container {
           @include flex(row, center, center);
           padding: 0;
           margin-bottom: 24px;
         }
         .container__row4 {
-          @include flex(row, center, flex-start);
+          //@include flex(row, center, flex-start);
           label {
             padding-top: 6px;
           }
@@ -3249,7 +3257,7 @@ html {
           padding: 8px 12px 6px 12px;
         }
         input {
-          padding: 8px 16px 6px 16px;
+          padding: 6px 16px 4px 16px;
           @include body1();
           font-weight: normal;
           border-radius: 4px;
@@ -3294,7 +3302,6 @@ html {
         width: 100%;
       }
     }
-
     .table {
       margin-top: 32px;
       margin-bottom: 40px;
@@ -3394,23 +3401,6 @@ html {
       }
     }
   }
-  // .pagination {
-  //   .page-item {
-  //     a {
-  //       color: $black_text;
-  //       &:hover {
-  //         background-color: rgba(174, 0, 35, 0);
-  //       }
-  //     }
-  //   }
-  //   .active {
-  //     .page-link {
-  //       background-color: $red_primary;
-  //       border-color: $red_primary;
-  //     }
-  //   }
-  // }
-
   .pagination {
     margin-top: 24px;
     margin-bottom: 0;

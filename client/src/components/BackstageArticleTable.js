@@ -151,7 +151,9 @@ function BackstageArticleTable() {
           >
             <Modal.Body>
               <div className="container container__row1">
-                <label>姓名</label>
+                <label>
+                  姓名<span className="requiredDot">*</span>
+                </label>
                 <input
                   type="text"
                   name="name"
@@ -161,7 +163,9 @@ function BackstageArticleTable() {
                     targetArticle.name ? targetArticle.name : ''
                   }`}
                 />
-                <label>屆數</label>
+                <label>
+                  屆數<span className="requiredDot">*</span>
+                </label>
                 <input
                   type="text"
                   name="number"
@@ -185,7 +189,9 @@ function BackstageArticleTable() {
                 />
               </div> */}
               <div className="container container__row2">
-                <label>標題</label>
+                <label>
+                  標題<span className="requiredDot">*</span>
+                </label>
                 <input
                   type="text"
                   name="articleTitle"
@@ -197,7 +203,9 @@ function BackstageArticleTable() {
                 />
               </div>
               <div className="container container__row3">
-                <label>內文</label>
+                <label>
+                  內文<span className="requiredDot">*</span>
+                </label>
                 <textarea
                   className="contentInput"
                   name="content"
@@ -281,7 +289,7 @@ function BackstageArticleTable() {
               variant="primary"
               className="btn-reupload"
               onClick={(e) => {
-                getTargetAlumni(e);
+                getTargetArticle(e);
                 setTimeout(() => {
                   $('.pictureModal').css('display', 'block');
                 }, 100);
@@ -298,7 +306,7 @@ function BackstageArticleTable() {
             variant="success"
             className="btn-upload"
             onClick={(e) => {
-              getTargetAlumni(e);
+              getTargetArticle(e);
               setTimeout(() => {
                 $('.pictureModal').css('display', 'block');
               }, 0);
@@ -313,7 +321,7 @@ function BackstageArticleTable() {
           variant="primary"
           className="btn-edit"
           onClick={(e) => {
-            getTargetAlumni(e);
+            getTargetArticle(e);
             setTimeout(() => {
               $('.dataModal').css('display', 'block');
             }, 0);
@@ -400,7 +408,7 @@ function BackstageArticleTable() {
 
   // Utilities
 
-  const getTargetAlumni = (e) => {
+  const getTargetArticle = (e) => {
     let jobTitle,
       title = null;
     let targetArticleData = e.target.parentNode.parentNode.dataset;
@@ -422,7 +430,7 @@ function BackstageArticleTable() {
       avatar: targetArticleData.avatar,
     });
   };
-  const clearTargetAlumni = () => {
+  const clearTargetArticle = () => {
     setTargetArticle({
       name: '',
       number: '',
@@ -593,7 +601,7 @@ function BackstageArticleTable() {
         <Button
           variant="primary"
           onClick={() => {
-            clearTargetAlumni();
+            clearTargetArticle();
             setTimeout(() => {
               $('.dataModal').css('display', 'block');
             }, 0);
