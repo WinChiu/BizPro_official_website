@@ -172,7 +172,7 @@ function BackstageArticleTable() {
                   }`}
                 />
               </div>
-              <div className="container container__row2">
+              {/* <div className="container container__row2">
                 <label>頭銜</label>
                 <input
                   type="text"
@@ -183,8 +183,8 @@ function BackstageArticleTable() {
                     targetArticle.jobTitle ? targetArticle.jobTitle : ''
                   }`}
                 />
-              </div>
-              <div className="container container__row3">
+              </div> */}
+              <div className="container container__row2">
                 <label>標題</label>
                 <input
                   type="text"
@@ -196,7 +196,7 @@ function BackstageArticleTable() {
                   }`}
                 />
               </div>
-              <div className="container container__row4">
+              <div className="container container__row3">
                 <label>內文</label>
                 <textarea
                   className="contentInput"
@@ -253,13 +253,13 @@ function BackstageArticleTable() {
       >
         {number ? number : <span className="noData">查無資料</span>}
       </td>
-      <td
+      {/* <td
         contentEditable="false"
         suppressContentEditableWarning="true"
         className="jobTitleContent data"
       >
         {jobTitle ? jobTitle : <span className="noData">查無資料</span>}
-      </td>
+      </td> */}
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
@@ -607,7 +607,7 @@ function BackstageArticleTable() {
           <tr>
             <th>姓名</th>
             <th>屆數</th>
-            <th>頭銜</th>
+
             <th>心得標題</th>
             <th>心得內容</th>
             <th>照片</th>
@@ -620,9 +620,9 @@ function BackstageArticleTable() {
               return (
                 <ArticleRow
                   key={i}
-                  name={article.name}
-                  number={article.number}
-                  jobTitle={article.jobTitle}
+                  name={article.alumni.name}
+                  number={article.alumni.number}
+                  // jobTitle={article.jobTitle}
                   title={article.title}
                   content={article.content.replace(/(\r\n|\n|\r)/g, `\r\n`)}
                   avatar={article.avatar}
