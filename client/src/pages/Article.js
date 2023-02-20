@@ -11,7 +11,6 @@ import numberToRank from '../utility/numberToRank';
 function Article() {
   const [articleData, setArticleData] = useState(null);
   const [filteredArticleData, setFilteredArticleData] = useState([]);
-
   const [fieldOptions, setFieldOptions] = useState([]);
   const [majorOptions, setMajorOptions] = useState([]);
   const [majorFilter, setMajorFilter] = useState([]);
@@ -231,7 +230,7 @@ function Article() {
           }}
         />
         {fetchDataError ? (
-          <h4 className="member__items--warning">
+          <h4 className="article__items--warning">
             資料載入錯誤：請確認網際網路連線狀態，或連繫網站管理員
           </h4>
         ) : filteredArticleData.length !== 0 ? (
@@ -254,7 +253,7 @@ function Article() {
             }
           })
         ) : (
-          <h4 className="member__items--warning">無搜尋結果</h4>
+          <h4 className="article__items--warning">無搜尋結果</h4>
         )}
         <ReactPaginate
           nextLabel="›"
