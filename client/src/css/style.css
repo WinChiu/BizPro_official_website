@@ -3401,7 +3401,7 @@ html {
 }
 .backstage .settingPage .toastComponent {
   position: fixed;
-  z-index: 10;
+  z-index: 10000;
   top: 24px;
   transform: translateY(-24px);
   opacity: 0;
@@ -3449,6 +3449,10 @@ html {
 }
 .backstage .settingPage .warning {
   background-color: #b9544c;
+  min-width: 0px;
+}
+.backstage .settingPage .warning p {
+  margin-right: 0px;
 }
 .backstage .settingPage .toastTrigger {
   transform: translateY(0px);
@@ -3712,4 +3716,15 @@ select-pure {
   --hover-background-color: #38323c;
   --hover-color: white;
   --dropdown-items: 5;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }/*# sourceMappingURL=style.css.map */
