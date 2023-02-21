@@ -111,7 +111,7 @@ router.put(
       return res.status(400).json({ error: error.array() });
     }
     try {
-      //console.log('id_:', req.body._id);
+      console.log(req.body);
       const id = req.body._id;
 
       let alumni = await Alumni.findById(id);
@@ -134,8 +134,8 @@ router.put(
         alumni.tags = req.body.tags;
       if (req.body.major != '' && req.body.major != null)
         alumni.major = req.body.major;
-      await alumni.save();
-
+      let result = await alumni.save();
+      console.log(result);
       res.json(alumni);
     } catch (e) {
       console.error(e.message);
@@ -145,26 +145,25 @@ router.put(
 );
 
 router.delete(
-    '/delete_alumni',
-    check('_id', 'ID is required').notEmpty(),
-    async (req, res) => {
-        error = validationResult(req);
-        if (!error.isEmpty()){
-            return res.status(400).json({ error: error.array() });
-        }
-        try {
-            let result = await Alumni.findOneAndRemove({_id: req.body._id});
-            if (!result) {
-                console.log('no alumni found');
-                return res.status(400).json({msg: "Cannot find alumni data"});
-            }
-            res.send('alumni deleted');
-        }
-        catch(e) {
-            console.error(e.message);
-            res.status(500).send('Server Errrorororor');
-        }
+  '/delete_alumni',
+  check('_id', 'ID is required').notEmpty(),
+  async (req, res) => {
+    error = validationResult(req);
+    if (!error.isEmpty()) {
+      return res.status(400).json({ error: error.array() });
     }
+    try {
+      let result = await Alumni.findOneAndRemove({ _id: req.body._id });
+      if (!result) {
+        console.log('no alumni found');
+        return res.status(400).json({ msg: 'Cannot find alumni data' });
+      }
+      res.send('alumni deleted');
+    } catch (e) {
+      console.error(e.message);
+      res.status(500).send('Server Errrorororor');
+    }
+  }
 );
 
 module.exports = router;
