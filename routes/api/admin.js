@@ -104,7 +104,7 @@ router.put(
       return res.status(400).json({ error: error.array() });
     }
     try {
-      //console.log('id_:', req.body._id);
+      console.log(req.body);
       const id = req.body._id;
 
       let alumni = await Alumni.findById(id);
@@ -113,6 +113,10 @@ router.put(
         return res.status(400).json({ msg: 'No alumni data' });
       }
 
+      if (req.body.name != '' && req.body.name != null)
+        alumni.name = req.body.name;
+      if (req.body.number != '' && req.body.number != null)
+        alumni.number = req.body.number;
       if (req.body.jobTitle != '' && req.body.jobTitle != null)
         alumni.jobTitle = req.body.jobTitle;
       if (req.body.exp != '' && req.body.exp != null) alumni.exp = req.body.exp;
@@ -122,8 +126,8 @@ router.put(
         alumni.tags = req.body.tags;
       if (req.body.major != '' && req.body.major != null)
         alumni.major = req.body.major;
-      await alumni.save();
-
+      let result = await alumni.save();
+      console.log(result);
       res.json(alumni);
     } catch (e) {
       console.error(e.message);

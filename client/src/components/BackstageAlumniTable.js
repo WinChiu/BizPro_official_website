@@ -20,6 +20,7 @@ function BackstageAlumniTable() {
   const [modalTitle, setModalTitle] = useState('資料刪除警告');
   const [modalContent, setModalContent] = useState('');
   const [targetAlumni, setTargetAlumni] = useState({
+    id: '',
     name: '',
     number: '',
     avatar: '',
@@ -129,8 +130,22 @@ function BackstageAlumniTable() {
       </div>
     );
   };
-  const AlumniRow = ({ name, number, title, major, exp, tags, avatar }) => (
-    <tr data-name={name} data-number={number} data-avatar={avatar}>
+  const AlumniRow = ({
+    alumniId,
+    name,
+    number,
+    title,
+    major,
+    exp,
+    tags,
+    avatar,
+  }) => (
+    <tr
+      data-name={name}
+      data-number={number}
+      data-avatar={avatar}
+      data-id={alumniId}
+    >
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
@@ -277,8 +292,17 @@ function BackstageAlumniTable() {
           variant="success"
           className="btn-update"
           onClick={(e) => {
-            if (e.target.tagName === 'BUTTON') updateAlumni(e.target);
-            else updateAlumni(e.target.parentNode);
+            if (e.target.tagName === 'BUTTON') {
+              getTargetAlumni(e.target);
+              setTimeout(() => {
+                updateAlumni(e.target);
+              }, 0);
+            } else {
+              getTargetAlumni(e.target.parentNode);
+              setTimeout(() => {
+                updateAlumni(e.target.parentNode);
+              }, 0);
+            }
             endEdit(e.target);
           }}
         >
@@ -469,12 +493,15 @@ function BackstageAlumniTable() {
 
   const getTargetAlumni = (e) => {
     let targetAlumniData = e.parentNode.parentNode.dataset;
+    console.log(targetAlumniData);
     setTargetAlumni({
+      id: targetAlumniData.id,
       name: targetAlumniData.name,
       number: targetAlumniData.number,
       avatar: targetAlumniData.avatar,
     });
   };
+  const getAlumniRowData = (e) => {};
   const startEdit = (e) => {
     e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[1] === 'data') {
@@ -593,10 +620,8 @@ function BackstageAlumniTable() {
     }, 0);
 
     // TODO: if update fail, show what's wrong
-
     $('.modal').css('display', 'none');
   };
-
   const refreshAlumniData = async () => {
     await axios
       .get('http://localhost:5000/api/alumni/members')
@@ -618,19 +643,60 @@ function BackstageAlumniTable() {
     // setToastContent(`刪除 ${number} ${name} 的資料失敗，`);
     // triggerToast('warning');
   };
-  const updateAlumni = (e) => {
-    console.log(e);
-    let name = '';
-    let number = '';
+  const updateAlumni = async (e) => {
+    let newAlumniData = {
+      name: '',
+      number: '',
+      jobTitle: '',
+      exp: '',
+      tags: '',
+      major: '',
+    };
     e.parentNode.parentNode.childNodes.forEach((child) => {
-      if (child.classList[0] === 'nameContent') name = child.innerText;
-      if (child.classList[0] === 'numberContent') number = child.innerText;
+      if (child.classList[0] === 'nameContent')
+        newAlumniData.name = child.innerText;
+      if (child.classList[0] === 'numberContent')
+        newAlumniData.number = child.innerText;
+      if (child.classList[0] === 'titleContent')
+        newAlumniData.jobTitle = child.innerText;
+      if (child.classList[0] === 'expContent')
+        newAlumniData.exp = child.innerText;
+      if (child.classList[0] === 'tagsContent')
+        newAlumniData.tags = child.innerText;
+      if (child.classList[0] === 'majorContent')
+        newAlumniData.major = child.innerText;
     });
+
     // if update success
-    setToastContent(`成功更新 ${numberToRank(number)} ${name} 的資料`);
-    setTimeout(() => {
-      triggerToast('success');
-    }, 0);
+    console.log(targetAlumni);
+    await axios
+      .put('http://localhost:5000/api/admin/update_alumni', {
+        _id: targetAlumni.id,
+        name: newAlumniData.name,
+        number: newAlumniData.number,
+        jobTitle: newAlumniData.jobTitle,
+        exp: [newAlumniData.exp],
+        tags: [newAlumniData.tags],
+        major: [newAlumniData.major],
+      })
+      .then((res) => {
+        setToastContent(
+          `成功更新 ${numberToRank(newAlumniData.number)} ${
+            newAlumniData.name
+          } 的資料`
+        );
+        console.log('update success');
+        setTimeout(() => {
+          triggerToast('success');
+        }, 0);
+      })
+      .catch((err) => {
+        console.log(err.response.data.error[0].msg);
+        setToastContent(`更新資料失敗`);
+        setTimeout(() => {
+          triggerToast('warning');
+        }, 0);
+      });
 
     // TODO: if update fail, show what's wrong
     // setToastContent(`更新 ${number} ${name} 的資料失敗，`);
@@ -656,7 +722,7 @@ function BackstageAlumniTable() {
         );
         setTimeout(() => {
           triggerToast('success');
-          // $('.dataModal').css('display', 'none');
+          $('.dataModal').css('display', 'none');
         }, 0);
       })
       .catch((err) => {
@@ -716,6 +782,7 @@ function BackstageAlumniTable() {
                   exp={member.exp}
                   tags={member.tags}
                   avatar={member.avatar}
+                  alumniId={member._id}
                 />
               );
             } else {
