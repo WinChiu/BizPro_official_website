@@ -419,7 +419,7 @@ function Member() {
                 <div className="filter__field">
                   <Select
                     classNamePrefix="filter__field--selector"
-                    placeholder="選擇領域"
+                    placeholder="選擇領域（含所有經歷）"
                     isMulti
                     options={fieldOptions}
                     onChange={(choice) => {
