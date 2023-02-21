@@ -103,8 +103,6 @@ router.post(
 router.put(
   '/update_alumni',
   check('_id', 'Alumni ID is required').notEmpty(),
-  //check('name', 'Name is required').notEmpty(),
-  //check('number', 'Number is required').notEmpty(),
   async (req, res) => {
     const error = validationResult(req);
     if (!error.isEmpty()) {
@@ -165,5 +163,27 @@ router.delete(
     }
   }
 );
+
+router.delete(
+  '/delete_article',
+  check('_id', 'ID is required').notEmpty(),
+  async (req, res) => {
+    error = validationResult(req);
+    if (!error.isEmpty()) {
+      return res.status(400).json({ error: error.array() });
+    }
+    try {
+        let result = await Article.findOneAndRemove({ _id: req.body._id });
+        if (!result) {
+          console.log('no article found');
+          return res.status(400).json({ msg: 'Cannot find article data' });
+        }
+        res.send('article deleted');
+      } catch (e) {
+        console.error(e.message);
+        res.status(500).send('Server Errrorororor');
+      }
+  }
+)
 
 module.exports = router;
