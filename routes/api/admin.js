@@ -6,52 +6,52 @@ const Admin = require('../../models/admin');
 const { check, validationResult } = require('express-validator');
 
 router.post(
-  '/add_alumni',
-  check('name', 'Name is required').notEmpty(),
-  check('number', 'Number is required').notEmpty(),
-  check('jobTitle', 'Job title is required').notEmpty(),
-  check('exp', 'Experience is required').notEmpty(),
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      console.log('Empty');
-      return res.status(400).json({ errors: errors.array() });
-    }
-    const { name, number, jobTitle, exp, tags, avatar, major } = req.body;
+    '/add_alumni',
+    check('name', 'Name is required').notEmpty(),
+    check('number', 'Number is required').notEmpty(),
+    check('jobTitle', 'Job title is required').notEmpty(),
+    check('exp', 'Experience is required').notEmpty(),
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()){
+            return res.status(400).json({ errors: errors.array() });
+        }
+        const {name, number, jobTitle, exp, tags, avatar, major} = req.body;
    
-    try{
-      let alumni = await Alumni.findOne({ 
-        name, number
-      });
-      if (alumni){
-        console.log(alumni);
-        return res.status(400).json({errors: [{msg: 'alumni already exists'}]});
-      }
+        try{
+            let alumni = await Alumni.findOne({ 
+                name, number
+            });
+            if (alumni){
+                console.log(alumni);
+                return res.status(400).json({errors: [{msg: 'alumni already exists'}]});
+            }
+            // Todo: avatar normalization
 
-      // Todo: avatar normalization
-      alumni = new Alumni({
-        name,
-        number,
-        jobTitle,
-        exp,
-        tags,
-        avatar,
-        major,
-      });
-      await alumni.save();
-      res.send('alumni added success!!');
+            alumni = new Alumni({
+                name,
+                number,
+                jobTitle,
+                exp,
+                tags,
+                avatar,
+                major
+            });
 
-      const payload = {
-        alumni: {
-          id: alumni.id,
-        },
-      };
-    } catch (e) {
-      console.error(e.message);
-      res.status(500).send('Server Errorrrrr');
-    }
-  }
-);
+            await alumni.save();
+            res.send('alumni added success!!');
+
+            const payload = {
+                alumni: {
+                    id: alumni.id
+                }
+            };
+        }
+        catch(e){
+            console.error(e.message);
+            res.status(500).send('Server Errorrrrr');
+        }
+});
 
 router.post(
     '/add_article',
