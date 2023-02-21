@@ -180,7 +180,6 @@ function Member() {
 
     return;
   }, [memberColumnCount]);
-
   const MemberItem = (props) => (
     <div
       className="member__items--item"
@@ -240,6 +239,35 @@ function Member() {
       </div>
     </section>
   );
+
+  // const PopUp = ({ props }) => (
+  //   <section className="member__popUp">
+  //     <div className="member__popUp--img">
+  //       <img src={props.avatar} alt="avatar" />
+  //     </div>
+  //     <div className="member__popUp--content">
+  //       <div className="titleContainer">
+  //         <h3>
+  //           {numberToRank(props.number)} {props.name}
+  //         </h3>
+  //         <div className="content__tags">
+  //           {props.tags.map((tag) => (
+  //             <div className="content__tags--tag">{tag}</div>
+  //           ))}
+  //         </div>
+  //       </div>
+
+  //       <p>{props.jobTitle}</p>
+  //       <ul>
+  //         {props.exp.map((exp) => (
+  //           <li>{exp}</li>
+  //         ))}
+  //         <div className="gradientBox" />
+  //       </ul>
+  //     </div>
+  //   </section>
+  // );
+
   const openPopup = () => {
     $('.member__popUp').css('display', 'flex');
     $('.member__popupLayer').css('display', 'block');
