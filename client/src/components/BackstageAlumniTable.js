@@ -42,13 +42,12 @@ function BackstageAlumniTable() {
   }, []);
 
   // Components
-
-  const WarningToast = () => {
+  const WarningToast = () => (
     <div className="toastComponent warning">
       <p>{toastContent ? toastContent : '無提示訊息'}</p>
-      <img src={cross} alt="toastClose" className="toastClose" />
-    </div>;
-  };
+      {/* <img src={cross} alt="toastClose" className="toastClose" /> */}
+    </div>
+  );
   const SuccessToast = () => (
     <div className="toastComponent success">
       <p>{toastContent ? toastContent : '無提示訊息'}</p>
@@ -210,7 +209,7 @@ function BackstageAlumniTable() {
               variant="primary"
               className="btn-reupload"
               onClick={(e) => {
-                getTargetAlumni(e);
+                getTargetAlumni(e.target);
                 setTimeout(() => {
                   $('.pictureModal').css('display', 'block');
                 }, 0);
@@ -227,7 +226,7 @@ function BackstageAlumniTable() {
             variant="success"
             className="btn-upload"
             onClick={(e) => {
-              getTargetAlumni(e);
+              getTargetAlumni(e.target);
               setTimeout(() => {
                 $('.pictureModal').css('display', 'block');
               }, 0);
@@ -257,15 +256,20 @@ function BackstageAlumniTable() {
           variant="danger"
           className="btn-delete"
           onClick={(e) => {
-            triggerWarningModal(e);
-            getTargetAlumni(e);
+            if (e.target.tagName === 'BUTTON') {
+              triggerWarningModal(e.target);
+              getTargetAlumni(e.target);
+            } else {
+              triggerWarningModal(e.target.parentNode);
+              getTargetAlumni(e.target.parentNode);
+            }
           }}
         >
           <img
             src={icon_x}
             alt="icon_x"
             onClick={(e) => {
-              startEdit(e.target.parentNode);
+              //startEdit(e.target.parentNode);
             }}
           />
         </Button>
@@ -273,31 +277,22 @@ function BackstageAlumniTable() {
           variant="success"
           className="btn-update"
           onClick={(e) => {
-            updateAlumni(e);
+            if (e.target.tagName === 'BUTTON') updateAlumni(e.target);
+            else updateAlumni(e.target.parentNode);
+            endEdit(e.target);
           }}
         >
-          <img
-            src={icon_upload}
-            alt="icon_upload"
-            onClick={(e) => {
-              startEdit(e.target.parentNode);
-            }}
-          />
+          <img src={icon_upload} alt="icon_upload" />
         </Button>
         <Button
           variant="danger"
           className="btn-cancel"
           onClick={(e) => {
-            endEdit(e);
+            if (e.target.tagName === 'BUTTON') endEdit(e.target);
+            else endEdit(e.target.parentNode);
           }}
         >
-          <img
-            src={icon_x_circle}
-            alt="icon_x_circle"
-            onClick={(e) => {
-              startEdit(e.target.parentNode);
-            }}
-          />
+          <img src={icon_x_circle} alt="icon_x_circle" />
         </Button>
       </td>
     </tr>
@@ -358,8 +353,9 @@ function BackstageAlumniTable() {
             </Modal.Title>
           </Modal.Header>
           <form
-            onSubmit={() => {
-              updateAvatar();
+            onSubmit={(e) => {
+              e.preventDefault();
+              addAlumni(e);
             }}
           >
             <Modal.Body>
@@ -372,20 +368,16 @@ function BackstageAlumniTable() {
                   name="name"
                   placeholder="姓名"
                   className="nameInput"
-                  defaultValue={`${targetAlumni.name ? targetAlumni.name : ''}`}
-                  required="required"
+                  required
                 />
                 <label>
                   屆數<span className="requiredDot">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="number"
                   placeholder="屆數"
                   className="numberInput"
-                  defaultValue={`${
-                    targetAlumni.number ? targetAlumni.number : ''
-                  }`}
                   required
                 />
               </div>
@@ -398,6 +390,7 @@ function BackstageAlumniTable() {
                   name="title"
                   placeholder="頭銜"
                   className="titleInput"
+                  required
                 />
               </div>
               <div className="container container__row3">
@@ -409,6 +402,7 @@ function BackstageAlumniTable() {
                   name="major"
                   placeholder="學歷（使用；隔開）"
                   className="majorInput"
+                  required
                 />
               </div>
               <div className="container container__row4">
@@ -420,6 +414,7 @@ function BackstageAlumniTable() {
                   name="exp"
                   placeholder="經歷（使用；隔開）"
                   className="expInput"
+                  required
                 />
               </div>
               <div className="container container__row5">
@@ -428,9 +423,10 @@ function BackstageAlumniTable() {
                 </label>
                 <input
                   type="text"
-                  name="exp"
+                  name="tag"
                   placeholder="產業標籤（使用；隔開）"
-                  className="expInput"
+                  className="tagInput"
+                  required
                 />
               </div>
               <div className="container container__row6">
@@ -439,9 +435,10 @@ function BackstageAlumniTable() {
                 </label>
                 <input
                   type="text"
-                  name="exp"
+                  name="avatar"
                   placeholder="照片連結"
-                  className="expInput"
+                  className="avatarInput"
+                  required
                 />
               </div>
             </Modal.Body>
@@ -457,11 +454,11 @@ function BackstageAlumniTable() {
               <Button
                 type="submit"
                 variant="success"
-                onClick={() => {
-                  updateAvatar();
-                }}
+                // onClick={() => {
+                //   updateAvatar();
+                // }}
               >
-                更新
+                新增
               </Button>
             </Modal.Footer>
           </form>
@@ -469,10 +466,9 @@ function BackstageAlumniTable() {
       </div>
     );
   };
-  // Utilities
 
   const getTargetAlumni = (e) => {
-    let targetAlumniData = e.target.parentNode.parentNode.dataset;
+    let targetAlumniData = e.parentNode.parentNode.dataset;
     setTargetAlumni({
       name: targetAlumniData.name,
       number: targetAlumniData.number,
@@ -528,7 +524,7 @@ function BackstageAlumniTable() {
     // }
   };
   const endEdit = (e) => {
-    e.target.parentNode.parentNode.childNodes.forEach((child) => {
+    e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[1] === 'data') {
         child.classList.remove('editable');
         child.setAttribute('contentEditable', false);
@@ -551,7 +547,7 @@ function BackstageAlumniTable() {
   const triggerWarningModal = (e) => {
     let name = '';
     let number = '';
-    e.target.parentNode.parentNode.childNodes.forEach((child) => {
+    e.parentNode.parentNode.childNodes.forEach((child) => {
       console.log(child);
       if (child.classList[0] === 'nameContent') name = child.innerText;
       if (child.classList[0] === 'numberContent') number = child.innerText;
@@ -571,12 +567,19 @@ function BackstageAlumniTable() {
     }
     if (type == 'warning')
       $('.toastComponent.warning').addClass('toastTrigger');
+    setTimeout(() => {
+      $('.toastComponent').removeClass('toastTrigger');
+    }, 1500);
   };
   const closeToast = () => {
     $('.toastComponent').addClass('toastTrigger');
   };
-  const updateAvatar = () => {
+  const updateAvatar = async (e) => {
     // TODO: avatar update api
+    await axios
+      .put('http://localhost:5000/api/admin/update', {})
+      .then()
+      .catch((err) => {});
 
     // if update success
     setToastContent(
@@ -604,23 +607,22 @@ function BackstageAlumniTable() {
       .catch((error) => console.log(error));
   };
   // TODO: delete and update api call to be add
-  const deleteAlumni = (target) => {
+  const deleteAlumni = async (target) => {
     setToastContent(
       `成功刪除 ${numberToRank(target.number)} ${target.name} 的資料`
     );
     setTimeout(() => {
       triggerToast('success');
     }, 0);
-
     // TODO: if update fail, show what's wrong
     // setToastContent(`刪除 ${number} ${name} 的資料失敗，`);
     // triggerToast('warning');
   };
   const updateAlumni = (e) => {
+    console.log(e);
     let name = '';
     let number = '';
-    e.target.parentNode.parentNode.childNodes.forEach((child) => {
-      console.log(child);
+    e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[0] === 'nameContent') name = child.innerText;
       if (child.classList[0] === 'numberContent') number = child.innerText;
     });
@@ -635,8 +637,36 @@ function BackstageAlumniTable() {
     // triggerToast('warning');
     endEdit(e);
   };
-  const addAlumni = () => {};
-
+  const addAlumni = async (e) => {
+    await axios
+      .post('http://localhost:5000/api/admin/add_alumni', {
+        name: e.target.name.value,
+        number: e.target.number.value,
+        jobTitle: e.target.title.value,
+        exp: e.target.exp.value.split('；'),
+        tags: e.target.tag.value.split('；'),
+        avatar: e.target.avatar.value,
+        major: e.target.major.value.split('；'),
+      })
+      .then((res) => {
+        setToastContent(
+          `成功新增${numberToRank(e.target.number.value)} ${
+            e.target.name.value
+          }`
+        );
+        setTimeout(() => {
+          triggerToast('success');
+          // $('.dataModal').css('display', 'none');
+        }, 0);
+      })
+      .catch((err) => {
+        console.log(err.response.data.errors[0].msg);
+        setToastContent('已存在相同屆數與姓名的 Alumni');
+        setTimeout(() => {
+          triggerToast('warning');
+        }, 0);
+      });
+  };
   const switchPage = (certainPage) => {
     document.getElementById('settingPageSection').scrollIntoView();
     setNowPage(certainPage);

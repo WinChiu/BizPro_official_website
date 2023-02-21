@@ -25,7 +25,6 @@ router.post(
         number,
       });
       if (alumni) {
-        console.log(alumni);
         return res
           .status(400)
           .json({ errors: [{ msg: 'alumni already exists' }] });
