@@ -131,20 +131,6 @@ router.put(
         }
     }
 );
-/*
-router.delete(
-    '/erase',
-    async (req, res) => {
-        try{
-            Alumni.findOneAndRemove();
-        }
-        catch(e){
-            console.error(e.message);
-            res.status(500).send('Server Errrorororor');
-        }
-    }
-);
-*/
 
 router.delete(
     '/delete_alumni',
@@ -158,7 +144,7 @@ router.delete(
             let result = await Alumni.findOneAndRemove({_id: req.body._id});
             if (!result) {
                 console.log('no alumni found');
-                res.status(400).json({msg: "Cannot find alumni data"});
+                return res.status(400).json({msg: "Cannot find alumni data"});
             }
             res.send('alumni deleted');
         }
