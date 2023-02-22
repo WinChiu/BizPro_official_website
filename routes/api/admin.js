@@ -79,9 +79,9 @@ router.post(
         number: req.body.number,
       });
 
-      if(!alumni){
+      if (!alumni) {
         console.log('No alumni');
-        return res.status(400).json({ msg: "Cannot find alumni" });
+        return res.status(400).json({ msg: 'Cannot find alumni' });
       }
 
       let alumniID = alumni.id;
@@ -93,13 +93,12 @@ router.post(
       };
 
       // if article is already exist: update it
-      if (req.body._id != null && req.body._id != ''){
+      if (req.body._id != null && req.body._id != '') {
         let article = await Article.findOneAndUpdate(
-            { _id: req.body._id },
-            { $set: articleFields }
+          { _id: req.body._id },
+          { $set: articleFields }
         );
-      }
-      else{
+      } else {
         let article = await Article.create(articleFields);
       }
       res.send('Article added success!!');
@@ -197,57 +196,56 @@ router.delete(
 
 // add admin (be careful)
 router.post(
-    '/add_admin',
-    check('name', 'Name is required').notEmpty(),
-    check('email', 'Please enter valid email').isEmail(),
-    check(
-        'password',
-        'please enter a password with 6 or more characters'
-    ).isLength({ min: 6 }),
-    async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
-        }
-        const { name, email, password } = req.body;
-
-        try {
-            let admin = await Admin.findOne({ email });
-            if (admin) {
-                return res
-                    .status(400)
-                    .json({ errors: [{ msg: 'Admin already exists' }] });
-            }
-            admin = new Admin({
-                "name": name,
-                "email": email,
-                "password": password
-            });
-
-            const salt = await bcrypt.genSalt(10);
-            admin.password = await bcrypt.hash(password, salt);
-            await admin.save();
-            
-            const payload = {
-                admin: {
-                    id: admin.id
-                }
-            }
-            jwt.sign(
-                payload,
-                config.get('jwtSecret'),
-                { expiresIn: '5 days' },
-                (err, token) => {
-                    if (err) throw err;
-                    res.json({ token });
-                }
-            );
-        }
-        catch (e) {
-            console.error(e.message);
-            res.status(500).json({ msg: "Server Errorororor" });
-        }
+  '/add_admin',
+  check('name', 'Name is required').notEmpty(),
+  check('email', 'Please enter valid email').isEmail(),
+  check(
+    'password',
+    'please enter a password with 6 or more characters'
+  ).isLength({ min: 6 }),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
+    const { name, email, password } = req.body;
+
+    try {
+      let admin = await Admin.findOne({ email });
+      if (admin) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Admin already exists' }] });
+      }
+      admin = new Admin({
+        name: name,
+        email: email,
+        password: password,
+      });
+
+      const salt = await bcrypt.genSalt(10);
+      admin.password = await bcrypt.hash(password, salt);
+      await admin.save();
+
+      const payload = {
+        admin: {
+          id: admin.id,
+        },
+      };
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        { expiresIn: '5 days' },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
+    } catch (e) {
+      console.error(e.message);
+      res.status(500).json({ msg: 'Server Errorororor' });
+    }
+  }
 );
 
 module.exports = router;
