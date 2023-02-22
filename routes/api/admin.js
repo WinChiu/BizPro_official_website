@@ -1,9 +1,12 @@
 const mongoose = require('mongoose');
 const express = require('express');
+const config = require('config');
 const router = express.Router();
 const Alumni = require('../../models/alumni');
 const Article = require('../../models/article');
 const Admin = require('../../models/admin');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 
 router.post(
@@ -58,7 +61,7 @@ router.post(
 );
 
 router.post(
-  '/add_and_update_article',
+  '/add_article',
   check('name', 'Alumni name is required').notEmpty(),
   check('number', 'Alumni number is required').notEmpty(),
   check('title', 'Title is required').notEmpty(),
@@ -99,6 +102,14 @@ router.post(
     }
   }
 );
+
+// Update article
+
+/* 
+router.put(
+    '/update_article'
+);
+*/
 
 router.put(
   '/update_alumni',
@@ -185,5 +196,60 @@ router.delete(
       }
   }
 )
+
+// add admin (be careful)
+router.post(
+    '/add_admin',
+    check('name', 'Name is required').notEmpty(),
+    check('email', 'Please enter valid email').isEmail(),
+    check(
+        'password',
+        'please enter a password with 6 or more characters'
+    ).isLength({ min: 6 }),
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+        const { name, email, password } = req.body;
+
+        try {
+            let admin = await Admin.findOne({ email });
+            if (admin) {
+                return res
+                    .status(400)
+                    .json({ errors: [{ msg: 'Admin already exists' }] });
+            }
+            admin = new Admin({
+                "name": name,
+                "email": email,
+                "password": password
+            });
+
+            const salt = await bcrypt.genSalt(10);
+            admin.password = await bcrypt.hash(password, salt);
+            await admin.save();
+            
+            const payload = {
+                admin: {
+                    id: admin.id
+                }
+            }
+            jwt.sign(
+                payload,
+                config.get('jwtSecret'),
+                { expiresIn: '5 days' },
+                (err, token) => {
+                    if (err) throw err;
+                    res.json({ token });
+                }
+            );
+        }
+        catch (e) {
+            console.error(e.message);
+            res.status(500).json({ msg: "Server Errorororor" });
+        }
+    }
+);
 
 module.exports = router;
