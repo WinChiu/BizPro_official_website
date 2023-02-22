@@ -104,7 +104,7 @@ router.put(
   '/update_alumni',
   check('_id', 'Alumni ID is required').notEmpty(),
   async (req, res) => {
-    const error = validationResult(req);
+    const error = validationResult(req.body);
     if (!error.isEmpty()) {
       return res.status(400).json({ error: error.array() });
     }
@@ -143,7 +143,7 @@ router.put(
 
 router.delete(
   '/delete_alumni',
-  check('_id', 'ID is required').notEmpty(),
+  check('_id', 'Alumni ID is required').notEmpty(),
   async (req, res) => {
     error = validationResult(req);
     if (!error.isEmpty()) {

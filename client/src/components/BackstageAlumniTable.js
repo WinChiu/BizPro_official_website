@@ -26,18 +26,17 @@ function BackstageAlumniTable() {
     avatar: '',
   });
 
+  const fetchData = async () => {
+    await axios
+      .get('http://localhost:5000/api/alumni/members')
+      .then((res) => {
+        setMemberData(res.data);
+        setTotalPage(Math.ceil(res.data.length / 10));
+      })
+      .catch((error) => console.log(error));
+  };
   // Load Data
   useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get('http://localhost:5000/api/alumni/members')
-        .then((res) => {
-          setMemberData(res.data);
-
-          setTotalPage(Math.ceil(res.data.length / 10));
-        })
-        .catch((error) => console.log(error));
-    };
     fetchData();
     return;
   }, []);
@@ -256,21 +255,22 @@ function BackstageAlumniTable() {
           variant="primary"
           className="btn-edit"
           onClick={(e) => {
-            console.log(e.target.tagName);
             if (e.target.tagName === 'BUTTON') {
               startEdit(e.target);
-              getTargetAlumni(e.target);
             } else {
               startEdit(e.target.parentNode);
-              getTargetAlumni(e.target.parentNode);
             }
+
+            // getTargetAlumni(e.target);
+            // startEdit(e.target);
           }}
         >
           <img
             src={icon_edit}
             alt="icon_edit"
             onClick={(e) => {
-              startEdit(e.target.parentNode);
+              //getTargetAlumni(e.target.parentNode);
+              //startEdit(e.target.parentNode);
             }}
           />
         </Button>
@@ -300,11 +300,15 @@ function BackstageAlumniTable() {
           className="btn-update"
           onClick={(e) => {
             if (e.target.tagName === 'BUTTON') {
-              //getTargetAlumni(e.target);
-              updateAlumni(e.target);
+              getTargetAlumni(e.target);
+              setTimeout(() => {
+                updateAlumni(e.target);
+              }, 0);
             } else {
-              //getTargetAlumni(e.target.parentNode);
-              updateAlumni(e.target.parentNode);
+              getTargetAlumni(e.target.parentNode);
+              setTimeout(() => {
+                updateAlumni(e.target.parentNode);
+              }, 0);
             }
             endEdit(e.target);
           }}
@@ -380,6 +384,7 @@ function BackstageAlumniTable() {
             </Modal.Title>
           </Modal.Header>
           <form
+            id="addAlumniForm"
             onSubmit={(e) => {
               e.preventDefault();
               addAlumni(e);
@@ -461,10 +466,11 @@ function BackstageAlumniTable() {
                   照片<span className="requiredDot">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="url"
                   name="avatar"
                   placeholder="照片連結"
                   className="avatarInput"
+                  pattern="https://.*"
                   required
                 />
               </div>
@@ -473,18 +479,13 @@ function BackstageAlumniTable() {
               <Button
                 variant="primary"
                 onClick={() => {
+                  document.getElementById('addAlumniForm').reset();
                   $('.modal').css('display', 'none');
                 }}
               >
                 取消
               </Button>
-              <Button
-                type="submit"
-                variant="success"
-                // onClick={() => {
-                //   updateAvatar();
-                // }}
-              >
+              <Button type="submit" variant="success">
                 新增
               </Button>
             </Modal.Footer>
@@ -496,7 +497,7 @@ function BackstageAlumniTable() {
 
   const getTargetAlumni = (e) => {
     let targetAlumniData = e.parentNode.parentNode.dataset;
-    console.log(targetAlumniData);
+
     setTargetAlumni({
       id: targetAlumniData.id,
       name: targetAlumniData.name,
@@ -508,6 +509,7 @@ function BackstageAlumniTable() {
   const startEdit = (e) => {
     e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[1] === 'data') {
+        console.log('check');
         child.classList.add('editable');
         child.setAttribute('contentEditable', true);
       }
@@ -524,6 +526,7 @@ function BackstageAlumniTable() {
         });
       }
     });
+
     // if (isSthEditing === false) {
     //   e.target.parentNode.parentNode.childNodes.forEach((child) => {
     //     if (child.classList[1] === 'data') {
@@ -578,7 +581,6 @@ function BackstageAlumniTable() {
     let name = '';
     let number = '';
     e.parentNode.parentNode.childNodes.forEach((child) => {
-      console.log(child);
       if (child.classList[0] === 'nameContent') name = child.innerText;
       if (child.classList[0] === 'numberContent') number = child.innerText;
     });
@@ -635,13 +637,30 @@ function BackstageAlumniTable() {
       .catch((error) => console.log(error));
   };
   // TODO: delete and update api call to be add
-  const deleteAlumni = async (target) => {
-    setToastContent(
-      `成功刪除 ${numberToRank(target.number)} ${target.name} 的資料`
-    );
-    setTimeout(() => {
-      triggerToast('success');
-    }, 0);
+  const deleteAlumni = async () => {
+    console.log(targetAlumni.id);
+    await axios
+      .delete('http://localhost:5000/api/admin/delete_alumni', {
+        data: {
+          _id: targetAlumni.id,
+        },
+      })
+      .then((res) => {
+        setToastContent(`成功刪除資料`);
+        setTimeout(() => {
+          fetchData();
+          setTimeout(() => {
+            triggerToast('success');
+          }, 500);
+        }, 0);
+      })
+      .catch((err) => {
+        console.log(err.response.data.error[0].msg);
+        setToastContent(`刪除資料失敗，請重新操作`);
+        setTimeout(() => {
+          triggerToast('warning');
+        }, 0);
+      });
     // TODO: if update fail, show what's wrong
     // setToastContent(`刪除 ${number} ${name} 的資料失敗，`);
     // triggerToast('warning');
@@ -687,12 +706,15 @@ function BackstageAlumniTable() {
           } 的資料`
         );
         setTimeout(() => {
-          triggerToast('success');
+          fetchData();
+          setTimeout(() => {
+            triggerToast('success');
+          }, 500);
         }, 0);
       })
       .catch((err) => {
         console.log(err.response.data.error[0].msg);
-        setToastContent(`更新資料失敗`);
+        setToastContent(`更新資料失敗，請重新操作`);
         setTimeout(() => {
           triggerToast('warning');
         }, 0);
