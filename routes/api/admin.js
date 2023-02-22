@@ -61,7 +61,7 @@ router.post(
 );
 
 router.post(
-  '/add_article',
+  '/add_and_update_article',
   check('name', 'Alumni name is required').notEmpty(),
   check('number', 'Alumni number is required').notEmpty(),
   check('title', 'Title is required').notEmpty(),
@@ -79,7 +79,12 @@ router.post(
         number: req.body.number,
       });
 
-      let alumniID = alumni._id;
+      if(!alumni){
+        console.log('No alumni');
+        return res.status(400).json({ msg: "Cannot find alumni" });
+      }
+
+      let alumniID = alumni.id;
       let articleFields = {
         alumni: alumniID,
         title: req.body.title,
@@ -87,14 +92,16 @@ router.post(
         avatar: req.body.avatar,
       };
 
-      let article = await Article.findOneAndUpdate(
-        { alumni: alumniID },
-        { $set: articleFields }
-      );
-      if (!article) {
-        article = await Article.create(articleFields);
+      // if article is already exist: update it
+      if (req.body._id != null && req.body._id != ''){
+        let article = await Article.findOneAndUpdate(
+            { _id: req.body._id },
+            { $set: articleFields }
+        );
       }
-      //console.log(article);
+      else{
+        let article = await Article.create(articleFields);
+      }
       res.send('Article added success!!');
     } catch (e) {
       console.error(e.message);
@@ -102,14 +109,6 @@ router.post(
     }
   }
 );
-
-// Update article
-
-/* 
-router.put(
-    '/update_article'
-);
-*/
 
 router.put(
   '/update_alumni',
@@ -120,7 +119,7 @@ router.put(
       return res.status(400).json({ error: error.array() });
     }
     try {
-      console.log(req.body);
+      //console.log(req.body);
       const id = req.body._id;
 
       let alumni = await Alumni.findById(id);
