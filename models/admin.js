@@ -6,11 +6,17 @@ const AdminSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
+        email: {
+            type: String,
+            required: true,
+            unique: true,
+        },
         password: {
             type: String,
             required: true,
+            min: 6,
         }
-    }, {collation: 'admin'}
+    }, {collection: 'admin'}
 );
 
 module.exports = Admin = mongoose.model('admin', AdminSchema);
