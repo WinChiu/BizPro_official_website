@@ -73,22 +73,22 @@ router.post(
       //  Search alumni ID
       let alumni = await Alumni.findOne({
         name: req.body.name,
-        number: req.body.number
+        number: req.body.number,
       });
 
       let alumniID = alumni._id;
       let articleFields = {
-        "alumni": alumniID,
-        "title": req.body.title,
-        "content": req.body.content,
-        "avatar": req.body.avatar
-      }
-      
+        alumni: alumniID,
+        title: req.body.title,
+        content: req.body.content,
+        avatar: req.body.avatar,
+      };
+
       let article = await Article.findOneAndUpdate(
-        { "alumni": alumniID}, 
-        { $set: articleFields},
+        { alumni: alumniID },
+        { $set: articleFields }
       );
-      if(!article){
+      if (!article) {
         article = await Article.create(articleFields);
       }
       //console.log(article);
@@ -124,8 +124,7 @@ router.put(
         alumni.number = req.body.number;
       if (req.body.jobTitle != '' && req.body.jobTitle != null)
         alumni.jobTitle = req.body.jobTitle;
-      if (req.body.exp != '' && req.body.exp != null) 
-        alumni.exp = req.body.exp;
+      if (req.body.exp != '' && req.body.exp != null) alumni.exp = req.body.exp;
       if (req.body.avatar != '' && req.body.avatar != null)
         alumni.avatar = req.body.avatar;
       if (req.body.tags != '' && req.body.tags != null)
@@ -173,17 +172,17 @@ router.delete(
       return res.status(400).json({ error: error.array() });
     }
     try {
-        let result = await Article.findOneAndRemove({ _id: req.body._id });
-        if (!result) {
-          console.log('no article found');
-          return res.status(400).json({ msg: 'Cannot find article data' });
-        }
-        res.send('article deleted');
-      } catch (e) {
-        console.error(e.message);
-        res.status(500).send('Server Errrorororor');
+      let result = await Article.findOneAndRemove({ _id: req.body._id });
+      if (!result) {
+        console.log('no article found');
+        return res.status(400).json({ msg: 'Cannot find article data' });
       }
+      res.send('article deleted');
+    } catch (e) {
+      console.error(e.message);
+      res.status(500).send('Server Errrorororor');
+    }
   }
-)
+);
 
 module.exports = router;

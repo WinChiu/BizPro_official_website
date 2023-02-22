@@ -256,7 +256,14 @@ function BackstageAlumniTable() {
           variant="primary"
           className="btn-edit"
           onClick={(e) => {
-            startEdit(e.target);
+            console.log(e.target.tagName);
+            if (e.target.tagName === 'BUTTON') {
+              startEdit(e.target);
+              getTargetAlumni(e.target);
+            } else {
+              startEdit(e.target.parentNode);
+              getTargetAlumni(e.target.parentNode);
+            }
           }}
         >
           <img
@@ -293,15 +300,11 @@ function BackstageAlumniTable() {
           className="btn-update"
           onClick={(e) => {
             if (e.target.tagName === 'BUTTON') {
-              getTargetAlumni(e.target);
-              setTimeout(() => {
-                updateAlumni(e.target);
-              }, 0);
+              //getTargetAlumni(e.target);
+              updateAlumni(e.target);
             } else {
-              getTargetAlumni(e.target.parentNode);
-              setTimeout(() => {
-                updateAlumni(e.target.parentNode);
-              }, 0);
+              //getTargetAlumni(e.target.parentNode);
+              updateAlumni(e.target.parentNode);
             }
             endEdit(e.target);
           }}
@@ -667,8 +670,6 @@ function BackstageAlumniTable() {
         newAlumniData.major = child.innerText;
     });
 
-    // if update success
-    console.log(targetAlumni);
     await axios
       .put('http://localhost:5000/api/admin/update_alumni', {
         _id: targetAlumni.id,
@@ -685,7 +686,6 @@ function BackstageAlumniTable() {
             newAlumniData.name
           } 的資料`
         );
-        console.log('update success');
         setTimeout(() => {
           triggerToast('success');
         }, 0);
@@ -726,7 +726,9 @@ function BackstageAlumniTable() {
         }, 0);
       })
       .catch((err) => {
-        console.log(err.response.data.errors[0].msg);
+        let errorMsg = err.response.data.errors[0].msg;
+        if (errorMsg) {
+        }
         setToastContent('已存在相同屆數與姓名的 Alumni');
         setTimeout(() => {
           triggerToast('warning');
