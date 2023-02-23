@@ -494,7 +494,6 @@ function BackstageAlumniTable() {
 
   const getTargetAlumni = (e) => {
     let targetAlumniData = e.parentNode.parentNode.dataset;
-
     setTargetAlumni({
       id: targetAlumniData.id,
       name: targetAlumniData.name,
@@ -701,6 +700,7 @@ function BackstageAlumniTable() {
     endEdit(e);
   };
   const addAlumni = async (e) => {
+    console.log(e.target.avatar.value);
     await axios
       .post('http://localhost:5000/api/admin/add_alumni', {
         name: e.target.name.value,

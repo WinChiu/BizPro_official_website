@@ -8,6 +8,7 @@ const ArticleSchema = new mongoose.Schema(
     },
     title: {
       type: String,
+      required: true,
     },
     content: {
       type: String,
@@ -15,7 +16,6 @@ const ArticleSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      required: true,
     },
   },
   { collection: 'article' }

@@ -9,6 +9,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { check, validationResult } = require('express-validator');
 
+// POST: Add alumni
 router.post(
   '/add_alumni',
   check('name', 'Name is required').notEmpty(),
@@ -55,13 +56,14 @@ router.post(
       };
     } catch (e) {
       console.error(e.message);
-      res.status(500).send('Server Errorrrrr');
+      res.status(500).send('Server Error');
     }
   }
 );
 
+// POST: Add article
 router.post(
-  '/add_and_update_article',
+  '/add_article',
   check('name', 'Alumni name is required').notEmpty(),
   check('number', 'Alumni number is required').notEmpty(),
   check('title', 'Title is required').notEmpty(),
@@ -71,43 +73,143 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    //const { title, content, avatar } = req.body;
     try {
       // Search alumni ID
+      let alumni = await Alumni.findOne({
+        name: req.body.name,
+        number: req.body.number,
+      });
+
+      console.log(alumni);
+      if (!alumni) {
+        return res.status(400).json({ msg: 'Cannot find alumni' });
+      } else if (await Article.findOne({ alumni: alumni._id })) {
+        // check if 'One existed article belongs to this alumni'
+        return res
+          .status(400)
+          .json({ msg: 'One existed article belongs to this alumni' });
+      }
+
+      await Article.create({
+        alumni: alumni.id,
+        title: req.body.title,
+        content: req.body.content,
+        avatar: req.body.avatar,
+      });
+      // if article is already exist: update it
+      res.send('Article added success!!');
+    } catch (e) {
+      console.error(e.message);
+      return res.status(500).json({ msg: 'Server Error' });
+    }
+  }
+);
+
+// PUT: Update article
+router.put(
+  '/update_article',
+  check('_id', 'Article ID is required').notEmpty(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    try {
+      //  check if article exist
+      let article = await Article.findById(req.body._id);
+      if (!article) {
+        console.log('No article');
+        return res.status(400).json({ msg: 'No article data' });
+      }
 
       let alumni = await Alumni.findOne({
         name: req.body.name,
         number: req.body.number,
       });
+      let articleByAlumni = await Article.findOne({ alumni: alumni._id });
       if (!alumni) {
-        console.log('No alumni');
+        // check if alumni exist (in case alumni name or number has been changed)
         return res.status(400).json({ msg: 'Cannot find alumni' });
+      } else if (articleByAlumni._id === req.body._id) {
+        // check if 'One existed article belongs to this alumni'
+        return res
+          .status(400)
+          .json({ msg: 'One existed article belongs to this alumni' });
       }
 
-      let alumniID = alumni._id;
-      let articleFields = {
-        alumni: alumniID,
-        title: req.body.title,
-        content: req.body.content,
-        avatar: req.body.avatar,
-      };
+      article.alumni = alumni._id;
+      if (req.body.title != '' && req.body.title != null)
+        article.title = req.body.title;
+      if (req.body.content != '' && req.body.content != null)
+        article.content = req.body.content;
+      if (req.body.avatar != '' && req.body.avatar != null)
+        article.avatar = req.body.avatar;
+
       // if article is already exist: update it
-      if (alumniID != null && alumniID != '') {
-        await Article.findOneAndUpdate(
-          { _id: req.body._id },
-          { $set: articleFields }
-        );
-      } else {
-        await Article.create(articleFields);
-      }
-      res.send('Article added success!!');
+      let result = await article.save();
+      console.log(result);
+      res.json(article);
     } catch (e) {
       console.error(e.message);
-      return res.status(500).json({ msg: 'Server Errorrrr' });
+      return res.status(500).json({ msg: 'Server Error' });
     }
   }
 );
 
+// To be delete
+// router.post(
+//   '/add_and_update_article',
+//   check('name', 'Alumni name is required').notEmpty(),
+//   check('number', 'Alumni number is required').notEmpty(),
+//   check('title', 'Title is required').notEmpty(),
+//   check('content', 'Content is required').notEmpty(),
+//   async (req, res) => {
+//     const errors = validationResult(req);
+//     if (!errors.isEmpty()) {
+//       return res.status(400).json({ errors: errors.array() });
+//     }
+//     const { title, content, avatar } = req.body;
+//     try {
+//       //  Search alumni ID
+//       let alumni = await Alumni.findOne({
+//         name: req.body.name,
+//         number: req.body.number,
+//       });
+
+//       if (!alumni) {
+//         return res.status(400).json({ msg: 'Cannot find alumni' });
+//       } else if (req.body._id) {
+//         return res
+//           .status(400)
+//           .json({ msg: 'One existed article belongs to this alumni' });
+//       }
+//       console.log(req.body.avatar);
+//       let alumniID = alumni.id;
+//       let articleFields = {
+//         alumni: alumniID,
+//         title: req.body.title,
+//         content: req.body.content,
+//         avatar: req.body.avatar,
+//       };
+
+//       // if article is already exist: update it
+//       if (req.body._id != null && req.body._id != '') {
+//         await Article.findOneAndUpdate(
+//           { _id: req.body._id },
+//           { $set: articleFields }
+//         );
+//       } else {
+//         await Article.create(articleFields);
+//       }
+//       res.send('Article added success!!');
+//     } catch (e) {
+//       console.error(e.message);
+//       return res.status(500).json({ msg: 'Server Error' });
+//     }
+//   }
+// );
+
+// PUT: Update alumni
 router.put(
   '/update_alumni',
   check('_id', 'Alumni ID is required').notEmpty(),
@@ -149,6 +251,7 @@ router.put(
   }
 );
 
+// DELETE: Delete alumni
 router.delete(
   '/delete_alumni',
   check('_id', 'Alumni ID is required').notEmpty(),
@@ -171,6 +274,7 @@ router.delete(
   }
 );
 
+// DELETE: Delete article
 router.delete(
   '/delete_article',
   check('_id', 'ID is required').notEmpty(),
