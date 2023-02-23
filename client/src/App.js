@@ -8,6 +8,7 @@ import Journey from './pages/Journey';
 import Article from './pages/Article';
 import Member from './pages/Member';
 import Backstage from './pages/Backstage';
+import Login from './pages/Login';
 import $ from 'jquery';
 import axios from 'axios';
 import LogoLoading from './components/LogoLoading';
@@ -57,6 +58,7 @@ function App() {
         <Route path="/member_talk" element={<Article />} />
         <Route path="/members" element={<Member />} />
         <Route path="/backstage" element={<Backstage />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
       <Footer />
     </BrowserRouter>

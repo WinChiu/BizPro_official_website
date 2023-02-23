@@ -92,16 +92,19 @@ function BackstageArticleTable() {
       </Modal.Dialog>
     </div>
   );
-  const PictureUploadModal = () => {
-    //TODO: get current avatar url and fill in input field. If not, then leave empty
-    return (
-      <div className="modal show pictureModal">
-        <Modal.Dialog>
-          <Modal.Header>
-            <Modal.Title>
-              <strong>請輸入圖片位址</strong>
-            </Modal.Title>
-          </Modal.Header>
+  const PictureUploadModal = () => (
+    <div className="modal show pictureModal">
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Title>
+            <strong>請輸入圖片位址</strong>
+          </Modal.Title>
+        </Modal.Header>
+        <form
+          onSubmit={(e) => {
+            updateAvatar();
+          }}
+        >
           <Modal.Body>
             <input
               type="url"
@@ -111,6 +114,7 @@ function BackstageArticleTable() {
               defaultValue={`${
                 targetArticle.avatar ? targetArticle.avatar : ''
               }`}
+              required
             />
           </Modal.Body>
           <Modal.Footer>
@@ -131,10 +135,11 @@ function BackstageArticleTable() {
               確定
             </Button>
           </Modal.Footer>
-        </Modal.Dialog>
-      </div>
-    );
-  };
+        </form>
+      </Modal.Dialog>
+    </div>
+  );
+
   const DataEditModal = () => {
     return (
       <div className="modal show dataModal">
@@ -145,8 +150,9 @@ function BackstageArticleTable() {
             </Modal.Title>
           </Modal.Header>
           <form
-            onSubmit={() => {
-              updateAvatar();
+            onSubmit={(e) => {
+              e.preventDefault();
+              addArticle(e);
             }}
           >
             <Modal.Body>
@@ -162,32 +168,23 @@ function BackstageArticleTable() {
                   defaultValue={`${
                     targetArticle.name ? targetArticle.name : ''
                   }`}
+                  required
                 />
                 <label>
                   屆數<span className="requiredDot">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="number"
                   placeholder="屆數"
                   className="numberInput"
                   defaultValue={`${
                     targetArticle.number ? targetArticle.number : ''
                   }`}
+                  required
                 />
               </div>
-              {/* <div className="container container__row2">
-                <label>頭銜</label>
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="頭銜"
-                  className="titleInput"
-                  defaultValue={`${
-                    targetArticle.jobTitle ? targetArticle.jobTitle : ''
-                  }`}
-                />
-              </div> */}
+
               <div className="container container__row2">
                 <label>
                   標題<span className="requiredDot">*</span>
@@ -200,6 +197,7 @@ function BackstageArticleTable() {
                   defaultValue={`${
                     targetArticle.title ? targetArticle.title : ''
                   }`}
+                  required
                 />
               </div>
               <div className="container container__row3">
@@ -208,11 +206,12 @@ function BackstageArticleTable() {
                 </label>
                 <textarea
                   className="contentInput"
-                  name="content"
+                  name="articleContent"
                   cols="30"
                   rows="10"
                   defaultValue={targetArticle.content}
                   placeholder="心得文內文"
+                  required
                 ></textarea>
               </div>
             </Modal.Body>
@@ -225,13 +224,7 @@ function BackstageArticleTable() {
               >
                 取消
               </Button>
-              <Button
-                type="submit"
-                variant="success"
-                onClick={(e) => {
-                  updateAvatar();
-                }}
-              >
+              <Button type="submit" variant="success">
                 更新
               </Button>
             </Modal.Footer>
@@ -240,7 +233,7 @@ function BackstageArticleTable() {
       </div>
     );
   };
-  const ArticleRow = ({ name, number, jobTitle, title, avatar, content }) => (
+  const ArticleRow = ({ name, number, title, avatar, content }) => (
     <tr
       data-name={name}
       data-number={number}
@@ -261,13 +254,6 @@ function BackstageArticleTable() {
       >
         {number ? number : <span className="noData">查無資料</span>}
       </td>
-      {/* <td
-        contentEditable="false"
-        suppressContentEditableWarning="true"
-        className="jobTitleContent data"
-      >
-        {jobTitle ? jobTitle : <span className="noData">查無資料</span>}
-      </td> */}
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
@@ -321,7 +307,11 @@ function BackstageArticleTable() {
           variant="primary"
           className="btn-edit"
           onClick={(e) => {
-            getTargetArticle(e);
+            if (e.target.tagName === 'BUTTON') {
+              getTargetArticle(e.target);
+            } else {
+              getTargetArticle(e.target.parentNode);
+            }
             setTimeout(() => {
               $('.dataModal').css('display', 'block');
             }, 0);
@@ -342,7 +332,7 @@ function BackstageArticleTable() {
           variant="success"
           className="btn-update"
           onClick={(e) => {
-            updateArticle(e);
+            //updateArticle(e);
           }}
         >
           <img src={icon_upload} alt="icon_upload" />
@@ -411,8 +401,8 @@ function BackstageArticleTable() {
   const getTargetArticle = (e) => {
     let jobTitle,
       title = null;
-    let targetArticleData = e.target.parentNode.parentNode.dataset;
-    e.target.parentNode.parentNode.childNodes.forEach((child) => {
+    let targetArticleData = e.parentNode.parentNode.dataset;
+    e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[0] === 'jobTitleContent') {
         jobTitle = child.innerText;
       }
@@ -441,7 +431,7 @@ function BackstageArticleTable() {
     });
   };
   const startEdit = (e) => {
-    e.target.parentNode.parentNode.childNodes.forEach((child) => {
+    e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[1] === 'data') {
         child.classList.add('editable');
         child.setAttribute('contentEditable', true);
@@ -459,34 +449,6 @@ function BackstageArticleTable() {
         });
       }
     });
-    // if (isSthEditing === false) {
-    //   e.target.parentNode.parentNode.childNodes.forEach((child) => {
-    //     if (child.classList[1] === 'data') {
-    //       child.classList.add('editable');
-    //       child.setAttribute('contentEditable', true);
-    //     }
-    //     if (child.classList[0] === 'buttonGroup') {
-    //       console.log('buttonGroup');
-    //       child.childNodes.forEach((btn) => {
-    //         if (
-    //           btn.classList[0] === 'btn-edit' ||
-    //           btn.classList[0] === 'btn-delete'
-    //         ) {
-    //           btn.style.display = 'none';
-    //         } else {
-    //           btn.style.display = 'inline';
-    //         }
-    //       });
-    //     }
-    //   });
-    // } else {
-    //   setToastContent(
-    //     `尚有 Alumni 資料正在編輯中，請先結束該筆資料的編輯再進行下一步`
-    //   );
-    //   setTimeout(() => {
-    //     triggerToast('warning');
-    //   }, 0);
-    // }
   };
   const endEdit = (e) => {
     e.target.parentNode.parentNode.childNodes.forEach((child) => {
@@ -534,22 +496,11 @@ function BackstageArticleTable() {
   const closeToast = () => {
     $('.toastComponent').addClass('toastTrigger');
   };
-  const updateAvatar = () => {
-    // TODO: avatar update api
-    console.log('call avatar update api');
-    // if update success
-    setToastContent(
-      `成功更新 ${numberToRank(targetArticle.number)} ${
-        targetArticle.name
-      } 的照片`
-    );
-    $('.modal').css('display', 'none');
-    setTimeout(() => {
-      triggerToast('success');
-    }, 0);
-
-    // TODO: if update fail, show what's wrong
-    $('.modal').css('display', 'none');
+  const updateAvatar = (e) => {
+    console.log(e.target.name.value);
+    console.log(e.target.number.value);
+    console.log(e.target.articleTitle.value);
+    console.log(e.target.articleContent.value);
   };
   // TODO: delete and update api call to be add
   const deleteArticle = (target) => {
@@ -564,25 +515,33 @@ function BackstageArticleTable() {
     // setToastContent(`刪除 ${number} ${name} 的資料失敗，`);
     // triggerToast('warning');
   };
-  const updateArticle = (e) => {
-    let name = '';
-    let number = '';
-    e.target.parentNode.parentNode.childNodes.forEach((child) => {
-      if (child.classList[0] === 'nameContent') name = child.innerText;
-      if (child.classList[0] === 'numberContent') number = child.innerText;
-    });
-    // if update success
-    setToastContent(`成功更新 ${numberToRank(number)} ${name} 的資料`);
-    setTimeout(() => {
-      triggerToast('success');
-    }, 0);
+  // const updateArticle = (e) => {
+  //   let name = '';
+  //   let number = '';
+  //   e.target.parentNode.parentNode.childNodes.forEach((child) => {
+  //     if (child.classList[0] === 'nameContent') name = child.innerText;
+  //     if (child.classList[0] === 'numberContent') number = child.innerText;
+  //   });
+  //   // if update success
+  //   setToastContent(`成功更新 ${numberToRank(number)} ${name} 的資料`);
+  //   setTimeout(() => {
+  //     triggerToast('success');
+  //   }, 0);
 
-    // TODO: if update fail, show what's wrong
-    // setToastContent(`更新 ${number} ${name} 的資料失敗，`);
-    // triggerToast('warning');
-    endEdit(e);
+  //   // TODO: if update fail, show what's wrong
+  //   // setToastContent(`更新 ${number} ${name} 的資料失敗，`);
+  //   // triggerToast('warning');
+  //   endEdit(e);
+  // };
+  const addArticle = async (e) => {
+    await axios.post(
+      'http://localhost:5000/api/article/add_and_update_article'
+    );
+    console.log(e.target.name.value);
+    console.log(e.target.number.value);
+    console.log(e.target.articleTitle.value);
+    console.log(e.target.articleContent.value);
   };
-  const addArticle = () => {};
 
   const switchPage = (certainPage) => {
     document.getElementById('settingPageSection').scrollIntoView();

@@ -71,35 +71,34 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { title, content, avatar } = req.body;
+    //const { title, content, avatar } = req.body;
     try {
-      //  Search alumni ID
+      // Search alumni ID
+
       let alumni = await Alumni.findOne({
         name: req.body.name,
         number: req.body.number,
       });
-
       if (!alumni) {
         console.log('No alumni');
         return res.status(400).json({ msg: 'Cannot find alumni' });
       }
 
-      let alumniID = alumni.id;
+      let alumniID = alumni._id;
       let articleFields = {
         alumni: alumniID,
         title: req.body.title,
         content: req.body.content,
         avatar: req.body.avatar,
       };
-
       // if article is already exist: update it
-      if (req.body._id != null && req.body._id != '') {
-        let article = await Article.findOneAndUpdate(
+      if (alumniID != null && alumniID != '') {
+        await Article.findOneAndUpdate(
           { _id: req.body._id },
           { $set: articleFields }
         );
       } else {
-        let article = await Article.create(articleFields);
+        await Article.create(articleFields);
       }
       res.send('Article added success!!');
     } catch (e) {

@@ -6,7 +6,6 @@ import Modal from 'react-bootstrap/Modal';
 import Pagination from 'react-bootstrap/Pagination';
 import Table from 'react-bootstrap/Table';
 import ReactPaginate from 'react-paginate';
-import cross from '../asset/img/icon/icon_crossWhite.svg';
 import icon_edit from '../asset/img/icon/icon_edit.svg';
 import icon_upload from '../asset/img/icon/icon_upload.svg';
 import icon_x from '../asset/img/icon/icon_x.svg';
@@ -30,7 +29,17 @@ function BackstageAlumniTable() {
     await axios
       .get('http://localhost:5000/api/alumni/members')
       .then((res) => {
-        setMemberData(res.data);
+        setMemberData(
+          res.data.sort((alumni1, alumni2) =>
+            Number(alumni1.number) < Number(alumni2.number)
+              ? 1
+              : Number(alumni1.number) > Number(alumni2.number)
+              ? -1
+              : alumni1.name > alumni2.name
+              ? 1
+              : -1
+          )
+        );
         setTotalPage(Math.ceil(res.data.length / 10));
       })
       .catch((error) => console.log(error));
@@ -88,23 +97,30 @@ function BackstageAlumniTable() {
       </Modal.Dialog>
     </div>
   );
-  const PictureUploadModal = () => {
-    //TODO: get current avatar url and fill in input field. If not, then leave empty
-    return (
-      <div className="modal show pictureModal">
-        <Modal.Dialog>
-          <Modal.Header>
-            <Modal.Title>
-              <strong>請輸入圖片位址</strong>
-            </Modal.Title>
-          </Modal.Header>
+  const PictureUploadModal = () => (
+    <div className="modal show pictureModal">
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Title>
+            <strong>請輸入圖片位址</strong>
+          </Modal.Title>
+        </Modal.Header>
+        <form
+          id="addAvatarForm"
+          onSubmit={(e) => {
+            e.preventDefault();
+            updateAvatar(e);
+          }}
+        >
           <Modal.Body>
             <input
               type="url"
-              name="search"
-              placeholder="https://example.com/avatar.jpg"
+              name="updateAvatar"
+              placeholder="http://example.com/avatar.jpg"
+              pattern="http://.*"
               className="pictureUrlInput"
               defaultValue={`${targetAlumni.avatar ? targetAlumni.avatar : ''}`}
+              required
             />
           </Modal.Body>
           <Modal.Footer>
@@ -112,23 +128,20 @@ function BackstageAlumniTable() {
               variant="primary"
               onClick={() => {
                 $('.modal').css('display', 'none');
+                document.getElementById('addAvatarForm').reset();
               }}
             >
               取消
             </Button>
-            <Button
-              variant="success"
-              onClick={() => {
-                updateAvatar();
-              }}
-            >
+            <Button type="submit" variant="success">
               確定
             </Button>
           </Modal.Footer>
-        </Modal.Dialog>
-      </div>
-    );
-  };
+        </form>
+      </Modal.Dialog>
+    </div>
+  );
+
   const AlumniRow = ({
     alumniId,
     name,
@@ -150,21 +163,21 @@ function BackstageAlumniTable() {
         suppressContentEditableWarning="true"
         className="nameContent data"
       >
-        {name ? name : <span className="noData">查無資料</span>}
+        {name ? name : <span className="noData">無資料</span>}
       </td>
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
         className="numberContent data"
       >
-        {number ? number : <span className="noData">查無資料</span>}
+        {number ? number : <span className="noData">無資料</span>}
       </td>
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
         className="titleContent data"
       >
-        {title ? title : <span className="noData">查無資料</span>}
+        {title ? title : <span className="noData">無資料</span>}
       </td>
       <td
         contentEditable="false"
@@ -172,7 +185,7 @@ function BackstageAlumniTable() {
         className="majorContent data"
       >
         {major[0] === 'Unknown' ? (
-          <span className="noData">查無資料</span>
+          <span className="noData">無資料</span>
         ) : major.length !== 0 ? (
           major.map((data, i) => {
             if (i !== major.length - 1) {
@@ -181,7 +194,7 @@ function BackstageAlumniTable() {
             return data;
           })
         ) : (
-          <span className="noData">查無資料</span>
+          <span className="noData">無資料</span>
         )}
       </td>
       <td
@@ -197,7 +210,7 @@ function BackstageAlumniTable() {
             return data;
           })
         ) : (
-          <span className="noData">查無資料</span>
+          <span className="noData">無資料</span>
         )}
       </td>
       <td
@@ -213,7 +226,7 @@ function BackstageAlumniTable() {
             return data;
           })
         ) : (
-          <span className="noData">查無資料</span>
+          <span className="noData">無資料</span>
         )}
       </td>
       <td>
@@ -260,19 +273,9 @@ function BackstageAlumniTable() {
             } else {
               startEdit(e.target.parentNode);
             }
-
-            // getTargetAlumni(e.target);
-            // startEdit(e.target);
           }}
         >
-          <img
-            src={icon_edit}
-            alt="icon_edit"
-            onClick={(e) => {
-              //getTargetAlumni(e.target.parentNode);
-              //startEdit(e.target.parentNode);
-            }}
-          />
+          <img src={icon_edit} alt="icon_edit" />
         </Button>
         <Button
           variant="danger"
@@ -450,28 +453,22 @@ function BackstageAlumniTable() {
                 />
               </div>
               <div className="container container__row5">
-                <label>
-                  產業<span className="requiredDot">*</span>
-                </label>
+                <label>產業</label>
                 <input
                   type="text"
                   name="tag"
                   placeholder="產業標籤（使用；隔開）"
                   className="tagInput"
-                  required
                 />
               </div>
               <div className="container container__row6">
-                <label>
-                  照片<span className="requiredDot">*</span>
-                </label>
+                <label>照片</label>
                 <input
                   type="url"
                   name="avatar"
                   placeholder="照片連結"
                   className="avatarInput"
-                  pattern="https://.*"
-                  required
+                  pattern="http://.*"
                 />
               </div>
             </Modal.Body>
@@ -526,35 +523,6 @@ function BackstageAlumniTable() {
         });
       }
     });
-
-    // if (isSthEditing === false) {
-    //   e.target.parentNode.parentNode.childNodes.forEach((child) => {
-    //     if (child.classList[1] === 'data') {
-    //       child.classList.add('editable');
-    //       child.setAttribute('contentEditable', true);
-    //     }
-    //     if (child.classList[0] === 'buttonGroup') {
-    //       console.log('buttonGroup');
-    //       child.childNodes.forEach((btn) => {
-    //         if (
-    //           btn.classList[0] === 'btn-edit' ||
-    //           btn.classList[0] === 'btn-delete'
-    //         ) {
-    //           btn.style.display = 'none';
-    //         } else {
-    //           btn.style.display = 'inline';
-    //         }
-    //       });
-    //     }
-    //   });
-    // } else {
-    //   setToastContent(
-    //     `尚有 Alumni 資料正在編輯中，請先結束該筆資料的編輯再進行下一步`
-    //   );
-    //   setTimeout(() => {
-    //     triggerToast('warning');
-    //   }, 0);
-    // }
   };
   const endEdit = (e) => {
     e.parentNode.parentNode.childNodes.forEach((child) => {
@@ -607,25 +575,32 @@ function BackstageAlumniTable() {
     $('.toastComponent').addClass('toastTrigger');
   };
   const updateAvatar = async (e) => {
-    // TODO: avatar update api
     await axios
-      .put('http://localhost:5000/api/admin/update', {})
-      .then()
-      .catch((err) => {});
-
-    // if update success
-    setToastContent(
-      `成功更新 ${numberToRank(targetAlumni.number)} ${
-        targetAlumni.name
-      } 的照片`
-    );
-    $('.modal').css('display', 'none');
-    setTimeout(() => {
-      triggerToast('success');
-    }, 0);
-
-    // TODO: if update fail, show what's wrong
-    $('.modal').css('display', 'none');
+      .put('http://localhost:5000/api/admin/update_alumni', {
+        _id: targetAlumni.id,
+        avatar: e.target.updateAvatar.value,
+      })
+      .then((res) => {
+        setToastContent(
+          `成功更新 ${numberToRank(targetAlumni.number)} ${
+            targetAlumni.name
+          } 的照片`
+        );
+        setTimeout(() => {
+          fetchData();
+          setTimeout(() => {
+            triggerToast('success');
+            $('.modal').css('display', 'none');
+          }, 500);
+        }, 0);
+      })
+      .catch((err) => {
+        console.log(err.response.data.error[0].msg);
+        setToastContent(`更新照片失敗，請重新操作`);
+        setTimeout(() => {
+          triggerToast('warning');
+        }, 0);
+      });
   };
   const refreshAlumniData = async () => {
     await axios
@@ -695,9 +670,9 @@ function BackstageAlumniTable() {
         name: newAlumniData.name,
         number: newAlumniData.number,
         jobTitle: newAlumniData.jobTitle,
-        exp: [newAlumniData.exp],
-        tags: [newAlumniData.tags],
-        major: [newAlumniData.major],
+        exp: newAlumniData === '' ? [] : newAlumniData.exp.split('；'),
+        tags: newAlumniData.tags.split('；'),
+        major: newAlumniData.major.split('；'),
       })
       .then((res) => {
         setToastContent(
@@ -732,7 +707,10 @@ function BackstageAlumniTable() {
         number: e.target.number.value,
         jobTitle: e.target.title.value,
         exp: e.target.exp.value.split('；'),
-        tags: e.target.tag.value.split('；'),
+        tags:
+          e.target.tag.value === ''
+            ? []
+            : e.target.tag.value === ''.split('；'),
         avatar: e.target.avatar.value,
         major: e.target.major.value.split('；'),
       })
@@ -743,8 +721,11 @@ function BackstageAlumniTable() {
           }`
         );
         setTimeout(() => {
-          triggerToast('success');
-          $('.dataModal').css('display', 'none');
+          fetchData();
+          setTimeout(() => {
+            triggerToast('success');
+            $('.dataModal').css('display', 'none');
+          }, 500);
         }, 0);
       })
       .catch((err) => {
