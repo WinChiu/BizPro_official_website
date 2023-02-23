@@ -133,12 +133,10 @@ router.put(
         alumni.number = req.body.number;
       if (req.body.jobTitle != '' && req.body.jobTitle != null)
         alumni.jobTitle = req.body.jobTitle;
-      if (req.body.exp != '' && req.body.exp != null) 
-        alumni.exp = req.body.exp;
+      if (req.body.exp != '' && req.body.exp != null) alumni.exp = req.body.exp;
       if (req.body.avatar != '' && req.body.avatar != null)
         alumni.avatar = req.body.avatar;
-      if (req.body.tags != null)
-        alumni.tags = req.body.tags;
+      if (req.body.tags != null) alumni.tags = req.body.tags;
       if (req.body.major != '' && req.body.major != null)
         alumni.major = req.body.major;
       let result = await alumni.save();
