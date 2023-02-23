@@ -21,37 +21,45 @@ function BackstageArticleTable() {
   const [modalTitle, setModalTitle] = useState('資料刪除警告');
   const [modalContent, setModalContent] = useState('');
   const [targetArticle, setTargetArticle] = useState({
+    id: '',
     name: '',
     number: '',
-    jobTitle: '',
     title: '',
     content: '',
     avatar: '',
   });
-
+  const fetchData = async () => {
+    await axios
+      .get('http://localhost:5000/api/article/member_talk')
+      .then((res) => {
+        setArticleData(
+          res.data.sort((article1, article2) =>
+            Number(article1.alumni.number) < Number(article2.alumni.number)
+              ? 1
+              : Number(article1.alumni.number) > Number(article2.alumni.number)
+              ? -1
+              : article1.alumni.name > article2.alumni.name
+              ? 1
+              : -1
+          )
+        );
+        setTotalPage(Math.ceil(res.data.length / 10));
+      })
+      .catch((error) => console.log(error));
+  };
   // Load Data
   useEffect(() => {
-    const fetchData = async () => {
-      await axios
-        .get('http://localhost:5000/api/article/member_talk')
-        .then((res) => {
-          setArticleData(res.data);
-          setTotalPage(Math.ceil(res.data.length / 10));
-        })
-        .catch((error) => console.log(error));
-    };
     fetchData();
     return;
   }, []);
 
   // Components
 
-  const WarningToast = () => {
+  const WarningToast = () => (
     <div className="toastComponent warning">
       <p>{toastContent ? toastContent : '無提示訊息'}</p>
-      <img src={cross} alt="toastClose" className="toastClose" />
-    </div>;
-  };
+    </div>
+  );
   const SuccessToast = () => (
     <div className="toastComponent success">
       <p>{toastContent ? toastContent : '無提示訊息'}</p>
@@ -92,25 +100,31 @@ function BackstageArticleTable() {
       </Modal.Dialog>
     </div>
   );
-  const PictureUploadModal = () => {
-    //TODO: get current avatar url and fill in input field. If not, then leave empty
-    return (
-      <div className="modal show pictureModal">
-        <Modal.Dialog>
-          <Modal.Header>
-            <Modal.Title>
-              <strong>請輸入圖片位址</strong>
-            </Modal.Title>
-          </Modal.Header>
+  const PictureUploadModal = () => (
+    <div className="modal show pictureModal">
+      <Modal.Dialog>
+        <Modal.Header>
+          <Modal.Title>
+            <strong>請輸入圖片位址</strong>
+          </Modal.Title>
+        </Modal.Header>
+        <form
+          id="addAvatarForm"
+          onSubmit={(e) => {
+            e.preventDefault();
+            updateAvatar(e);
+          }}
+        >
           <Modal.Body>
             <input
               type="url"
-              name="search"
+              name="updateAvatar"
               placeholder="https://example.com/avatar.jpg"
               className="pictureUrlInput"
               defaultValue={`${
                 targetArticle.avatar ? targetArticle.avatar : ''
               }`}
+              required
             />
           </Modal.Body>
           <Modal.Footer>
@@ -122,19 +136,15 @@ function BackstageArticleTable() {
             >
               取消
             </Button>
-            <Button
-              variant="success"
-              onClick={() => {
-                updateAvatar();
-              }}
-            >
+            <Button type="submit" variant="success">
               確定
             </Button>
           </Modal.Footer>
-        </Modal.Dialog>
-      </div>
-    );
-  };
+        </form>
+      </Modal.Dialog>
+    </div>
+  );
+
   const DataEditModal = () => {
     return (
       <div className="modal show dataModal">
@@ -145,8 +155,9 @@ function BackstageArticleTable() {
             </Modal.Title>
           </Modal.Header>
           <form
-            onSubmit={() => {
-              updateAvatar();
+            onSubmit={(e) => {
+              e.preventDefault();
+              addArticle(e);
             }}
           >
             <Modal.Body>
@@ -162,33 +173,36 @@ function BackstageArticleTable() {
                   defaultValue={`${
                     targetArticle.name ? targetArticle.name : ''
                   }`}
+                  required
                 />
                 <label>
                   屆數<span className="requiredDot">*</span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   name="number"
                   placeholder="屆數"
                   className="numberInput"
                   defaultValue={`${
                     targetArticle.number ? targetArticle.number : ''
                   }`}
+                  required
                 />
               </div>
-              {/* <div className="container container__row2">
-                <label>頭銜</label>
+              <div className="container container__row2">
+                <label>照片</label>
                 <input
-                  type="text"
-                  name="title"
-                  placeholder="頭銜"
-                  className="titleInput"
+                  type="url"
+                  pattern="http://.*"
+                  name="articleAvatar"
+                  placeholder="照片"
+                  className="articleAvatarInput"
                   defaultValue={`${
-                    targetArticle.jobTitle ? targetArticle.jobTitle : ''
+                    targetArticle.avatar ? targetArticle.avatar : ''
                   }`}
                 />
-              </div> */}
-              <div className="container container__row2">
+              </div>
+              <div className="container container__row3">
                 <label>
                   標題<span className="requiredDot">*</span>
                 </label>
@@ -200,19 +214,21 @@ function BackstageArticleTable() {
                   defaultValue={`${
                     targetArticle.title ? targetArticle.title : ''
                   }`}
+                  required
                 />
               </div>
-              <div className="container container__row3">
+              <div className="container container__row4">
                 <label>
                   內文<span className="requiredDot">*</span>
                 </label>
                 <textarea
                   className="contentInput"
-                  name="content"
+                  name="articleContent"
                   cols="30"
                   rows="10"
                   defaultValue={targetArticle.content}
                   placeholder="心得文內文"
+                  required
                 ></textarea>
               </div>
             </Modal.Body>
@@ -225,13 +241,7 @@ function BackstageArticleTable() {
               >
                 取消
               </Button>
-              <Button
-                type="submit"
-                variant="success"
-                onClick={(e) => {
-                  updateAvatar();
-                }}
-              >
+              <Button type="submit" variant="success">
                 更新
               </Button>
             </Modal.Footer>
@@ -240,12 +250,13 @@ function BackstageArticleTable() {
       </div>
     );
   };
-  const ArticleRow = ({ name, number, jobTitle, title, avatar, content }) => (
+  const ArticleRow = ({ articleId, name, number, title, avatar, content }) => (
     <tr
       data-name={name}
       data-number={number}
       data-avatar={avatar}
-      data-content={content}
+      data-id={articleId}
+      // data-content={content}
     >
       <td
         contentEditable="false"
@@ -261,13 +272,6 @@ function BackstageArticleTable() {
       >
         {number ? number : <span className="noData">查無資料</span>}
       </td>
-      {/* <td
-        contentEditable="false"
-        suppressContentEditableWarning="true"
-        className="jobTitleContent data"
-      >
-        {jobTitle ? jobTitle : <span className="noData">查無資料</span>}
-      </td> */}
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
@@ -289,7 +293,7 @@ function BackstageArticleTable() {
               variant="primary"
               className="btn-reupload"
               onClick={(e) => {
-                getTargetArticle(e);
+                getTargetArticle(e.target);
                 setTimeout(() => {
                   $('.pictureModal').css('display', 'block');
                 }, 100);
@@ -306,7 +310,7 @@ function BackstageArticleTable() {
             variant="success"
             className="btn-upload"
             onClick={(e) => {
-              getTargetArticle(e);
+              getTargetArticle(e.target);
               setTimeout(() => {
                 $('.pictureModal').css('display', 'block');
               }, 0);
@@ -321,7 +325,11 @@ function BackstageArticleTable() {
           variant="primary"
           className="btn-edit"
           onClick={(e) => {
-            getTargetArticle(e);
+            if (e.target.tagName === 'BUTTON') {
+              getTargetArticle(e.target);
+            } else {
+              getTargetArticle(e.target.parentNode);
+            }
             setTimeout(() => {
               $('.dataModal').css('display', 'block');
             }, 0);
@@ -338,13 +346,7 @@ function BackstageArticleTable() {
         >
           <img src={icon_x} alt="icon_x" />
         </Button>
-        <Button
-          variant="success"
-          className="btn-update"
-          onClick={(e) => {
-            updateArticle(e);
-          }}
-        >
+        <Button variant="success" className="btn-update">
           <img src={icon_upload} alt="icon_upload" />
         </Button>
         <Button
@@ -409,25 +411,25 @@ function BackstageArticleTable() {
   // Utilities
 
   const getTargetArticle = (e) => {
-    let jobTitle,
+    let content,
       title = null;
-    let targetArticleData = e.target.parentNode.parentNode.dataset;
-    e.target.parentNode.parentNode.childNodes.forEach((child) => {
-      if (child.classList[0] === 'jobTitleContent') {
-        jobTitle = child.innerText;
-      }
+    let targetArticleData = e.parentNode.parentNode.dataset;
+    e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[0] === 'titleContent') {
         title = child.innerText;
+      }
+      if (child.classList[0] === 'contentContent') {
+        content = child.textContent;
       }
     });
 
     setTargetArticle({
       name: targetArticleData.name,
       number: targetArticleData.number,
-      jobTitle: jobTitle,
       title: title,
-      content: targetArticleData.content,
+      content: content,
       avatar: targetArticleData.avatar,
+      id: targetArticleData.id,
     });
   };
   const clearTargetArticle = () => {
@@ -441,7 +443,7 @@ function BackstageArticleTable() {
     });
   };
   const startEdit = (e) => {
-    e.target.parentNode.parentNode.childNodes.forEach((child) => {
+    e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[1] === 'data') {
         child.classList.add('editable');
         child.setAttribute('contentEditable', true);
@@ -459,34 +461,6 @@ function BackstageArticleTable() {
         });
       }
     });
-    // if (isSthEditing === false) {
-    //   e.target.parentNode.parentNode.childNodes.forEach((child) => {
-    //     if (child.classList[1] === 'data') {
-    //       child.classList.add('editable');
-    //       child.setAttribute('contentEditable', true);
-    //     }
-    //     if (child.classList[0] === 'buttonGroup') {
-    //       console.log('buttonGroup');
-    //       child.childNodes.forEach((btn) => {
-    //         if (
-    //           btn.classList[0] === 'btn-edit' ||
-    //           btn.classList[0] === 'btn-delete'
-    //         ) {
-    //           btn.style.display = 'none';
-    //         } else {
-    //           btn.style.display = 'inline';
-    //         }
-    //       });
-    //     }
-    //   });
-    // } else {
-    //   setToastContent(
-    //     `尚有 Alumni 資料正在編輯中，請先結束該筆資料的編輯再進行下一步`
-    //   );
-    //   setTimeout(() => {
-    //     triggerToast('warning');
-    //   }, 0);
-    // }
   };
   const endEdit = (e) => {
     e.target.parentNode.parentNode.childNodes.forEach((child) => {
@@ -528,28 +502,46 @@ function BackstageArticleTable() {
         $('.toastComponent').removeClass('toastTrigger');
       }, 1500);
     }
-    if (type == 'warning')
+    if (type == 'warning') {
       $('.toastComponent.warning').addClass('toastTrigger');
+      setTimeout(() => {
+        $('.toastComponent').removeClass('toastTrigger');
+      }, 1500);
+    }
   };
   const closeToast = () => {
     $('.toastComponent').addClass('toastTrigger');
   };
-  const updateAvatar = () => {
-    // TODO: avatar update api
-    console.log('call avatar update api');
-    // if update success
-    setToastContent(
-      `成功更新 ${numberToRank(targetArticle.number)} ${
-        targetArticle.name
-      } 的照片`
-    );
-    $('.modal').css('display', 'none');
-    setTimeout(() => {
-      triggerToast('success');
-    }, 0);
-
-    // TODO: if update fail, show what's wrong
-    $('.modal').css('display', 'none');
+  const updateAvatar = async (e) => {
+    await axios
+      .put('http://localhost:5000/api/admin/update_article', {
+        _id: targetArticle.id,
+        name: targetArticle.name,
+        number: targetArticle.number,
+        avatar: e.target.updateAvatar.value,
+      })
+      .then((res) => {
+        console.log('hi');
+        setToastContent(
+          `成功更新 ${numberToRank(targetArticle.number)} ${
+            targetArticle.name
+          } 的照片`
+        );
+        setTimeout(() => {
+          fetchData();
+          setTimeout(() => {
+            triggerToast('success');
+            //$('.modal').css('display', 'none');
+          }, 500);
+        }, 0);
+      })
+      .catch((err) => {
+        console.log(err.response.data.msg);
+        setToastContent(`更新照片失敗，請重新操作`);
+        setTimeout(() => {
+          triggerToast('warning');
+        }, 0);
+      });
   };
   // TODO: delete and update api call to be add
   const deleteArticle = (target) => {
@@ -564,25 +556,68 @@ function BackstageArticleTable() {
     // setToastContent(`刪除 ${number} ${name} 的資料失敗，`);
     // triggerToast('warning');
   };
-  const updateArticle = (e) => {
-    let name = '';
-    let number = '';
-    e.target.parentNode.parentNode.childNodes.forEach((child) => {
-      if (child.classList[0] === 'nameContent') name = child.innerText;
-      if (child.classList[0] === 'numberContent') number = child.innerText;
-    });
-    // if update success
-    setToastContent(`成功更新 ${numberToRank(number)} ${name} 的資料`);
-    setTimeout(() => {
-      triggerToast('success');
-    }, 0);
+  // const updateArticle = (e) => {
+  //   let name = '';
+  //   let number = '';
+  //   e.target.parentNode.parentNode.childNodes.forEach((child) => {
+  //     if (child.classList[0] === 'nameContent') name = child.innerText;
+  //     if (child.classList[0] === 'numberContent') number = child.innerText;
+  //   });
+  //   // if update success
+  //   setToastContent(`成功更新 ${numberToRank(number)} ${name} 的資料`);
+  //   setTimeout(() => {
+  //     triggerToast('success');
+  //   }, 0);
 
-    // TODO: if update fail, show what's wrong
-    // setToastContent(`更新 ${number} ${name} 的資料失敗，`);
-    // triggerToast('warning');
-    endEdit(e);
+  //   // TODO: if update fail, show what's wrong
+  //   // setToastContent(`更新 ${number} ${name} 的資料失敗，`);
+  //   // triggerToast('warning');
+  //   endEdit(e);
+  // };
+  const addArticle = async (e) => {
+    console.log(e.target.articleAvatar.value ? 1 : 2);
+    await axios
+      .post('http://localhost:5000/api/admin/add_article', {
+        name: e.target.name.value,
+        number: e.target.number.value,
+        title: e.target.articleTitle.value,
+        content: e.target.articleContent.value,
+        avatar: e.target.articleAvatar.value
+          ? e.target.articleAvatar.value
+          : '',
+      })
+      .then((res) => {
+        setToastContent(
+          `成功新增 ${numberToRank(e.target.number.value)} ${
+            e.target.name.value
+          } 的心得文`
+        );
+        setTimeout(() => {
+          fetchData();
+          setTimeout(() => {
+            triggerToast('success');
+            //$('.dataModal').css('display', 'none');
+          }, 500);
+        }, 0);
+      })
+      .catch((err) => {
+        console.log(err.response.data.msg);
+        if (err.response.data.msg === 'Cannot find alumni') {
+          setToastContent(`找不到對應的 Alumni，請重新操作`);
+        } else if (
+          err.response.data.msg === 'One existed article belongs to this alumni'
+        ) {
+          setToastContent(
+            `該 Alumni 已上傳過心得文，請重新操作或使用「編輯」功能來修改`
+          );
+        } else {
+          setToastContent(`新增心得文失敗，請重新操作`);
+        }
+        setTimeout(() => {
+          triggerToast('warning');
+        }, 0);
+      });
   };
-  const addArticle = () => {};
 
   const switchPage = (certainPage) => {
     document.getElementById('settingPageSection').scrollIntoView();
@@ -634,6 +669,7 @@ function BackstageArticleTable() {
                   title={article.title}
                   content={article.content.replace(/(\r\n|\n|\r)/g, `\r\n`)}
                   avatar={article.avatar}
+                  articleId={article._id}
                 />
               );
             } else {
