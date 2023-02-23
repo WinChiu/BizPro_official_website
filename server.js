@@ -13,6 +13,7 @@ app.use('/api/alumni', require('./routes/api/alumni'));
 app.use('/api/alumni', require('./routes/api/selection'));
 app.use('/api/article', require('./routes/api/article'));
 app.use('/api/admin', require('./routes/api/admin'));
+app.use('/api/auth', require('./routes/api/auth'));
 
 if (process.env.NODE_ENV === 'production') {
   // Set static folder
