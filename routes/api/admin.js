@@ -7,10 +7,12 @@ const Article = require('../../models/article');
 const Admin = require('../../models/admin');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const auth = require('../../middleware/auth');
 const { check, validationResult } = require('express-validator');
 
 router.post(
   '/add_alumni',
+  auth,
   check('name', 'Name is required').notEmpty(),
   check('number', 'Number is required').notEmpty(),
   check('jobTitle', 'Job title is required').notEmpty(),
@@ -62,6 +64,7 @@ router.post(
 
 router.post(
   '/add_and_update_article',
+  auth,
   check('name', 'Alumni name is required').notEmpty(),
   check('number', 'Alumni number is required').notEmpty(),
   check('title', 'Title is required').notEmpty(),
@@ -111,6 +114,7 @@ router.post(
 
 router.put(
   '/update_alumni',
+  auth,
   check('_id', 'Alumni ID is required').notEmpty(),
   async (req, res) => {
     const error = validationResult(req.body);
@@ -153,6 +157,7 @@ router.put(
 
 router.delete(
   '/delete_alumni',
+  auth,
   check('_id', 'Alumni ID is required').notEmpty(),
   async (req, res) => {
     error = validationResult(req);
@@ -175,6 +180,7 @@ router.delete(
 
 router.delete(
   '/delete_article',
+  auth,
   check('_id', 'ID is required').notEmpty(),
   async (req, res) => {
     error = validationResult(req);
@@ -195,7 +201,7 @@ router.delete(
   }
 );
 
-// add admin (be careful)
+// add admin (be careful / temp)
 router.post(
   '/add_admin',
   check('name', 'Name is required').notEmpty(),
