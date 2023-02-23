@@ -1,27 +1,68 @@
+const express = require('express');
+const router = express.Router();
+const bcrypt = require('bcryptjs');
+const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const Admin = require('../../models/admin');
+const { check, validationResult } = require('express-validator');
 
-module.exports = function (req, res, next) {
-  // Get token from header
-  const token = req.header('x-auth-token');
-
-  // Check if not token
-  if (!token) {
-    return res.status(401).json({ msg: 'No token, authorization denied' });
+router.get(
+  '/',
+  auth,
+  (req, res) => {
+    res.send('Test auth');
   }
+);
 
-  // Verify token
-  try {
-    jwt.verify(token, config.get('jwtSecret'), (error, decoded) => {
-      if (error) {
-        return res.status(401).json({ msg: 'Token is not valid' });
-      } else {
-        req.user = decoded.user;
-        next();
+router.post(
+  '/',
+  check('email', 'Please include a valid email').isEmail(),
+  check('password', 'Password is required').exists(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { email, password } = req.body;
+
+    try {
+      let admin = await Admin.findOne({ email });
+      if (!admin) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid Credentials' }] });
       }
-    });
-  } catch (err) {
-    console.error('something wrong with auth middleware');
-    res.status(500).json({ msg: 'Server Error' });
+
+      const isMatch = await bcrypt.compare(password, admin.password);
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid Credentials' }] });
+      }
+
+      const payload = {
+        admin: {
+          id: admin.id
+        }
+      };
+
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        { expiresIn: '5 days' },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
+    }
+    catch(e) {
+      console.error(e.message);
+      res.status(500).send("Server Error");
+    }
   }
-};
+);
+
+module.exports = router;
