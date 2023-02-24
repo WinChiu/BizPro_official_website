@@ -6,7 +6,7 @@ import $ from 'jquery';
 
 function NavBar() {
   // const [dropDownOpen, setdropDownOpen] = useState(false);
-  console.log(document.URL);
+
   useEffect(() => {
     if (document.location.href[document.location.href.length - 1] === '/') {
       $('.navBar').addClass('navHamburgerWhite');

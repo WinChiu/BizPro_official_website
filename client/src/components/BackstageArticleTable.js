@@ -521,7 +521,6 @@ function BackstageArticleTable() {
         avatar: e.target.updateAvatar.value,
       })
       .then((res) => {
-        console.log('hi');
         setToastContent(
           `成功更新 ${numberToRank(targetArticle.number)} ${
             targetArticle.name
@@ -575,7 +574,6 @@ function BackstageArticleTable() {
   //   endEdit(e);
   // };
   const addArticle = async (e) => {
-    console.log(e.target.articleAvatar.value ? 1 : 2);
     await axios
       .post('http://localhost:5000/api/admin/add_article', {
         name: e.target.name.value,

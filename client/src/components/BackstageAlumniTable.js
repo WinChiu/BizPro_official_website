@@ -11,6 +11,8 @@ import icon_upload from '../asset/img/icon/icon_upload.svg';
 import icon_x from '../asset/img/icon/icon_x.svg';
 import icon_x_circle from '../asset/img/icon/icon_x_circle.svg';
 import numberToRank from '../utility/numberToRank';
+import useToken from '../utility/useToken';
+
 function BackstageAlumniTable() {
   const [memberData, setMemberData] = useState(null);
   const [totalPage, setTotalPage] = useState(0);
@@ -24,6 +26,7 @@ function BackstageAlumniTable() {
     number: '',
     avatar: '',
   });
+  const { token, setToken } = useToken();
 
   const fetchData = async () => {
     await axios
@@ -505,7 +508,6 @@ function BackstageAlumniTable() {
   const startEdit = (e) => {
     e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[1] === 'data') {
-        console.log('check');
         child.classList.add('editable');
         child.setAttribute('contentEditable', true);
       }
@@ -575,10 +577,20 @@ function BackstageAlumniTable() {
   };
   const updateAvatar = async (e) => {
     await axios
-      .put('http://localhost:5000/api/admin/update_alumni', {
-        _id: targetAlumni.id,
-        avatar: e.target.updateAvatar.value,
-      })
+      .put(
+        'http://localhost:5000/api/admin/update_alumni',
+        {
+          _id: targetAlumni.id,
+          name: targetAlumni.name,
+          number: targetAlumni.number,
+          avatar: e.target.updateAvatar.value,
+        },
+        {
+          headers: {
+            'x-auth-token': token,
+          },
+        }
+      )
       .then((res) => {
         setToastContent(
           `成功更新 ${numberToRank(targetAlumni.number)} ${
@@ -594,7 +606,7 @@ function BackstageAlumniTable() {
         }, 0);
       })
       .catch((err) => {
-        console.log(err.response.data.error[0].msg);
+        console.log(err.response.data.msg);
         setToastContent(`更新照片失敗，請重新操作`);
         setTimeout(() => {
           triggerToast('warning');
@@ -610,13 +622,14 @@ function BackstageAlumniTable() {
       })
       .catch((error) => console.log(error));
   };
-  // TODO: delete and update api call to be add
   const deleteAlumni = async () => {
-    console.log(targetAlumni.id);
     await axios
       .delete('http://localhost:5000/api/admin/delete_alumni', {
         data: {
           _id: targetAlumni.id,
+        },
+        headers: {
+          'x-auth-token': token,
         },
       })
       .then((res) => {
@@ -629,15 +642,17 @@ function BackstageAlumniTable() {
         }, 0);
       })
       .catch((err) => {
-        console.log(err.response.data.error[0].msg);
-        setToastContent(`刪除資料失敗，請重新操作`);
+        console.log(err.response.data.msg);
+        if (
+          err.response.data.msg === 'Token is not valid' ||
+          err.response.data.msg === 'No token, authorization denied'
+        )
+          setToastContent(`請先登入再進行操作`);
+        else setToastContent(`刪除資料失敗，請重新操作`);
         setTimeout(() => {
           triggerToast('warning');
         }, 0);
       });
-    // TODO: if update fail, show what's wrong
-    // setToastContent(`刪除 ${number} ${name} 的資料失敗，`);
-    // triggerToast('warning');
   };
   const updateAlumni = async (e) => {
     let newAlumniData = {
@@ -664,15 +679,23 @@ function BackstageAlumniTable() {
     });
 
     await axios
-      .put('http://localhost:5000/api/admin/update_alumni', {
-        _id: targetAlumni.id,
-        name: newAlumniData.name,
-        number: newAlumniData.number,
-        jobTitle: newAlumniData.jobTitle,
-        exp: newAlumniData === '' ? [] : newAlumniData.exp.split('；'),
-        tags: newAlumniData.tags.split('；'),
-        major: newAlumniData.major.split('；'),
-      })
+      .put(
+        'http://localhost:5000/api/admin/update_alumni',
+        {
+          _id: targetAlumni.id,
+          name: newAlumniData.name,
+          number: newAlumniData.number,
+          jobTitle: newAlumniData.jobTitle,
+          exp: newAlumniData === '' ? [] : newAlumniData.exp.split('；'),
+          tags: newAlumniData.tags.split('；'),
+          major: newAlumniData.major.split('；'),
+        },
+        {
+          headers: {
+            'x-auth-token': token,
+          },
+        }
+      )
       .then((res) => {
         setToastContent(
           `成功更新 ${numberToRank(newAlumniData.number)} ${
@@ -687,33 +710,44 @@ function BackstageAlumniTable() {
         }, 0);
       })
       .catch((err) => {
-        console.log(err.response.data.error[0].msg);
-        setToastContent(`更新資料失敗，請重新操作`);
+        console.log(err.response.data.msg);
+        if (
+          err.response.data.msg === 'Token is not valid' ||
+          err.response.data.msg === 'No token, authorization denied'
+        )
+          setToastContent(`請先登入再進行操作`);
+        else if (err.response.data.msg === 'alumni already exists')
+          setToastContent('已存在相同屆數與姓名的 Alumni');
+        else setToastContent('新增資料失敗，請重新操作');
         setTimeout(() => {
           triggerToast('warning');
         }, 0);
       });
 
-    // TODO: if update fail, show what's wrong
-    // setToastContent(`更新 ${number} ${name} 的資料失敗，`);
-    // triggerToast('warning');
     endEdit(e);
   };
   const addAlumni = async (e) => {
-    console.log(e.target.avatar.value);
     await axios
-      .post('http://localhost:5000/api/admin/add_alumni', {
-        name: e.target.name.value,
-        number: e.target.number.value,
-        jobTitle: e.target.title.value,
-        exp: e.target.exp.value.split('；'),
-        tags:
-          e.target.tag.value === ''
-            ? []
-            : e.target.tag.value === ''.split('；'),
-        avatar: e.target.avatar.value,
-        major: e.target.major.value.split('；'),
-      })
+      .post(
+        'http://localhost:5000/api/admin/add_alumni',
+        {
+          name: e.target.name.value,
+          number: e.target.number.value,
+          jobTitle: e.target.title.value,
+          exp: e.target.exp.value.split('；'),
+          tags:
+            e.target.tag.value === ''
+              ? []
+              : e.target.tag.value === ''.split('；'),
+          avatar: e.target.avatar.value,
+          major: e.target.major.value.split('；'),
+        },
+        {
+          headers: {
+            'x-auth-token': token,
+          },
+        }
+      )
       .then((res) => {
         setToastContent(
           `成功新增${numberToRank(e.target.number.value)} ${
@@ -729,10 +763,15 @@ function BackstageAlumniTable() {
         }, 0);
       })
       .catch((err) => {
-        let errorMsg = err.response.data.errors[0].msg;
-        if (errorMsg) {
-        }
-        setToastContent('已存在相同屆數與姓名的 Alumni');
+        console.log(err.response.data.msg);
+        if (
+          err.response.data.msg === 'Token is not valid' ||
+          err.response.data.msg === 'No token, authorization denied'
+        )
+          setToastContent(`請先登入再進行操作`);
+        else if (err.response.data.msg === 'alumni already exists')
+          setToastContent('已存在相同屆數與姓名的 Alumni');
+        else setToastContent('新增資料失敗，請重新操作');
         setTimeout(() => {
           triggerToast('warning');
         }, 0);

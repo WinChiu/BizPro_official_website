@@ -1,27 +1,18 @@
-import React from 'react';
-import './css/style.css';
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import About from './pages/About';
-import Journey from './pages/Journey';
-import Article from './pages/Article';
-import Member from './pages/Member';
-import Backstage from './pages/Backstage';
-import Login from './pages/Login';
 import $ from 'jquery';
-import axios from 'axios';
+import React, { useState } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Footer from './components/Footer';
 import LogoLoading from './components/LogoLoading';
+import NavBar from './components/NavBar';
+import './css/style.css';
+import About from './pages/About';
+import Article from './pages/Article';
+import Backstage from './pages/Backstage';
+import Journey from './pages/Journey';
+import Login from './pages/Login';
+import Member from './pages/Member';
+import useToken from './utility/useToken';
 
-// const About = lazy(() => import('./pages/About'));
-// const Journey = lazy(() => import('./pages/Journey'));
-// const Article = lazy(() => import('./pages/Article'));
-// const Member = lazy(() => import('./pages/Member'));
-// const Backstage = lazy(() => import('./pages/Backstage'));
-/*
-TODO:
-- lazy loading
-*/
 
 function App() {
   const setVh = () => {
@@ -30,10 +21,8 @@ function App() {
   };
   window.addEventListener('load', setVh);
   window.addEventListener('resize', setVh);
-
   window.onload = () => {
     let nowLocation = window.location.href;
-    console.log(nowLocation);
     if (nowLocation[nowLocation.length - 1] === '/') {
       $('.logoContainer').css('animation-iteration-count', '1');
       setTimeout(() => {
@@ -48,6 +37,9 @@ function App() {
       $('body').css('overflow-y', 'scroll');
     }
   };
+
+  const { token, setToken } = useToken();
+
   return (
     <BrowserRouter>
       <NavBar />
@@ -58,7 +50,7 @@ function App() {
         <Route path="/member_talk" element={<Article />} />
         <Route path="/members" element={<Member />} />
         <Route path="/backstage" element={<Backstage />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setToken={setToken} />} />
       </Routes>
       <Footer />
     </BrowserRouter>

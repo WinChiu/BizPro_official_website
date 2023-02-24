@@ -282,7 +282,6 @@ function Member() {
   };
 
   const startFilter = async (major, field, grade) => {
-    console.log(major, field, grade);
     let filteredMemberDataTemp = [];
     // field filter
     if (directSearch === '')
@@ -335,14 +334,12 @@ function Member() {
         search: searchData,
       })
       .then((res) => {
-        console.log(res.data);
         return res.data;
       })
       .catch((err) => {
         console.log(err.message);
       });
 
-    console.log(filteredMemberDataTemp);
     setNowPage(1);
     setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
     setFilteredMemberData(filteredMemberDataTemp);

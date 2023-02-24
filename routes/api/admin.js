@@ -31,10 +31,7 @@ router.post(
         number,
       });
       if (alumni) {
-        console.log(alumni);
-        return res
-          .status(400)
-          .json({ errors: [{ msg: 'alumni already exists' }] });
+        return res.status(400).json({ msg: 'alumni already exists' });
       }
       // Todo: avatar normalization
 
@@ -83,7 +80,6 @@ router.post(
         number: req.body.number,
       });
 
-      console.log(alumni);
       if (!alumni) {
         return res.status(400).json({ msg: 'Cannot find alumni' });
       } else if (await Article.findOne({ alumni: alumni._id })) {
@@ -136,8 +132,7 @@ router.put(
         return res.status(400).json({ msg: 'Cannot find alumni' });
       } else if (articleByAlumni._id === req.body._id) {
         // check if 'One existed article belongs to this alumni'
-// TODO: 確認是否
- 
+        // TODO: 確認是否
         return res
           .status(400)
           .json({ msg: 'One existed article belongs to this alumni' });
@@ -162,59 +157,6 @@ router.put(
   }
 );
 
-// To be delete
-// router.post(
-//   '/add_and_update_article',
-//   check('name', 'Alumni name is required').notEmpty(),
-//   check('number', 'Alumni number is required').notEmpty(),
-//   check('title', 'Title is required').notEmpty(),
-//   check('content', 'Content is required').notEmpty(),
-//   async (req, res) => {
-//     const errors = validationResult(req);
-//     if (!errors.isEmpty()) {
-//       return res.status(400).json({ errors: errors.array() });
-//     }
-//     const { title, content, avatar } = req.body;
-//     try {
-//       //  Search alumni ID
-//       let alumni = await Alumni.findOne({
-//         name: req.body.name,
-//         number: req.body.number,
-//       });
-
-//       if (!alumni) {
-//         return res.status(400).json({ msg: 'Cannot find alumni' });
-//       } else if (req.body._id) {
-//         return res
-//           .status(400)
-//           .json({ msg: 'One existed article belongs to this alumni' });
-//       }
-//       console.log(req.body.avatar);
-//       let alumniID = alumni.id;
-//       let articleFields = {
-//         alumni: alumniID,
-//         title: req.body.title,
-//         content: req.body.content,
-//         avatar: req.body.avatar,
-//       };
-
-//       // if article is already exist: update it
-//       if (req.body._id != null && req.body._id != '') {
-//         await Article.findOneAndUpdate(
-//           { _id: req.body._id },
-//           { $set: articleFields }
-//         );
-//       } else {
-//         await Article.create(articleFields);
-//       }
-//       res.send('Article added success!!');
-//     } catch (e) {
-//       console.error(e.message);
-//       return res.status(500).json({ msg: 'Server Error' });
-//     }
-//   }
-// );
-
 // PUT: Update alumni
 router.put(
   '/update_alumni',
@@ -226,10 +168,18 @@ router.put(
       return res.status(400).json({ error: error.array() });
     }
     try {
-      //console.log(req.body);
       const id = req.body._id;
 
-      let alumni = await Alumni.findById(id);
+      let alumni = await Alumni.findOne({
+        name: req.body.name,
+        number: req.body.number,
+      });
+
+      if (alumni && alumni._id.valueOf() !== id) {
+        return res.status(400).json({ msg: 'alumni already exists' });
+      }
+
+      alumni = await Alumni.findById(id);
       if (!alumni) {
         console.log('No alumni');
         return res.status(400).json({ msg: 'No alumni data' });
@@ -248,11 +198,10 @@ router.put(
       if (req.body.major != '' && req.body.major != null)
         alumni.major = req.body.major;
       let result = await alumni.save();
-      //console.log(result);
       res.json(alumni);
     } catch (e) {
       console.error(e.message);
-      return res.status(400).json({ msg: 'Server Errrrrror' });
+      return res.status(400).json({ msg: 'Server Error' });
     }
   }
 );

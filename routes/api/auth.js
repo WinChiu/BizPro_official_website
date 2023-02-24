@@ -7,13 +7,9 @@ const config = require('config');
 const Admin = require('../../models/admin');
 const { check, validationResult } = require('express-validator');
 
-router.get(
-  '/',
-  auth,
-  (req, res) => {
-    res.send('Test auth');
-  }
-);
+router.get('/', auth, (req, res) => {
+  res.send('Test auth');
+});
 
 router.post(
   '/',
@@ -44,23 +40,22 @@ router.post(
 
       const payload = {
         admin: {
-          id: admin.id
-        }
+          id: admin.id,
+        },
       };
 
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: '5 days' },
+        { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
           res.json({ token });
         }
       );
-    }
-    catch(e) {
+    } catch (e) {
       console.error(e.message);
-      res.status(500).send("Server Error");
+      res.status(500).send('Server Error');
     }
   }
 );

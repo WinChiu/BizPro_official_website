@@ -35,11 +35,9 @@ router.post('/select', async (req, res) => {
       doc != null;
       doc = await alumniData.next()
     ) {
-      //console.log(doc._id.valueOf());
       IDList.push(doc._id.valueOf());
     }
 
-    //console.log(IDList.length);
     let newQuery = {
       alumni: { $in: IDList },
     };

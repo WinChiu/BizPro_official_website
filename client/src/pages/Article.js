@@ -37,7 +37,6 @@ function Article() {
       await axios
         .get('http://localhost:5000/api/article/member_talk')
         .then((res) => {
-          console.log(res.data);
 
           res.data.map((article) => {
             article.alumni.tags.map((tag) => {
@@ -81,7 +80,6 @@ function Article() {
     setNowPage(certainPage);
   };
   const startFilter = async (major, field) => {
-    console.log(major, field);
     let filteredArticleDataTemp = await axios
       .post('http://localhost:5000/api/article/select', {
         major: major,
@@ -195,7 +193,6 @@ function Article() {
                 onChange={(choice) => {
                   let tempArray = [];
                   choice.map((option) => {
-                    console.log(option.value);
                     tempArray.push(`${option.value}`);
                   });
                   setMajorFilter(tempArray);
