@@ -7,11 +7,7 @@ import BackstageArticleTable from '../components/BackstageArticleTable';
 import $ from 'jquery';
 function Backstage() {
   const [nowTab, setNowTab] = useState('alumni');
-  useEffect(() => {
-    $('#fb-root').css('display', 'none');
-    $('.navBar').css('display', 'none');
-    $('.footer').css('display', 'none');
-  }, []);
+
   const Tab = ({ icon, title, tabName }) => (
     <div
       className="sideBarTab"

@@ -610,6 +610,7 @@ function BackstageAlumniTable() {
         setToastContent(`更新照片失敗，請重新操作`);
         setTimeout(() => {
           triggerToast('warning');
+          $('.dataModal').css('display', 'block');
         }, 0);
       });
   };
@@ -646,9 +647,10 @@ function BackstageAlumniTable() {
         if (
           err.response.data.msg === 'Token is not valid' ||
           err.response.data.msg === 'No token, authorization denied'
-        )
+        ) {
           setToastContent(`請先登入再進行操作`);
-        else setToastContent(`刪除資料失敗，請重新操作`);
+          window.location.href = '/login';
+        } else setToastContent(`刪除資料失敗，請重新操作`);
         setTimeout(() => {
           triggerToast('warning');
         }, 0);
@@ -714,13 +716,15 @@ function BackstageAlumniTable() {
         if (
           err.response.data.msg === 'Token is not valid' ||
           err.response.data.msg === 'No token, authorization denied'
-        )
+        ) {
           setToastContent(`請先登入再進行操作`);
-        else if (err.response.data.msg === 'alumni already exists')
+          window.location.href = '/login';
+        } else if (err.response.data.msg === 'alumni already exists')
           setToastContent('已存在相同屆數與姓名的 Alumni');
         else setToastContent('新增資料失敗，請重新操作');
         setTimeout(() => {
           triggerToast('warning');
+          $('.dataModal').css('display', 'block');
         }, 0);
       });
 
@@ -767,13 +771,15 @@ function BackstageAlumniTable() {
         if (
           err.response.data.msg === 'Token is not valid' ||
           err.response.data.msg === 'No token, authorization denied'
-        )
+        ) {
           setToastContent(`請先登入再進行操作`);
-        else if (err.response.data.msg === 'alumni already exists')
+          window.location.href = '/login';
+        } else if (err.response.data.msg === 'alumni already exists')
           setToastContent('已存在相同屆數與姓名的 Alumni');
         else setToastContent('新增資料失敗，請重新操作');
         setTimeout(() => {
           triggerToast('warning');
+          $('.dataModal').css('display', 'block');
         }, 0);
       });
   };

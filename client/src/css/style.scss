@@ -3172,7 +3172,7 @@ html {
       position: fixed;
       z-index: 10000;
       top: 24px;
-      transform: translateY(-24px);
+      transform: translateX(-125px) translateY(-24px);
       opacity: 0;
       min-width: 240px;
       width: -webkit-fit-content;
@@ -3220,7 +3220,7 @@ html {
       }
     }
     .toastTrigger {
-      transform: translateY(0px);
+      transform: translateX(-125px) translateY(0px);
       opacity: 1;
     }
 
@@ -3477,6 +3477,14 @@ html {
       border: 1px solid #cccccc;
       width: 100%;
       margin-bottom: 20px;
+    }
+    .errorText {
+      width: 100%;
+      text-align: center;
+      @include body1();
+      color: $red_primary;
+      padding-bottom: 12px;
+      display: none;
     }
     .buttonGroup {
       @include flex(row, center, center);

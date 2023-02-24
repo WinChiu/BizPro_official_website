@@ -7,8 +7,8 @@ const config = require('config');
 const Admin = require('../../models/admin');
 const { check, validationResult } = require('express-validator');
 
-router.get('/', auth, (req, res) => {
-  res.send('Test auth');
+router.get('/is_login', auth, (req, res) => {
+  res.send(true);
 });
 
 router.post(

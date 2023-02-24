@@ -6,7 +6,17 @@ import $ from 'jquery';
 
 function NavBar() {
   // const [dropDownOpen, setdropDownOpen] = useState(false);
-
+  useEffect(() => {
+    let href = window.location.href.split('/');
+    if (
+      href[href.length - 1] === 'backstage' ||
+      href[href.length - 1] === 'login'
+    ) {
+      $('#fb-root').css('display', 'none');
+      $('.navBar').css('display', 'none');
+      $('.footer').css('display', 'none');
+    }
+  }, []);
   useEffect(() => {
     if (document.location.href[document.location.href.length - 1] === '/') {
       $('.navBar').addClass('navHamburgerWhite');

@@ -5,21 +5,19 @@ import Button from 'react-bootstrap/Button';
 import axios from 'axios';
 
 function Login({ setToken }) {
-  useEffect(() => {
-    $('#fb-root').css('display', 'none');
-    $('.navBar').css('display', 'none');
-    $('.footer').css('display', 'none');
-  }, []);
-
   const onSubmit = async (e) => {
-    e.preventDefault();
     let token = await axios
       .post('http://localhost:5000/api/auth', {
         email: `${e.target.email.value}`,
         password: `${e.target.psw.value}`,
       })
       .then((res) => {
+        window.location.replace('/backstage');
+        $('.navBar').css('display', 'none');
         return res.data;
+      })
+      .catch(() => {
+        $('.errorText').css('display', 'block');
       });
     setToken(token);
   };
@@ -33,9 +31,10 @@ function Login({ setToken }) {
           onSubmit(e);
         }}
       >
-        <img src={logo} alt="logo" />
-        <input type="text" placeholder="信箱" name="email" required />
-        <input type="text" placeholder="密碼" name="psw" required />
+        <img src={logo} alt="logo" />{' '}
+        <p className="errorText">帳號或密碼錯誤</p>
+        <input type="email" placeholder="信箱" name="email" required />
+        <input type="password" placeholder="密碼" name="psw" required />
         <div className="buttonGroup">
           <a href="/">
             <p>返回官網</p>

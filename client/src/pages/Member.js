@@ -9,6 +9,8 @@ import Header from '../components/Header';
 import localDb from '../config/localDb.json';
 import numberToRank from '../utility/numberToRank.js';
 import emptyAvatar from '../asset/img/empty_avatar.webp';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 /*
 TODO:
 - loading 符號
@@ -356,6 +358,7 @@ function Member() {
   };
   return (
     <React.Fragment>
+      <NavBar />
       <Header title={headerWording.title} content={headerWording.content} />
       <section className="member" id="memberSection">
         <img
@@ -514,6 +517,7 @@ function Member() {
           renderOnZeroPageCount={null}
         />
       </section>
+      <Footer />
     </React.Fragment>
   );
 }

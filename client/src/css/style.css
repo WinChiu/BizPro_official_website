@@ -3411,7 +3411,7 @@ html {
   position: fixed;
   z-index: 10000;
   top: 24px;
-  transform: translateY(-24px);
+  transform: translateX(-125px) translateY(-24px);
   opacity: 0;
   min-width: 240px;
   width: -moz-fit-content;
@@ -3463,7 +3463,7 @@ html {
   margin-right: 0px;
 }
 .backstage .settingPage .toastTrigger {
-  transform: translateY(0px);
+  transform: translateX(-125px) translateY(0px);
   opacity: 1;
 }
 .backstage .settingPage .modal {
@@ -3758,6 +3758,18 @@ html {
   border: 1px solid #cccccc;
   width: 100%;
   margin-bottom: 20px;
+}
+.loginContainer .formContainer .errorText {
+  width: 100%;
+  text-align: center;
+  font-family: "PingFangTC-Regular";
+  font-size: 16px;
+  line-height: 150%;
+  margin: 0;
+  color: #312f2f;
+  color: #ae0023;
+  padding-bottom: 12px;
+  display: none;
 }
 .loginContainer .formContainer .buttonGroup {
   display: flex;

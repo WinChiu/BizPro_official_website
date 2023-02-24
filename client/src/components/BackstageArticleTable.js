@@ -12,6 +12,7 @@ import icon_upload from '../asset/img/icon/icon_upload.svg';
 import icon_x from '../asset/img/icon/icon_x.svg';
 import icon_x_circle from '../asset/img/icon/icon_x_circle.svg';
 import numberToRank from '../utility/numberToRank';
+import useToken from '../utility/useToken';
 
 function BackstageArticleTable() {
   const [articleData, setArticleData] = useState(null);
@@ -28,6 +29,7 @@ function BackstageArticleTable() {
     content: '',
     avatar: '',
   });
+  const { token, setToken } = useToken();
   const fetchData = async () => {
     await axios
       .get('http://localhost:5000/api/article/member_talk')
@@ -144,20 +146,124 @@ function BackstageArticleTable() {
       </Modal.Dialog>
     </div>
   );
-
-  const DataEditModal = () => {
+  const AddArticleModal = () => {
     return (
-      <div className="modal show dataModal">
+      <div className="modal show dataModal addArticleModal">
         <Modal.Dialog>
           <Modal.Header>
             <Modal.Title>
-              <strong>編輯或新增心得</strong>
+              <strong>新增心得</strong>
             </Modal.Title>
           </Modal.Header>
           <form
             onSubmit={(e) => {
               e.preventDefault();
               addArticle(e);
+            }}
+          >
+            <Modal.Body>
+              <div className="container container__row1">
+                <label>
+                  姓名<span className="requiredDot">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="姓名"
+                  className="nameInput"
+                  defaultValue={`${
+                    targetArticle.name ? targetArticle.name : ''
+                  }`}
+                  required
+                />
+                <label>
+                  屆數<span className="requiredDot">*</span>
+                </label>
+                <input
+                  type="number"
+                  name="number"
+                  placeholder="屆數"
+                  className="numberInput"
+                  defaultValue={`${
+                    targetArticle.number ? targetArticle.number : ''
+                  }`}
+                  required
+                />
+              </div>
+              <div className="container container__row2">
+                <label>照片</label>
+                <input
+                  type="url"
+                  pattern="http://.*"
+                  name="articleAvatar"
+                  placeholder="照片"
+                  className="articleAvatarInput"
+                  defaultValue={`${
+                    targetArticle.avatar ? targetArticle.avatar : ''
+                  }`}
+                />
+              </div>
+              <div className="container container__row3">
+                <label>
+                  標題<span className="requiredDot">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="articleTitle"
+                  placeholder="心得文標題"
+                  className="articleTitleInput"
+                  defaultValue={`${
+                    targetArticle.title ? targetArticle.title : ''
+                  }`}
+                  required
+                />
+              </div>
+              <div className="container container__row4">
+                <label>
+                  內文<span className="requiredDot">*</span>
+                </label>
+                <textarea
+                  className="contentInput"
+                  name="articleContent"
+                  cols="30"
+                  rows="10"
+                  defaultValue={targetArticle.content}
+                  placeholder="心得文內文"
+                  required
+                ></textarea>
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  $('.modal').css('display', 'none');
+                }}
+              >
+                取消
+              </Button>
+              <Button type="submit" variant="success">
+                新增
+              </Button>
+            </Modal.Footer>
+          </form>
+        </Modal.Dialog>
+      </div>
+    );
+  };
+  const UpdateArticleModal = () => {
+    return (
+      <div className="modal show dataModal updateArticleModal">
+        <Modal.Dialog>
+          <Modal.Header>
+            <Modal.Title>
+              <strong>編輯心得</strong>
+            </Modal.Title>
+          </Modal.Header>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              updateArticle(e);
             }}
           >
             <Modal.Body>
@@ -331,7 +437,7 @@ function BackstageArticleTable() {
               getTargetArticle(e.target.parentNode);
             }
             setTimeout(() => {
-              $('.dataModal').css('display', 'block');
+              $('.updateArticleModal').css('display', 'block');
             }, 0);
           }}
         >
@@ -341,7 +447,13 @@ function BackstageArticleTable() {
           variant="danger"
           className="btn-delete"
           onClick={(e) => {
-            triggerWarningModal(e);
+            if (e.target.tagName === 'BUTTON') {
+              triggerWarningModal(e.target);
+              getTargetArticle(e.target);
+            } else {
+              triggerWarningModal(e.target.parentNode);
+              getTargetArticle(e.target.parentNode);
+            }
           }}
         >
           <img src={icon_x} alt="icon_x" />
@@ -386,15 +498,7 @@ function BackstageArticleTable() {
           </Pagination.Item>
         );
       })}
-      {/* <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Ellipsis />
 
-      <Pagination.Item>{11}</Pagination.Item>
-      <Pagination.Item active>{12}</Pagination.Item>
-      <Pagination.Item>{13}</Pagination.Item>
-
-      <Pagination.Ellipsis />
-      <Pagination.Item>{20}</Pagination.Item> */}
       <Pagination.Next
         onClick={() => {
           switchPage('next');
@@ -486,7 +590,7 @@ function BackstageArticleTable() {
   const triggerWarningModal = (e) => {
     let name = '';
     let number = '';
-    e.target.parentNode.parentNode.childNodes.forEach((child) => {
+    e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[0] === 'nameContent') name = child.innerText;
       if (child.classList[0] === 'numberContent') number = child.innerText;
     });
@@ -502,24 +606,31 @@ function BackstageArticleTable() {
         $('.toastComponent').removeClass('toastTrigger');
       }, 1500);
     }
-    if (type == 'warning') {
+    if (type == 'warning')
       $('.toastComponent.warning').addClass('toastTrigger');
-      setTimeout(() => {
-        $('.toastComponent').removeClass('toastTrigger');
-      }, 1500);
-    }
+    setTimeout(() => {
+      $('.toastComponent').removeClass('toastTrigger');
+    }, 1500);
   };
   const closeToast = () => {
     $('.toastComponent').addClass('toastTrigger');
   };
   const updateAvatar = async (e) => {
     await axios
-      .put('http://localhost:5000/api/admin/update_article', {
-        _id: targetArticle.id,
-        name: targetArticle.name,
-        number: targetArticle.number,
-        avatar: e.target.updateAvatar.value,
-      })
+      .put(
+        'http://localhost:5000/api/admin/update_article',
+        {
+          _id: targetArticle.id,
+          name: targetArticle.name,
+          number: targetArticle.number,
+          avatar: e.target.updateAvatar.value,
+        },
+        {
+          headers: {
+            'x-auth-token': token,
+          },
+        }
+      )
       .then((res) => {
         setToastContent(
           `成功更新 ${numberToRank(targetArticle.number)} ${
@@ -530,7 +641,6 @@ function BackstageArticleTable() {
           fetchData();
           setTimeout(() => {
             triggerToast('success');
-            //$('.modal').css('display', 'none');
           }, 500);
         }, 0);
       })
@@ -539,51 +649,116 @@ function BackstageArticleTable() {
         setToastContent(`更新照片失敗，請重新操作`);
         setTimeout(() => {
           triggerToast('warning');
+          $('.pictureModal').css('display', 'block');
         }, 0);
       });
   };
   // TODO: delete and update api call to be add
-  const deleteArticle = (target) => {
-    setToastContent(
-      `成功刪除 ${numberToRank(target.number)} ${target.name} 的資料`
-    );
-    setTimeout(() => {
-      triggerToast('success');
-    }, 0);
-
-    // TODO: if update fail, show what's wrong
-    // setToastContent(`刪除 ${number} ${name} 的資料失敗，`);
-    // triggerToast('warning');
+  const deleteArticle = async () => {
+    await axios
+      .delete('http://localhost:5000/api/admin/delete_article', {
+        data: {
+          _id: targetArticle.id,
+        },
+        headers: {
+          'x-auth-token': token,
+        },
+      })
+      .then((res) => {
+        setToastContent(`成功刪除資料`);
+        setTimeout(() => {
+          fetchData();
+          setTimeout(() => {
+            triggerToast('success');
+          }, 500);
+        }, 0);
+      })
+      .catch((err) => {
+        console.log(err.response.data.msg);
+        if (
+          err.response.data.msg === 'Token is not valid' ||
+          err.response.data.msg === 'No token, authorization denied'
+        )
+          setToastContent(`請先登入再進行操作`);
+        else setToastContent(`刪除資料失敗，請重新操作`);
+        setTimeout(() => {
+          triggerToast('warning');
+        }, 0);
+      });
   };
-  // const updateArticle = (e) => {
-  //   let name = '';
-  //   let number = '';
-  //   e.target.parentNode.parentNode.childNodes.forEach((child) => {
-  //     if (child.classList[0] === 'nameContent') name = child.innerText;
-  //     if (child.classList[0] === 'numberContent') number = child.innerText;
-  //   });
-  //   // if update success
-  //   setToastContent(`成功更新 ${numberToRank(number)} ${name} 的資料`);
-  //   setTimeout(() => {
-  //     triggerToast('success');
-  //   }, 0);
-
-  //   // TODO: if update fail, show what's wrong
-  //   // setToastContent(`更新 ${number} ${name} 的資料失敗，`);
-  //   // triggerToast('warning');
-  //   endEdit(e);
-  // };
+  const updateArticle = async (e) => {
+    console.log(targetArticle.id);
+    await axios
+      .put(
+        'http://localhost:5000/api/admin/update_article',
+        {
+          _id: targetArticle.id,
+          name: e.target.name.value,
+          number: e.target.number.value,
+          title: e.target.articleTitle.value,
+          content: e.target.articleContent.value,
+          avatar: e.target.articleAvatar.value
+            ? e.target.articleAvatar.value
+            : '',
+        },
+        {
+          headers: {
+            'x-auth-token': token,
+          },
+        }
+      )
+      .then((res) => {
+        setToastContent(
+          `成功更新 ${numberToRank(e.target.number.value)} ${
+            e.target.name.value
+          } 的資料`
+        );
+        setTimeout(() => {
+          fetchData();
+          setTimeout(() => {
+            triggerToast('success');
+            $('.updateArticleModal').css('display', 'none');
+          }, 500);
+        }, 0);
+      })
+      .catch((err) => {
+        console.log(err.response.data.msg);
+        if (
+          err.response.data.msg === 'Token is not valid' ||
+          err.response.data.msg === 'No token, authorization denied'
+        ) {
+          setToastContent(`請先登入再進行操作`);
+          window.location.href = '/login';
+        } else if (err.response.data.msg === 'alumni already exists')
+          setToastContent('已存在相同屆數與姓名的 Alumni');
+        else if (err.response.data.msg === 'Cannot find alumni')
+          setToastContent('不存在此 Alumni，請確認名稱與屆數是否正確');
+        else setToastContent('新增資料失敗，請重新操作');
+        setTimeout(() => {
+          triggerToast('warning');
+          $('.updateArticleModal').css('display', 'block');
+        }, 0);
+      });
+  };
   const addArticle = async (e) => {
     await axios
-      .post('http://localhost:5000/api/admin/add_article', {
-        name: e.target.name.value,
-        number: e.target.number.value,
-        title: e.target.articleTitle.value,
-        content: e.target.articleContent.value,
-        avatar: e.target.articleAvatar.value
-          ? e.target.articleAvatar.value
-          : '',
-      })
+      .post(
+        'http://localhost:5000/api/admin/add_article',
+        {
+          name: e.target.name.value,
+          number: e.target.number.value,
+          title: e.target.articleTitle.value,
+          content: e.target.articleContent.value,
+          avatar: e.target.articleAvatar.value
+            ? e.target.articleAvatar.value
+            : '',
+        },
+        {
+          headers: {
+            'x-auth-token': token,
+          },
+        }
+      )
       .then((res) => {
         setToastContent(
           `成功新增 ${numberToRank(e.target.number.value)} ${
@@ -594,25 +769,24 @@ function BackstageArticleTable() {
           fetchData();
           setTimeout(() => {
             triggerToast('success');
-            //$('.dataModal').css('display', 'none');
+            $('.addArticleModal').css('display', 'none');
           }, 500);
         }, 0);
       })
       .catch((err) => {
         console.log(err.response.data.msg);
-        if (err.response.data.msg === 'Cannot find alumni') {
+        if (err.response.data.msg === 'Cannot find alumni')
           setToastContent(`找不到對應的 Alumni，請重新操作`);
-        } else if (
+        else if (
           err.response.data.msg === 'One existed article belongs to this alumni'
-        ) {
+        )
           setToastContent(
             `該 Alumni 已上傳過心得文，請重新操作或使用「編輯」功能來修改`
           );
-        } else {
-          setToastContent(`新增心得文失敗，請重新操作`);
-        }
+        else setToastContent(`新增心得文失敗，請重新操作`);
         setTimeout(() => {
           triggerToast('warning');
+          $('.addArticleModal').css('display', 'block');
         }, 0);
       });
   };
@@ -628,7 +802,8 @@ function BackstageArticleTable() {
       <WarningToast />
       <WarningModal />
       <PictureUploadModal />
-      <DataEditModal />
+      <UpdateArticleModal />
+      <AddArticleModal />
       <div className="titleSection">
         <h2 className="title">歷屆心得文資料庫</h2>
         <Button
@@ -636,7 +811,7 @@ function BackstageArticleTable() {
           onClick={() => {
             clearTargetArticle();
             setTimeout(() => {
-              $('.dataModal').css('display', 'block');
+              $('.addArticleModal').css('display', 'block');
             }, 0);
           }}
         >

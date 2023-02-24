@@ -115,22 +115,23 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
+      console.log(req.body);
       //  check if article exist
       let article = await Article.findById(req.body._id);
       if (!article) {
         console.log('No article');
         return res.status(400).json({ msg: 'No article data' });
       }
-
       let alumni = await Alumni.findOne({
         name: req.body.name,
         number: req.body.number,
       });
-      let articleByAlumni = await Article.findOne({ alumni: alumni._id });
       if (!alumni) {
         // check if alumni exist (in case alumni name or number has been changed)
         return res.status(400).json({ msg: 'Cannot find alumni' });
-      } else if (articleByAlumni._id === req.body._id) {
+      }
+      let articleByAlumni = await Article.findOne({ alumni: alumni._id });
+      if (articleByAlumni._id === req.body._id) {
         // check if 'One existed article belongs to this alumni'
         // TODO: 確認是否
         return res

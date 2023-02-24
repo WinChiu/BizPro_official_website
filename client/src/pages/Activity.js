@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import localDb from '../config/localDb.json';
 import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
 import doubleCircleSymbol from '../asset/img/doubleCircle_symbol_white300.svg';
+import Footer from '../components/Footer';
 
 function Activity() {
   const headerWording = localDb.headerWording.activity;
@@ -62,6 +63,7 @@ function Activity() {
           </div>
         </article>
       </section>
+      <Footer/>
     </React.Fragment>
   );
 }
