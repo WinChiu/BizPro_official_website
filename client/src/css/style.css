@@ -3588,15 +3588,34 @@ html {
     font-size: 30px;
   }
 }
-.backstage .settingPage .table {
+.backstage .settingPage .tableContainer {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
   margin-top: 32px;
   margin-bottom: 40px;
+  scrollbar-color: grey;
+  scrollbar-width: thin;
+  padding: 0;
 }
-.backstage .settingPage .table thead th {
+.backstage .settingPage .tableContainer .table {
+  margin: 0;
+  width: 100%;
+  border-collapse: collapse;
+}
+.backstage .settingPage .tableContainer .table .freeze {
+  position: sticky;
+  left: 0;
+  top: 0;
+  border: none;
+  outline: #dee2e6 solid 1px;
+}
+.backstage .settingPage .tableContainer .table thead th {
   background-color: #38323c;
   color: white;
+  background-clip: padding-box;
 }
-.backstage .settingPage .table tbody tr td {
+.backstage .settingPage .tableContainer .table tbody tr td {
   vertical-align: middle;
   background-color: #ffffff;
   color: #312f2f;
@@ -3605,7 +3624,7 @@ html {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.backstage .settingPage .table tbody tr td .btn-edit {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-edit {
   background-color: transparent;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
@@ -3617,13 +3636,13 @@ html {
   padding: 8px 10px 8px 10px;
   margin-right: 8px;
 }
-.backstage .settingPage .table tbody tr td .btn-edit:hover {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-edit:hover {
   background-color: #ededed;
 }
-.backstage .settingPage .table tbody tr td .btn-edit img {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-edit img {
   z-index: -1;
 }
-.backstage .settingPage .table tbody tr td .btn-reupload {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-reupload {
   background-color: #38323c;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
@@ -3635,10 +3654,10 @@ html {
   padding: 8px 12px 6px 12px;
   margin-right: 8px;
 }
-.backstage .settingPage .table tbody tr td .btn-reupload:hover {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-reupload:hover {
   background-color: #4c5263;
 }
-.backstage .settingPage .table tbody tr td .btn-danger {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-danger {
   background-color: transparent;
   border: none;
   font-family: "PingFangTC-Regular";
@@ -3649,10 +3668,10 @@ html {
   color: white;
   padding: 8px 10px 8px 10px;
 }
-.backstage .settingPage .table tbody tr td .btn-danger:hover {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-danger:hover {
   background-color: #ededed;
 }
-.backstage .settingPage .table tbody tr td .btn-success {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-success {
   border: none;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
@@ -3663,13 +3682,13 @@ html {
   margin-right: 8px;
   padding: 8px 10px 8px 10px;
 }
-.backstage .settingPage .table tbody tr td .btn-update {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-update {
   background-color: transparent;
 }
-.backstage .settingPage .table tbody tr td .btn-update:hover {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-update:hover {
   background-color: #ededed;
 }
-.backstage .settingPage .table tbody tr td a {
+.backstage .settingPage .tableContainer .table tbody tr td a {
   color: #312f2f;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
@@ -3677,18 +3696,18 @@ html {
   margin: 0;
   color: #312f2f;
 }
-.backstage .settingPage .table tbody tr td a:hover {
+.backstage .settingPage .tableContainer .table tbody tr td a:hover {
   color: #4c5263;
 }
-.backstage .settingPage .table tbody tr td .noData {
+.backstage .settingPage .tableContainer .table tbody tr td .noData {
   opacity: 0.5;
   color: #4c5263;
 }
-.backstage .settingPage .table tbody tr td .btn-update,
-.backstage .settingPage .table tbody tr td .btn-cancel {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-update,
+.backstage .settingPage .tableContainer .table tbody tr td .btn-cancel {
   display: none;
 }
-.backstage .settingPage .table tbody tr .editable {
+.backstage .settingPage .tableContainer .table tbody tr .editable {
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;

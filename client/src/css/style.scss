@@ -3162,7 +3162,6 @@ html {
     height: fit-content;
     min-height: 100vh;
     padding: 48px 48px 48px 314px;
-    //overflow-y: scroll;
     box-sizing: border-box;
     position: relative;
     @include flex(column, flex-start, center);
@@ -3297,7 +3296,6 @@ html {
         }
       }
     }
-
     .titleSection {
       width: 100%;
       @include flex(row, center, center);
@@ -3315,102 +3313,116 @@ html {
         width: 100%;
       }
     }
-    .table {
+
+    .tableContainer {
+      width: 100%;
+      overflow-y: hidden;
+      overflow-x: hidden;
       margin-top: 32px;
       margin-bottom: 40px;
-      thead {
-        th {
-          background-color: $black_secondary;
-          color: white;
+      scrollbar-color: grey;
+      scrollbar-width: thin;
+      padding: 0;
+      .table {
+        margin: 0;
+        width: 100%;
+        border-collapse: collapse;
+        .freeze {
+          position: sticky;
+          left: 0;
+          top: 0;
+          border: none;
+          outline: #dee2e6 solid 1px;
         }
-      }
-      tbody {
-        tr {
-          td {
-            vertical-align: middle;
-            background-color: $white_100;
-            color: $black_text;
-            max-width: 180px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-
-            .btn-edit {
-              background-color: transparent;
-              @include body2();
-              border: none;
-              color: white;
-              padding: 8px 10px 8px 10px;
-              margin-right: 8px;
-
-              &:hover {
-                background-color: $white_300;
-              }
-              img {
-                z-index: -1;
-              }
-            }
-            .btn-reupload {
-              background-color: $black_secondary;
-              @include body2();
-              border: none;
-              color: white;
-              padding: 8px 12px 6px 12px;
-              margin-right: 8px;
-              &:hover {
-                background-color: $grey;
-              }
-            }
-
-            .btn-danger {
-              background-color: transparent;
-              border: none;
-              @include body2();
-              color: white;
-              padding: 8px 10px 8px 10px;
-              &:hover {
-                background-color: $white_300;
-              }
-            }
-            .btn-success {
-              border: none;
-              @include body2();
-              color: white;
-              margin-right: 8px;
-              padding: 8px 10px 8px 10px;
-            }
-            .btn-update {
-              background-color: transparent;
-              &:hover {
-                background-color: $white_300;
-              }
-            }
-            a {
+        thead {
+          th {
+            background-color: $black_secondary;
+            color: white;
+            background-clip: padding-box;
+          }
+        }
+        tbody {
+          tr {
+            td {
+              vertical-align: middle;
+              background-color: $white_100;
               color: $black_text;
-              @include body2();
-              &:hover {
+              max-width: 180px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              .btn-edit {
+                background-color: transparent;
+                @include body2();
+                border: none;
+                color: white;
+                padding: 8px 10px 8px 10px;
+                margin-right: 8px;
+
+                &:hover {
+                  background-color: $white_300;
+                }
+                img {
+                  z-index: -1;
+                }
+              }
+              .btn-reupload {
+                background-color: $black_secondary;
+                @include body2();
+                border: none;
+                color: white;
+                padding: 8px 12px 6px 12px;
+                margin-right: 8px;
+                &:hover {
+                  background-color: $grey;
+                }
+              }
+
+              .btn-danger {
+                background-color: transparent;
+                border: none;
+                @include body2();
+                color: white;
+                padding: 8px 10px 8px 10px;
+                &:hover {
+                  background-color: $white_300;
+                }
+              }
+              .btn-success {
+                border: none;
+                @include body2();
+                color: white;
+                margin-right: 8px;
+                padding: 8px 10px 8px 10px;
+              }
+              .btn-update {
+                background-color: transparent;
+                &:hover {
+                  background-color: $white_300;
+                }
+              }
+              a {
+                color: $black_text;
+                @include body2();
+                &:hover {
+                  color: $grey;
+                }
+              }
+              .noData {
+                opacity: 0.5;
                 color: $grey;
               }
+              .btn-update,
+              .btn-cancel {
+                display: none;
+              }
             }
-            .noData {
-              opacity: 0.5;
-              color: $grey;
+            .editable {
+              white-space: normal;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              background-color: rgb(255, 234, 230);
             }
-            .btn-update,
-            .btn-cancel {
-              display: none;
-            }
-          }
-          .editable {
-            white-space: normal;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            background-color: rgb(255, 234, 230);
-          }
-          td:focus-visible {
-            // white-space: normal;
-            // overflow: hidden;
-            // text-overflow: ellipsis;
           }
         }
       }

@@ -47,11 +47,49 @@ function BackstageAlumniTable() {
       })
       .catch((error) => console.log(error));
   };
+  const isOverflown = (element) => {
+    console.log(element);
+    return (
+      element.scrollHeight > element.clientHeight ||
+      element.scrollWidth > element.clientWidth
+    );
+  };
+  const stickColumn = () => {
+    console.log('change');
+    if (isOverflown(document.getElementsByClassName('tableContainer')[0])) {
+      let left =
+        document
+          .getElementsByClassName('toBeFreezeCol2')[0]
+          .getBoundingClientRect().left -
+        document
+          .getElementsByClassName('toBeFreezeCol1')[0]
+          .getBoundingClientRect().left;
+
+      $('.toBeFreezeCol1').map((id, cell) => {
+        cell.classList.add('freeze');
+      });
+      $('.toBeFreezeCol2').map((id, cell) => {
+        cell.classList.add('freeze');
+        cell.style.left = `${left}px`;
+      });
+      $('.tableContainer').css('overflow-x', 'scroll');
+    } else {
+      $('.tableContainer').css('overflow-x', 'hidden');
+    }
+  };
   // Load Data
   useEffect(() => {
     fetchData();
+    window.addEventListener('resize', () => {
+      stickColumn();
+    });
     return;
   }, []);
+
+  $(document).ready(() => {
+    stickColumn();
+  });
+  // window.addEventListener('resize', stickColumn());
 
   // Components
   const WarningToast = () => (
@@ -164,14 +202,14 @@ function BackstageAlumniTable() {
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
-        className="nameContent data"
+        className="nameContent data toBeFreezeCol1"
       >
         {name ? name : <span className="noData">無資料</span>}
       </td>
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
-        className="numberContent data"
+        className="numberContent data toBeFreezeCol2"
       >
         {number ? number : <span className="noData">無資料</span>}
       </td>
@@ -806,41 +844,43 @@ function BackstageAlumniTable() {
           新增 Alumni
         </Button>
       </div>
-      <Table bordered>
-        <thead>
-          <tr>
-            <th>姓名</th>
-            <th>屆數</th>
-            <th>頭銜</th>
-            <th>學歷</th>
-            <th>經歷（使用；隔開）</th>
-            <th>產業標籤（使用；隔開）</th>
-            <th>照片</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          {memberData?.map((member, i) => {
-            if ((nowPage - 1) * 10 <= i && i < nowPage * 10) {
-              return (
-                <AlumniRow
-                  key={i}
-                  name={member.name}
-                  number={member.number}
-                  title={member.jobTitle}
-                  major={member.major}
-                  exp={member.exp}
-                  tags={member.tags}
-                  avatar={member.avatar}
-                  alumniId={member._id}
-                />
-              );
-            } else {
-              return;
-            }
-          })}
-        </tbody>
-      </Table>
+      <div className="tableContainer">
+        <Table bordered>
+          <thead>
+            <tr>
+              <th className="toBeFreezeCol1">姓名</th>
+              <th className="toBeFreezeCol2">屆數</th>
+              <th>頭銜</th>
+              <th>學歷</th>
+              <th>經歷</th>
+              <th>領域標籤</th>
+              <th>照片</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {memberData?.map((member, i) => {
+              if ((nowPage - 1) * 10 <= i && i < nowPage * 10) {
+                return (
+                  <AlumniRow
+                    key={i}
+                    name={member.name}
+                    number={member.number}
+                    title={member.jobTitle}
+                    major={member.major}
+                    exp={member.exp}
+                    tags={member.tags}
+                    avatar={member.avatar}
+                    alumniId={member._id}
+                  />
+                );
+              } else {
+                return;
+              }
+            })}
+          </tbody>
+        </Table>
+      </div>
       <ReactPaginate
         nextLabel="›"
         onPageChange={(e) => {
