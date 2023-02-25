@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import backstage_logo from '../asset/img/backstage_logo.svg';
 import icon_alumniData from '../asset/img/icon/icon_alumniData.svg';
 import icon_alumniTalk from '../asset/img/icon/icon_alumniTalk.svg';
 import BackstageAlumniTable from '../components/BackstageAlumniTable';
 import BackstageArticleTable from '../components/BackstageArticleTable';
+import $ from 'jquery';
 function Backstage() {
   const [nowTab, setNowTab] = useState('alumni');
+
   const Tab = ({ icon, title, tabName }) => (
     <div
       className="sideBarTab"
@@ -38,7 +40,14 @@ function Backstage() {
             tabName={'article'}
           />
         </div>
-        <p className="sign">Built by 22nd Win & 21st Jim</p>
+        <p className="sign" style={{ marginBottom: '8px', fontWeight: '100' }}>
+          Built by 22nd Win & 21st Jim
+        </p>
+        <a href="https://forms.gle/GGNGUujviXm8gfA9A" target="_blanck">
+          <p className="sign" style={{ fontWeight: '100' }}>
+            網站問題回報表單
+          </p>
+        </a>
       </section>
       <section className="settingPage" id="settingPageSection">
         {nowTab === 'alumni' ? (

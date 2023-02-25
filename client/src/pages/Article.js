@@ -8,10 +8,11 @@ import doubleCircleSymbol from '../asset/img/doubleCircle_symbol_white300.svg';
 import Header from '../components/Header';
 import localDb from '../config/localDb.json';
 import numberToRank from '../utility/numberToRank';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 function Article() {
   const [articleData, setArticleData] = useState(null);
   const [filteredArticleData, setFilteredArticleData] = useState([]);
-
   const [fieldOptions, setFieldOptions] = useState([]);
   const [majorOptions, setMajorOptions] = useState([]);
   const [majorFilter, setMajorFilter] = useState([]);
@@ -38,8 +39,6 @@ function Article() {
       await axios
         .get('/api/article/member_talk')
         .then((res) => {
-          console.log(res.data);
-
           res.data.map((article) => {
             article.alumni.tags.map((tag) => {
               if (!field.includes(tag)) {
@@ -82,7 +81,6 @@ function Article() {
     setNowPage(certainPage);
   };
   const startFilter = async (major, field) => {
-    console.log(major, field);
     let filteredArticleDataTemp = await axios
       .post('/api/article/select', {
         major: major,
@@ -165,6 +163,7 @@ function Article() {
   );
   return (
     <React.Fragment>
+      <NavBar />
       <Header title={headerWording.title} content={headerWording.content} />
       <section className="article" id="articleSection">
         <img
@@ -196,7 +195,6 @@ function Article() {
                 onChange={(choice) => {
                   let tempArray = [];
                   choice.map((option) => {
-                    console.log(option.value);
                     tempArray.push(`${option.value}`);
                   });
                   setMajorFilter(tempArray);
@@ -206,7 +204,7 @@ function Article() {
               />
               <Select
                 classNamePrefix="filter__field--selector"
-                placeholder="選擇領域"
+                placeholder="選擇領域（含所有經歷）"
                 isMulti
                 options={fieldOptions}
                 onChange={(choice) => {
@@ -279,6 +277,7 @@ function Article() {
           renderOnZeroPageCount={null}
         />
       </section>
+      <Footer/>
     </React.Fragment>
   );
 }

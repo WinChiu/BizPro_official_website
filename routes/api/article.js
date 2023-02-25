@@ -3,12 +3,11 @@ const router = express.Router();
 
 const Article = require('../../models/article');
 const Alumni = require('../../models/alumni');
-const ArticleTest = require('../../models/article_test');
 const articleQuery = require('../../core/articleQuery');
 
 router.get('/member_talk', async (req, res) => {
   try {
-    const article = await ArticleTest.find().populate('alumni', [
+    const article = await Article.find().populate('alumni', [
       'name',
       'number',
       'jobTitle',
@@ -36,16 +35,14 @@ router.post('/select', async (req, res) => {
       doc != null;
       doc = await alumniData.next()
     ) {
-      //console.log(doc._id.valueOf());
       IDList.push(doc._id.valueOf());
     }
 
-    //console.log(IDList.length);
     let newQuery = {
       alumni: { $in: IDList },
     };
 
-    const articleData = await ArticleTest.find(newQuery).populate('alumni', [
+    const articleData = await Article.find(newQuery).populate('alumni', [
       'name',
       'number',
       'jobTitle',

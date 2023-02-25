@@ -1,26 +1,20 @@
-import React from 'react';
-import './css/style.css';
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import About from './pages/About';
-import Journey from './pages/Journey';
-import Article from './pages/Article';
-import Member from './pages/Member';
-import Backstage from './pages/Backstage';
 import $ from 'jquery';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import Footer from './components/Footer';
 import LogoLoading from './components/LogoLoading';
-
-// const About = lazy(() => import('./pages/About'));
-// const Journey = lazy(() => import('./pages/Journey'));
-// const Article = lazy(() => import('./pages/Article'));
-// const Member = lazy(() => import('./pages/Member'));
-// const Backstage = lazy(() => import('./pages/Backstage'));
-/*
-TODO:
-- lazy loading
-*/
+import './css/style.css';
+import About from './pages/About';
+import Article from './pages/Article';
+import Backstage from './pages/Backstage';
+import Journey from './pages/Journey';
+import Login from './pages/Login';
+import Member from './pages/Member';
+import useToken from './utility/useToken';
+import axios from 'axios';
+import PrivateRouteBackstage from './components/PrivateRouteBackstage';
+import PrivateRouteLogin from './components/PrivateRouteLogin';
 
 function App() {
   const setVh = () => {
@@ -29,10 +23,8 @@ function App() {
   };
   window.addEventListener('load', setVh);
   window.addEventListener('resize', setVh);
-
   window.onload = () => {
     let nowLocation = window.location.href;
-    console.log(nowLocation);
     if (nowLocation[nowLocation.length - 1] === '/') {
       $('.logoContainer').css('animation-iteration-count', '1');
       setTimeout(() => {
@@ -47,18 +39,25 @@ function App() {
       $('body').css('overflow-y', 'scroll');
     }
   };
+
+  const { token, setToken } = useToken();
+
   return (
     <BrowserRouter>
-      <NavBar />
       <LogoLoading />
       <Routes>
         <Route exact path="/" element={<About />} />
         <Route path="/journey" element={<Journey />} />
         <Route path="/member_talk" element={<Article />} />
         <Route path="/members" element={<Member />} />
-        <Route path="/backstage" element={<Backstage />} />
+        <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route
+          path="/backstage"
+          element={
+            <PrivateRouteBackstage token={token} backstage={<Backstage />} />
+          }
+        />
       </Routes>
-      <Footer />
     </BrowserRouter>
   );
 }

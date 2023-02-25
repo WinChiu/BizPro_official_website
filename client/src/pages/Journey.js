@@ -33,6 +33,8 @@ import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
 import toggle_symbol from '../asset/img/toggle_symbol.svg';
 import Header from '../components/Header';
 import localDb from '../config/localDb.json';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 function Journey() {
   const headerWordingJunior = localDb.headerWording.journey.junior;
   const headerWordingSenior = localDb.headerWording.journey.senior;
@@ -608,6 +610,7 @@ function Journey() {
 
   return (
     <React.Fragment>
+      <NavBar />
       <Header
         title={
           tab === 'junior'
@@ -666,6 +669,7 @@ function Journey() {
       ) : (
         <Alumni />
       )}
+      <Footer />
     </React.Fragment>
   );
 }

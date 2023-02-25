@@ -253,6 +253,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  margin: 0;
   color: #312f2f;
   color: #e8e4da;
   text-decoration: none;
@@ -375,6 +376,7 @@ html {
     font-family: "PingFangTC-Regular";
     font-size: 14px;
     line-height: 150%;
+    margin: 0;
     color: #312f2f;
     color: #ffffff;
     color: #ffffff;
@@ -1375,7 +1377,9 @@ html {
   justify-content: center;
   align-items: center;
   width: 100%;
-  position: relative;
+  position: sticky;
+  top: 56px;
+  z-index: 100;
 }
 .tab__item {
   display: flex;
@@ -2322,6 +2326,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  margin: 0;
   color: #312f2f;
   color: white;
 }
@@ -2494,6 +2499,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  margin: 0;
   color: #312f2f;
   padding: 4px 12px 2px 12px;
   border-radius: 16px;
@@ -2515,7 +2521,6 @@ html {
   margin: 0;
   color: #312f2f;
   color: #4c5263;
-  z-index: 1;
 }
 .article .pagination {
   margin-top: 24px;
@@ -2610,6 +2615,7 @@ html {
     font-family: "PingFangTC-Regular";
     font-size: 14px;
     line-height: 150%;
+    margin: 0;
     color: #312f2f;
   }
   .article__item--content .tags .tag {
@@ -2700,6 +2706,7 @@ html {
     font-family: "PingFangTC-Regular";
     font-size: 14px;
     line-height: 150%;
+    margin: 0;
     color: #312f2f;
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -2776,6 +2783,28 @@ html {
   color: #312f2f;
   -webkit-font-smoothing: antialiased;
 }
+.member__popUp--content .content__tags {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 8px 0px 8px 0px;
+}
+.member__popUp--content .content__tags--caption {
+  font-family: "PingFangTC-Regular";
+  font-size: 12px;
+}
+.member__popUp--content .content__tags--tag {
+  font-family: "PingFangTC-Regular";
+  font-size: 12px;
+  padding: 3px 10px 2px 10px;
+  border-radius: 16px;
+  background-color: #ae0023;
+  color: white;
+  margin-right: 8px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
 .member__popUp--content p,
 .member__popUp--content li {
   font-family: "PingFangTC-Regular";
@@ -2800,28 +2829,6 @@ html {
   background: linear-gradient(180deg, rgba(246, 246, 246, 0) 0%, rgb(246, 246, 246) 75%, rgb(246, 246, 246) 100%);
   position: sticky;
   bottom: -2px;
-}
-.member__popUp--content .content__tags {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  margin: 4px 0px 12px 0px;
-}
-.member__popUp--content .content__tags--caption {
-  font-family: "PingFangTC-Regular";
-  font-size: 12px;
-}
-.member__popUp--content .content__tags--tag {
-  font-family: "PingFangTC-Regular";
-  font-size: 12px;
-  padding: 3px 10px 2px 10px;
-  border-radius: 16px;
-  background-color: #ae0023;
-  color: white;
-  margin-right: 8px;
-  width: -moz-fit-content;
-  width: fit-content;
 }
 .member__popUp--img {
   display: flex;
@@ -2984,6 +2991,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  margin: 0;
   color: #312f2f;
   color: white;
 }
@@ -3096,6 +3104,7 @@ html {
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  margin: 0;
   color: #312f2f;
   font-weight: bold;
   color: #38323c;
@@ -3336,7 +3345,7 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
 }
 .backstage .sidebar .backstage_logo {
@@ -3384,6 +3393,7 @@ html {
   font-size: 12px;
   color: #e8e4da;
   margin-bottom: 24px;
+  margin-left: 16px;
 }
 .backstage .settingPage {
   width: 100%;
@@ -3400,9 +3410,9 @@ html {
 }
 .backstage .settingPage .toastComponent {
   position: fixed;
-  z-index: 10;
+  z-index: 10000;
   top: 24px;
-  transform: translateY(-24px);
+  transform: translateX(-125px) translateY(-24px);
   opacity: 0;
   min-width: 240px;
   width: -moz-fit-content;
@@ -3448,9 +3458,13 @@ html {
 }
 .backstage .settingPage .warning {
   background-color: #b9544c;
+  min-width: 0px;
+}
+.backstage .settingPage .warning p {
+  margin-right: 0px;
 }
 .backstage .settingPage .toastTrigger {
-  transform: translateY(0px);
+  transform: translateX(-125px) translateY(0px);
   opacity: 1;
 }
 .backstage .settingPage .modal {
@@ -3468,6 +3482,9 @@ html {
   min-width: 480px;
   width: 500px;
 }
+.backstage .settingPage .modal .modal-dialog .requiredDot {
+  color: #ae0023;
+}
 .backstage .settingPage .modal .modal-dialog .container {
   display: flex;
   flex-direction: row;
@@ -3475,12 +3492,6 @@ html {
   align-items: center;
   padding: 0;
   margin-bottom: 24px;
-}
-.backstage .settingPage .modal .modal-dialog .container__row4 {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
 }
 .backstage .settingPage .modal .modal-dialog .container__row4 label {
   padding-top: 6px;
@@ -3510,7 +3521,7 @@ html {
   padding: 8px 12px 6px 12px;
 }
 .backstage .settingPage .modal .modal-dialog input {
-  padding: 8px 16px 6px 16px;
+  padding: 6px 8px 4px 8px;
   font-family: "PingFangTC-Regular";
   font-size: 16px;
   line-height: 150%;
@@ -3534,10 +3545,11 @@ html {
   margin-right: 16px;
 }
 .backstage .settingPage .modal .modal-dialog textarea {
-  padding: 8px 16px 6px 16px;
+  padding: 8px 8px 6px 8px;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  margin: 0;
   color: #312f2f;
   font-weight: normal;
   border-radius: 4px;
@@ -3577,15 +3589,34 @@ html {
     font-size: 30px;
   }
 }
-.backstage .settingPage .table {
+.backstage .settingPage .tableContainer {
+  width: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
   margin-top: 32px;
   margin-bottom: 40px;
+  scrollbar-color: grey;
+  scrollbar-width: thin;
+  padding: 0;
 }
-.backstage .settingPage .table thead th {
+.backstage .settingPage .tableContainer .table {
+  margin: 0;
+  width: 100%;
+  border-collapse: collapse;
+}
+.backstage .settingPage .tableContainer .table .freeze {
+  position: sticky;
+  left: 0;
+  top: 0;
+  border: none;
+  outline: #dee2e6 solid 1px;
+}
+.backstage .settingPage .tableContainer .table thead th {
   background-color: #38323c;
   color: white;
+  background-clip: padding-box;
 }
-.backstage .settingPage .table tbody tr td {
+.backstage .settingPage .tableContainer .table tbody tr td {
   vertical-align: middle;
   background-color: #ffffff;
   color: #312f2f;
@@ -3594,83 +3625,90 @@ html {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.backstage .settingPage .table tbody tr td .btn-edit {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-edit {
   background-color: transparent;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  margin: 0;
   color: #312f2f;
   border: none;
   color: white;
   padding: 8px 10px 8px 10px;
   margin-right: 8px;
 }
-.backstage .settingPage .table tbody tr td .btn-edit:hover {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-edit:hover {
   background-color: #ededed;
 }
-.backstage .settingPage .table tbody tr td .btn-edit img {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-edit img {
   z-index: -1;
 }
-.backstage .settingPage .table tbody tr td .btn-reupload {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-reupload {
   background-color: #38323c;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  margin: 0;
   color: #312f2f;
   border: none;
   color: white;
   padding: 8px 12px 6px 12px;
   margin-right: 8px;
 }
-.backstage .settingPage .table tbody tr td .btn-reupload:hover {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-reupload:hover {
   background-color: #4c5263;
 }
-.backstage .settingPage .table tbody tr td .btn-danger {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-danger {
   background-color: transparent;
   border: none;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  margin: 0;
   color: #312f2f;
   color: white;
   padding: 8px 10px 8px 10px;
 }
-.backstage .settingPage .table tbody tr td .btn-danger:hover {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-danger:hover {
   background-color: #ededed;
 }
-.backstage .settingPage .table tbody tr td .btn-success {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-success {
   border: none;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  margin: 0;
   color: #312f2f;
   color: white;
   margin-right: 8px;
-  background-color: transparent;
   padding: 8px 10px 8px 10px;
 }
-.backstage .settingPage .table tbody tr td .btn-success:hover {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-update {
+  background-color: transparent;
+}
+.backstage .settingPage .tableContainer .table tbody tr td .btn-update:hover {
   background-color: #ededed;
 }
-.backstage .settingPage .table tbody tr td a {
+.backstage .settingPage .tableContainer .table tbody tr td a {
   color: #312f2f;
   font-family: "PingFangTC-Regular";
   font-size: 14px;
   line-height: 150%;
+  margin: 0;
   color: #312f2f;
 }
-.backstage .settingPage .table tbody tr td a:hover {
+.backstage .settingPage .tableContainer .table tbody tr td a:hover {
   color: #4c5263;
 }
-.backstage .settingPage .table tbody tr td .noData {
+.backstage .settingPage .tableContainer .table tbody tr td .noData {
   opacity: 0.5;
   color: #4c5263;
 }
-.backstage .settingPage .table tbody tr td .btn-update,
-.backstage .settingPage .table tbody tr td .btn-cancel {
+.backstage .settingPage .tableContainer .table tbody tr td .btn-update,
+.backstage .settingPage .tableContainer .table tbody tr td .btn-cancel {
   display: none;
 }
-.backstage .settingPage .table tbody tr .editable {
+.backstage .settingPage .tableContainer .table tbody tr .editable {
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3700,6 +3738,97 @@ html {
   color: white;
 }
 
+.loginContainer {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("../asset/img/loginBg.webp");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+.loginContainer .formContainer {
+  position: absolute;
+  min-width: 400px;
+  background-color: rgb(246, 246, 246);
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+}
+.loginContainer .formContainer img {
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 32px;
+}
+.loginContainer .formContainer input {
+  padding: 6px 8px 4px 8px;
+  font-family: "PingFangTC-Regular";
+  font-size: 16px;
+  line-height: 150%;
+  margin: 0;
+  color: #312f2f;
+  font-weight: normal;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.loginContainer .formContainer .errorText {
+  width: 100%;
+  text-align: center;
+  font-family: "PingFangTC-Regular";
+  font-size: 16px;
+  line-height: 150%;
+  margin: 0;
+  color: #312f2f;
+  color: #ae0023;
+  padding-bottom: 12px;
+  display: none;
+}
+.loginContainer .formContainer .buttonGroup {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.loginContainer .formContainer .buttonGroup a {
+  color: #4c5263;
+}
+.loginContainer .formContainer .buttonGroup a p {
+  font-family: "PingFangTC-Regular";
+  font-size: 14px;
+  line-height: 150%;
+  margin: 0;
+  color: #312f2f;
+  font-weight: normal;
+  margin-right: 20px;
+  color: #4c5263;
+}
+.loginContainer .formContainer .buttonGroup a p:hover {
+  color: #ae0023;
+}
+.loginContainer .formContainer .buttonGroup a:hover {
+  color: #ae0023;
+}
+.loginContainer .formContainer .buttonGroup .btn-primary {
+  background-color: #38323c;
+  border: none;
+  font-family: "PingFangTC-Regular";
+  font-size: 16px;
+  line-height: 150%;
+  margin: 0;
+  color: #312f2f;
+  color: white;
+  padding: 8px 12px 6px 12px;
+  white-space: nowrap;
+}
+
 select-pure {
   flex: 1;
   min-width: 232px;
@@ -3714,4 +3843,15 @@ select-pure {
   --hover-background-color: #38323c;
   --hover-color: white;
   --dropdown-items: 5;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }/*# sourceMappingURL=style.css.map */

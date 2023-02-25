@@ -331,34 +331,7 @@ function Backstage() {
         });
       }
     });
-    // if (isSthEditing === false) {
-    //   e.target.parentNode.parentNode.childNodes.forEach((child) => {
-    //     if (child.classList[1] === 'data') {
-    //       child.classList.add('editable');
-    //       child.setAttribute('contentEditable', true);
-    //     }
-    //     if (child.classList[0] === 'buttonGroup') {
-    //       console.log('buttonGroup');
-    //       child.childNodes.forEach((btn) => {
-    //         if (
-    //           btn.classList[0] === 'btn-edit' ||
-    //           btn.classList[0] === 'btn-delete'
-    //         ) {
-    //           btn.style.display = 'none';
-    //         } else {
-    //           btn.style.display = 'inline';
-    //         }
-    //       });
-    //     }
-    //   });
-    // } else {
-    //   setToastContent(
-    //     `尚有 Alumni 資料正在編輯中，請先結束該筆資料的編輯再進行下一步`
-    //   );
-    //   setTimeout(() => {
-    //     triggerToast('warning');
-    //   }, 0);
-    // }
+
   };
   const endEdit = (e) => {
     e.target.parentNode.parentNode.childNodes.forEach((child) => {
@@ -385,7 +358,6 @@ function Backstage() {
     let name = '';
     let number = '';
     e.target.parentNode.parentNode.childNodes.forEach((child) => {
-      console.log(child);
       if (child.classList[0] === 'nameContent') name = child.innerText;
       if (child.classList[0] === 'numberContent') number = child.innerText;
     });
@@ -442,7 +414,6 @@ function Backstage() {
     let name = '';
     let number = '';
     e.target.parentNode.parentNode.childNodes.forEach((child) => {
-      console.log(child);
       if (child.classList[0] === 'nameContent') name = child.innerText;
       if (child.classList[0] === 'numberContent') number = child.innerText;
     });

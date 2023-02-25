@@ -8,6 +8,9 @@ import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
 import Header from '../components/Header';
 import localDb from '../config/localDb.json';
 import numberToRank from '../utility/numberToRank.js';
+import emptyAvatar from '../asset/img/empty_avatar.webp';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
 /*
 TODO:
 - loading 符號
@@ -78,23 +81,33 @@ function Member() {
           }
 
           // Set options
-          res.data.map((member) => {
-            if (!grade.includes(member.number)) {
-              grade.push(member.number);
-            }
-            member.tags.map((tag) => {
-              if (!field.includes(tag)) {
-                field.push(tag);
+          res.data
+            .sort((alumni1, alumni2) =>
+              Number(alumni1.number) > Number(alumni2.number)
+                ? 1
+                : Number(alumni1.number) < Number(alumni2.number)
+                ? -1
+                : alumni1.name < alumni2.name
+                ? 1
+                : -1
+            )
+            .map((member) => {
+              if (!grade.includes(member.number)) {
+                grade.push(member.number);
               }
-            });
-            member.major.map((m) => {
-              if (!major.includes(m)) {
-                if (m !== 'Unknown') {
-                  major.push(m);
+              member.tags.map((tag) => {
+                if (!field.includes(tag)) {
+                  field.push(tag);
                 }
-              }
+              });
+              member.major.map((m) => {
+                if (!major.includes(m)) {
+                  if (m !== 'Unknown') {
+                    major.push(m);
+                  }
+                }
+              });
             });
-          });
           grade.map((item) => {
             gradeOptionsTemp.push({ value: item, label: item });
           });
@@ -180,46 +193,54 @@ function Member() {
 
     return;
   }, [memberColumnCount]);
-
-  const MemberItem = (props) => (
-    <div
-      className="member__items--item"
-      onClick={() => {
-        setPopupContent(filteredMemberData[props.id]);
-        setTimeout(() => {
-          openPopup();
-        }, 100);
-      }}
-    >
-      <div className="item__container">
-        <div className="item__container--img">
-          <div className="mask">查看成員經歷</div>
-          <img src={props.avatar} alt="avatar" className="item__img--img" />
-        </div>
-        <div className="item__container--content">
-          <p className="item__content--title">
-            {numberToRank(props.number)} {props.name}
-          </p>
-          <p className="item__content--subTitle">{props.jobTitle}</p>
-        </div>
-      </div>
-      <Button
-        variant="primary"
+  const MemberItem = (props) => {
+    return (
+      <div
+        className="member__items--item"
         onClick={() => {
-          setPopupContent(memberData[props.id]);
+          setPopupContent(filteredMemberData[props.id]);
           setTimeout(() => {
             openPopup();
           }, 100);
         }}
       >
-        查看成員經歷
-      </Button>
-    </div>
-  );
+        <div className="item__container">
+          <div className="item__container--img">
+            <div className="mask">查看成員經歷</div>
+            <img
+              src={checkImage(props.avatar) ? props.avatar : emptyAvatar}
+              alt="avatar"
+              className="item__img--img"
+            />
+          </div>
+          <div className="item__container--content">
+            <p className="item__content--title">
+              {numberToRank(props.number)} {props.name}
+            </p>
+            <p className="item__content--subTitle">{props.jobTitle}</p>
+          </div>
+        </div>
+        <Button
+          variant="primary"
+          onClick={() => {
+            setPopupContent(memberData[props.id]);
+            setTimeout(() => {
+              openPopup();
+            }, 100);
+          }}
+        >
+          查看成員經歷
+        </Button>
+      </div>
+    );
+  };
   const PopUp = ({ props }) => (
     <section className="member__popUp">
       <div className="member__popUp--img">
-        <img src={props.avatar} alt="avatar" />
+        <img
+          src={checkImage(props.avatar) ? props.avatar : emptyAvatar}
+          alt="avatar"
+        />
       </div>
       <div className="member__popUp--content">
         <h3>
@@ -240,6 +261,7 @@ function Member() {
       </div>
     </section>
   );
+
   const openPopup = () => {
     $('.member__popUp').css('display', 'flex');
     $('.member__popupLayer').css('display', 'block');
@@ -262,7 +284,6 @@ function Member() {
   };
 
   const startFilter = async (major, field, grade) => {
-    console.log(major, field, grade);
     let filteredMemberDataTemp = [];
     // field filter
     if (directSearch === '')
@@ -321,7 +342,6 @@ function Member() {
         console.log(err.message);
       });
 
-    console.log(filteredMemberDataTemp);
     setNowPage(1);
     setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
     setFilteredMemberData(filteredMemberDataTemp);
@@ -333,8 +353,13 @@ function Member() {
       }
     });
   };
+  const checkImage = (url) => {
+    return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+  };
+
   return (
     <React.Fragment>
+      <NavBar />
       <Header title={headerWording.title} content={headerWording.content} />
       <section className="member" id="memberSection">
         <img
@@ -390,7 +415,7 @@ function Member() {
                 <div className="filter__field">
                   <Select
                     classNamePrefix="filter__field--selector"
-                    placeholder="選擇領域"
+                    placeholder="選擇領域（含所有經歷）"
                     isMulti
                     options={fieldOptions}
                     onChange={(choice) => {
@@ -449,6 +474,7 @@ function Member() {
                 (nowPage - 1) * onePageMemberCount <= i &&
                 i < nowPage * onePageMemberCount
               ) {
+                checkImage(member.avatar);
                 return (
                   <MemberItem
                     name={`${member.name}`}
@@ -492,6 +518,7 @@ function Member() {
           renderOnZeroPageCount={null}
         />
       </section>
+      <Footer />
     </React.Fragment>
   );
 }

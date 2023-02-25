@@ -20,7 +20,7 @@ router.post('/select', async (req, res) => {
   }
 });
 
-router.get('/search', async (req, res) => {
+router.post('/search', async (req, res) => {
   try {
     let query = findQuery(req);
     let searchData = req.body.search;
@@ -55,7 +55,6 @@ router.get('/search', async (req, res) => {
     console.error(e);
     res.status(500).json({ msg: 'Server Error!' });
   }
-  res.status(200).json(result);
 });
 
 module.exports = router;
