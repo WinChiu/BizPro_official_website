@@ -49,12 +49,47 @@ function BackstageArticleTable() {
       })
       .catch((error) => console.log(error));
   };
+  const isOverflown = (element) => {
+    console.log(element);
+    return (
+      element.scrollHeight > element.clientHeight ||
+      element.scrollWidth > element.clientWidth
+    );
+  };
+  const stickColumn = () => {
+    console.log('change');
+    if (isOverflown(document.getElementsByClassName('tableContainer')[0])) {
+      let left =
+        document
+          .getElementsByClassName('toBeFreezeCol2')[0]
+          .getBoundingClientRect().left -
+        document
+          .getElementsByClassName('toBeFreezeCol1')[0]
+          .getBoundingClientRect().left;
+
+      $('.toBeFreezeCol1').map((id, cell) => {
+        cell.classList.add('freeze');
+      });
+      $('.toBeFreezeCol2').map((id, cell) => {
+        cell.classList.add('freeze');
+        cell.style.left = `${left}px`;
+      });
+      $('.tableContainer').css('overflow-x', 'scroll');
+    } else {
+      $('.tableContainer').css('overflow-x', 'hidden');
+    }
+  };
   // Load Data
   useEffect(() => {
     fetchData();
+    window.addEventListener('resize', () => {
+      stickColumn();
+    });
     return;
   }, []);
-
+  $(document).ready(() => {
+    stickColumn();
+  });
   // Components
 
   const WarningToast = () => (
@@ -367,14 +402,14 @@ function BackstageArticleTable() {
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
-        className="nameContent data"
+        className="nameContent data toBeFreezeCol1"
       >
         {name ? name : <span className="noData">查無資料</span>}
       </td>
       <td
         contentEditable="false"
         suppressContentEditableWarning="true"
-        className="numberContent data"
+        className="numberContent data toBeFreezeCol2"
       >
         {number ? number : <span className="noData">查無資料</span>}
       </td>
@@ -472,44 +507,6 @@ function BackstageArticleTable() {
         </Button>
       </td>
     </tr>
-  );
-  const PaginationComponent = () => (
-    <Pagination>
-      <Pagination.First
-        onClick={() => {
-          switchPage('first');
-        }}
-      />
-      <Pagination.Prev
-        onClick={() => {
-          switchPage('prev');
-        }}
-      />
-      {Array.from(Array(totalPage), (e, i) => {
-        return (
-          <Pagination.Item
-            key={i}
-            onClick={() => {
-              switchPage('certainPage', i + 1);
-            }}
-            active={nowPage === i + 1 ? true : false}
-          >
-            {i + 1}
-          </Pagination.Item>
-        );
-      })}
-
-      <Pagination.Next
-        onClick={() => {
-          switchPage('next');
-        }}
-      />
-      <Pagination.Last
-        onClick={() => {
-          switchPage('last');
-        }}
-      />
-    </Pagination>
   );
 
   // Utilities
@@ -818,39 +815,40 @@ function BackstageArticleTable() {
           新增心得文
         </Button>
       </div>
-      <Table bordered>
-        <thead>
-          <tr>
-            <th>姓名</th>
-            <th>屆數</th>
-
-            <th>心得標題</th>
-            <th>心得內容</th>
-            <th>照片</th>
-            <th>操作</th>
-          </tr>
-        </thead>
-        <tbody>
-          {articleData?.map((article, i) => {
-            if ((nowPage - 1) * 10 <= i && i < nowPage * 10) {
-              return (
-                <ArticleRow
-                  key={i}
-                  name={article.alumni.name}
-                  number={article.alumni.number}
-                  // jobTitle={article.jobTitle}
-                  title={article.title}
-                  content={article.content.replace(/(\r\n|\n|\r)/g, `\r\n`)}
-                  avatar={article.avatar}
-                  articleId={article._id}
-                />
-              );
-            } else {
-              return;
-            }
-          })}
-        </tbody>
-      </Table>
+      <div className="tableContainer">
+        <Table bordered>
+          <thead>
+            <tr>
+              <th className="toBeFreezeCol1">姓名</th>
+              <th className="toBeFreezeCol2">屆數</th>
+              <th>心得標題</th>
+              <th>心得內容</th>
+              <th>照片</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody>
+            {articleData?.map((article, i) => {
+              if ((nowPage - 1) * 10 <= i && i < nowPage * 10) {
+                return (
+                  <ArticleRow
+                    key={i}
+                    name={article.alumni.name}
+                    number={article.alumni.number}
+                    // jobTitle={article.jobTitle}
+                    title={article.title}
+                    content={article.content.replace(/(\r\n|\n|\r)/g, `\r\n`)}
+                    avatar={article.avatar}
+                    articleId={article._id}
+                  />
+                );
+              } else {
+                return;
+              }
+            })}
+          </tbody>
+        </Table>
+      </div>
       <ReactPaginate
         nextLabel="›"
         onPageChange={(e) => {

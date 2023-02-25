@@ -48,14 +48,12 @@ function BackstageAlumniTable() {
       .catch((error) => console.log(error));
   };
   const isOverflown = (element) => {
-    console.log(element);
     return (
       element.scrollHeight > element.clientHeight ||
       element.scrollWidth > element.clientWidth
     );
   };
   const stickColumn = () => {
-    console.log('change');
     if (isOverflown(document.getElementsByClassName('tableContainer')[0])) {
       let left =
         document
@@ -89,7 +87,6 @@ function BackstageAlumniTable() {
   $(document).ready(() => {
     stickColumn();
   });
-  // window.addEventListener('resize', stickColumn());
 
   // Components
   const WarningToast = () => (
@@ -158,7 +155,7 @@ function BackstageAlumniTable() {
               type="url"
               name="updateAvatar"
               placeholder="http://example.com/avatar.jpg"
-              pattern="http://.*"
+              pattern="http://.*|https://.*"
               className="pictureUrlInput"
               defaultValue={`${targetAlumni.avatar ? targetAlumni.avatar : ''}`}
               required
@@ -535,6 +532,7 @@ function BackstageAlumniTable() {
 
   const getTargetAlumni = (e) => {
     let targetAlumniData = e.parentNode.parentNode.dataset;
+    console.log(targetAlumniData);
     setTargetAlumni({
       id: targetAlumniData.id,
       name: targetAlumniData.name,
@@ -718,11 +716,12 @@ function BackstageAlumniTable() {
         newAlumniData.major = child.innerText;
     });
 
+    console.log(e.parentNode.parentNode.dataset.id);
     await axios
       .put(
         'http://localhost:5000/api/admin/update_alumni',
         {
-          _id: targetAlumni.id,
+          _id: e.parentNode.parentNode.dataset.id,
           name: newAlumniData.name,
           number: newAlumniData.number,
           jobTitle: newAlumniData.jobTitle,
@@ -759,10 +758,9 @@ function BackstageAlumniTable() {
           window.location.href = '/login';
         } else if (err.response.data.msg === 'alumni already exists')
           setToastContent('已存在相同屆數與姓名的 Alumni');
-        else setToastContent('新增資料失敗，請重新操作');
+        else setToastContent('更新資料失敗，請重新操作');
         setTimeout(() => {
           triggerToast('warning');
-          $('.dataModal').css('display', 'block');
         }, 0);
       });
 

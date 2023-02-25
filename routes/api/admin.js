@@ -170,12 +170,10 @@ router.put(
     }
     try {
       const id = req.body._id;
-
       let alumni = await Alumni.findOne({
         name: req.body.name,
         number: req.body.number,
       });
-
       if (alumni && alumni._id.valueOf() !== id) {
         return res.status(400).json({ msg: 'alumni already exists' });
       }

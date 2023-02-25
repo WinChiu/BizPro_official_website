@@ -40,7 +40,14 @@ function Backstage() {
             tabName={'article'}
           />
         </div>
-        <p className="sign">Built by 22nd Win & 21st Jim</p>
+        <p className="sign" style={{ marginBottom: '8px', fontWeight: '100' }}>
+          Built by 22nd Win & 21st Jim
+        </p>
+        <a href="https://forms.gle/GGNGUujviXm8gfA9A" target="_blanck">
+          <p className="sign" style={{ fontWeight: '100' }}>
+            網站問題回報表單
+          </p>
+        </a>
       </section>
       <section className="settingPage" id="settingPageSection">
         {nowTab === 'alumni' ? (

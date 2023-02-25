@@ -356,6 +356,7 @@ function Member() {
   const checkImage = (url) => {
     return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   };
+
   return (
     <React.Fragment>
       <NavBar />
