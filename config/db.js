@@ -9,7 +9,7 @@ const connectDB = async () => {
       useUnifiedTopology: true,
     });
     mongoose.connection.useDb('BP');
-    console.log('MongoDB Connected...');
+    console.log('MongoDB Connected');
   } catch (err) {
     console.log(err.message);
     process.exit(1);

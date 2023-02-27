@@ -31,10 +31,10 @@ import title_symbol_left_md from '../asset/img/title_symbol_left_md.svg';
 import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
 import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
 import toggle_symbol from '../asset/img/toggle_symbol.svg';
-import Header from '../components/Header';
-import localDb from '../config/localDb.json';
-import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
+import NavBar from '../components/NavBar';
+import localDb from '../config/localDb.json';
 function Journey() {
   const headerWordingJunior = localDb.headerWording.journey.junior;
   const headerWordingSenior = localDb.headerWording.journey.senior;
@@ -533,15 +533,6 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--alumni')[0]
       .classList.remove('tab__item--default', 'tab__item--active');
-    // document
-    //   .getElementsByClassName('tab__item--junior')[1]
-    //   .classList.remove('tab__item--default', 'tab__item--active');
-    // document
-    //   .getElementsByClassName('tab__item--senior')[1]
-    //   .classList.remove('tab__item--default', 'tab__item--active');
-    // document
-    //   .getElementsByClassName('tab__item--alumni')[1]
-    //   .classList.remove('tab__item--default', 'tab__item--active');
   };
   const changeToJunior = () => {
     clearClass();
@@ -552,18 +543,6 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--senior')[0]
       .classList.add('tab__item--default');
-    document
-      .getElementsByClassName('tab__item--alumni')[0]
-      .classList.add('tab__item--default');
-    // document
-    //   .getElementsByClassName('tab__item--junior')[1]
-    //   .classList.add('tab__item--active');
-    // document
-    //   .getElementsByClassName('tab__item--senior')[1]
-    //   .classList.add('tab__item--default');
-    // document
-    //   .getElementsByClassName('tab__item--alumni')[1]
-    //   .classList.add('tab__item--default');
   };
   const changeToSenior = () => {
     clearClass();
@@ -573,18 +552,6 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--senior')[0]
       .classList.add('tab__item--active');
-    document
-      .getElementsByClassName('tab__item--alumni')[0]
-      .classList.add('tab__item--default');
-    // document
-    //   .getElementsByClassName('tab__item--junior')[1]
-    //   .classList.add('tab__item--default');
-    // document
-    //   .getElementsByClassName('tab__item--senior')[1]
-    //   .classList.add('tab__item--active');
-    // document
-    //   .getElementsByClassName('tab__item--alumni')[1]
-    //   .classList.add('tab__item--default');
   };
   const changeToAlumni = () => {
     clearClass();
@@ -597,15 +564,6 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--alumni')[0]
       .classList.add('tab__item--active');
-    // document
-    //   .getElementsByClassName('tab__item--junior')[1]
-    //   .classList.add('tab__item--default');
-    // document
-    //   .getElementsByClassName('tab__item--senior')[1]
-    //   .classList.add('tab__item--default');
-    // document
-    //   .getElementsByClassName('tab__item--alumni')[1]
-    //   .classList.add('tab__item--active');
   };
 
   return (

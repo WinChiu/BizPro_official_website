@@ -13,7 +13,7 @@ router.get('/is_login', auth, (req, res) => {
 
 router.post(
   '/',
-  check('email', 'Please include a valid email').isEmail(),
+  check('name', 'Name is required').notEmpty(),
   check('password', 'Password is required').exists(),
   async (req, res) => {
     const errors = validationResult(req);
@@ -21,10 +21,11 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { email, password } = req.body;
+    const { name, password } = req.body;
 
     try {
-      let admin = await Admin.findOne({ email });
+      let admin = await Admin.findOne({ name });
+      
       if (!admin) {
         return res
           .status(400)
@@ -47,7 +48,7 @@ router.post(
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: 360000 },
+        { expiresIn: 86400 },
         (err, token) => {
           if (err) throw err;
           res.json({ token });

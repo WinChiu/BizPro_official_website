@@ -282,7 +282,7 @@ function BackstageAlumniTable() {
             >
               重新上傳
             </Button>
-            <a href={avatar} className="avatarContent">
+            <a href={avatar} className="avatarContent" target="_blanck">
               檢視
             </a>
           </>
@@ -328,13 +328,7 @@ function BackstageAlumniTable() {
             }
           }}
         >
-          <img
-            src={icon_x}
-            alt="icon_x"
-            onClick={(e) => {
-              //startEdit(e.target.parentNode);
-            }}
-          />
+          <img src={icon_x} alt="icon_x" onClick={(e) => {}} />
         </Button>
         <Button
           variant="success"
@@ -491,12 +485,13 @@ function BackstageAlumniTable() {
                 />
               </div>
               <div className="container container__row5">
-                <label>產業</label>
+                <label>領域</label>
                 <input
                   type="text"
                   name="tag"
-                  placeholder="產業標籤（使用；隔開）"
+                  placeholder="領域標籤（使用；隔開）"
                   className="tagInput"
+                  style={{ marginLeft: '8px' }}
                 />
               </div>
               <div className="container container__row6">
@@ -506,7 +501,8 @@ function BackstageAlumniTable() {
                   name="avatar"
                   placeholder="照片連結"
                   className="avatarInput"
-                  pattern="http://.*"
+                  pattern="http://.*|https://.*"
+                  style={{ marginLeft: '8px' }}
                 />
               </div>
             </Modal.Body>
@@ -532,7 +528,6 @@ function BackstageAlumniTable() {
 
   const getTargetAlumni = (e) => {
     let targetAlumniData = e.parentNode.parentNode.dataset;
-    console.log(targetAlumniData);
     setTargetAlumni({
       id: targetAlumniData.id,
       name: targetAlumniData.name,
@@ -540,12 +535,12 @@ function BackstageAlumniTable() {
       avatar: targetAlumniData.avatar,
     });
   };
-  const getAlumniRowData = (e) => {};
   const startEdit = (e) => {
     e.parentNode.parentNode.childNodes.forEach((child) => {
       if (child.classList[1] === 'data') {
         child.classList.add('editable');
         child.setAttribute('contentEditable', true);
+        if (child.innerText === '無資料') child.innerText = '';
       }
       if (child.classList[0] === 'buttonGroup') {
         child.childNodes.forEach((btn) => {
@@ -580,7 +575,7 @@ function BackstageAlumniTable() {
         });
       }
     });
-    //setIsSthEditing(false);
+    fetchData();
   };
   const triggerWarningModal = (e) => {
     let name = '';
@@ -670,7 +665,9 @@ function BackstageAlumniTable() {
         },
       })
       .then((res) => {
-        setToastContent(`成功刪除資料`);
+        setToastContent(
+          `成功刪除 ${targetAlumni.number} ${targetAlumni.name} 的資料`
+        );
         setTimeout(() => {
           fetchData();
           setTimeout(() => {
@@ -716,7 +713,6 @@ function BackstageAlumniTable() {
         newAlumniData.major = child.innerText;
     });
 
-    console.log(e.parentNode.parentNode.dataset.id);
     await axios
       .put(
         'http://localhost:5000/api/admin/update_alumni',
@@ -725,8 +721,8 @@ function BackstageAlumniTable() {
           name: newAlumniData.name,
           number: newAlumniData.number,
           jobTitle: newAlumniData.jobTitle,
-          exp: newAlumniData === '' ? [] : newAlumniData.exp.split('；'),
-          tags: newAlumniData.tags.split('；'),
+          exp: newAlumniData.exp === '' ? [] : newAlumniData.exp.split('；'),
+          tags: newAlumniData.tags === '' ? [] : newAlumniData.tags.split('；'),
           major: newAlumniData.major.split('；'),
         },
         {

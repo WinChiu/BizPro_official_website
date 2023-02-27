@@ -34,34 +34,6 @@ TODO:
 
 function About() {
   useEffect(() => {
-    // let onLongTouch;
-    // let timer;
-    // let touchDuration = 1000;
-    // function touchstart(e) {
-    //   console.log('hi');
-    //   e.preventDefault();
-    //   if (!timer) {
-    //     timer = setTimeout(onLongTouch, touchDuration);
-    //   } else {
-    //     console.log('stop');
-    //   }
-    // }
-    // function touchend() {
-    //   if (timer) {
-    //     clearTimeout(timer);
-    //     timer = null;
-    //     console.log("time's up");
-    //   }
-    // }
-    // onLongTouch = function () {
-    //   timer = null;
-    // };
-    // document
-    //   .getElementById('aboutHeaderLogo')
-    //   .addEventListener('mousedown', touchstart, false);
-    // document
-    // .getElementById('aboutHeaderLogo')
-    // .addEventListener('mouseup', touchend, false);
     let pressTimer;
     $('#aboutHeaderLogo')
       .mouseup(function () {

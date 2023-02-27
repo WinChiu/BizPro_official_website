@@ -15,24 +15,6 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Credentials', true);
   next();
 });
-// app.use(async (ctx, next) => {
-//   // Website you wish to allow to connect
-//   ctx.set({
-//     'Access-Control-Allow-Origin': '*',
-//     // Request methods you wish to allow
-//     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
-//     // Request headers you wish to allow
-//     'Access-Control-Allow-Headers':
-//       'X-Requested-With,content-type,x-auth-token',
-//     'Access-Control-Allow-Credentials': true,
-//   });
-
-//   if ((ctx.req.method = 'OPTIONS')) {
-//     ctx.res.statusCode = 204;
-//   }
-//   // Pass to next layer of middleware
-//   await next();
-// });
 
 app.use('/api/alumni', require('./routes/api/alumni'));
 app.use('/api/alumni', require('./routes/api/selection'));

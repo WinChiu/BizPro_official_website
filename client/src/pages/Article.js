@@ -5,11 +5,13 @@ import ReactPaginate from 'react-paginate';
 import Select from 'react-select';
 import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
 import doubleCircleSymbol from '../asset/img/doubleCircle_symbol_white300.svg';
+import emptyAvatar from '../asset/img/empty_avatar.webp';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
+import NavBar from '../components/NavBar';
 import localDb from '../config/localDb.json';
 import numberToRank from '../utility/numberToRank';
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
+
 function Article() {
   const [articleData, setArticleData] = useState(null);
   const [filteredArticleData, setFilteredArticleData] = useState([]);
@@ -28,8 +30,6 @@ function Article() {
     content: '',
     avatar: '',
   });
-  // TODO: textarea line break (Someone on stack-overflow said that i should use "\r\n" to replace "\n" instead of using "<br>"
-  // but it still doesn't work!!!)
   useEffect(() => {
     let field = [];
     let major = [];
@@ -102,6 +102,9 @@ function Article() {
       }
     });
   };
+  const checkImage = (url) => {
+    return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
+  };
   const Item = (props) => {
     return (
       <div
@@ -116,7 +119,10 @@ function Article() {
         }}
       >
         <div className="article__item--img">
-          <img src={props.avatar} alt="avatar" />
+          <img
+            src={checkImage(props.avatar) ? props.avatar : emptyAvatar}
+            alt="avatar"
+          />
         </div>
         <div className="article__item--content">
           <p className="name">{`${props.number} ${props.name}${'：'}${
@@ -137,6 +143,7 @@ function Article() {
       </div>
     );
   };
+
   const PopUp = ({ props }) => (
     <section className="article__detail">
       <img
@@ -277,7 +284,7 @@ function Article() {
           renderOnZeroPageCount={null}
         />
       </section>
-      <Footer/>
+      <Footer />
     </React.Fragment>
   );
 }

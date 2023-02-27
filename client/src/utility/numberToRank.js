@@ -1,6 +1,6 @@
 export default function numberToRank(number) {
   if (number === '1') {
-    return '創始元老';
+    return number + 'st';
   } else if (number[number.length - 1] === '1') {
     return number + 'st';
   } else if (number[number.length - 1] === '2') {

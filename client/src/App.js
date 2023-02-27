@@ -1,9 +1,8 @@
 import $ from 'jquery';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
-import Footer from './components/Footer';
 import LogoLoading from './components/LogoLoading';
+import PrivateRouteBackstage from './components/PrivateRouteBackstage';
 import './css/style.css';
 import About from './pages/About';
 import Article from './pages/Article';
@@ -12,9 +11,6 @@ import Journey from './pages/Journey';
 import Login from './pages/Login';
 import Member from './pages/Member';
 import useToken from './utility/useToken';
-import axios from 'axios';
-import PrivateRouteBackstage from './components/PrivateRouteBackstage';
-import PrivateRouteLogin from './components/PrivateRouteLogin';
 
 function App() {
   const setVh = () => {
