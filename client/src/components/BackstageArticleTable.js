@@ -50,7 +50,6 @@ function BackstageArticleTable() {
       .catch((error) => console.log(error));
   };
   const isOverflown = (element) => {
-    console.log(element);
     return (
       element.scrollHeight > element.clientHeight ||
       element.scrollWidth > element.clientWidth
@@ -229,13 +228,14 @@ function BackstageArticleTable() {
                 <label>照片</label>
                 <input
                   type="url"
-                  pattern="http://.*"
+                  pattern="http://.*|https://.*"
                   name="articleAvatar"
                   placeholder="照片"
                   className="articleAvatarInput"
                   defaultValue={`${
                     targetArticle.avatar ? targetArticle.avatar : ''
                   }`}
+                  style={{ marginLeft: '8px' }}
                 />
               </div>
               <div className="container container__row3">
@@ -334,13 +334,14 @@ function BackstageArticleTable() {
                 <label>照片</label>
                 <input
                   type="url"
-                  pattern="http://.*"
+                  pattern="http://.*|https://.*"
                   name="articleAvatar"
                   placeholder="照片"
                   className="articleAvatarInput"
                   defaultValue={`${
                     targetArticle.avatar ? targetArticle.avatar : ''
                   }`}
+                  style={{ marginLeft: '8px' }}
                 />
               </div>
               <div className="container container__row3">
@@ -442,7 +443,7 @@ function BackstageArticleTable() {
             >
               重新上傳
             </Button>
-            <a href={avatar} className="avatarContent">
+            <a href={avatar} className="avatarContent" target="_blanck">
               檢視
             </a>
           </>
@@ -684,7 +685,6 @@ function BackstageArticleTable() {
       });
   };
   const updateArticle = async (e) => {
-    console.log(targetArticle.id);
     await axios
       .put(
         '/api/admin/update_article',

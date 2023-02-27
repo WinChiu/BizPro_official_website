@@ -27,7 +27,6 @@ router.get('/member_talk', async (req, res) => {
 router.post('/select', async (req, res) => {
   try {
     let query = articleQuery(req);
-    console.log(query);
     IDList = [];
     const alumniData = Alumni.find(query).cursor();
     for (

@@ -8,7 +8,6 @@ router.post('/select', async (req, res) => {
     let query = findQuery(req);
 
     const alumniData = await Alumni.find(query);
-    console.log(query);
     if (!alumniData) {
       res.status(400).json({ msg: 'No alumni data available' });
     } else {
@@ -16,7 +15,7 @@ router.post('/select', async (req, res) => {
     }
   } catch (e) {
     console.error(e.message);
-    res.status(500).json({ msg: 'Server Error...' });
+    res.status(500).json({ msg: 'Server Error' });
   }
 });
 

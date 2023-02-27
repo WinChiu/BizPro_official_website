@@ -1,6 +1,6 @@
 $red_primary: #ae0023;
 $red_secondary: #b9544c;
-$black_text: #312f2f;
+$black_text: #3a3a3a;
 $black_secondary: #38323c;
 $grey: #4c5263;
 $beige: #e8e4da;
@@ -129,12 +129,14 @@ body {
   box-sizing: border-box;
   padding-top: 60px;
   padding: 0;
-  overflow-y: hidden;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  //visibility: hidden;
 }
 * {
   //border: 1px rgb(54, 107, 223) solid;
   font-family: 'PingFangTC-Regular', 'Noto Sans TC', 'roboto';
-  scrollbar-gutter: stable;
+  //scrollbar-gutter: stable;
 }
 html {
   scroll-behavior: smooth !important;
@@ -151,13 +153,14 @@ p {
 
 ::-webkit-scrollbar-track {
   border-radius: 10px;
-  background-color: $white_200;
+  background: $white_200;
   //display: block;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
-  background-color: $white_200;
+  // background-color: $white_200;
+  // background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -345,6 +348,7 @@ html {
 
 .header {
   width: 100%;
+  width: 100vw;
   height: 290px;
   @include flex(row, space-between, flex-end);
   padding: 0 128px 44px 128px;
@@ -517,6 +521,8 @@ html {
 .junior {
   background-color: $white_200;
   z-index: 0;
+  width: 100vw;
+
   .courseStructure {
     width: 100%;
     padding: 128px 128px 128px 128px;
@@ -973,6 +979,7 @@ html {
   background-color: $white_200;
   z-index: 0;
   padding: 120px 128px 120px 80px;
+  width: 100vw;
   .dot_symbol {
     position: absolute;
     z-index: -1;
@@ -983,7 +990,7 @@ html {
   .dubbleCircle {
     position: absolute;
     z-index: -1;
-    bottom: -520px;
+    bottom: -320px;
     left: -280px;
     transform: scaleX(-1);
     opacity: 0.8;
@@ -1106,9 +1113,10 @@ html {
       transform: scale(0.9);
     }
     .dubbleCircle {
-      bottom: -600px;
-      left: -360px;
-      transform: scaleX(-0.6);
+      bottom: 200px;
+      left: -260px;
+      transform: scale(0.8);
+      //transform: scaleX(-0.6);
     }
     &__course {
       margin-bottom: 44px;
@@ -1142,6 +1150,8 @@ html {
   position: relative;
   z-index: 0;
   overflow: hidden;
+  width: 100vw;
+
   .dubbleCircle {
     position: absolute;
     z-index: -1;
@@ -1284,6 +1294,8 @@ html {
 }
 
 .about {
+  width: 100vw;
+
   .sectionTitle {
     margin-bottom: 80px;
     @include flex(row, center, center);
@@ -1316,6 +1328,8 @@ html {
     @include flex(column, center, center);
     overflow: hidden;
     padding-top: 120px;
+    width: 100vw;
+
     .headerImg {
       position: fixed;
       height: calc(100vh + 60px);
@@ -1478,6 +1492,7 @@ html {
     overflow: hidden;
     position: relative;
     background-color: $white_200;
+    width: 100vw;
     .connection {
       &__left {
         position: absolute;
@@ -1517,7 +1532,7 @@ html {
           iframe {
             width: 500px;
             height: 281px;
-            border: 5px white solid;
+            // border: 5px white solid;
             max-width: 100%;
           }
           &--wrap {
@@ -1547,6 +1562,7 @@ html {
     position: relative;
     overflow: visible;
     background-color: $white_200;
+    width: 100vw;
 
     .bgCircle {
       position: absolute;
@@ -1618,6 +1634,7 @@ html {
     padding: 80px 200px 80px 200px;
     position: relative;
     overflow: hidden;
+    width: 100vw;
 
     @include flex(column, center, center);
     .people_symbol {
@@ -1673,6 +1690,7 @@ html {
     overflow: hidden;
     background-color: $white_200;
     z-index: 0;
+    width: 100vw;
     .briefIntro {
       &__course,
       &__people {
@@ -1726,9 +1744,7 @@ html {
         }
       }
     }
-
     // for animation
-
     .hideToRight {
       transform: translateX(200px);
       opacity: 0;
@@ -1737,12 +1753,11 @@ html {
       transform: translateX(-200px);
       opacity: 0;
     }
-
     .double_circle {
       position: absolute;
       z-index: -1;
       right: -180px;
-      bottom: -300px;
+      bottom: -250px;
       width: 500px;
       opacity: 0.8;
     }
@@ -2133,6 +2148,8 @@ html {
   background-color: $white_200;
   overflow: hidden;
   position: relative;
+  width: 100vw;
+
   .connectionSymbol {
     position: absolute;
     z-index: 0;
@@ -2291,9 +2308,10 @@ html {
         bottom: 28px;
         left: 0;
         background: linear-gradient(
-          0deg,
-          $white_200 20%,
-          rgba(255, 255, 255, 0) 100%
+          180deg,
+          rgba(246, 246, 246, 0) 0%,
+          rgba(246, 246, 246, 1) 75%,
+          rgba(246, 246, 246, 1) 100%
         );
       }
     }
@@ -2330,12 +2348,12 @@ html {
       .name {
         @include body1();
         font-weight: bold;
-        margin-bottom: 4px;
+        margin-bottom: 2px;
       }
       .title {
         @include h3();
         font-weight: bold;
-        margin-bottom: 8px;
+        margin-bottom: 12px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
@@ -2561,6 +2579,8 @@ html {
   background-color: $white_200;
   overflow: hidden;
   min-height: 100vh;
+  width: 100vw;
+
   .connectionSymbol {
     position: absolute;
     z-index: -1;
@@ -2585,8 +2605,6 @@ html {
     box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
     display: none;
     opacity: 0;
-    -webkit-filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
-    filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
     max-height: 700px;
     height: fit-content;
     left: 50%;
@@ -2600,12 +2618,19 @@ html {
     width: fit-content;
     z-index: 21;
 
+    // ::before {
+    //   content: '';
+    //   -webkit-filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
+    //   filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.3));
+    // }
     &--content {
       min-width: 390px;
       max-height: 300px;
       padding: 24px 32px;
       @include flex(column, center, flex-start);
       position: relative;
+      //background-color: $white_200;
+
       h3 {
         @include h3();
         -webkit-font-smoothing: antialiased;
@@ -2613,6 +2638,7 @@ html {
       .content__tags {
         @include flex(row, flex-start, center);
         margin: 8px 0px 8px 0px;
+        filter: none;
         &--caption {
           @include caption();
         }
@@ -2638,19 +2664,18 @@ html {
         overflow-y: scroll;
         margin-bottom: 0;
         padding-left: 20px;
-        width: 100%;
 
+        width: 100%;
         .gradientBox {
           display: none;
           width: calc(100%);
-          height: 40px;
+          height: 20px;
           background: linear-gradient(
             180deg,
             rgba(246, 246, 246, 0) 0%,
             rgba(246, 246, 246, 1) 75%,
             rgba(246, 246, 246, 1) 100%
           );
-
           position: sticky;
           bottom: -2px;
         }
@@ -2660,9 +2685,9 @@ html {
       @include flex(column, center, center);
       width: 300px;
       height: 300px;
-
       img {
         height: 100%;
+        min-height: 300px;
       }
     }
   }
@@ -2822,6 +2847,7 @@ html {
         &--img {
           margin-bottom: 16px;
           position: relative;
+
           .item__img--img {
             width: 180px;
           }
@@ -3106,6 +3132,8 @@ html {
   @include flex(row, flex-start, center);
   background-color: $white_300;
   position: relative;
+  width: 100vw;
+
   .sidebar {
     height: 100vh;
     width: 250px;

@@ -5,12 +5,12 @@ import Button from 'react-bootstrap/Button';
 import ReactPaginate from 'react-paginate';
 import Select from 'react-select';
 import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
+import emptyAvatar from '../asset/img/empty_avatar.webp';
+import Footer from '../components/Footer';
 import Header from '../components/Header';
+import NavBar from '../components/NavBar';
 import localDb from '../config/localDb.json';
 import numberToRank from '../utility/numberToRank.js';
-import emptyAvatar from '../asset/img/empty_avatar.webp';
-import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
 /*
 TODO:
 - loading 符號
@@ -234,6 +234,7 @@ function Member() {
       </div>
     );
   };
+
   const PopUp = ({ props }) => (
     <section className="member__popUp">
       <div className="member__popUp--img">
@@ -473,8 +474,7 @@ function Member() {
               if (
                 (nowPage - 1) * onePageMemberCount <= i &&
                 i < nowPage * onePageMemberCount
-              ) {
-                checkImage(member.avatar);
+              )
                 return (
                   <MemberItem
                     name={`${member.name}`}
@@ -487,9 +487,7 @@ function Member() {
                     id={i}
                   />
                 );
-              } else {
-                return;
-              }
+              else return;
             })
           ) : (
             <h4 className="member__items--warning">無搜尋結果</h4>

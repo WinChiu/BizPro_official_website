@@ -82,12 +82,14 @@ router.post(
 
       if (!alumni) {
         return res.status(400).json({ msg: 'Cannot find alumni' });
-      } else if (await Article.findOne({ alumni: alumni._id })) {
-        // check if 'One existed article belongs to this alumni'
-        return res
-          .status(400)
-          .json({ msg: 'One existed article belongs to this alumni' });
       }
+
+      // else if (await Article.findOne({ alumni: alumni._id })) {
+      //   // check if 'One existed article belongs to this alumni'
+      //   return res
+      //     .status(400)
+      //     .json({ msg: 'One existed article belongs to this alumni' });
+      // }
 
       await Article.create({
         alumni: alumni.id,
@@ -115,7 +117,6 @@ router.put(
       return res.status(400).json({ errors: errors.array() });
     }
     try {
-      console.log(req.body);
       //  check if article exist
       let article = await Article.findById(req.body._id);
       if (!article) {
@@ -133,7 +134,6 @@ router.put(
       let articleByAlumni = await Article.findOne({ alumni: alumni._id });
       if (articleByAlumni._id === req.body._id) {
         // check if 'One existed article belongs to this alumni'
-        // TODO: 確認是否
         return res
           .status(400)
           .json({ msg: 'One existed article belongs to this alumni' });
@@ -149,7 +149,6 @@ router.put(
 
       // if article is already exist: update it
       let result = await article.save();
-      console.log(result);
       res.json(article);
     } catch (e) {
       console.error(e.message);
@@ -224,7 +223,7 @@ router.delete(
       res.send('alumni deleted');
     } catch (e) {
       console.error(e.message);
-      res.status(500).send('Server Errrorororor');
+      res.status(500).send('Server Error');
     }
   }
 );
@@ -248,7 +247,7 @@ router.delete(
       res.send('article deleted');
     } catch (e) {
       console.error(e.message);
-      res.status(500).send('Server Errrorororor');
+      res.status(500).send('Server Error');
     }
   }
 );
@@ -257,7 +256,6 @@ router.delete(
 router.post(
   '/add_admin',
   check('name', 'Name is required').notEmpty(),
-  check('email', 'Please enter valid email').isEmail(),
   check(
     'password',
     'please enter a password with 6 or more characters'
@@ -267,10 +265,9 @@ router.post(
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const { name, email, password } = req.body;
-
+    const { name, password } = req.body;
     try {
-      let admin = await Admin.findOne({ email });
+      let admin = await Admin.findOne({ name });
       if (admin) {
         return res
           .status(400)
@@ -278,7 +275,6 @@ router.post(
       }
       admin = new Admin({
         name: name,
-        email: email,
         password: password,
       });
 
@@ -291,10 +287,11 @@ router.post(
           id: admin.id,
         },
       };
+
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: '5 days' },
+        { expiresIn: 86400 },
         (err, token) => {
           if (err) throw err;
           res.json({ token });
@@ -302,7 +299,7 @@ router.post(
       );
     } catch (e) {
       console.error(e.message);
-      res.status(500).json({ msg: 'Server Errorororor' });
+      res.status(500).json({ msg: 'Server Error' });
     }
   }
 );
