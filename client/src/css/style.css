@@ -1420,7 +1420,7 @@ html {
 @media screen and (max-width: 600px) {
   .tab {
     position: sticky;
-    top: 56px;
+    top: 60px;
     z-index: 5;
   }
   .tab__item {
