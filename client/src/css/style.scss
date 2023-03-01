@@ -78,7 +78,7 @@ $white_300: #ededed;
   font-size: 14px;
   line-height: 150%;
   margin: 0;
-color: $black_text;
+  color: $black_text;
 }
 @mixin caption {
   font-family: 'PingFangTC-Regular';
@@ -218,7 +218,7 @@ html {
     top: 60px;
     display: none;
     width: 160px;
-    z-index: 100;
+    z-index: 20000;
     .dropdown__item {
       color: $black_text;
       line-height: 150%;
@@ -1247,7 +1247,7 @@ html {
   position: -webkit-sticky;
   position: sticky;
   top: 56px;
-  z-index: 100;
+  z-index: 5;
 
   &__item {
     @include flex(row, center, center);
