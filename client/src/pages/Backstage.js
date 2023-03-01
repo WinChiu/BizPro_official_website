@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import $ from 'jquery';
+import React, { useEffect, useState } from 'react';
 import backstage_logo from '../asset/img/backstage_logo.svg';
 import icon_alumniData from '../asset/img/icon/icon_alumniData.svg';
 import icon_alumniTalk from '../asset/img/icon/icon_alumniTalk.svg';
 import BackstageAlumniTable from '../components/BackstageAlumniTable';
 import BackstageArticleTable from '../components/BackstageArticleTable';
-import $ from 'jquery';
 function Backstage() {
   const [nowTab, setNowTab] = useState('alumni');
-
   const Tab = ({ icon, title, tabName }) => (
     <div
       className="sideBarTab"
@@ -19,6 +18,10 @@ function Backstage() {
       <p className="tab--title">{title}</p>
     </div>
   );
+  useEffect(() => {
+    $('#fb-root').css('display', 'none');
+    $('#fb-customer-chat').css('display', 'none');
+  }, []);
   return (
     <section className="backstage">
       <section className="sidebar">

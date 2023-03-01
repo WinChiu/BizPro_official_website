@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import '../css/style.css';
-import logo_red from '../asset/img/logo_red.svg';
-import icon_hamburger from '../asset/img/icon/icon_hamburger.svg';
 import $ from 'jquery';
+import React, { useEffect } from 'react';
+import icon_hamburger from '../asset/img/icon/icon_hamburger.svg';
+import logo_red from '../asset/img/logo_red.svg';
+import '../css/style.css';
 
 function NavBar() {
   // const [dropDownOpen, setdropDownOpen] = useState(false);

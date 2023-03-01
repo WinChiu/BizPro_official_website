@@ -3,16 +3,15 @@ import $ from 'jquery';
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Pagination from 'react-bootstrap/Pagination';
 import Table from 'react-bootstrap/Table';
 import ReactPaginate from 'react-paginate';
 import icon_edit from '../asset/img/icon/icon_edit.svg';
 import icon_upload from '../asset/img/icon/icon_upload.svg';
 import icon_x from '../asset/img/icon/icon_x.svg';
 import icon_x_circle from '../asset/img/icon/icon_x_circle.svg';
+import fixMultipleInput from '../utility/fixMultipleInput';
 import numberToRank from '../utility/numberToRank';
 import useToken from '../utility/useToken';
-
 function BackstageAlumniTable() {
   const [memberData, setMemberData] = useState(null);
   const [totalPage, setTotalPage] = useState(0);
@@ -155,7 +154,7 @@ function BackstageAlumniTable() {
               type="url"
               name="updateAvatar"
               placeholder="http://example.com/avatar.jpg"
-              pattern="http://.*|https://.*"
+              pattern="^(http(s)?://)([^/]+)(/[^/]+)+\.(jpeg|jpg|gif|png|bmp|webp)$"
               className="pictureUrlInput"
               defaultValue={`${targetAlumni.avatar ? targetAlumni.avatar : ''}`}
               required
@@ -179,7 +178,6 @@ function BackstageAlumniTable() {
       </Modal.Dialog>
     </div>
   );
-
   const AlumniRow = ({
     alumniId,
     name,
@@ -363,52 +361,6 @@ function BackstageAlumniTable() {
       </td>
     </tr>
   );
-  const PaginationComponent = () => (
-    <Pagination>
-      <Pagination.First
-        onClick={() => {
-          switchPage('first');
-        }}
-      />
-      <Pagination.Prev
-        onClick={() => {
-          switchPage('prev');
-        }}
-      />
-      {Array.from(Array(totalPage), (e, i) => {
-        return (
-          <Pagination.Item
-            key={i}
-            onClick={() => {
-              switchPage('certainPage', i + 1);
-            }}
-            active={nowPage === i + 1 ? true : false}
-          >
-            {i + 1}
-          </Pagination.Item>
-        );
-      })}
-      {/* <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Ellipsis />
-
-      <Pagination.Item>{11}</Pagination.Item>
-      <Pagination.Item active>{12}</Pagination.Item>
-      <Pagination.Item>{13}</Pagination.Item>
-
-      <Pagination.Ellipsis />
-      <Pagination.Item>{20}</Pagination.Item> */}
-      <Pagination.Next
-        onClick={() => {
-          switchPage('next');
-        }}
-      />
-      <Pagination.Last
-        onClick={() => {
-          switchPage('last');
-        }}
-      />
-    </Pagination>
-  );
   const AddAlumniModal = () => {
     return (
       <div className="modal show dataModal">
@@ -501,7 +453,7 @@ function BackstageAlumniTable() {
                   name="avatar"
                   placeholder="照片連結"
                   className="avatarInput"
-                  pattern="http://.*|https://.*"
+                  pattern="^(http(s)?://)([^/]+)(/[^/]+)+\.(jpeg|jpg|gif|png|bmp|webp)$"
                   style={{ marginLeft: '8px' }}
                 />
               </div>
@@ -525,7 +477,6 @@ function BackstageAlumniTable() {
       </div>
     );
   };
-
   const getTargetAlumni = (e) => {
     let targetAlumniData = e.parentNode.parentNode.dataset;
     setTargetAlumni({
@@ -555,6 +506,7 @@ function BackstageAlumniTable() {
         });
       }
     });
+    preventMultipleEdit('startEdit');
   };
   const endEdit = (e) => {
     e.parentNode.parentNode.childNodes.forEach((child) => {
@@ -576,6 +528,7 @@ function BackstageAlumniTable() {
       }
     });
     fetchData();
+    preventMultipleEdit('endEdit');
   };
   const triggerWarningModal = (e) => {
     let name = '';
@@ -602,9 +555,6 @@ function BackstageAlumniTable() {
     setTimeout(() => {
       $('.toastComponent').removeClass('toastTrigger');
     }, 1500);
-  };
-  const closeToast = () => {
-    $('.toastComponent').addClass('toastTrigger');
   };
   const updateAvatar = async (e) => {
     await axios
@@ -633,6 +583,7 @@ function BackstageAlumniTable() {
           setTimeout(() => {
             triggerToast('success');
             $('.modal').css('display', 'none');
+            preventMultipleEdit('endEdit');
           }, 500);
         }, 0);
       })
@@ -644,15 +595,6 @@ function BackstageAlumniTable() {
           $('.dataModal').css('display', 'block');
         }, 0);
       });
-  };
-  const refreshAlumniData = async () => {
-    await axios
-      .get('/api/alumni/members')
-      .then((res) => {
-        setMemberData(res.data);
-        setTotalPage(Math.ceil(res.data.length / 10));
-      })
-      .catch((error) => console.log(error));
   };
   const deleteAlumni = async () => {
     await axios
@@ -721,9 +663,14 @@ function BackstageAlumniTable() {
           name: newAlumniData.name,
           number: newAlumniData.number,
           jobTitle: newAlumniData.jobTitle,
-          exp: newAlumniData.exp === '' ? [] : newAlumniData.exp.split('；'),
-          tags: newAlumniData.tags === '' ? [] : newAlumniData.tags.split('；'),
-          major: newAlumniData.major.split('；'),
+          exp: fixMultipleInput(newAlumniData.exp.split('；')),
+          tags:
+            newAlumniData.tags === ''
+              ? []
+              : newAlumniData.tags === false
+              ? []
+              : fixMultipleInput(newAlumniData.tags.split('；')),
+          major: fixMultipleInput(newAlumniData.major.split('；')),
         },
         {
           headers: {
@@ -770,13 +717,15 @@ function BackstageAlumniTable() {
           name: e.target.name.value,
           number: e.target.number.value,
           jobTitle: e.target.title.value,
-          exp: e.target.exp.value.split('；'),
+          exp: fixMultipleInput(e.target.exp.value.split('；')),
           tags:
             e.target.tag.value === ''
               ? []
-              : e.target.tag.value === ''.split('；'),
+              : e.target.tag.value === false
+              ? []
+              : fixMultipleInput(e.target.tag.value.split('；')),
           avatar: e.target.avatar.value,
-          major: e.target.major.value.split('；'),
+          major: fixMultipleInput(e.target.major.value.split('；')),
         },
         {
           headers: {
@@ -819,6 +768,23 @@ function BackstageAlumniTable() {
     document.getElementById('settingPageSection').scrollIntoView();
     setNowPage(certainPage);
   };
+  const preventMultipleEdit = (type) => {
+    let editBtns = document.getElementsByClassName('btn-edit');
+    switch (type) {
+      case 'startEdit':
+        for (var i = 0; i < editBtns.length; i++) {
+          editBtns[i].setAttribute('disabled', true);
+        }
+        break;
+      case 'endEdit':
+        for (var i = 0; i < editBtns.length; i++) {
+          editBtns[i].setAttribute('disabled', false);
+        }
+        break;
+      default:
+        break;
+    }
+  };
 
   return (
     <React.Fragment>
@@ -845,9 +811,9 @@ function BackstageAlumniTable() {
               <th className="toBeFreezeCol1">姓名</th>
               <th className="toBeFreezeCol2">屆數</th>
               <th>頭銜</th>
-              <th>學歷</th>
-              <th>經歷</th>
-              <th>領域標籤</th>
+              <th>學歷（；）</th>
+              <th>經歷（；）</th>
+              <th>領域標籤（；）</th>
               <th>照片</th>
               <th>操作</th>
             </tr>

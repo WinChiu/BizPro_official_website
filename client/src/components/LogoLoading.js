@@ -1,6 +1,6 @@
+import $ from 'jquery';
 import React from 'react';
 import logo from '../asset/img/logo_red.svg';
-import $ from 'jquery';
 
 function LogoLoading() {
   return (

@@ -1,10 +1,10 @@
 import React from 'react';
-import sampleImg from '../asset/img/sampleImg.jpg';
-import Header from '../components/Header';
-import localDb from '../config/localDb.json';
 import connectionSymbol from '../asset/img/connection_symbol_white300.svg';
 import doubleCircleSymbol from '../asset/img/doubleCircle_symbol_white300.svg';
+import sampleImg from '../asset/img/sampleImg.jpg';
 import Footer from '../components/Footer';
+import Header from '../components/Header';
+import localDb from '../config/localDb.json';
 
 function Activity() {
   const headerWording = localDb.headerWording.activity;
