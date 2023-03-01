@@ -7,7 +7,7 @@ import logo from '../asset/img/backstage_logo_black.svg';
 function Login({ setToken }) {
   const onSubmit = async (e) => {
     let token = await axios
-      .post('http://localhost:5000/api/auth', {
+      .post('api/auth', {
         name: `${e.target.name.value}`,
         password: `${e.target.psw.value}`,
       })
