@@ -543,6 +543,9 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--senior')[0]
       .classList.add('tab__item--default');
+    document
+      .getElementsByClassName('tab__item--alumni')[0]
+      .classList.add('tab__item--default');
   };
   const changeToSenior = () => {
     clearClass();
@@ -552,6 +555,9 @@ function Journey() {
     document
       .getElementsByClassName('tab__item--senior')[0]
       .classList.add('tab__item--active');
+    document
+      .getElementsByClassName('tab__item--alumni')[0]
+      .classList.add('tab__item--default');
   };
   const changeToAlumni = () => {
     clearClass();
