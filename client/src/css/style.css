@@ -1421,7 +1421,7 @@ html {
   .tab {
     position: sticky;
     top: 56px;
-    z-index: 100;
+    z-index: 5;
   }
   .tab__item {
     padding: 8px 0px 8px 0px;
