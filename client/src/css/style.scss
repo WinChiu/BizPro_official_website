@@ -1795,6 +1795,8 @@ html {
         width: 100vw;
         padding: 64px 128px 64px 128px;
         background-color: $beige;
+        margin-bottom: 64px;
+
         .content--title {
           margin-bottom: 40px;
           padding-right: 0px;
@@ -2531,7 +2533,7 @@ html {
   @media screen and (max-width: 414px) {
     padding: 64px 24px 80px 24px;
     &__detail {
-      padding: 24px 4px 20px 16px;
+      padding: 24px 16px 20px 16px;
       .doubleCircleSymbol {
         display: none;
       }

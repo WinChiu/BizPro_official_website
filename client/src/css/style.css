@@ -1955,6 +1955,7 @@ html {
     width: 100vw;
     padding: 64px 128px 64px 128px;
     background-color: #e8e4da;
+    margin-bottom: 64px;
   }
   .about__vision--content .content--title {
     margin-bottom: 40px;
@@ -2680,7 +2681,7 @@ html {
     padding: 64px 24px 80px 24px;
   }
   .article__detail {
-    padding: 24px 4px 20px 16px;
+    padding: 24px 16px 20px 16px;
   }
   .article__detail .doubleCircleSymbol {
     display: none;
