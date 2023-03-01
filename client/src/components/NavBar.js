@@ -13,6 +13,7 @@ function NavBar() {
       href[href.length - 1] === 'login'
     ) {
       $('#fb-root').css('display', 'none');
+      $('#fb-customer-chat').css('display', 'none');
       $('.navBar').css('display', 'none');
       $('.footer').css('display', 'none');
     }

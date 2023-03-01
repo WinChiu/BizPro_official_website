@@ -1,10 +1,14 @@
 import axios from 'axios';
 import $ from 'jquery';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import logo from '../asset/img/backstage_logo_black.svg';
 
 function Login({ setToken }) {
+  useEffect(() => {
+    $('#fb-root').css('display', 'none');
+    $('#fb-customer-chat').css('display', 'none');
+  }, []);
   const onSubmit = async (e) => {
     let token = await axios
       .post('api/auth', {
