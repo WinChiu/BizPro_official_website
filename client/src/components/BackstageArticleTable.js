@@ -3,17 +3,14 @@ import $ from 'jquery';
 import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import Pagination from 'react-bootstrap/Pagination';
 import Table from 'react-bootstrap/Table';
 import ReactPaginate from 'react-paginate';
-import cross from '../asset/img/icon/icon_crossWhite.svg';
 import icon_edit from '../asset/img/icon/icon_edit.svg';
 import icon_upload from '../asset/img/icon/icon_upload.svg';
 import icon_x from '../asset/img/icon/icon_x.svg';
 import icon_x_circle from '../asset/img/icon/icon_x_circle.svg';
 import numberToRank from '../utility/numberToRank';
 import useToken from '../utility/useToken';
-
 function BackstageArticleTable() {
   const [articleData, setArticleData] = useState(null);
   const [totalPage, setTotalPage] = useState(0);
@@ -228,7 +225,7 @@ function BackstageArticleTable() {
                 <label>照片</label>
                 <input
                   type="url"
-                  pattern="http://.*|https://.*"
+                  pattern="^(http(s)?://)([^/]+)(/[^/]+)+\.(jpeg|jpg|gif|png|bmp|webp)$"
                   name="articleAvatar"
                   placeholder="照片"
                   className="articleAvatarInput"
@@ -334,7 +331,7 @@ function BackstageArticleTable() {
                 <label>照片</label>
                 <input
                   type="url"
-                  pattern="http://.*|https://.*"
+                  pattern="^(http(s)?://)([^/]+)(/[^/]+)+\.(jpeg|jpg|gif|png|bmp|webp)$"
                   name="articleAvatar"
                   placeholder="照片"
                   className="articleAvatarInput"
@@ -509,9 +506,7 @@ function BackstageArticleTable() {
       </td>
     </tr>
   );
-
   // Utilities
-
   const getTargetArticle = (e) => {
     let content,
       title = null;
@@ -542,26 +537,6 @@ function BackstageArticleTable() {
       title: '',
       content: '',
       avatar: '',
-    });
-  };
-  const startEdit = (e) => {
-    e.parentNode.parentNode.childNodes.forEach((child) => {
-      if (child.classList[1] === 'data') {
-        child.classList.add('editable');
-        child.setAttribute('contentEditable', true);
-      }
-      if (child.classList[0] === 'buttonGroup') {
-        child.childNodes.forEach((btn) => {
-          if (
-            btn.classList[0] === 'btn-edit' ||
-            btn.classList[0] === 'btn-delete'
-          ) {
-            btn.style.display = 'none';
-          } else {
-            btn.style.display = 'inline';
-          }
-        });
-      }
     });
   };
   const endEdit = (e) => {
@@ -609,9 +584,6 @@ function BackstageArticleTable() {
     setTimeout(() => {
       $('.toastComponent').removeClass('toastTrigger');
     }, 1500);
-  };
-  const closeToast = () => {
-    $('.toastComponent').addClass('toastTrigger');
   };
   const updateAvatar = async (e) => {
     await axios
@@ -787,7 +759,6 @@ function BackstageArticleTable() {
         }, 0);
       });
   };
-
   const switchPage = (certainPage) => {
     document.getElementById('settingPageSection').scrollIntoView();
     setNowPage(certainPage);

@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Backstage from '../pages/Backstage';
-import Login from '../pages/Login';
 
 import { Navigate } from 'react-router-dom';
 

@@ -24,9 +24,9 @@ import title_symbol_left_lg from '../asset/img/title_symbol_left_lg.svg';
 import title_symbol_left_md from '../asset/img/title_symbol_left_md.svg';
 import title_symbol_right_lg from '../asset/img/title_symbol_right_lg.svg';
 import title_symbol_right_md from '../asset/img/title_symbol_right_md.svg';
+import Footer from '../components/Footer';
 import MarqueeLogo from '../components/MarqueeLogo';
 import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
 /*
 TODO:
 - 進入動畫

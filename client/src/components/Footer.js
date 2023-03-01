@@ -1,8 +1,8 @@
 import React from 'react';
-import '../css/style.css';
+import icon_email from '../asset/img/icon/icon_email.svg';
 import icon_facebook from '../asset/img/icon/icon_facebook.svg';
 import icon_instagram from '../asset/img/icon/icon_instagram.svg';
-import icon_email from '../asset/img/icon/icon_email.svg';
+import '../css/style.css';
 
 function Footer() {
   return (
