@@ -1,14 +1,14 @@
 require('babel-register')({
-  presets: ['es2015', 'react'],
+  presets: ['es2015'],
 });
 
 const router = require('./sitemap-routes').default;
 const Sitemap = require('react-router-sitemap').default;
 
 function generateSitemap() {
+  console.log('generate sitemap');
   return new Sitemap(router)
-    .build('https://www.bizpro-taipei.com')
-    .save('./public/sitemap.xml');
+    .build('https://bizpro-taipei.com')
+    .save('./sitemap.xml');
 }
-
 generateSitemap();

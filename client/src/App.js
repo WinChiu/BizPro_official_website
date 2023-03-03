@@ -11,7 +11,7 @@ import Journey from './pages/Journey';
 import Login from './pages/Login';
 import Member from './pages/Member';
 import useToken from './utility/useToken';
-
+// import generateSitemap from './sitemap-generator';
 function App() {
   const setVh = () => {
     const vh = window.innerHeight * 0.01;
@@ -37,7 +37,7 @@ function App() {
   };
 
   const { token, setToken } = useToken();
-
+  //generateSitemap();
   return (
     <BrowserRouter>
       <LogoLoading />
