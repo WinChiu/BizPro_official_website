@@ -21,7 +21,6 @@
     "url": "https://github.com/yichunlo/BizPro_official_website/issues"
   },
   "dependencies": {
-
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "config": "^3.3.8",
