@@ -1,5 +1,6 @@
 {
   "name": "bizpro_official_website",
+  "homepage": "https://www.bizpro-taipei.com",
   "description": "This official website is designed for BizPro. Be sure to read the document carefully in order to maintain the website successfully. If you are the administrator after 22nd and facing any problems about the website, feel free to contact 21st Jim or 22nd Win via Facebook or E-mail.",
   "version": "1.0.0",
   "main": "index.js",
@@ -19,7 +20,6 @@
   "bugs": {
     "url": "https://github.com/yichunlo/BizPro_official_website/issues"
   },
-  "homepage": "https://github.com/yichunlo/BizPro_official_website#readme",
   "dependencies": {
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
