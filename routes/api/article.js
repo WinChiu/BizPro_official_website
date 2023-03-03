@@ -5,7 +5,7 @@ const Article = require('../../models/article');
 const Alumni = require('../../models/alumni');
 const articleQuery = require('../../core/articleQuery');
 
-router.get('/member_talk', async (req, res) => {
+router.get('/articles', async (req, res) => {
   try {
     const article = await Article.find().populate('alumni', [
       'name',

@@ -29,7 +29,7 @@ function BackstageArticleTable() {
   const { token, setToken } = useToken();
   const fetchData = async () => {
     await axios
-      .get('/api/article/member_talk')
+      .get('/api/article/articles')
       .then((res) => {
         setArticleData(
           res.data.sort((article1, article2) =>

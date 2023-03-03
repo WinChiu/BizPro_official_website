@@ -63,7 +63,7 @@ function NavBar() {
           <a href="/activity">社群活動</a>
         </div> */}
         <div className="navBar__item navBar__word">
-          <a href="/member_talk">成員心得</a>
+          <a href="/articles">成員心得</a>
         </div>
       </div>
     </div>
@@ -101,7 +101,7 @@ function NavBar() {
           <a href="/activity">社群活動</a>
         </div> */}
         <div className="dropdown__item">
-          <a href="/member_talk">成員心得</a>
+          <a href="/articles">成員心得</a>
         </div>
       </div>
     </div>

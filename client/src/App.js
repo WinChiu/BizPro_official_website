@@ -44,7 +44,7 @@ function App() {
       <Routes>
         <Route exact path="/" element={<About />} />
         <Route path="/journey" element={<Journey />} />
-        <Route path="/member_talk" element={<Article />} />
+        <Route path="/articles" element={<Article />} />
         <Route path="/members" element={<Member />} />
         <Route path="/login" element={<Login setToken={setToken} />} />
         <Route

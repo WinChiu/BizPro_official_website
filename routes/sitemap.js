@@ -10,7 +10,12 @@ router.get('/sitemap.xml', async (req, res) => {
     });
 
     // Add your URLs to the sitemap
-    smStream.write({ url: '/home', changefreq: 'daily', priority: 0.8 });
+    smStream.write({ url: '/', changefreq: 'daily', priority: 0.8 });
+    smStream.write({ url: '/members', changefreq: 'daily', priority: 0.8 });
+    smStream.write({ url: '/articles', changefreq: 'daily', priority: 0.8 });
+    smStream.write({ url: '/journey', changefreq: 'daily', priority: 0.8 });
+    smStream.write({ url: '/backstage', changefreq: 'daily', priority: 0.8 });
+    smStream.write({ url: '/login', changefreq: 'daily', priority: 0.8 });
 
     // End the stream
     smStream.end();
