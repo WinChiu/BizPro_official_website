@@ -37,7 +37,7 @@ function Article() {
     let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
-        .get('http://localhost:5000/api/article/articles')
+        .get('/api/article/articles')
         .then((res) => {
           res.data.map((article) => {
             article.alumni.tags.map((tag) => {
