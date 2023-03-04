@@ -1,9 +1,8 @@
-import React from 'react';
 import axios from 'axios';
+import React from 'react';
 import Backstage from '../pages/Backstage';
 import Login from '../pages/Login';
 
-import { Navigate } from 'react-router-dom';
 
 function PrivateRouteLogin({ token }) {
   const isLogin = async () => {
