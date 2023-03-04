@@ -2395,6 +2395,7 @@ html {
       text-align: center;
       @include h4();
       color: $grey;
+      z-index: 100;
     }
   }
   .pagination {
@@ -2839,6 +2840,7 @@ html {
       text-align: center;
       @include h4();
       color: $grey;
+      z-index: 100;
     }
     &--item {
       cursor: pointer;
