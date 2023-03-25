@@ -19,19 +19,17 @@ app.use((req, res, next) => {
 });
 
 app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        'worker-src': ["'self'", 'blob:'],
-      },
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      imgSrc: ["'self'", 'data:'],
+      fontSrc: ["'self'"],
+      connectSrc: ["'self'"],
     },
   })
 );
-app.use((req, res, next) => {
-  res.setHeader('Content-Security-Policy', "script-src 'self' 'unsafe-inline'");
-  next();
-});
 app.use('/api/alumni', require('./routes/api/alumni'));
 app.use('/api/alumni', require('./routes/api/selection'));
 app.use('/api/article', require('./routes/api/article'));
