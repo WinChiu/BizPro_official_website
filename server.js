@@ -19,11 +19,12 @@ app.use((req, res, next) => {
 });
 
 app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      'default-src': ["'self'"],
-      'worker-src': ["'self'", 'blob:'],
-      'object-src': ["'none'"],
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        'worker-src': ["'self'", 'blob:'],
+      },
     },
   })
 );
