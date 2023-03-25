@@ -37,9 +37,8 @@ app.use(
       scriptSrcElem: [
         "'self'",
         'https://www.googletagmanager.com/',
-        "'nonce-5050'",
+        "'sha256-l6bIpvKoJVSPBMGzu4HU8uEr16CQf4LIbVDlSiM7g2U='",
       ],
-
       imgSrc: [
         "'self'",
         'https://img.youtube.com/',
