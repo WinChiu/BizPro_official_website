@@ -28,7 +28,10 @@ app.use(
     },
   })
 );
-
+app.use((req, res, next) => {
+  res.setHeader('Content-Security-Policy', "script-src 'self' 'unsafe-inline'");
+  next();
+});
 app.use('/api/alumni', require('./routes/api/alumni'));
 app.use('/api/alumni', require('./routes/api/selection'));
 app.use('/api/article', require('./routes/api/article'));
