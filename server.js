@@ -34,7 +34,12 @@ app.use(
         "'unsafe-inline'",
         'https://www.googletagmanager.com/',
       ],
-      scriptSrcElem: ["'self'", 'https://www.googletagmanager.com/'],
+      scriptSrcElem: [
+        "'self'",
+        'https://www.googletagmanager.com/',
+        "'nonce-5050'",
+      ],
+
       imgSrc: [
         "'self'",
         'https://img.youtube.com/',
