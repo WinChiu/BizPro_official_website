@@ -5,7 +5,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "npm install  && cd ../client && npm install && npm run build",
+    "build": "npm install  && cd client && npm install && npm run build",
     "start": "node server",
     "start-render": "set NODE_ENV=production && node server",
     "server": "nodemon server",
