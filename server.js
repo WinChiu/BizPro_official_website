@@ -18,29 +18,21 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: [
-        "'self'",
-        "'unsafe-inline'",
-        'https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css',
-        'https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css',
-      ],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ['*'],
-      fontSrc: ["'self'"],
-      connectSrc: ["'self'"],
-    },
-  })
-);
 app.use('/api/alumni', require('./routes/api/alumni'));
 app.use('/api/alumni', require('./routes/api/selection'));
 app.use('/api/article', require('./routes/api/article'));
 app.use('/api/admin', require('./routes/api/admin'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use(sitemapRouter);
+
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "'unsafe-inline'"],
+    },
+  })
+);
 
 app.use(express.static('client/build'));
 app.get('*', (req, res) => {
