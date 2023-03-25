@@ -29,7 +29,11 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        'https://www.googletagmanager.com/',
+      ],
       imgSrc: ["'self'", 'https://img.youtube.com/'],
     },
   })
