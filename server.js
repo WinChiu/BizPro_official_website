@@ -29,7 +29,7 @@ app.use(
         'https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css',
       ],
       styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", '*', 'data:'],
+      imgSrc: ['*'],
       fontSrc: ["'self'"],
       connectSrc: ["'self'"],
     },
