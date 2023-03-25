@@ -35,7 +35,11 @@ app.use(
         'https://www.googletagmanager.com/',
       ],
       scriptSrcElem: ["'self'", 'https://www.googletagmanager.com/'],
-      imgSrc: ["'self'", 'https://img.youtube.com/'],
+      imgSrc: [
+        "'self'",
+        'https://img.youtube.com/',
+        'https://img.youtube.com/vi/',
+      ],
     },
   })
 );
