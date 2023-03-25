@@ -22,9 +22,14 @@ app.use(
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
-      scriptSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: [
+        "'self'",
+        "'unsafe-inline'",
+        'https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/base.min.css',
+        'https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css',
+      ],
       styleSrc: ["'self'", "'unsafe-inline'"],
-      imgSrc: ["'self'", 'data:'],
+      imgSrc: ["'self'", '*', 'data:'],
       fontSrc: ["'self'"],
       connectSrc: ["'self'"],
     },
