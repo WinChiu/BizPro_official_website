@@ -34,13 +34,6 @@ app.use(
     },
   })
 );
-app.use((req, res, next) => {
-  res.setHeader(
-    'Content-Security-Policy',
-    "default-src 'self'; img-src 'self' data:; script-src 'self' 'unsafe-inline'"
-  );
-  return next();
-});
 
 app.use(express.static('client/build'));
 app.get('*', (req, res) => {
