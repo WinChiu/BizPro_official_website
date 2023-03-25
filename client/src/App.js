@@ -17,9 +17,10 @@ function App() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   };
-  window.addEventListener('load', setVh);
+
   window.addEventListener('resize', setVh);
   window.onload = () => {
+    setVh();
     let nowLocation = window.location.href;
     if (nowLocation[nowLocation.length - 1] === '/') {
       $('.logoContainer').css('animation-iteration-count', '1');
