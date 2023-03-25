@@ -37,7 +37,7 @@ app.use(
       scriptSrcElem: [
         "'self'",
         'https://www.googletagmanager.com/',
-        "'sha256-l6bIpvKoJVSPBMGzu4HU8uEr16CQf4LIbVDlSiM7g2U='",
+        "'sha256-gfxL+bl/D/MBx52oS7p9QJnqj6WO8LmGV0Idh+GwNuE='",
       ],
       imgSrc: [
         "'self'",
