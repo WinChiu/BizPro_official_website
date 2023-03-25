@@ -39,6 +39,7 @@ app.use(
         "'self'",
         'https://img.youtube.com/',
         'https://img.youtube.com/vi/',
+        'https://i.imgur.com/',
       ],
     },
   })
