@@ -45,6 +45,7 @@ app.use(
         'https://img.youtube.com/vi/',
         'https://i.imgur.com/',
       ],
+      connectSrc: ["'self'", 'https://www.google-analytics.com/'],
     },
   })
 );
