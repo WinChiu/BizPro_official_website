@@ -45,7 +45,7 @@ function App() {
 
   $(window).on('load', () => {
     console.log('hi');
-    setVh();
+    // setVh();
     let nowLocation = window.location.href;
     if (nowLocation[nowLocation.length - 1] === '/') {
       $('.logoContainer').css('animation-iteration-count', '1');
