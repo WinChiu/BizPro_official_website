@@ -42,7 +42,30 @@ function App() {
   //     $('body').css('overflow-y', 'scroll');
   //   }
   // };
-  $(window).on('load', console.log('load'));
+  $(window).on('load', function () {
+    setVh();
+    let nowLocation = window.location.href;
+    if (nowLocation[nowLocation.length - 1] === '/') {
+      $('.logoContainer').css('animation-iteration-count', '1');
+      console.log('stop loading');
+      setTimeout(() => {
+        $('.logoContainer').css('width', '200px');
+        console.log('show logo');
+
+        setTimeout(() => {
+          $('.logoLoading').fadeOut();
+          console.log('fadeout 1');
+
+          $('body').css('overflow-y', 'scroll');
+        }, 1200);
+      }, 1200);
+    } else {
+      $('.logoLoading').fadeOut();
+      console.log('fadeout 2');
+
+      $('body').css('overflow-y', 'scroll');
+    }
+  });
   const { token, setToken } = useToken();
   return (
     <BrowserRouter>
