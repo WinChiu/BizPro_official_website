@@ -29,7 +29,6 @@ app.use(sitemapRouter);
 app.use((req, res, next) => {
   const nonce = crypto.randomBytes(16).toString('base64');
   res.locals.nonce = nonce;
-  res.render('index', { nonce });
   next();
 });
 
@@ -61,7 +60,7 @@ res.render('index', { nonce });
 
 app.use(express.static('client/build'));
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'), {
+  res.render(path.resolve(__dirname, 'client', 'build', 'index.html'), {
     nonce: res.locals.nonce,
   });
 });
