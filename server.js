@@ -29,7 +29,6 @@ app.use(sitemapRouter);
 app.use((req, res, next) => {
   const nonce = crypto.randomBytes(16).toString('base64');
   res.locals.nonce = nonce;
-  res.render('index', { nonce });
   next();
 });
 
@@ -60,9 +59,17 @@ app.use(
 
 app.use(express.static('client/build'));
 app.get('*', (req, res) => {
-  res.render(path.resolve(__dirname, 'client', 'build', 'index.html'), {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'), {
     nonce: res.locals.nonce,
-  });
+  }),
+    function (err) {
+      if (err) {
+        console.error(err);
+        res.status(err.status).end();
+      } else {
+        console.log('Sent file with nonce:', res.locals.nonce);
+      }
+    };
 });
 
 const PORT = process.env.PORT || 5000;
