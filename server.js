@@ -29,6 +29,7 @@ app.use(sitemapRouter);
 app.use((req, res, next) => {
   const nonce = crypto.randomBytes(16).toString('base64');
   res.locals.nonce = nonce;
+  res.render('index', { nonce });
   next();
 });
 
@@ -56,7 +57,6 @@ app.use(
     },
   })
 );
-res.render('index', { nonce });
 
 app.use(express.static('client/build'));
 app.get('*', (req, res) => {
