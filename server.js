@@ -34,11 +34,7 @@ app.use(
         "'unsafe-inline'",
         'https://www.googletagmanager.com/',
       ],
-      scriptSrcElem: [
-        "'self'",
-        'https://www.googletagmanager.com/',
-        "'sha256-gfxL+bl/D/MBx52oS7p9QJnqj6WO8LmGV0Idh+GwNuE='",
-      ],
+      scriptSrcElem: ["'self'", 'https://www.googletagmanager.com/'],
       imgSrc: [
         "'self'",
         'https://img.youtube.com/',
