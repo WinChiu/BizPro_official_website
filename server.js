@@ -48,6 +48,14 @@ app.use((req, res, next) => {
 //   });
 // });
 
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      workerSrc: ["'self'"],
+    },
+  })
+);
+
 app.use('/api/alumni', require('./routes/api/alumni'));
 app.use('/api/alumni', require('./routes/api/selection'));
 app.use('/api/article', require('./routes/api/article'));
