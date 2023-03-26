@@ -69,7 +69,7 @@ function App() {
   const { token, setToken } = useToken();
   return (
     <BrowserRouter>
-      {/* <LogoLoading /> */}
+      <LogoLoading />
       <Routes>
         <Route exact path="/" element={<About />} />
         <Route path="/journey" element={<Journey />} />
