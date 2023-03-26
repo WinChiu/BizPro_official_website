@@ -19,12 +19,13 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use((req, res, next) => {
-  console.log('Middleware called');
-  res.locals.nonces = crypto.randomBytes(16).toString('base64');
-  console.log(res.locals.nonces);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log('Middleware called');
+//   res.locals.nonces = crypto.randomBytes(16).toString('base64');
+//   process.env.SCRIPT_NONCE = res.locals.nonces;
+//   console.log(res.locals.nonces);
+//   next();
+// });
 
 app.use((req, res) => {
   helmet.contentSecurityPolicy({
@@ -35,11 +36,7 @@ app.use((req, res) => {
         "'unsafe-inline'",
         'https://www.googletagmanager.com/',
       ],
-      scriptSrcElem: [
-        "'self'",
-        'https://www.googletagmanager.com/',
-        `nonce-${res.locals.nonces.scriptNonce}`,
-      ],
+      scriptSrcElem: ["'self'", 'https://www.googletagmanager.com/'],
       imgSrc: [
         "'self'",
         'https://img.youtube.com/',
@@ -62,19 +59,7 @@ app.use(express.static('client/build'));
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'), {
     nonce: res.locals.nonce,
-  }),
-    function (err) {
-      if (err) {
-        console.error(err);
-        res.status(err.status).end();
-      } else {
-        console.log('Sent file with nonce:', res.locals.nonce);
-      }
-    };
-});
-
-app.get('/check-nonces', (req, res) => {
-  res.send(res.locals.nonces);
+  });
 });
 
 const PORT = process.env.PORT || 5000;
