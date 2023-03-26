@@ -27,12 +27,14 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use(sitemapRouter);
 
 app.use((req, res, next) => {
-  const nonce = crypto.randomBytes(16).toString('base64');
-  res.locals.nonce = nonce;
+  res.locals.nonces = {
+    styleNonce: crypto.randomBytes(16).toString('base64'),
+    scriptNonce: crypto.randomBytes(16).toString('base64'),
+  };
   next();
 });
 
-app.use(
+app.use((req, res) => {
   helmet.contentSecurityPolicy({
     directives: {
       defaultSrc: ["'self'"],
@@ -44,7 +46,13 @@ app.use(
       scriptSrcElem: [
         "'self'",
         'https://www.googletagmanager.com/',
-        `nonce-${res.locals.nonce}`,
+        `'nonce-${res.locals.nonces.scriptNonce}'`,
+      ],
+      styleSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net/'],
+      styleSrcElem: [
+        "'self'",
+        'https://cdn.jsdelivr.net/',
+        `'nonce-${res.locals.nonces.styleNonce}'`,
       ],
       imgSrc: [
         "'self'",
@@ -54,8 +62,8 @@ app.use(
       ],
       connectSrc: ["'self'", 'https://www.google-analytics.com/'],
     },
-  })
-);
+  });
+});
 
 app.use(express.static('client/build'));
 app.get('*', (req, res) => {
