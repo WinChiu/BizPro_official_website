@@ -19,6 +19,9 @@ function App() {
   };
 
   window.addEventListener('resize', setVh);
+  window.addEventListener('load', () => {
+    console.log('load fin');
+  });
   window.onload = () => {
     setVh();
     let nowLocation = window.location.href;
