@@ -17,36 +17,31 @@ function App() {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   };
-  $('.logoLoading').fadeOut();
-  console.log('hi');
-  window.addEventListener('resize', setVh);
-  window.addEventListener('load', () => {
-    console.log('load fin');
-  });
-  window.onload = () => {
-    setVh();
-    let nowLocation = window.location.href;
-    if (nowLocation[nowLocation.length - 1] === '/') {
-      $('.logoContainer').css('animation-iteration-count', '1');
-      console.log('stop loading');
-      setTimeout(() => {
-        $('.logoContainer').css('width', '200px');
-        console.log('show logo');
+  // window.addEventListener('resize', setVh);
+  // window.onload = () => {
+  //   setVh();
+  //   let nowLocation = window.location.href;
+  //   if (nowLocation[nowLocation.length - 1] === '/') {
+  //     $('.logoContainer').css('animation-iteration-count', '1');
+  //     console.log('stop loading');
+  //     setTimeout(() => {
+  //       $('.logoContainer').css('width', '200px');
+  //       console.log('show logo');
 
-        setTimeout(() => {
-          $('.logoLoading').fadeOut();
-          console.log('fadeout 1');
+  //       setTimeout(() => {
+  //         $('.logoLoading').fadeOut();
+  //         console.log('fadeout 1');
 
-          $('body').css('overflow-y', 'scroll');
-        }, 1200);
-      }, 1200);
-    } else {
-      $('.logoLoading').fadeOut();
-      console.log('fadeout 2');
+  //         $('body').css('overflow-y', 'scroll');
+  //       }, 1200);
+  //     }, 1200);
+  //   } else {
+  //     $('.logoLoading').fadeOut();
+  //     console.log('fadeout 2');
 
-      $('body').css('overflow-y', 'scroll');
-    }
-  };
+  //     $('body').css('overflow-y', 'scroll');
+  //   }
+  // };
 
   const { token, setToken } = useToken();
   return (
