@@ -5,7 +5,7 @@ var app = express();
 const connectDB = require('./config/db');
 const sitemapRouter = require('./routes/sitemap');
 const helmet = require('helmet');
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
 connectDB();
 
@@ -27,26 +27,26 @@ app.use((req, res, next) => {
 //   next();
 // });
 
-app.use((req, res) => {
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'"],
-      scriptSrc: [
-        "'self'",
-        "'unsafe-inline'",
-        'https://www.googletagmanager.com/',
-      ],
-      scriptSrcElem: ["'self'", 'https://www.googletagmanager.com/'],
-      imgSrc: [
-        "'self'",
-        'https://img.youtube.com/',
-        'https://img.youtube.com/vi/',
-        'https://i.imgur.com/',
-      ],
-      connectSrc: ["'self'", 'https://www.google-analytics.com/'],
-    },
-  });
-});
+// app.use((req, res) => {
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'"],
+//       scriptSrc: [
+//         "'self'",
+//         "'unsafe-inline'",
+//         'https://www.googletagmanager.com/',
+//       ],
+//       scriptSrcElem: ["'self'", 'https://www.googletagmanager.com/'],
+//       imgSrc: [
+//         "'self'",
+//         'https://img.youtube.com/',
+//         'https://img.youtube.com/vi/',
+//         'https://i.imgur.com/',
+//       ],
+//       connectSrc: ["'self'", 'https://www.google-analytics.com/'],
+//     },
+//   });
+// });
 
 app.use('/api/alumni', require('./routes/api/alumni'));
 app.use('/api/alumni', require('./routes/api/selection'));
