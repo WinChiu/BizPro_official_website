@@ -5,6 +5,8 @@ var app = express();
 const connectDB = require('./config/db');
 const sitemapRouter = require('./routes/sitemap');
 const helmet = require('helmet');
+const crypto = require('crypto');
+const nonce = crypto.randomBytes(16).toString('base64');
 
 connectDB();
 
@@ -34,7 +36,11 @@ app.use(
         "'unsafe-inline'",
         'https://www.googletagmanager.com/',
       ],
-      scriptSrcElem: ["'self'", 'https://www.googletagmanager.com/'],
+      scriptSrcElem: [
+        "'self'",
+        'https://www.googletagmanager.com/',
+        `nonce-${nonce}`,
+      ],
       imgSrc: [
         "'self'",
         'https://img.youtube.com/',
