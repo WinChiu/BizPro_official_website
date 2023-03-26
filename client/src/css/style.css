@@ -19,7 +19,7 @@ body {
 }
 
 * {
-  font-family: "Noto Sans TC", "roboto";
+  font-family: "Noto Sans TC", "PingFang TC";
 }
 
 html {
@@ -81,13 +81,13 @@ html {
   cursor: pointer;
 }
 .navBar__item a {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
   margin: 0;
   color: #3a3a3a;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-size: 18px;
   margin-left: 40px;
   font-weight: normal;
@@ -122,13 +122,13 @@ html {
   cursor: pointer;
 }
 .navBar__dropdown .dropdown__item a {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
   margin: 0;
   color: #3a3a3a;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-size: 18px;
   font-weight: normal;
 }
@@ -208,7 +208,7 @@ html {
   box-sizing: border-box;
 }
 .footer__hashtag {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -240,7 +240,7 @@ html {
   margin-right: 8px;
 }
 .footer .linkList__word {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -251,7 +251,7 @@ html {
   margin: 0;
 }
 .footer .caption {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 12px;
   text-align: center;
@@ -290,7 +290,7 @@ html {
   position: relative;
 }
 .header__content .content__title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 34px;
   line-height: 120%;
@@ -305,7 +305,7 @@ html {
   }
 }
 .header__content .content__word {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -359,7 +359,7 @@ html {
     transform: scale(0.8);
   }
   .header__content .content__title {
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 600;
     font-size: 24px;
     line-height: 150%;
@@ -369,7 +369,7 @@ html {
     color: #ffffff;
   }
   .header__content .content__word {
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 400;
     font-size: 14px;
     line-height: 150%;
@@ -409,7 +409,7 @@ html {
   flex: 1;
 }
 .activity__content--word .content__title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 34px;
   line-height: 120%;
@@ -423,7 +423,7 @@ html {
   }
 }
 .activity__content--word .content__paragraph {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -557,7 +557,7 @@ html {
   display: none;
 }
 .junior .courseStructure__intro--content .sectionTitle .title--word {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 34px;
   line-height: 120%;
@@ -576,7 +576,7 @@ html {
   color: #ffffff;
 }
 .junior .courseStructure__intro--content p {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -609,7 +609,7 @@ html {
   flex: 1;
 }
 .junior .courseStructure__infos--container .container__title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 24px;
   line-height: 150%;
@@ -627,7 +627,7 @@ html {
   height: 380px;
 }
 .junior .courseStructure__infos--container .container__content--words {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -655,7 +655,7 @@ html {
   margin-bottom: 12px;
 }
 .junior .courseStructure__infos--container .container__content--iconSet .iconSet__items--title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -692,7 +692,7 @@ html {
   display: none;
 }
 .junior .caseStudy .sectionTitle .title--word {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 34px;
   line-height: 120%;
@@ -738,7 +738,7 @@ html {
   flex: 1;
 }
 .junior .caseStudy__hbs--content h2, .junior .caseStudy__lean--content h2 {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 34px;
   line-height: 120%;
@@ -752,7 +752,7 @@ html {
   }
 }
 .junior .caseStudy__hbs--content p, .junior .caseStudy__lean--content p {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -795,7 +795,7 @@ html {
   display: none;
 }
 .junior .project .sectionTitle .title--word {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 34px;
   line-height: 120%;
@@ -817,7 +817,7 @@ html {
   margin-bottom: 48px;
 }
 .junior .project__jp--title h2, .junior .project__lc--title h2 {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 34px;
   line-height: 120%;
@@ -831,7 +831,7 @@ html {
   }
 }
 .junior .project__jp--title p, .junior .project__lc--title p {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -859,7 +859,7 @@ html {
   margin-bottom: 32px;
 }
 .junior .project__jp--content .content--feature .feature__item h4, .junior .project__lc--content .content--feature .feature__item h4 {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
@@ -1089,7 +1089,7 @@ html {
   align-items: center;
 }
 .senior__course--content .contentContainer p, .senior__project--content .contentContainer p {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -1128,7 +1128,7 @@ html {
   transition-duration: 0.2s;
 }
 .senior__course--content .contentContainer .content--toggleList .toggleItem--title p, .senior__project--content .contentContainer .content--toggleList .toggleItem--title p {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -1138,7 +1138,7 @@ html {
   font-weight: bold;
 }
 .senior__course--content .contentContainer .content--toggleList .toggleItem--content, .senior__project--content .contentContainer .content--toggleList .toggleItem--content {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -1148,7 +1148,7 @@ html {
   color: white;
 }
 .senior__course--content h2, .senior__project--content h2 {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 34px;
   line-height: 120%;
@@ -1307,7 +1307,7 @@ html {
 .alumni__content .btn-primary {
   background-color: #38323c;
   border: none;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -1330,7 +1330,7 @@ html {
   width: 100%;
 }
 .alumni__content--item h3 {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 24px;
   line-height: 150%;
@@ -1339,7 +1339,7 @@ html {
   margin-bottom: 12px;
 }
 .alumni__content--item p {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -1412,7 +1412,7 @@ html {
   padding: 16px 0px 16px 0px;
 }
 .tab__item p {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -1470,7 +1470,7 @@ html {
   display: none;
 }
 .about .sectionTitle .title--word {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 34px;
   line-height: 120%;
@@ -1563,7 +1563,7 @@ html {
   height: 40px;
 }
 .about__header--title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 48px;
   line-height: 150%;
@@ -1574,7 +1574,7 @@ html {
   margin: 8px 0 8px 0;
 }
 .about__header--subTitle {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 24px;
   line-height: 150%;
@@ -1592,7 +1592,7 @@ html {
   align-items: center;
 }
 .about__header--readMore .readMore--word {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
@@ -1648,7 +1648,7 @@ html {
   flex: 1;
 }
 .about__intro--content .content__word--paragraph {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -1658,7 +1658,7 @@ html {
   padding-right: 56px;
 }
 .about__intro--content .content__word--quote {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
@@ -1730,7 +1730,7 @@ html {
   padding-right: 56px;
 }
 .about__vision--content .content--word {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -1756,7 +1756,7 @@ html {
   margin-left: 48px;
 }
 .about__vision--iconList .iconList__item--content .content--title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
@@ -1767,7 +1767,7 @@ html {
   margin-bottom: 4px;
 }
 .about__vision--iconList .iconList__item--content .content--word {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -1802,7 +1802,7 @@ html {
   display: none;
 }
 .about__achieve--content {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -1836,7 +1836,7 @@ html {
   white-space: nowrap;
 }
 .about__achieve--numberList .numberList__item--content {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
@@ -1888,7 +1888,7 @@ html {
 .about__briefIntro .briefIntro__course--word .btn-primary, .about__briefIntro .briefIntro__people--word .btn-primary {
   background-color: #38323c;
   border: none;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -1911,7 +1911,7 @@ html {
   background-color: #4c5263;
 }
 .about__briefIntro .briefIntro__course--word .word--title, .about__briefIntro .briefIntro__people--word .word--title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 34px;
   line-height: 120%;
@@ -1925,7 +1925,7 @@ html {
   }
 }
 .about__briefIntro .briefIntro__course--word .word--content, .about__briefIntro .briefIntro__people--word .word--content {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -2005,7 +2005,7 @@ html {
     opacity: 1;
   }
   .about__header--title {
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 600;
     font-size: 48px;
     line-height: 150%;
@@ -2233,7 +2233,7 @@ html {
     color: #ffffff;
   }
   .about__header--subTitle {
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 600;
     font-size: 20px;
     line-height: 150%;
@@ -2309,7 +2309,7 @@ html {
 .article__searchSection .btn-primary {
   background-color: #38323c;
   border: none;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -2343,7 +2343,7 @@ html {
   align-items: center;
 }
 .article__searchSection--filter label {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
@@ -2372,7 +2372,7 @@ html {
 }
 .article__searchSection--filter .filter__major--selector__multi-value__label,
 .article__searchSection--filter .filter__field--selector__multi-value__label {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -2433,7 +2433,7 @@ html {
   margin-right: 16px;
 }
 .article__detail--titleGroup .titleGroup__img--subTitle {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -2442,7 +2442,7 @@ html {
   font-weight: bold;
 }
 .article__detail--titleGroup .titleGroup__word--title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 24px;
   line-height: 150%;
@@ -2451,7 +2451,7 @@ html {
   font-weight: bold;
 }
 .article__detail--content {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -2507,7 +2507,7 @@ html {
   width: 100%;
 }
 .article__item--content .name {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -2517,7 +2517,7 @@ html {
   margin-bottom: 2px;
 }
 .article__item--content .title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 24px;
   line-height: 150%;
@@ -2531,7 +2531,7 @@ html {
   overflow: hidden;
 }
 .article__item--content .content {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -2552,7 +2552,7 @@ html {
   align-items: center;
 }
 .article__item--content .tags .tag {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -2572,7 +2572,7 @@ html {
   padding: 32px 0px;
   width: 100%;
   text-align: center;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
@@ -2651,7 +2651,7 @@ html {
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
@@ -2662,7 +2662,7 @@ html {
   }
   .article__item--content .title {
     -webkit-line-clamp: 2;
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
@@ -2673,7 +2673,7 @@ html {
   .article__item--content .content {
     display: none;
     -webkit-line-clamp: 1;
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 400;
     font-size: 14px;
     line-height: 150%;
@@ -2681,7 +2681,7 @@ html {
     color: #3a3a3a;
   }
   .article__item--content .tags .tag {
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 400;
     font-size: 12px;
   }
@@ -2696,7 +2696,7 @@ html {
     width: 100%;
   }
   .article__searchSection--filter label {
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 600;
     font-size: 20px;
     line-height: 150%;
@@ -2739,7 +2739,7 @@ html {
     display: none;
   }
   .article__detail--titleGroup .titleGroup__word--title {
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 600;
     font-size: 20px;
     line-height: 150%;
@@ -2768,7 +2768,7 @@ html {
     margin-left: 0px;
   }
   .article__item--content .content {
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 400;
     font-size: 14px;
     line-height: 150%;
@@ -2779,7 +2779,7 @@ html {
     margin-bottom: 8px;
   }
   .article__item--content .name {
-    font-family: "Noto Sans TC";
+    font-family: "Noto Sans TC", "PingFang TC";
     font-weight: 400;
     font-size: 14px;
     line-height: 150%;
@@ -2852,7 +2852,7 @@ html {
   position: relative;
 }
 .member__popUp--content h3 {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 24px;
   line-height: 150%;
@@ -2869,12 +2869,12 @@ html {
   filter: none;
 }
 .member__popUp--content .content__tags--caption {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 12px;
 }
 .member__popUp--content .content__tags--tag {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 12px;
   padding: 3px 10px 2px 10px;
@@ -2887,7 +2887,7 @@ html {
 }
 .member__popUp--content p,
 .member__popUp--content li {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -2957,7 +2957,7 @@ html {
 .member__searchSection .btn-primary {
   background-color: #38323c;
   border: none;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -2983,7 +2983,7 @@ html {
   align-items: center;
 }
 .member__searchSection--search .search--directSearchLabel {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
@@ -3002,7 +3002,7 @@ html {
 }
 .member__searchSection--search .searchContainer .search--directSearchInput {
   padding: 8px 16px 6px 16px;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3026,7 +3026,7 @@ html {
   margin-bottom: 16px;
 }
 .member__searchSection--filter label {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
@@ -3055,7 +3055,7 @@ html {
   align-items: center;
 }
 .member__searchSection--filter .filterContainer .filter__major label, .member__searchSection--filter .filterContainer .filter__field label, .member__searchSection--filter .filterContainer .filter__grade label {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
@@ -3075,7 +3075,7 @@ html {
   padding: 1px 4px 1px 6px;
 }
 .member__searchSection--filter .filterContainer .filter__major--selector__multi-value__label, .member__searchSection--filter .filterContainer .filter__field--selector__multi-value__label, .member__searchSection--filter .filterContainer .filter__grade--selector__multi-value__label {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -3104,7 +3104,7 @@ html {
   position: absolute;
   width: 100%;
   text-align: center;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 20px;
   line-height: 150%;
@@ -3147,7 +3147,7 @@ html {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3164,7 +3164,7 @@ html {
   align-items: center;
 }
 .member__items--item .item__container--content .item__content--title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3175,7 +3175,7 @@ html {
   text-align: center;
 }
 .member__items--item .item__container--content .item__content--subTitle {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3194,7 +3194,7 @@ html {
 .member__items--item .btn-primary {
   background-color: rgb(246, 246, 246);
   border: #38323c solid 1px;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -3476,7 +3476,7 @@ html {
   margin-right: 16px;
 }
 .backstage .sidebar .tabContainer .sideBarTab .tab--title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3485,7 +3485,7 @@ html {
   color: #e8e4da;
 }
 .backstage .sidebar .sign {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 12px;
   color: #e8e4da;
@@ -3537,7 +3537,7 @@ html {
 .backstage .settingPage .toastComponent p {
   padding-top: 2px;
   width: 100%;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3597,7 +3597,7 @@ html {
 .backstage .settingPage .modal .modal-dialog .btn-primary {
   background-color: #38323c;
   border: none;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3611,7 +3611,7 @@ html {
 .backstage .settingPage .modal .modal-dialog .btn-danger {
   background-color: #ae0023;
   border: none;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3622,7 +3622,7 @@ html {
 }
 .backstage .settingPage .modal .modal-dialog input {
   padding: 6px 8px 4px 8px;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3634,7 +3634,7 @@ html {
   width: 100%;
 }
 .backstage .settingPage .modal .modal-dialog label {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3648,7 +3648,7 @@ html {
 }
 .backstage .settingPage .modal .modal-dialog textarea {
   padding: 8px 8px 6px 8px;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -3669,7 +3669,7 @@ html {
 .backstage .settingPage .titleSection .btn-primary {
   background-color: #38323c;
   border: none;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3681,7 +3681,7 @@ html {
   white-space: nowrap;
 }
 .backstage .settingPage .titleSection .title {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 600;
   font-size: 34px;
   line-height: 120%;
@@ -3732,7 +3732,7 @@ html {
 }
 .backstage .settingPage .tableContainer .table tbody tr td .btn-edit {
   background-color: transparent;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -3751,7 +3751,7 @@ html {
 }
 .backstage .settingPage .tableContainer .table tbody tr td .btn-reupload {
   background-color: #38323c;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -3768,7 +3768,7 @@ html {
 .backstage .settingPage .tableContainer .table tbody tr td .btn-danger {
   background-color: transparent;
   border: none;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -3782,7 +3782,7 @@ html {
 }
 .backstage .settingPage .tableContainer .table tbody tr td .btn-success {
   border: none;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -3800,7 +3800,7 @@ html {
 }
 .backstage .settingPage .tableContainer .table tbody tr td a {
   color: #3a3a3a;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -3878,7 +3878,7 @@ html {
 }
 .loginContainer .formContainer input {
   padding: 6px 8px 4px 8px;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3893,7 +3893,7 @@ html {
 .loginContainer .formContainer .errorText {
   width: 100%;
   text-align: center;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;
@@ -3913,7 +3913,7 @@ html {
   color: #4c5263;
 }
 .loginContainer .formContainer .buttonGroup a p {
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 14px;
   line-height: 150%;
@@ -3932,7 +3932,7 @@ html {
 .loginContainer .formContainer .buttonGroup .btn-primary {
   background-color: #38323c;
   border: none;
-  font-family: "Noto Sans TC";
+  font-family: "Noto Sans TC", "PingFang TC";
   font-weight: 400;
   font-size: 16px;
   line-height: 150%;

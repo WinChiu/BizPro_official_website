@@ -142,7 +142,7 @@ body {
 }
 * {
   //border: 1px rgb(54, 107, 223) solid;
-  font-family: 'Noto Sans TC', 'roboto';
+  font-family: 'Noto Sans TC', 'PingFang TC';
   //scrollbar-gutter: stable;
 }
 html {
@@ -203,7 +203,7 @@ html {
     cursor: pointer;
     a {
       @include h4();
-      font-family: 'Noto Sans TC';
+      font-family: 'Noto Sans TC', 'PingFang TC';
 
       font-size: 18px;
       margin-left: 40px;
@@ -236,7 +236,7 @@ html {
       cursor: pointer;
       a {
         @include h4();
-        font-family: 'Noto Sans TC';
+        font-family: 'Noto Sans TC', 'PingFang TC';
         font-size: 18px;
         font-weight: normal;
       }
