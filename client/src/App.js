@@ -42,7 +42,7 @@ function App() {
   //     $('body').css('overflow-y', 'scroll');
   //   }
   // };
-
+  $(window).on('load', console.log('load'));
   const { token, setToken } = useToken();
   return (
     <BrowserRouter>
