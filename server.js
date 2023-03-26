@@ -51,6 +51,7 @@ app.use(
     },
   })
 );
+res.render('index', { nonce });
 
 app.use(express.static('client/build'));
 app.get('*', (req, res) => {
