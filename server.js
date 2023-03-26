@@ -19,18 +19,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/alumni', require('./routes/api/alumni'));
-app.use('/api/alumni', require('./routes/api/selection'));
-app.use('/api/article', require('./routes/api/article'));
-app.use('/api/admin', require('./routes/api/admin'));
-app.use('/api/auth', require('./routes/api/auth'));
-app.use(sitemapRouter);
-
 app.use((req, res, next) => {
-  res.locals.nonces = {
-    styleNonce: crypto.randomBytes(16).toString('base64'),
-    scriptNonce: crypto.randomBytes(16).toString('base64'),
-  };
+  console.log('Middleware called');
+  res.locals.nonces = crypto.randomBytes(16).toString('base64');
+  console.log(res.locals.nonces);
   next();
 });
 
@@ -46,13 +38,7 @@ app.use((req, res) => {
       scriptSrcElem: [
         "'self'",
         'https://www.googletagmanager.com/',
-        `'nonce-${res.locals.nonces.scriptNonce}'`,
-      ],
-      styleSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net/'],
-      styleSrcElem: [
-        "'self'",
-        'https://cdn.jsdelivr.net/',
-        `'nonce-${res.locals.nonces.styleNonce}'`,
+        `nonce-${res.locals.nonces.scriptNonce}`,
       ],
       imgSrc: [
         "'self'",
@@ -64,6 +50,13 @@ app.use((req, res) => {
     },
   });
 });
+
+app.use('/api/alumni', require('./routes/api/alumni'));
+app.use('/api/alumni', require('./routes/api/selection'));
+app.use('/api/article', require('./routes/api/article'));
+app.use('/api/admin', require('./routes/api/admin'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use(sitemapRouter);
 
 app.use(express.static('client/build'));
 app.get('*', (req, res) => {
@@ -78,6 +71,10 @@ app.get('*', (req, res) => {
         console.log('Sent file with nonce:', res.locals.nonce);
       }
     };
+});
+
+app.get('/check-nonces', (req, res) => {
+  res.send(res.locals.nonces);
 });
 
 const PORT = process.env.PORT || 5000;
