@@ -6,7 +6,6 @@ const connectDB = require('./config/db');
 const sitemapRouter = require('./routes/sitemap');
 const helmet = require('helmet');
 const crypto = require('crypto');
-const nonce = crypto.randomBytes(16).toString('base64');
 
 connectDB();
 
@@ -27,6 +26,12 @@ app.use('/api/admin', require('./routes/api/admin'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use(sitemapRouter);
 
+app.use((req, res, next) => {
+  const nonce = crypto.randomBytes(16).toString('base64');
+  res.locals.nonce = nonce;
+  next();
+});
+
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -39,7 +44,7 @@ app.use(
       scriptSrcElem: [
         "'self'",
         'https://www.googletagmanager.com/',
-        `nonce-${nonce}`,
+        `nonce-${res.locals.nonce}`,
       ],
       imgSrc: [
         "'self'",
@@ -55,7 +60,9 @@ res.render('index', { nonce });
 
 app.use(express.static('client/build'));
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'), {
+    nonce: res.locals.nonce,
+  });
 });
 
 const PORT = process.env.PORT || 5000;
