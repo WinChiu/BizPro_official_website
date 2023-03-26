@@ -29,6 +29,7 @@ app.use(sitemapRouter);
 app.use((req, res, next) => {
   const nonce = crypto.randomBytes(16).toString('base64');
   res.locals.nonce = nonce;
+  res.render('index', { nonce });
   next();
 });
 
