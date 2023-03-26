@@ -18,7 +18,7 @@ function App() {
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   };
   $('.logoLoading').fadeOut();
-
+  console.log('hi');
   window.addEventListener('resize', setVh);
   window.addEventListener('load', () => {
     console.log('load fin');
