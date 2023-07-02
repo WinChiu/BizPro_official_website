@@ -11,15 +11,15 @@ import Journey from './pages/Journey';
 import Login from './pages/Login';
 import Member from './pages/Member';
 import useToken from './utility/useToken';
-// import generateSitemap from './sitemap-generator';
+const nonce = process.env.SCRIPT_NONCE;
 function App() {
   const setVh = () => {
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty('--vh', `${vh}px`);
   };
-  window.addEventListener('load', setVh);
   window.addEventListener('resize', setVh);
   window.onload = () => {
+    setVh();
     let nowLocation = window.location.href;
     if (nowLocation[nowLocation.length - 1] === '/') {
       $('.logoContainer').css('animation-iteration-count', '1');
@@ -27,20 +27,26 @@ function App() {
         $('.logoContainer').css('width', '200px');
         setTimeout(() => {
           $('.logoLoading').fadeOut();
+
           $('body').css('overflow-y', 'scroll');
         }, 1200);
       }, 1200);
     } else {
       $('.logoLoading').fadeOut();
+
       $('body').css('overflow-y', 'scroll');
     }
   };
 
   const { token, setToken } = useToken();
-  //generateSitemap();
   return (
     <BrowserRouter>
-      <LogoLoading />
+      {navigator.userAgent.indexOf('Safari') != -1 &&
+      navigator.userAgent.indexOf('Chrome') == -1 ? (
+        <></>
+      ) : (
+        <LogoLoading />
+      )}
       <Routes>
         <Route exact path="/" element={<About />} />
         <Route path="/journey" element={<Journey />} />

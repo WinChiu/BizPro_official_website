@@ -277,6 +277,7 @@ function About() {
                 />
                 <iframe
                   src="https://www.youtube.com/embed/IdNSw0eSkdc?rel=0"
+                  srcDoc={`<style>*{padding:0;margin:0;overflow:hidden}html,body{height:100%}img,span{position:absolute;width:100%;top:0;bottom:0;margin:auto}span{height:1.5em;text-align:center;font:48px/1.5 sans-serif;color:white;text-shadow:0 0 0.5em black}</style><a href=https://www.youtube.com/embed/IdNSw0eSkdc/?autoplay=1><img src=https://img.youtube.com/vi/IdNSw0eSkdc/hqdefault.jpg alt='bizpro'><span>▶</span></a>`}
                   title="【BizPro】創辦人專訪｜林竹芸Maggie Lin"
                   frameborder="0"
                   allow="accelerometer; clipboard-write; encrypted-media; gyroscope"
