@@ -91,6 +91,7 @@ function Member() {
                 ? 1
                 : -1
             )
+            .sort((alumni1, alumni2) => (alumni1.name === 'Maggie' ? -1 : 1))
             .map((member) => {
               if (!grade.includes(member.number)) {
                 grade.push(member.number);
@@ -193,6 +194,7 @@ function Member() {
 
     return;
   }, [memberColumnCount]);
+
   const MemberItem = (props) => {
     return (
       <div
@@ -234,7 +236,6 @@ function Member() {
       </div>
     );
   };
-
   const PopUp = ({ props }) => (
     <section className="member__popUp">
       <div className="member__popUp--img">
@@ -262,7 +263,6 @@ function Member() {
       </div>
     </section>
   );
-
   const openPopup = () => {
     $('.member__popUp').css('display', 'flex');
     $('.member__popupLayer').css('display', 'block');
@@ -283,7 +283,6 @@ function Member() {
     setNowPage(certainPage);
     window.scrollTo(0, 240);
   };
-
   const startFilter = async (major, field, grade) => {
     let filteredMemberDataTemp = [];
     // field filter
@@ -295,6 +294,17 @@ function Member() {
           tags: field,
         })
         .then((res) => {
+          res.data
+            .sort((alumni1, alumni2) =>
+              Number(alumni1.number) > Number(alumni2.number)
+                ? 1
+                : Number(alumni1.number) < Number(alumni2.number)
+                ? -1
+                : alumni1.name < alumni2.name
+                ? 1
+                : -1
+            )
+            .sort((alumni1, alumni2) => (alumni1.name === 'Maggie' ? -1 : 1));
           return res.data;
         })
         .catch((err) => {
@@ -309,13 +319,23 @@ function Member() {
           search: directSearch,
         })
         .then((res) => {
+          res.data
+            .sort((alumni1, alumni2) =>
+              Number(alumni1.number) > Number(alumni2.number)
+                ? 1
+                : Number(alumni1.number) < Number(alumni2.number)
+                ? -1
+                : alumni1.name < alumni2.name
+                ? 1
+                : -1
+            )
+            .sort((alumni1, alumni2) => (alumni1.name === 'Maggie' ? -1 : 1));
           return res.data;
         })
         .catch((err) => {
           console.log(err.message);
         });
     setNowPage(1);
-
     setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
     setFilteredMemberData(filteredMemberDataTemp);
 
@@ -326,7 +346,6 @@ function Member() {
       }
     });
   };
-
   const startSearch = async (searchData) => {
     let filteredMemberDataTemp = [];
     filteredMemberDataTemp = await axios
@@ -337,6 +356,17 @@ function Member() {
         search: searchData,
       })
       .then((res) => {
+        res.data
+          .sort((alumni1, alumni2) =>
+            Number(alumni1.number) > Number(alumni2.number)
+              ? 1
+              : Number(alumni1.number) < Number(alumni2.number)
+              ? -1
+              : alumni1.name < alumni2.name
+              ? 1
+              : -1
+          )
+          .sort((alumni1, alumni2) => (alumni1.name === 'Maggie' ? -1 : 1));
         return res.data;
       })
       .catch((err) => {
