@@ -1,9 +1,10 @@
 export default function numberToRank(number) {
-  if (number === '1') {
+  let lastNum = number % 10;
+  if (lastNum === '1') {
     return number + 'st';
-  } else if (number === '2') {
+  } else if (lastNum === '2') {
     return number + 'nd';
-  } else if (number === '3') {
+  } else if (lastNum === '3') {
     return number + 'rd';
   } else {
     return number + 'th';
