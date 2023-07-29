@@ -1,5 +1,5 @@
 export default function numberToRank(number) {
-  let lastNum = number % 10;
+  let lastNum = number[number.length - 1];
   if (lastNum === '1') {
     return number + 'st';
   } else if (lastNum === '2') {
