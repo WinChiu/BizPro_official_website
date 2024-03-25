@@ -6,8 +6,8 @@ const findQuery = require('../../core/findQuery');
 router.post('/select', async (req, res) => {
   try {
     let query = findQuery(req);
-
     const alumniData = await Alumni.find(query);
+    console.log('fetch data');
     if (!alumniData) {
       res.status(400).json({ msg: 'No alumni data available' });
     } else {
@@ -46,6 +46,7 @@ router.post('/search', async (req, res) => {
         },
       ],
     });
+    console.log('fetch data');
     if (!result) {
       res.status(400).json({ msg: 'No alumni data available' });
     }

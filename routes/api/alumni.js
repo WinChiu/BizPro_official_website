@@ -6,6 +6,7 @@ const { error } = require('jquery');
 router.get('/members', async (req, res) => {
   try {
     const alumniData = await Alumni.find();
+    console.log('fetch data');
     if (!alumniData) {
       return res.status(400).json({ msg: 'No alumni data available' });
     }

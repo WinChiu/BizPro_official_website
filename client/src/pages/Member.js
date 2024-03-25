@@ -49,7 +49,7 @@ function Member() {
     let majorOptionsTemp = [];
     const fetchData = async () => {
       await axios
-        .get('/api/alumni/members')
+        .get('http://localhost:5000/api/alumni/members')
         .then((res) => {
           const gridColumnCount = window
             .getComputedStyle(
@@ -286,33 +286,29 @@ function Member() {
   const startFilter = async (major, field, grade) => {
     let filteredMemberDataTemp = [];
     // field filter
-    if (directSearch === '')
+    if (directSearch === '') {
+      const filterFunction = (value) => {
+        console.log(value.name, major, value.major);
+        return (
+          (grade === '0' || grade === '' ? true : value.number === grade) &&
+          (field[0] === undefined
+            ? true
+            : value.tags.filter((tag) => field.includes(tag))[0] === undefined
+            ? false
+            : true) &&
+          (major[0] === undefined
+            ? true
+            : value.major.filter((el) => major.includes(el))[0] === undefined
+            ? false
+            : true)
+        );
+      };
+      filteredMemberDataTemp = memberData.filter((member) =>
+        filterFunction(member)
+      );
+    } else
       filteredMemberDataTemp = await axios
-        .post('/api/alumni/select', {
-          number: grade,
-          major: major,
-          tags: field,
-        })
-        .then((res) => {
-          res.data
-            .sort((alumni1, alumni2) =>
-              Number(alumni1.number) > Number(alumni2.number)
-                ? 1
-                : Number(alumni1.number) < Number(alumni2.number)
-                ? -1
-                : alumni1.name < alumni2.name
-                ? 1
-                : -1
-            )
-            .sort((alumni1, alumni2) => (alumni1.name === 'Maggie' ? -1 : 1));
-          return res.data;
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    else
-      filteredMemberDataTemp = await axios
-        .post('/api/alumni/search', {
+        .post('http://localhost:5000/api/alumni/search', {
           number: grade,
           major: major,
           tags: field,
@@ -335,6 +331,7 @@ function Member() {
         .catch((err) => {
           console.log(err.message);
         });
+
     setNowPage(1);
     setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
     setFilteredMemberData(filteredMemberDataTemp);
@@ -349,7 +346,7 @@ function Member() {
   const startSearch = async (searchData) => {
     let filteredMemberDataTemp = [];
     filteredMemberDataTemp = await axios
-      .post('/api/alumni/search', {
+      .post('http://localhost:5000/api/alumni/search', {
         number: gradeFilter,
         major: majorFilter,
         tags: fieldFilter,
@@ -415,6 +412,7 @@ function Member() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              console.log(memberData);
               const formData = new FormData(e.target);
               for (const pair of formData.entries()) {
                 setDirectSearch(pair[1]);
