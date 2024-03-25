@@ -285,53 +285,60 @@ function Member() {
   };
   const startFilter = async (major, field, grade) => {
     let filteredMemberDataTemp = [];
+    const filterFunction = (value) => {
+      //console.log(value.name, major, value.major);
+      return (
+        (grade === '0' || grade === '' ? true : value.number === grade) &&
+        (field[0] === undefined
+          ? true
+          : value.tags.filter((tag) => field.includes(tag))[0] === undefined
+          ? false
+          : true) &&
+        (major[0] === undefined
+          ? true
+          : value.major.filter((el) => major.includes(el))[0] === undefined
+          ? false
+          : true)
+      );
+    };
+    const searchFunction = (value) => {
+      return value.name.toLowerCase().includes(directSearch.toLowerCase())
+        ? true
+        : value.number.toLowerCase().includes(directSearch.toLowerCase())
+        ? true
+        : value.jobTitle.toLowerCase().includes(directSearch.toLowerCase())
+        ? true
+        : value.exp.some((v) => {
+            if (v.toLowerCase().includes(directSearch.toLowerCase()))
+              return true;
+          })
+        ? true
+        : value.tags.some((v) => {
+            if (v.toLowerCase().includes(directSearch.toLowerCase()))
+              return true;
+          })
+        ? true
+        : value.major.some((v) => {
+            if (v.toLowerCase().includes(directSearch.toLowerCase()))
+              return true;
+          })
+        ? true
+        : false;
+    };
     // field filter
+
     if (directSearch === '') {
-      const filterFunction = (value) => {
-        console.log(value.name, major, value.major);
-        return (
-          (grade === '0' || grade === '' ? true : value.number === grade) &&
-          (field[0] === undefined
-            ? true
-            : value.tags.filter((tag) => field.includes(tag))[0] === undefined
-            ? false
-            : true) &&
-          (major[0] === undefined
-            ? true
-            : value.major.filter((el) => major.includes(el))[0] === undefined
-            ? false
-            : true)
-        );
-      };
       filteredMemberDataTemp = memberData.filter((member) =>
         filterFunction(member)
       );
-    } else
-      filteredMemberDataTemp = await axios
-        .post('http://localhost:5000/api/alumni/search', {
-          number: grade,
-          major: major,
-          tags: field,
-          search: directSearch,
-        })
-        .then((res) => {
-          res.data
-            .sort((alumni1, alumni2) =>
-              Number(alumni1.number) > Number(alumni2.number)
-                ? 1
-                : Number(alumni1.number) < Number(alumni2.number)
-                ? -1
-                : alumni1.name < alumni2.name
-                ? 1
-                : -1
-            )
-            .sort((alumni1, alumni2) => (alumni1.name === 'Maggie' ? -1 : 1));
-          return res.data;
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-
+    } else {
+      filteredMemberDataTemp = memberData.filter((member) =>
+        filterFunction(member)
+      );
+      filteredMemberDataTemp = filteredMemberDataTemp.filter((member) =>
+        searchFunction(member)
+      );
+    }
     setNowPage(1);
     setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
     setFilteredMemberData(filteredMemberDataTemp);
@@ -343,44 +350,71 @@ function Member() {
       }
     });
   };
-  const startSearch = async (searchData) => {
-    let filteredMemberDataTemp = [];
-    filteredMemberDataTemp = await axios
-      .post('http://localhost:5000/api/alumni/search', {
-        number: gradeFilter,
-        major: majorFilter,
-        tags: fieldFilter,
-        search: searchData,
-      })
-      .then((res) => {
-        res.data
-          .sort((alumni1, alumni2) =>
-            Number(alumni1.number) > Number(alumni2.number)
-              ? 1
-              : Number(alumni1.number) < Number(alumni2.number)
-              ? -1
-              : alumni1.name < alumni2.name
-              ? 1
-              : -1
-          )
-          .sort((alumni1, alumni2) => (alumni1.name === 'Maggie' ? -1 : 1));
-        return res.data;
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  // const startSearch = async (searchData) => {
+  //   let filteredMemberDataTemp = [];
+  //   const searchFunction = (value) => {
+  //     return value.name.toLowerCase().includes(directSearch.toLowerCase())
+  //       ? true
+  //       : value.number.toLowerCase().includes(directSearch.toLowerCase())
+  //       ? true
+  //       : value.jobTitle.toLowerCase().includes(directSearch.toLowerCase())
+  //       ? true
+  //       : value.exp.some((v) => {
+  //           if (v.toLowerCase().includes(directSearch.toLowerCase()))
+  //             return true;
+  //         })
+  //       ? true
+  //       : value.tags.some((v) => {
+  //           if (v.toLowerCase().includes(directSearch.toLowerCase()))
+  //             return true;
+  //         })
+  //       ? true
+  //       : value.major.some((v) => {
+  //           if (v.toLowerCase().includes(directSearch.toLowerCase()))
+  //             return true;
+  //         })
+  //       ? true
+  //       : false;
+  //   };
+  //   filteredMemberDataTemp = memberData.filter((member) =>
+  //     searchFunction(member)
+  //   );
+  //   // filteredMemberDataTemp = await axios
+  //   //   .post('http://localhost:5000/api/alumni/search', {
+  //   //     number: gradeFilter,
+  //   //     major: majorFilter,
+  //   //     tags: fieldFilter,
+  //   //     search: searchData,
+  //   //   })
+  //   //   .then((res) => {
+  //   //     res.data
+  //   //       .sort((alumni1, alumni2) =>
+  //   //         Number(alumni1.number) > Number(alumni2.number)
+  //   //           ? 1
+  //   //           : Number(alumni1.number) < Number(alumni2.number)
+  //   //           ? -1
+  //   //           : alumni1.name < alumni2.name
+  //   //           ? 1
+  //   //           : -1
+  //   //       )
+  //   //       .sort((alumni1, alumni2) => (alumni1.name === 'Maggie' ? -1 : 1));
+  //   //     return res.data;
+  //   //   })
+  //   //   .catch((err) => {
+  //   //     console.log(err.message);
+  //   //   });
 
-    setNowPage(1);
-    setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
-    setFilteredMemberData(filteredMemberDataTemp);
+  //   setNowPage(1);
+  //   setTotalPage(Math.ceil(filteredMemberDataTemp.length / onePageMemberCount));
+  //   setFilteredMemberData(filteredMemberDataTemp);
 
-    // Set pagination to page 1
-    $('.page-link').map((id, el) => {
-      if (el.getAttribute('aria-label') === 'Page 1') {
-        el.click();
-      }
-    });
-  };
+  //   // Set pagination to page 1
+  //   $('.page-link').map((id, el) => {
+  //     if (el.getAttribute('aria-label') === 'Page 1') {
+  //       el.click();
+  //     }
+  //   });
+  // };
   const checkImage = (url) => {
     return /\.(jpg|jpeg|png|webp|avif|gif|svg)$/.test(url);
   };
@@ -412,11 +446,11 @@ function Member() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              console.log(memberData);
               const formData = new FormData(e.target);
               for (const pair of formData.entries()) {
                 setDirectSearch(pair[1]);
-                startSearch(pair[1]);
+                // startSearch(pair[1]);
+                startFilter(majorFilter, fieldFilter, gradeFilter);
               }
             }}
           >
@@ -435,6 +469,7 @@ function Member() {
                         tempArray.push(`${option.value}`);
                       });
                       setMajorFilter(tempArray);
+                      console.log(majorFilter);
                       startFilter(tempArray, fieldFilter, gradeFilter);
                     }}
                     maxMenuHeight={220}
