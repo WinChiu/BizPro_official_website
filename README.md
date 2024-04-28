@@ -2,13 +2,6 @@
 
 This official website is designed for BizPro. Be sure to read the document carefully in order to maintain the website successfully. If you are the administrator after 22nd and facing any problems about the website, feel free to contact 21st Jim or 22nd Win via Facebook or E-mail.
 
-## TODO
-
-- Set up the environment
-- Front-end cowork
-- List backend Function
-  ...
-
 ## To Start
 
 - `npm start`: start backend server with node
